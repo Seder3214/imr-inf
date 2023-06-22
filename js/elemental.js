@@ -1736,7 +1736,7 @@ cost: E('ee1290'),
             return x
         },
         effDesc(x) { return formatReduction(x)+' weaker' },
-        cost: E('e1e207'),
+        cost: E('e1e190'),
     },
     {
         inf: true,
