@@ -75,7 +75,7 @@ const BPNS = [
     ['','Alpha-','Beta-','Mega-','Gamma-','Delta-','Epsilon-','Zeta-','Eta-','Teta-'],
     ['','Iota-','Kappa-','Lambda-','Mu-','Nu-','Xi-','Omicron-','Pi-','Rho-'],
     ['','Prestigious-','Honorous-','Glorious-','Renownful-','Valorous-','Meritous-','Excellent-','Royal-','Divine-'], 
-    ['','Unreal-','Real-','Authentic-','True-','Pure-],// h>1 -> ct
+    ['','Unreal-','Real-','Authentic-','True-','Pure-'],// h>1 -> ct
     ['','Fantastic-Endless-Divine-Rho-Teta-Yotta-Prestige-Level'],
 ]
 
