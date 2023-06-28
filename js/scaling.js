@@ -162,7 +162,7 @@ const SCALE_POWER= {
 const SCALE_FP = {
 	tickspeed() { return [1,1,1,tmp.tickspeedFP] },
 }
-
+const INF_SCALES = ['pe','FSS','inf_theorem','galaxy']
 const QCM8_SCALES = ['rank','tier','tetr','pent','hex','massUpg','tickspeed','bh_condenser','gamma_ray','supernova','fTier']
 const PreQ_SCALES = ['rank','tier','tetr','massUpg','tickspeed','bh_condenser','gamma_ray']
 const SCALE_TYPE = ['super', 'hyper', 'ultra', 'meta', 'exotic', 'supercritical'] // super, hyper, ultra, meta, exotic
@@ -336,9 +336,7 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(5,2)) start = start.add(beyondRankEffect(5,2,0))
 			if (hasBeyondRank(8,2)) start = start.add(beyondRankEffect(8,2))
 		}
-		else if (name='pe') {
-if (hasElement(252)) start = start.add(elemEffect(252))
-		}
+if (hasElement(252) && name !== ('pe' || 'FSS' || 'inf_theorem','galaxy')) start = start.add(elemEffect(252))
 	}
 	else if (type==1) {
 		if (name=="tickspeed") {
