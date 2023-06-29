@@ -281,9 +281,6 @@ function getPlayerData() {
                 bs: [],
             },
         },
-        beta: {
-            link: "https://raw.githack.com/Seder3214/imr-inf/dev/index.html",
-        },
         reset_msg: "",
         main_upg_msg: [0,0],
         tickspeed: E(0),
