@@ -355,7 +355,7 @@ function convertStringIntoAGY(s) {
     return result
 }
 function convertStringIntoLink(s) {
-if (s == 'link') return 'https://raw.githack.com/Seder3214/imr-inf/dev/index.html'
+if (s == 'link') return ''
 }
 
 function keyEvent(e) {
