@@ -511,8 +511,8 @@ function importy() {
 function enterBeta() {
     createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
         let st = ''
-        if (loadbeta == '256815') {
-            window.location.replace("https://raw.githack.com/Seder3214/imr-inf/dev/index.html");
+        if (loadbeta == BETA.ids[x]) {
+            window.location.replace("https://raw.githack.com/Seder3214/imr-inf/index.html");
         }
     })
 }
