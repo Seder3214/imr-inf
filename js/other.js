@@ -354,6 +354,9 @@ function convertStringIntoAGY(s) {
 
     return result
 }
+function convertStringIntoLink(s) {
+if (s == 'link') return 'https://raw.githack.com/Seder3214/imr-inf/dev/index.html'
+}
 
 function keyEvent(e) {
     let k = e.keyCode

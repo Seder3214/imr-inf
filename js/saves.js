@@ -282,7 +282,7 @@ function getPlayerData() {
             },
         },
         beta: {
-            tester: [],
+            link: "https://raw.githack.com/Seder3214/imr-inf/dev/index.html",
         },
         reset_msg: "",
         main_upg_msg: [0,0],
@@ -512,9 +512,11 @@ function importy() {
 }
 function enterBeta() {
     createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
+       let s = convertStringIntoLink('link')
         if (loadbeta == (tester1 || tester2)) {
-            window.location.replace("https://raw.githack.com/Seder3214/imr-inf/dev/index.html");
+            window.location.replace(s);
         }
+        else createPrompt("The id is not correct! Try again!")
     })
 }
 
@@ -525,14 +527,6 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
-        createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
-            if (loadbeta == (tester1 || tester2)) {
-                player.beta.tester.push(loadbeta)
-            }
-            else {
-                window.location.replace("https://raw.githack.com/Seder3214/imr-inf/main/index.html");
-            }
-        })
     if (start) {
         setInterval(save,60000)
         for (let x = 0; x < 5; x++) updateTemp()
