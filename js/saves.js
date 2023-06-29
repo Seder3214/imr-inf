@@ -6,6 +6,7 @@ const FPS = 20
 /* |*/let yda = btoa(JSON.stringify('472638')) /* |*/
 /* |*/let cgx = btoa(JSON.stringify('364173')) /* |*/
 /* |*/let ing = btoa(JSON.stringify('517835')) /* |*/
+/* |*/let rnd = btoa(JSON.stringify('632892')) /* |*/
 /* ------------------------------------------------ */
 function uni(x) { return E(1.5e56).mul(x) }
 function mlt(x) { return uni("ee9").pow(x) }
@@ -514,7 +515,7 @@ function importy() {
 function enterBeta() {
     createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
        let s = convertStringIntoLink('link')
-        if (loadbeta == (xdj || yda || cgx || ing)) {
+        if (loadbeta == (xdj || yda || cgx || ing || rnd)) {
             window.location.replace(s);
         }
         else createPrompt("The id is not correct! Try again!")
