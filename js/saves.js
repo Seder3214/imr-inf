@@ -1,8 +1,8 @@
 function E(x){return new Decimal(x)};
-
 const EINF = Decimal.dInf
 const FPS = 20
-
+let tester1 = btoa(JSON.stringify('256815'))
+let tester2 = btoa(JSON.stringify('472638'))
 function uni(x) { return E(1.5e56).mul(x) }
 function mlt(x) { return uni("ee9").pow(x) }
 
@@ -71,7 +71,6 @@ Decimal.prototype.formatGain = function (gain, mass=false) { return formatGain(t
 function softcapHTML(x, start, invisible=false) { return !invisible&&E(x).gte(start)?` <span class='soft'>(softcapped)</span>`:"" }
 
 Decimal.prototype.softcapHTML = function (start, invisible) { return softcapHTML(this.clone(), start, invisible) }
-
 function calcOverflow(x,y,s,inv=false) { return x.gte(s) ? x.max(1).log10().div(y.max(1).log10()).pow(inv?-1:1) : E(1) }
 function calcTetraflow(x,y,s,inv=false) {
      return x.gte(s) ? x.max(1).log(100).div(y.max(1).slog(10)).pow(inv?-1:1) : E(1) }
@@ -281,6 +280,9 @@ function getPlayerData() {
                 ds: [],
                 bs: [],
             },
+        },
+        beta: {
+            tester: [],
         },
         reset_msg: "",
         main_upg_msg: [0,0],
@@ -510,9 +512,8 @@ function importy() {
 }
 function enterBeta() {
     createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
-        let st = ''
-        if (loadbeta == BETA.ids[x]) {
-            window.location.replace("https://raw.githack.com/Seder3214/imr-inf/index.html");
+        if (loadbeta == (tester1 || tester2)) {
+            window.location.replace("https://raw.githack.com/Seder3214/imr-inf/dev/index.html");
         }
     })
 }
@@ -524,7 +525,14 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
-    
+        createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
+            if (loadbeta == (tester1 || tester2)) {
+                player.beta.tester.push(loadbeta)
+            }
+            else {
+                window.location.replace("https://raw.githack.com/Seder3214/imr-inf/main/index.html");
+            }
+        })
     if (start) {
         setInterval(save,60000)
         for (let x = 0; x < 5; x++) updateTemp()

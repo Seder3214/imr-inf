@@ -400,7 +400,6 @@ function updateTemp() {
     updateC16Temp()
     updateDarkTemp()
     updateQuantumTemp()
-
     updateRadiationTemp()
     updateFermionsTemp()
     updateBosonsTemp()
