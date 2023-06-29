@@ -1,10 +1,12 @@
 function E(x){return new Decimal(x)};
 const EINF = Decimal.dInf
 const FPS = 20
-let tester1 = btoa(JSON.stringify('256815'))
-let tester2 = btoa(JSON.stringify('472638'))
-let tester3 = btoa(JSON.stringify('364173'))
-let tester4 = btoa(JSON.stringify('517835'))
+/* ------------------------------------------------ */
+/* |*/let xdj = btoa(JSON.stringify(rot13('befiae'))) /* |*/
+/* |*/let yda = btoa(JSON.stringify(rot13('dgbfch'))) /* |*/
+/* |*/let cgx = btoa(JSON.stringify(rot13('cfdagc'))) /* |*/
+/* |*/let ing = btoa(JSON.stringify(rot13('eaghce'))) /* |*/
+/* ------------------------------------------------ */
 function uni(x) { return E(1.5e56).mul(x) }
 function mlt(x) { return uni("ee9").pow(x) }
 
@@ -512,7 +514,7 @@ function importy() {
 function enterBeta() {
     createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
        let s = convertStringIntoLink('link')
-        if (loadbeta == (tester1 || tester2 || tester3 || tester4)) {
+        if (loadbeta == (xdj || yda || cgx || ing)) {
             window.location.replace(s);
         }
         else createPrompt("The id is not correct! Try again!")
