@@ -357,20 +357,6 @@ function convertStringIntoAGY(s) {
 function convertStringIntoLink(s) {
 if (s == 'link') return 'https://raw.githack.com/Seder3214/imr-inf/dev2/index.html'
 }
-function rot13(str) { // LBH QVQ VG!
-  
-    var string = "";
-    for(var i = 0; i < str.length; i++) {
-      var temp = str.charAt(i);
-      if(temp !== " " || temp!== "!" || temp!== "?") {
-         string += String.fromCharCode(13 + String.prototype.charCodeAt(temp));
-      } else {
-        string += temp;
-      }
-    }
-    
-    return string;
-  }
   
 function keyEvent(e) {
     let k = e.keyCode

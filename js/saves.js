@@ -2,10 +2,10 @@ function E(x){return new Decimal(x)};
 const EINF = Decimal.dInf
 const FPS = 20
 /* ------------------------------------------------ */
-/* |*/let xdj = btoa(JSON.stringify(rot13('befiae'))) /* |*/
-/* |*/let yda = btoa(JSON.stringify(rot13('dgbfch'))) /* |*/
-/* |*/let cgx = btoa(JSON.stringify(rot13('cfdagc'))) /* |*/
-/* |*/let ing = btoa(JSON.stringify(rot13('eaghce'))) /* |*/
+/* |*/let xdj = btoa(JSON.stringify('256815')) /* |*/
+/* |*/let yda = btoa(JSON.stringify('472638')) /* |*/
+/* |*/let cgx = btoa(JSON.stringify('364173')) /* |*/
+/* |*/let ing = btoa(JSON.stringify('517835')) /* |*/
 /* ------------------------------------------------ */
 function uni(x) { return E(1.5e56).mul(x) }
 function mlt(x) { return uni("ee9").pow(x) }
