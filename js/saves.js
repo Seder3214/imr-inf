@@ -516,7 +516,7 @@ function enterBeta() {
     createPrompt("To enter beta, type your beta tester id!",'import',loadbeta=>{
        let s = convertStringIntoLink('link')
         if (loadbeta == (xdj || yda || cgx || ing || rnd)) {
-            window.location.replace(s);
+            window.location.replace(convertStringIntoLink('link'));
         }
         else createPrompt("The id is not correct! Try again!")
     })
