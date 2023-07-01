@@ -1,7 +1,7 @@
 const FERMIONS = {
     onActive(id) {
         let i = player.supernova.fermions.choosed
-         return i == id || (i[1] == '6 && ((i[0] < 6) == (id[0] < 6))) || (i[1] == '7' && i[0] == id[0])
+         return i == id || (i[1] == '6' && ((i[0] < 6) == (id[0] < 6))) || (i[1] == '7' && i[0] == id[0])
     },
     gain(i) {
         if (!player.supernova.fermions.unl) return E(0)
