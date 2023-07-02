@@ -17,7 +17,7 @@ const INF = {
         if (hasInfUpgrade(3)) e.push(161)
         if (iu15) e.push(218)
 
-        for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218 && tmp.brokenInf) e.push(player.atom.elements[i])
+        for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
 
         player.atom.elements = e
         if (hasElement(30,1)) player.atom.muonic_el = [30]
