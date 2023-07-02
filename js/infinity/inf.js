@@ -17,7 +17,7 @@ const INF = {
         if (hasInfUpgrade(3)) e.push(161)
         if (iu15) e.push(218)
 
-        for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
+        for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218 && tmp.brokenInf) e.push(player.atom.elements[i])
 
         player.atom.elements = e
         if (hasElement(30,1)) player.atom.muonic_el = [30]
@@ -827,12 +827,14 @@ player.inf.core[3].level = E(player.inf.theorem_max).floor()
 player.inf.core[4].level = E(player.inf.theorem_max).floor()
     player.inf.theorem_max = E(tmp.core_lvl)
 }
-
-if (hasElement(229) && player.inf.core[0].type == 'mass') player.inf.core[0].level = E(player.inf.theorem_max).floor()
+if (hasElement(229) || hasElement(249) || hasElement(260)) {
+    if (hasElement(229) && player.inf.core[0].type == 'mass') player.inf.core[0].level = E(player.inf.theorem_max).floor()
 if (hasElement(249) && player.inf.core[1].type == 'proto') player.inf.core[1].level = E(player.inf.theorem_max).floor()
 if (hasElement(249) && player.inf.core[2].type == 'time') player.inf.core[2].level = E(player.inf.theorem_max).floor()
 if (hasElement(260) && player.inf.core[3].type == 'atom') player.inf.core[3].level = E(player.inf.theorem_max).floor()
 if (hasElement(260) && player.inf.core[4].type == 'bh') player.inf.core[4].level = E(player.inf.theorem_max).floor()
+}
+
     player.inf.dim_mass = player.inf.dim_mass.add(tmp.dim_mass_gain.mul(dt))
     player.inf.nm_base = player.inf.nm_base.add(tmp.nm_base_gain.mul(dt))
     player.inf.pm_base = player.inf.pm_base.add(tmp.pm_base_gain.mul(dt))
