@@ -1673,7 +1673,7 @@ cost: E('ee1290'),
             cost: E('e64500000'),
         },
         {
-            desc: 'Unlock Exotic Fermions.',
+            desc: `Unlock Exotic Fermions. Meta Fermions won't activate all u-quarks above them`,
             cost: E('ee1812'),
             },
             {

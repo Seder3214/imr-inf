@@ -2,8 +2,9 @@ const DARK_RUN = {
     mass_glyph_name: ['Cyrillic Glyph', 'Deutsch Glyph', 'Swedish Glyph', 'Chinese Glyph', 'Spanish Glyph', 'Slovak Glyph'],
 
     mass_glyph_eff(i) {
-        let x,
-         g = (tmp.c16active || CHALS.inChal(17) || FERMIONS.onActive("17")? i == 5 ? hasCharger(10)?5:FERMIONS.onActive("17") && hasElement(282)?100000:10 : hasCharger(10)?50:FERMIONS.onActive("17") && hasElement(282)?100000:100 : player.dark.run.glyphs[i]) / tmp.dark.glyph_weak
+        let x
+        let unls = FERMIONS.getUnlLength()
+         g = (tmp.c16active || CHALS.inChal(17) || FERMIONS.onActive("17")? i == 5 ? hasCharger(10)?5:FERMIONS.onActive("17") && unls >= 8?100000:10 : hasCharger(10)?50:FERMIONS.onActive("17") && unls >= 8?100000:100 : player.dark.run.glyphs[i]) / tmp.dark.glyph_weak
         if (i < 4) x = 1/(g**0.5/100+1)
         else if (i == 4) x = [1/(g**0.5/100+1),1.1**(g**0.75)]
         else x = 1.1**(g**0.75)
@@ -198,8 +199,9 @@ function updateDarkRunHTML() {
     tmp.el.mg_btn_mode.setTxt(["Earning", "Max Earning", "Clear Glyph"][player.dark.run.gmode])
     tmp.el.mg_max_gain.setTxt(format(player.dark.run.gamount,0))
     for (let x = 0; x < MASS_GLYPHS_LEN; x++) {
+        let unls = FERMIONS.getUnlLength()
         tmp.el["mass_glyph"+x].setHTML(
-            tmp.c16active || CHALS.inChal(17) || FERMIONS.onActive("17")? x == 5 ? hasCharger(10)?5:FERMIONS.onActive("17") && hasElement(282)?100000:10 : hasCharger(10)?50:FERMIONS.onActive("17") && hasElement(282)?100000:100 : player.dark.run.glyphs[x]
+            tmp.c16active || CHALS.inChal(17) || FERMIONS.onActive("17")? x == 5 ? hasCharger(10)?5:FERMIONS.onActive("17") && unls >= 8?100000:10 : hasCharger(10)?50:FERMIONS.onActive("17") && unls >= 8?100000:100 : player.dark.run.glyphs[x]
             + (dra ? " (+" + format(tmp.dark.mass_glyph_gain[x],0) + ")" : dtmp.mg_passive[x]>0 ? " ["+format(dtmp.mg_passive[x],0)+"]" : ""))
         tmp.el["mass_glyph_tooltip"+x].setTooltip("<h3>"+DARK_RUN.mass_glyph_name[x]+"</h3><br class='line'>"+DARK_RUN.mass_glyph_effDesc[x](tmp.dark.mass_glyph_eff[x]))
     }
