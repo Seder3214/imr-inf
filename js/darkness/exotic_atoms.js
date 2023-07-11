@@ -224,7 +224,7 @@ const MUONIC_ELEM = {
             desc: `Newton Fragments effect' softcap starts later based on Corrupted Shards.`,
             eff() {
                 let x = E(1)
-                if (player.dark.c16.shard.gte('e3005')) x = player.dark.c16.shard.max(1).log10().log10().div(100)
+                if (player.dark.c16.shard.gte('e3005')) x = player.dark.c16.shard.max(1).log10().max(1).log10().div(100)
                 else x = E(0)
                 return x
             },
@@ -236,7 +236,7 @@ const MUONIC_ELEM = {
             desc: `Add more accelerator power based on Corrupted Shards.`,
             eff() {
                 let x = E(1)
-               if (player.dark.c16.shard.gte('e3050')) x = player.dark.c16.shard.max(1).log10().log10().div(10)
+               if (player.dark.c16.shard.gte('e3050')) x = player.dark.c16.shard.max(1).log10().max(1).log10().div(10)
                else x = E(0)
                 return x
             },
@@ -248,7 +248,7 @@ const MUONIC_ELEM = {
             desc: `Boost Dark Shadows first effect based on Corrupted Shards.`,
             eff() {
                 let x = E(1)
-                if (player.dark.c16.shard.gte('e3070'))   x = player.dark.c16.shard.max(1).log10().log10().add(1)
+                if (player.dark.c16.shard.gte('e3070'))   x = player.dark.c16.shard.max(1).log10().max(1).log10().add(1)
                 else x = E(1)
                 return overflow(x,5,0.1)
             },
@@ -293,7 +293,7 @@ const MUONIC_ELEM = {
             desc: `Automatically buy Galaxy Particle Generators, and Bitriennium-239 effect is better based on Galaxy Particle Generators.`,
             eff() {
                 let x = E(1)
-                x = player.galaxy.generator.root(3).add(1)
+                x = player.galaxy.generator.add(1).root(3).add(1)
                 return x.max(1)
             },
             effDesc: x=>"x"+format(x),
@@ -304,7 +304,7 @@ const MUONIC_ELEM = {
             desc: `Pre-Infinity Global Speed is better based on Galaxy Particles.`,
             eff() {
                 let x = E(1)
-                x = player.galaxy.stars.root(3).add(1)
+                x = player.galaxy.stars.add(1).root(3).add(1)
                 return x.max(1)
             },
             effDesc: x=>"x"+format(x),
