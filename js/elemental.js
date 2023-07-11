@@ -1834,7 +1834,7 @@ cost: E('ee1290'),
             {
                 c16: true,
                 desc: `Hyper-Glory is 30% weaker.`,
-                cost: E('e1e620'),
+                cost: E('e1e615'),
             },
             {
                 inf: true,
