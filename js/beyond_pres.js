@@ -71,7 +71,7 @@ const BEYOND_PRES = {
 const BPNS = [
     ['Level','Prestige','Honor','Glory','Renown','Valor','Merit','Excellence','Royalty','Divinity'],
     ['','Multi-','Power-','Mega-','Giga-','Tera-','Peta-','Exa-','Zetta-','Yotta-'],
-    ['','Alpha-','Beta-','Mega-','Gamma-','Delta-','Epsilon-','Zeta-','Eta-','Teta-'],
+    ['','Alpha-','Beta-','Theta-','Gamma-','Delta-','Epsilon-','Zeta-','Eta-','Teta-'],
     ['','Iota-','Kappa-','Lambda-','Mu-','Nu-','Xi-','Omicron-','Pi-','Rho-'],
     ['','Prestigious-','Honorous-','Glorious-','Renownful-','Valorous-','Meritous-','Excellent-','Royal-','Divine-'], 
     ['','Unreal-','Real-','Authentic-','True-','Pure-'],// h>1 -> ct
