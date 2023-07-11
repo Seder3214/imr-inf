@@ -643,8 +643,8 @@ ret = overflow(ret,1e68,0.5)
     • Pre-Infinity Global Speed is set to 1.00x.<br>
     • You can't buy Prestige Level and Rank.<br>
     `,
-    reward: `Grading cost formula is weaker.<br><span class='orange'>At 100 completions, unlock C20</span>`,
-    max: E(100),
+    reward: `Grading cost formula is weaker.<br><span class='orange'>At 250 completions, unlock C20</span>`,
+    max: E(250),
     inc: E('e1e72'),
     pow: E(10),
     start: E('e1e72'),
