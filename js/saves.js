@@ -182,6 +182,7 @@ function calc(dt) {
 function getPlayerData() {
     let s = {
         mass: E(0),
+name: "".
         ranks: {
             rank: E(0),
             tier: E(0),
@@ -559,6 +560,9 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
+if (player.name == undefined) {createPrompt("Choose your name!",'import',loadbeta=>{
+       player.name = loadbeta
+    }}
     if (start) {
         setInterval(save,60000)
         for (let x = 0; x < 5; x++) updateTemp()
