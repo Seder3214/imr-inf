@@ -51,7 +51,7 @@ const GALAXY = {
     doReset() {
 player.galaxy.times = player.galaxy.times.max(tmp.supernova.bulkGal)
 if (!hasTree('glx18')) {
-       if (player.chal.choosed != '19') let e = [275,283,229,249,260]
+       if (player.chal.choosed != 19) let e = [275,283,229,249,260]
 player.atom.elements = e
 if (!hasTree('glx14')) for (let x = 1; x <= 18; x++) player.chal.comps[x] = E(0)
 let save_keep = [6,8,10,0,11,13,15,16]
