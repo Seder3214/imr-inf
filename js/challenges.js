@@ -115,6 +115,8 @@ GALAXY.doReset()}
     enter(ch=player.chal.choosed) {
         if (player.chal.active == 0) {
             if (ch >= 19 && ch <= 20) {
+let e = [275,283,229,249,260] 
+ player.atom.elements = e
                 GALAXY.doReset()
         }
             if (ch >= 17 && ch <= 18) {
