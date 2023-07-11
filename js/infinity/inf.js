@@ -20,8 +20,8 @@ const INF = {
         for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
 
         player.atom.elements = e
-        if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) player.atom.muonic_el.push(i)
-        if (hasElement(30,1)) me.push(30)
+        if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) player.atom.muonic_el.push(player.atom.muonic.el[i])
+        if (hasElement(30,1)) player.atom.muonic_el.push(30)
       else player.atom.muonic_el = []
        if (!hasTree('glx14')) for (let x = 1; x <= 16; x++) player.chal.comps[x] = E(0)
         let keep = ["qu_qol1", "qu_qol2", "qu_qol3", "qu_qol4", "qu_qol5", "qu_qol6", "qu_qol7", "qu_qol8", "qu_qol9", "qu_qol8a", "unl1", "unl2", "unl3", "unl4",
