@@ -20,7 +20,7 @@ const INF = {
         for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
 
         player.atom.elements = e
-        if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) player.atom.muonic_el.push(player.atom.muonic.el[i])
+        if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) player.atom.muonic_el.push(player.atom.muonic_el[i])
         if (hasElement(30,1)) player.atom.muonic_el.push(30)
       else player.atom.muonic_el = []
        if (!hasTree('glx14')) for (let x = 1; x <= 16; x++) player.chal.comps[x] = E(0)
