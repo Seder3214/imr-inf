@@ -1801,11 +1801,11 @@ cost: E('ee1290'),
          {
             dark: true,
             desc: `Meta-Honor starts x1.5 later.`,
-            cost: E('e7.4e9'),
+            cost: E('e9e9'),
         },
         {
             desc: '[Meta-boost II] is ^1.25 stronger.',
-            cost: E('ee26450'),
+            cost: E('ee27500'),
             },
             {
                 inf: true,
@@ -1824,7 +1824,7 @@ cost: E('ee1290'),
         },
         {
             desc: 'Pre-Infinity Global Speed reduces Galaxy Requirement.',
-            cost: E('ee27000'),
+            cost: E('ee28000'),
             effect() {let x = E(1)
                 x = tmp.preInfGlobalSpeed.max(1).log10().add(1).log10()
             return x},
