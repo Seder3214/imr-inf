@@ -50,7 +50,7 @@ const GALAXY = {
     },
     doReset() {
 
-if (!hasTree('glx18') {
+if (!hasTree('glx18')) {
         let e = [275,283,229,249,260]
 player.atom.elements = e
 player.galaxy.times = player.galaxy.times.max(tmp.supernova.bulkGal)
