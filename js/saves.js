@@ -100,8 +100,10 @@ function calc(dt) {
             let rn = RANKS.names[x]
             if (tmp.brUnl && x < 4 || RANKS.autoUnl[rn]() && player.auto_ranks[rn]) RANKS.bulk(rn)
         }
+        if (player.auto_beyond_pres  && (hasBeyondPres(2,1))) BEYOND_PRES.reset(true)
         if (player.auto_ranks.beyond && (hasBeyondRank(2,1)||hasInfUpgrade(10))) BEYOND_RANKS.reset(true)
         for (let x = 0; x < PRES_LEN; x++) if (PRESTIGES.autoUnl[x]() && player.auto_pres[x]) PRESTIGES.reset(x,true)
+        for (let x = 0; x < ASCENSIONS.fullNames.length; x++) if (ASCENSIONS.autoUnl[x]() && player.auto_asc[x]) ASCENSIONS.reset(x,true)
         for (let x = 1; x <= UPGS.main.cols; x++) {
             let id = UPGS.main.ids[x]
             let upg = UPGS.main[x]
@@ -120,6 +122,7 @@ function calc(dt) {
             for (let x = 0; x < 3; x++) player.atom.powers[x] = player.atom.powers[x].add(tmp.atom.particles[x].powerGain.mul(du_gs))
         }
         if (hasTree("qol1")) for (let x = 1; x <= (player.dark.unl?118:117); x++) if (x<=tmp.elements.upg_length) ELEMENTS.buyUpg(x)
+        if (hasBeyondPres(1,9)) for (let x = 1; x <= 362; x++) if (x<=tmp.elements.upg_length) ELEMENTS.buyUpg(x)
         player.md.mass = player.md.mass.add(tmp.md.mass_gain.mul(du_gs))
         if (hasTree("qol3")) player.md.particles = player.md.particles.add(player.md.active ? tmp.md.rp_gain.mul(du_gs) : tmp.md.passive_rp_gain.mul(du_gs))
         if (hasTree("qol4")) STARS.generators.unl(true)
@@ -129,12 +132,26 @@ function calc(dt) {
                 for (let y = 0; y < BOSONS.upgs[id].length; y++) BOSONS.upgs.buy(id,y)
             }
         }
+        if (hasElement(38,1)) GALAXY.tier()
+        if (hasBeyondPres(2,2)) {
+            DARK.am.buyMax()
+         INF.nm.buyMax()
+         INF.dm.buyMax()
+         INF.pm.buyMax()
+         INF.em.buyMax()
+         INF.hm.buyMax()
+         INF.pe.buyMax()
+        }
+        if (hasTree('glx18') && (tmp.supernova.bulkGal.sub(player.galaxy.times).gte(1))) {
+            GALAXY.doReset()
+        }
         RADIATION.autoBuyBoosts()
         calcStars(du_gs)
         calcSupernova(dt)
         calcQuantum(dt)
         calcDark(inf_gs)
         calcInf(dt)
+        calcGalaxy(dt)
 
         if (hasTree("qu_qol4")) player.supernova.times = player.supernova.times.max(tmp.supernova.bulk)
 
@@ -146,6 +163,7 @@ function calc(dt) {
             if (hasElement(122)) for (let x = 9; x <= 11; x++) player.chal.comps[x] = player.chal.comps[x].max(tmp.chal.bulk[x].min(tmp.chal.max[x]))
             if (hasElement(131)) player.chal.comps[12] = player.chal.comps[12].max(tmp.chal.bulk[12].min(tmp.chal.max[12]))
             if (hasInfUpgrade(12)) for (let x = 13; x <= 15; x++) player.chal.comps[x] = player.chal.comps[x].max(tmp.chal.bulk[x].min(tmp.chal.max[x]))
+            if (hasElement(295)) for (let x = 16; x <= 17; x++) player.chal.comps[x] = player.chal.comps[x].max(tmp.chal.bulk[x].min(tmp.chal.max[x]))
         }
     }
 
@@ -176,6 +194,7 @@ function getPlayerData() {
             rank: false,
             tier: false,
         },
+        auto_beyond_pres: false,
         auto_pres: [],
         prestiges: [],
         pres: {
@@ -256,6 +275,7 @@ function getPlayerData() {
             times: E(0),
             post_10: false,
             stars: E(0),
+            galaxy: E(0),
             tree: [],
             chal: {
                 noTick: true,
@@ -284,6 +304,16 @@ function getPlayerData() {
                 hz: E(0),
                 ds: [],
                 bs: [],
+            },
+        },
+        galaxy: {
+            points: E(0),
+            times: E(0),
+            stars: E(0),
+            generator: E(0),
+            grade: {
+                type: [E(0),E(0),E(0),E(0)],
+                theorems: E(0),
             },
         },
         reset_msg: "",

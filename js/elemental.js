@@ -38,8 +38,8 @@ const ELEMENTS = {
     canBuy(x) {
         if (tmp.c16active && isElemCorrupted(x)) return false
         let u = this.upgs[x]
-        let res = u.inf ? player.inf.points : u.dark ? player.dark.shadow : player.atom.quarks
-        return res.gte(u.cost) && !hasElement(x) && (hasInfUpgrade(6) && x <= 218 || player.qu.rip.active || !BR_ELEM.includes(x)) && (tmp.c16active || !C16_ELEM.includes(x)) && !tmp.elements.cannot.includes(x) && !(CHALS.inChal(14) && x < 118) && !(CHALS.inChal(18) && x < 118)
+        let res = u.sn? player.supernova.times : u.inf ? player.inf.points : u.dark ? player.dark.shadow : player.atom.quarks
+        return res.gte(u.cost) && !hasElement(x) && (hasInfUpgrade(6) && x <= 218 || player.qu.rip.active || !BR_ELEM.includes(x)) && (tmp.c16active || !C16_ELEM.includes(x)) && !tmp.elements.cannot.includes(x) && !(CHALS.inChal(14) && x < 118) && !(CHALS.inChal(18) && x < 118)&& !(CHALS.inChal(19) && x < 362)
     },
     buyUpg(x) {
         if (this.canBuy(x)) {
@@ -1041,7 +1041,8 @@ const ELEMENTS = {
             desc: `Entropy's cap is increased by 25% every prestige level. Entropic Evaporation^2 is slightly weaker.`,
             cost: E("e4.4e76"),
             effect() {
-                let x = Decimal.pow(1.25,player.prestiges[0])
+                if (hasElement(298)) x = Decimal.pow(1.25,player.ranks.hex.root(2.6))
+                else x = Decimal.pow(1.25,player.prestiges[0])
                 return x
             },
             effDesc(x) { return "x"+format(x) },
@@ -1294,7 +1295,7 @@ const ELEMENTS = {
             desc: `Quantum Shard’s base is boosted by FSS.`,
             cost: E('e640000'),
             effect() {
-                let x = player.dark.matters.final.div(10).add(1)
+                let x = player.dark.matters.final.max(1).div(10).add(1)
                 if (hasElement(288)) x = player.dark.matters.final.mul(3).add(1)
                 return x
             },
@@ -1364,7 +1365,7 @@ const ELEMENTS = {
             desc: `Max Theorem's Level boosts Infinity Points.`,
             cost: E('e4e487'),
             effect() {
-                let x = player.inf.theorem_max.div(2).log(1.1).add(1)
+                let x = player.inf.theorem_max.div(2).max(1).log(1.1).add(1)
                 if (hasPrestige(1,950)) x = x.pow(1.25)
                 return x
             },
@@ -1380,7 +1381,7 @@ const ELEMENTS = {
             desc: `Infinity Points boosts Exotic Atoms.`,
             cost: E('e1670000'),
             effect() {
-                let x = player.inf.points.log(1.1).add(1)
+                let x = player.inf.points.add(1).log(1.1).add(1)
                 return x
             },
             effDesc(x) { return "x"+format(x,3) },
@@ -1394,8 +1395,10 @@ const ELEMENTS = {
             desc: `Dimensional Mass adds free C16 max completions.`,
             cost: E('e1.6e34'),
             effect() {
-                let x = player.inf.dim_mass.div(100).log(10).log(2).add(1)
-                return x
+                let x = player.inf.dim_mass.div(100).add(1).log(10).add(1).log(2).add(1)
+                if (hasElement(295)) x = player.inf.dim_mass.div(20).add(1).log(1.1).add(1)
+                if (hasElement(38,1)) x = x.mul(muElemEff(38,1))
+                return x.max(1)
             },
             effDesc(x) { return "+"+format(x,3) },
         },
@@ -1408,7 +1411,7 @@ const ELEMENTS = {
             desc: `Boost Dark Rays 4th effect by Infinity Points.`,
             cost: E('e1e640'),
             effect() {
-                let x = player.inf.points.log10().log(2).div(10).add(1)
+                let x = player.inf.points.add(1).log10().max(1).log(2).div(10).add(1)
                 return x
             },
             effDesc(x) { return "x"+format(x,3) },
@@ -1418,8 +1421,8 @@ const ELEMENTS = {
             desc: `Add 5 C16 max completions per Muon-Catalyzed Fusion Tier (starts at 12).`,
             cost: E('e4230000'),
             effect() {
-                let x = (player.dark.exotic_atom.tier-12)*5
-                return x
+                let x = E(player.dark.exotic_atom.tier-12).mul(5)
+                return x.max(0)
             },
             effDesc(x) { return "+"+format(x,0) },
         },
@@ -1438,7 +1441,7 @@ const ELEMENTS = {
             cost: E('e1e37'),
             effect() {
                 if (CHALS.inChal(17)|| CHALS.inChal(18)) x = E(0)
-                else x = player.inf.dim_mass.root(2.25).add(1)
+                else x = player.inf.dim_mass.add(1).root(2.25).add(1)
                 return x
             },
             effDesc(x) { return "+"+format(x,3) },
@@ -1499,10 +1502,10 @@ const ELEMENTS = {
             cost: E('e1e38'),
         },
         {
-            desc: `Scale Super Parallel Extruder later by Max Theorem's level.`,
+            desc: `Scale Super Scaling later by Max Theorem's level.`,
             cost: E('e1e743'),
             effect() {
-                let x = player.inf.theorem_max.max(1).root(1.25).add(1).floor()
+                let x = player.inf.theorem_max.max(1).root(hasElement(308)?1.15:1.25).add(1).floor()
                 return x
             },
             effDesc(x) { return "+"+format(x,0)+' later' },
@@ -1736,13 +1739,127 @@ cost: E('ee1290'),
             return x
         },
         effDesc(x) { return formatReduction(x)+' weaker' },
-        cost: E('e1e182'),
+        cost: E('e1e180'),
     },
     {
         inf: true,
         desc: 'Unlock Beyond-Prestiges.',
         cost: E(1e44),
  },
+ {
+    c16: true,
+    desc: `Automatically complete C16 and C17 challenges outside of them.<br>Bitriennium-239 effect formula is much more better.`,
+    cost: E('e1e187'),
+},
+{
+    desc: 'Einstein Theorem is better.',
+    cost: E('ee7250'),
+    },
+    {
+        sn: true,
+        desc: 'Unlock Galaxies.',
+        cost: E('1e16'),
+        },
+        {
+            dark: true,
+            desc: `Unseptennium-179 is even better (Per Prestige Level - 1.25x => <b>Per log3(Hex) - 1.25x</b>).`,
+            cost: E('e685000000'),
+        },
+        {
+            c16: true,
+            desc: `Galaxy Particles gain formula is better.`,
+            cost: E('e5e218'),
+        },
+        {
+            desc: 'Every Theorem in Core power will be equivalent to the highest power possible.',
+            cost: E('ee9000'),
+            },
+            {
+                inf: true,
+                desc: `<span class='red'>Remove</span> Mass Overflow^3-4.`,
+                cost: E(1e48),
+         },
+         {
+            dark: true,
+            desc: `Galaxy Particles gain formula is better again, and Unlock More Muonic Elements.`,
+            cost: E('e4e9'),
+        },
+        {
+            desc: 'Add 10000 C17 completions.',
+            cost: E('ee18500'),
+            },
+            {
+                c16: true,
+                desc: `[Exotic-Lepton] effect is better.`,
+                cost: E('e1.75e513'),
+            },
+            {
+                inf: true,
+                desc: `[glx1] effect is better and remove first softcap of Galaxy Particle Generator's effect.`,
+                cost: E(5e61),
+         },
+         {
+            dark: true,
+            desc: `Meta-Honor starts x1.5 later.`,
+            cost: E('e7.4e9'),
+        },
+        {
+            desc: '[Meta-boost II] is ^1.25 stronger.',
+            cost: E('ee26450'),
+            },
+            {
+                inf: true,
+                desc: `Bipentbium-252 is better.`,
+                cost: E(1e48),
+         },
+         {
+            dark: true,
+            desc: `Galaxy Particles gain is boosted by Infinity Points.`,
+            cost: E('e1.1e10'),
+            effect() {let x = E(1)
+                if (hasElement(313)) x = player.inf.points.max(1).root(10).add(1)
+                else x = player.inf.points.max(1).log10().add(1)
+            return x},
+            effDesc(x) { return "x"+format(x,3)+"" },
+        },
+        {
+            desc: 'Pre-Infinity Global Speed reduces Galaxy Requirement.',
+            cost: E('ee27000'),
+            effect() {let x = E(1)
+                x = tmp.preInfGlobalSpeed.max(1).log10().add(1).log10()
+            return x},
+            effDesc(x) { return "rooted by "+format(x,3)+"" },
+            
+            },
+            {
+                c16: true,
+                desc: `Hyper-Glory is 30% weaker.`,
+                cost: E('e1e600'),
+            },
+            {
+                inf: true,
+                desc: `Boost last Abyssal Blot effect by Galaxy Particle Generators amount.`,
+                effect() {
+                    let x = E(1)
+                    x = player.galaxy.generator.root(5).add(1)
+                    return x
+                },
+                effDesc: x=>"+"+format(x),
+                cost: E(1e66),
+         },
+         {
+            desc: 'Trinilennium-309 formula is better.',
+            cost: E('ee28000'),
+            },
+            {
+                dark: true,
+                desc: `Apply C18's reward to Galaxy Particles gain at reduced rate.`,
+                cost: E('e1.9e10'),
+                effect() {let x = E(1)
+                   x = (player.chal.comps[18].mul(25).pow(10).add(1)).log(1.1)
+                return x},
+                effDesc(x) { return "x"+format(x,3)+"" },
+            },
     ],
     /*
     {
@@ -1792,7 +1909,7 @@ cost: E('ee1290'),
         if (tmp.brokenInf) u += 35
         if (hasElement(253)) u += 16
         if (hasElement(269)) u += 23
-        if (hasElement(292)) u += 2
+        if (hasElement(292)) u += 22
         return u
     },
 }
@@ -1807,6 +1924,11 @@ const BR_ELEM = (()=>{
 const C16_ELEM = (()=>{
     let x = []
     for (let i in ELEMENTS.upgs) if (i>0&&ELEMENTS.upgs[i].c16) x.push(Number(i))
+    return x
+})()
+const SN_ELEM = (()=>{
+    let x = []
+    for (let i in ELEMENTS.upgs) if (i>0&&ELEMENTS.upgs[i].sn) x.push(Number(i))
     return x
 })()
 function getElementId(x) {
@@ -1962,7 +2084,7 @@ function updateElementsHTML() {
     tmp.el.elem_ch_div.setVisible(ch>0)
     if (ch) {
         let eu = elem_const.upgs[ch]
-        let res = [eu.inf?" Infinity Points":eu.dark?" Dark Shadows":" Quarks",eu.cs?" Corrupted Shards":" Exotic Atoms"][elayer]
+        let res = [eu.sn? " Supernovas" :eu.inf?" Infinity Points":eu.dark?" Dark Shadows":" Quarks",eu.cs?" Corrupted Shards":" Exotic Atoms"][elayer]
         let eff = tElem[["effect","mu_effect"][elayer]]
 
         tmp.el.elem_desc.setHTML("<b>["+["","Muonic "][elayer]+ELEMENTS.fullNames[ch]+"]</b> "+eu.desc)
@@ -1996,7 +2118,7 @@ function updateElementsHTML() {
                         let u = MUONIC_ELEM.upgs[x]
                        if ((c16 || c18) && isElemCorrupted(x,elayer)) upg.setClasses({elements: true, locked: true, corrupted: true})
                           else if ((c17 || c18) && isElemOverflowed(x,elayer))upg.setClasses({elements: true, locked: true,overflowed: true})
-                          else upg.setClasses({elements: true, locked: !elem_const.canBuy(x), bought: hasElement(x,elayer), muon: elayer == 1, cs: elayer == 1&& u.cs, br: elayer == 0 && BR_ELEM.includes(x), final: elayer == 0 && x == 118, dark: elayer == 0 && eu.dark, c16: elayer == 0 && eu.c16, inf: elayer == 0 && eu.inf})
+                          else upg.setClasses({elements: true, locked: !elem_const.canBuy(x), bought: hasElement(x,elayer), muon: elayer == 1, cs: elayer == 1&& u.cs, br: elayer == 0 && BR_ELEM.includes(x), final: elayer == 0 && x == 118, dark: elayer == 0 && eu.dark, c16: elayer == 0 && eu.c16, inf: elayer == 0 && eu.inf,sn: elayer == 0 && SN_ELEM.includes(x)})
                         
                     }
                 }

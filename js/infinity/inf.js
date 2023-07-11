@@ -20,12 +20,17 @@ const INF = {
         for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
 
         player.atom.elements = e
-        if (hasElement(30,1)) player.atom.muonic_el = [30]
-       else player.atom.muonic_el = []
-        for (let x = 1; x <= 16; x++) player.chal.comps[x] = E(0)
-        player.supernova.tree = ["qu_qol1", "qu_qol2", "qu_qol3", "qu_qol4", "qu_qol5", "qu_qol6", "qu_qol7", "qu_qol8", "qu_qol9", "qu_qol8a", "unl1", "unl2", "unl3", "unl4",
+        let me = []
+        if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) me.push(i)
+        if (hasElement(30,1)) me.push(30)
+       else player.atom.muonic_el = me
+       if (!hasTree('glx14')) for (let x = 1; x <= 16; x++) player.chal.comps[x] = E(0)
+        let keep = ["qu_qol1", "qu_qol2", "qu_qol3", "qu_qol4", "qu_qol5", "qu_qol6", "qu_qol7", "qu_qol8", "qu_qol9", "qu_qol8a", "unl1", "unl2", "unl3", "unl4",
         "qol1", "qol2", "qol3", "qol4", "qol5", "qol6", "qol7", "qol8", "qol9", 'qu_qol10', 'qu_qol11', 'qu_qol12', 'qu0']
-
+        for (let x = 0; x < tmp.supernova.tree_had.length; x++) if (TREE_UPGS.ids[tmp.supernova.tree_had[x]].glx) keep.push(tmp.supernova.tree_had[x])
+        let save_keep = []
+        for (let x in keep) if (hasTree(keep[x])) save_keep.push(keep[x])
+        player.supernova.tree = save_keep
         player.ranks.beyond = E(0)
         for (let x = 0; x < PRESTIGES.names.length; x++) player.prestiges[x] = E(0)
 
@@ -208,6 +213,8 @@ dark.matters.am = E(0)
         if (hasElement(17,1)) x = x.mul(muElemEff(17))
         if (hasElement(20,1)) x = x.mul(muElemEff(20))
         if (hasElement(235)) x = x.mul(elemEffect(235))
+        x = x.mul(tmp.hm_base_boost)
+        if (player.galaxy.grade.type[1].gte(1)) x = x.mul(tmp.grade.eff[1][0])
         return x.max(1).floor()
     },
 
@@ -334,10 +341,10 @@ dark.matters.am = E(0)
                 desc: "Now you can passively gain Infinity Points based on Max Theorem's Level",
                 cost: E(5e19),
                 effect() {
-                    if (hasElement(27,1)) x = player.dark.c16.shard.root(10).log2().add(1)
+                    if (hasElement(27,1)) x = player.dark.c16.shard.add(1).root(10).log2().add(1)
                     else x = player.inf.theorem_max.max(1).log10().add(1)
 
-                    return x
+                    return x.max(1)
                 },
                 effectDesc:
                  x => (hasElement(27,1)?'Based on Corrupted Shards - ':`Based on Max Theorem's Level - `) + formatPercent(x-1),
@@ -356,8 +363,7 @@ dark.matters.am = E(0)
 
     dim_mass: {
         gain() {
-            if (!hasInfUpgrade(9)) return E(0)
-
+            if (!hasInfUpgrade(9) || CHALS.inChal(19)) return E(0)
             let x = tmp.peEffect.eff||E(1)
             if (hasElement(23,1) && (!CHALS.inChal(16))) x = x.pow(muElemEff(23,1))
             if (player.chal.comps[18].gte(1)) x = x.mul(player.chal.comps[18].mul(25).pow(10).add(1))
@@ -366,7 +372,7 @@ dark.matters.am = E(0)
         effect() {
             let x = player.inf.dim_mass.add(1).log10().pow(2).div(10)
 
-            return x//.softcap(10,0.5,0)
+            return x.softcap(15000,0.25,0)
         },
     },
     nm_base: {
@@ -385,6 +391,7 @@ dark.matters.am = E(0)
             let soft = E(0.15)
             if (hasElement(32,1)) soft = soft.add(muElemEff(32))
             if (hasElement(272)) soft = soft.add(0.3)
+            if (player.galaxy.grade.type[3].gte(1)) soft = soft.add(gradeEffect(3,0))
             return soft
         },
         boost() {
@@ -460,7 +467,7 @@ dark.matters.am = E(0)
         },
         boost() {
             let x = E(1)
-            if (hasOrbUpg(2)) x = player.inf.hm_base.max(1).root(5).pow(0.35).add(1)
+            if (hasOrbUpg(2)) x = player.inf.hm_base.max(1).root(7).pow(0.15).add(1)
             return x.softcap(1e45,0.1,0)
         },
     },
@@ -475,7 +482,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(this.cost(tmp.peBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(this.cost(tmp.peBulk.sub(1))).max(0)
                 player.inf.pe = tmp.peBulk
             }
         },
@@ -488,6 +495,7 @@ dark.matters.am = E(0)
 
             if (hasElement(225)) step = step.add(elemEffect(225,0))
             if (tmp.inf_unl) step=step.mul(theoremEff('bh',5))
+            if (hasTree('glx17')) step = step.add(treeEff('glx17'))
             
             let eff = step.pow(t.add(bonus))
 
@@ -507,7 +515,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(this.cost(tmp.nmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(this.cost(tmp.nmBulk.sub(1))).max(0)
                 player.inf.nm = tmp.nmBulk
             }
         },
@@ -522,7 +530,10 @@ dark.matters.am = E(0)
                 let p = muElemEff(26,1)
                 step = step.mul(p)
             }
-            
+            if (hasElement(37,1)) {
+                let p = muElemEff(37,1)
+                step = step.pow(p)
+            }
             let eff = step.pow(t.add(bonus))
 
             return {step: step, eff: eff, bonus: bonus}
@@ -539,7 +550,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(this.cost(tmp.pmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2)) player.inf.points = player.inf.points.sub(this.cost(tmp.pmBulk.sub(1))).max(0)
                 player.inf.pm = tmp.pmBulk
             }
         },
@@ -560,13 +571,13 @@ dark.matters.am = E(0)
         can() { return player.inf.points.gte(tmp.dmCost) },
         buy() {
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(tmp.dmCost).max(0)
+                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(tmp.dmCost).max(0)
                 player.inf.dm = player.inf.dm.add(1)
             }
         },
         buyMax() { 
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(this.cost(tmp.dmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2)) player.inf.points = player.inf.points.sub(this.cost(tmp.dmBulk.sub(1))).max(0)
                 player.inf.dm = tmp.dmBulk
             }
         },
@@ -583,7 +594,7 @@ dark.matters.am = E(0)
         },
     },
     em: {
-        cost(i) { return Decimal.pow(1.2,i.scaleEvery('em')).mul(1e42).floor() },
+        cost(i) { return Decimal.pow(1.2,i.scaleEvery('em')).mul(1e38).floor() },
         can() { return player.inf.points.gte(tmp.emCost) },
         buy() {
             if (this.can()) {
@@ -593,7 +604,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(this.cost(tmp.emBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2)) player.inf.points = player.inf.points.sub(this.cost(tmp.emBulk.sub(1))).max(0)
                 player.inf.em = tmp.emBulk
             }
         },
@@ -610,7 +621,7 @@ dark.matters.am = E(0)
         },
     },
     hm: {
-        cost(i) { return Decimal.pow(1.2,i.scaleEvery('hm')).mul(1e42).floor() },
+        cost(i) { return Decimal.pow(1.2,i.scaleEvery('hm')).mul(1e38).floor() },
         can() { return player.inf.points.gte(tmp.hmCost) },
         buy() {
             if (this.can()) {
@@ -620,7 +631,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                player.inf.points = player.inf.points.sub(this.cost(tmp.hmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(this.cost(tmp.hmBulk.sub(1))).max(0)
                 player.inf.hm = tmp.hmBulk
             }
         },
@@ -721,12 +732,12 @@ function updateInfTemp() {
 
     tmp.emCost = INF.em.cost(player.inf.em)
     tmp.emBulk = E(0)
-    if (player.inf.points.gte(100)) tmp.emBulk = player.inf.points.div(1e42).log(1.2).scaleEvery('em',true).add(1).floor()
+    if (player.inf.points.gte(100)) tmp.emBulk = player.inf.points.div(1e38).log(1.2).scaleEvery('em',true).add(1).floor()
     tmp.emEffect = INF.em.effect()
 
     tmp.hmCost = INF.hm.cost(player.inf.hm)
     tmp.hmBulk = E(0)
-    if (player.inf.points.gte(100)) tmp.hmBulk = player.inf.points.div(1e42).log(1.2).scaleEvery('hm',true).add(1).floor()
+    if (player.inf.points.gte(100)) tmp.hmBulk = player.inf.points.div(1e38).log(1.2).scaleEvery('hm',true).add(1).floor()
     tmp.hmEffect = INF.hm.effect()
     tmp.dim_mass_gain = INF.dim_mass.gain()
     tmp.dim_mass_eff = INF.dim_mass.effect()
@@ -804,8 +815,18 @@ function calcInf(dt) {
             tmp.el.inf_popup.setDisplay(true)
         },8500)
     }
-    
-    if (!player.inf.reached && player.mass.gte(INF.req)) player.inf.reached=true
+    if (tmp.inf_reached && hasTree('glx9')) {
+        player.inf.theorem = player.inf.theorem.add(1)
+        if (player.inf.theorem.eq(0)) {
+            player.inf.points = player.inf.points.add(2)
+            player.inf.total = player.inf.total.add(2)
+        }
+        else {
+            player.inf.points = player.inf.points.add(tmp.IP_gain)
+            player.inf.total = player.inf.total.add(tmp.IP_gain)
+        }
+    }
+     if (!player.inf.reached && player.mass.gte(INF.req)) player.inf.reached=true
     if (hasElement(245) && (!CHALS.inChal(17))&& !(CHALS.inChal(18))) {
         let cs = tmp.c16.shardGain
 
@@ -816,8 +837,12 @@ function calcInf(dt) {
     if (hasInfUpgrade(6)) for (let x = 119; x <= 218; x++) buyElement(x,0)
 player.inf.theorem_max = player.inf.theorem_max.max(tmp.core_lvl).floor()
 player.inf.total = player.inf.total.max(player.inf.points)
-if (FERMIONS.onActive('07')) {
+if (FERMIONS.onActive('07')|| CHALS.inChal(19)) {
         player.inf.theorem_max = E(1)
+    }
+    power = Math.round(100+getPowerMult(tmp.core_lvl)*100)/100
+    for (let i = 0; i < MAX_CORE_LENGTH; i++) if (player.inf.core[i] && hasElement(300)) {
+     player.inf.core[i].power=power
     }
 if (CHALS.inChal(17)|| CHALS.inChal(18)) {
 player.inf.core[0].level = E(player.inf.theorem_max).floor()
@@ -832,14 +857,13 @@ if (hasElement(249) && player.inf.core[1].type == 'proto') player.inf.core[1].le
 if (hasElement(249) && player.inf.core[2].type == 'time') player.inf.core[2].level = E(player.inf.theorem_max).floor()
 if (hasElement(260) && player.inf.core[3].type == 'atom') player.inf.core[3].level = E(player.inf.theorem_max).floor()
 if (hasElement(260) && player.inf.core[4].type == 'bh') player.inf.core[4].level = E(player.inf.theorem_max).floor()
-
-
-    player.inf.dim_mass = player.inf.dim_mass.add(tmp.dim_mass_gain.mul(dt))
+   if (!CHALS.inChal(19)) { player.inf.dim_mass = player.inf.dim_mass.add(tmp.dim_mass_gain.mul(dt))
     player.inf.nm_base = player.inf.nm_base.add(tmp.nm_base_gain.mul(dt))
     player.inf.pm_base = player.inf.pm_base.add(tmp.pm_base_gain.mul(dt))
     player.inf.dm_base = player.inf.dm_base.add(tmp.dm_base_gain.mul(dt))
     player.inf.em_base = player.inf.em_base.add(tmp.em_base_gain.mul(dt))
     player.inf.hm_base = player.inf.hm_base.add(tmp.hm_base_gain.mul(dt))
+   }
     if (hasInfUpgrade(20)) player.inf.points = player.inf.points.add(tmp.IP_gain.mul(dt).mul(infUpgEffect(20)))
 }
 function setupInfHTML() {

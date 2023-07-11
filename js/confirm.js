@@ -138,6 +138,10 @@ const CONFIRMS_FUNCTION = {
 
         addQuote(11)
     },
+    glx() {
+       GALAXY.doReset()
+      addQuote(13)
+    },
     t_switch() {
         
     },

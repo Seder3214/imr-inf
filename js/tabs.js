@@ -22,6 +22,7 @@ const TABS = {
         { id: "Quantum", icon: "material-symbols:grid-4x4-rounded", color: "lightgreen", unl() { return quUnl() }, style: "qu" },
         { id: "Darkness", icon: "ic:baseline-remove-red-eye", color: "grey", unl() { return player.dark.unl }, style: "dark" },
         { id: "Infinity", icon: "game-icons:infinity", color: "orange", unl() { return tmp.inf_unl }, style: "inf" },
+        { id: "Galaxy", icon: "solar:star-rings-broken", color: "white", unl() { return player.galaxy.times.gte(1) }, style: "glx" },
         { id: "Options", icon: "mdi:gear" },
     ],
     2: {
@@ -40,6 +41,7 @@ const TABS = {
             { id: "Prestige Rewards", unl() { return hasUpgrade("br",9) } },
             { id: "Beyond-Ranks Rewards", unl() { return tmp.brUnl } },
             { id: "Ascension Rewards", unl() { return tmp.ascensions_unl } },
+            { id: "Beyond-Prestiges Rewards", unl() { return tmp.bpUnl } },
         ],
         3: [
             { id: "Challenges" },
@@ -80,6 +82,10 @@ const TABS = {
             { id: "Orb Of Creation - Upgrades", unl() {return player.chal.comps[17].gte(50)} },
         ],
         9: [
+            { id: "Galaxy Particles", unl() { return player.galaxy.times.gte(1) }, style: "glx" },
+            { id: "Grading", unl() { return player.galaxy.times.gte(1) }, style: "glx" },
+        ],
+        10: [
             { id: "Options" },
             { id: "Resource Hider" },
         ],

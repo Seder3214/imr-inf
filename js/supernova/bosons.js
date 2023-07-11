@@ -87,7 +87,7 @@ const BOSONS = {
             let a = x.add(1).pow(2e4)
             if (hasTree("qu2") && !player.qu.rip.active) a = a.pow(x.add(1).log10().add(1).pow(4/3).softcap(1e15,0.1,0))
             if (tmp.c16active) a = overflow(a,10,0.5)
-            if (hasElement(276)) a = a.max(1).log2().add(1)
+            if (hasElement(276)) a = a.max(1).log10().add(1)
             let b = expMult(x.add(1),2/3,2)
 a = overflow(a,'ee2500',0.25)
 if (hasElement(276)) a = overflow(a,'e6200',0.05)
@@ -106,6 +106,7 @@ if (hasElement(276)) a = overflow(a,'e6200',0.05)
         },
         graviton(x) {
             let a = expMult(x.add(1),0.5).pow(tmp.bosons.effect.hb?tmp.bosons.effect.hb[0]:1)
+            if (hasBeyondPres(1,3)) a = expMult(x.add(1),0.6).pow(tmp.bosons.effect.hb?tmp.bosons.effect.hb[0]:1)
             return [a]
         },
         hb(x) {
@@ -163,7 +164,7 @@ if (hasElement(276)) a = overflow(a,'e6200',0.05)
                 effect(i) {
                     let x
                     if (hasElement(213)) {
-                        x = player.supernova.bosons.photon.add(1).log10().add(10).log10().mul(i.add(10).log10()).pow(0.75)
+                        x = player.supernova.bosons.photon.add(1).log10().add(10).log10().mul(i.add(10).log10()).pow(0.75).mul(hasTree('glx12')?tmp.fermions.effs[0][3]:1)
                     } else {
                         x = player.supernova.bosons.photon.add(1).log10().add(1).pow(i.softcap(8000,0.1,0).pow(tmp.fermions.effs[0][3]).mul(0.5)).softcap("ee11",0.8,2).softcap("e4e14",hasElement(99)?0.785:0.75,2)
                         if (!hasElement(99)) x = x.softcap("e4e15",0.5,2)

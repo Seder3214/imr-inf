@@ -5,7 +5,7 @@ const DARK = {
         [1e120,1e180,'e345','e800','e2500','e56000','e125500','ee7'],
     ],
     gain() {
-        if (CHALS.inChal(18)) return E(0)
+        if (CHALS.inChal(18) ||CHALS.inChal(19)) return E(0)
         let x = E(1)
 
         x = x.mul(tmp.dark.shadowEff.ray)
@@ -22,7 +22,7 @@ const DARK = {
 
         if (hasUpgrade('br',20)) x = x.mul(upgEffect(4,20))
         if (tmp.inf_unl) x = x.mul(theoremEff('time',4))
-
+        if (hasTree('glx2')) x = x.mul(treeEff('glx2'))
         return x.floor()
     },
     rayEffect() {
@@ -125,7 +125,7 @@ const DARK = {
         if (hasElement(34,1)) x.mass = x.mass.pow(muElemEff(34))
 
         if (a.gte(1e6)) x.bp = a.div(1e6).pow(10)
-        if (a.gte(1e11)) x.sn = a.div(1e11).add(1).log10().div(10).add(1).softcap(7.5,0.25,0,hasElement(9,1)).softcap(600000,0.25,0)
+        if (a.gte(1e11)) x.sn = a.div(1e11).add(1).log10().div(10).add(1).softcap(7.5,0.25,0,hasElement(9,1)).mul(player.galaxy.grade.type[0].gte(1)?gradeEffect(0,1):1).softcap(600000,0.25,0)
         if (a.gte(1e25)) x.en = a.div(1e25).pow(3)
         if (tmp.chal14comp) x.ab = a.add(1).pow(2)
         if (!tmp.c16active && a.gte(1e130)) x.bhp = a.div(1e130).log10().div(5)
@@ -160,7 +160,7 @@ const DARK = {
         if (a.gte('e56000') && !tmp.c16active) x.ApQ_Overflow = Decimal.pow(10,a.div('e56000').log10().add(1).log10())
         if (a.gte('e125500')) x.fss = a.div('e56000').log10().add(1).log10().div(10).add(1).toNumber()
         if (a.gte('ee7')) {
-            x.ea = a.div('ee7').log10().div(1e6).add(1).root(2).softcap(hasElement(31,1)?3:1.75,0.25,0)
+            x.ea = a.div('ee7').log10().div(1e6).add(1).root(2).softcap(hasElement(31,1)?3:1.75,0.25,0).add(hasElement(312)?elemEffect(312):0)
         }
 
         return x
@@ -176,7 +176,7 @@ const DARK = {
         },
         buyMax() { 
             if (this.can()) {
-                player.dark.am_mass = player.dark.am_mass.sub(this.cost(tmp.amBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,2)) player.dark.am_mass = player.dark.am_mass.sub(this.cost(tmp.amBulk.sub(1))).max(0)
                 player.dark.am = tmp.amBulk
             }
         },

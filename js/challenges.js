@@ -110,7 +110,10 @@ const CHALS = {
     },
     enter(ch=player.chal.choosed) {
         if (player.chal.active == 0) {
-            if (ch >= 17 && ch <= 20) {
+            if (ch >= 19 && ch <= 20) {
+                GALAXY.doReset()
+        }
+            if (ch >= 17 && ch <= 18) {
                 INF.doReset()
         }
             else if (ch == 16) {
@@ -141,7 +144,8 @@ const CHALS = {
         else if (x < 9) return "Entering this challenge will force atom reset."
         else if (x < 13) return "Entering challenge will supernova reset."
         else if (x < 16) return "Entering challenge will force a Darkness reset."
-        else if (x < 20) return "Entering challenge will force a Infinity reset."
+        else if (x < 19) return "Entering challenge will force a Infinity reset."
+        else if (x < 20) return "Entering challenge will force a Galaxy reset."
         return "Entering challenge will force an FSS reset."
     },
     getMax(i) {
@@ -175,6 +179,7 @@ const CHALS = {
         if (hasElement(259) && i==15) x = x.add(1000000)
         if (hasElement(279) && i==17) x = x.add(1000)
         if (tmp.inf_unl && i==17) x = x.add(Math.min(theoremEff('mass',5)))
+        if (hasElement(303) && i==18) x = x.add(10000)
         return x.floor()
     },
     getScaleName(i) {
@@ -212,93 +217,106 @@ const CHALS = {
     getChalData(x, r=E(-1)) {
         let res = this.getResource(x)
         let lvl = r.lt(0)?player.chal.comps[x]:r
-        let chal = this[x]
-        let fp = 1
-        if (QCs.active() && x <= 12) fp /= tmp.qu.qc_eff[5]
-        let s1 = x > 8 ? 10 : 75
-        let s2 = 300
-        if (x == 8) s2 = 200
-        if (x > 8) s2 = 50
-        let s3 = 1000
-        if (x == 13 || x == 16) {
-            s1 = 2
-            s2 = 5
-            s3 = 10
+        let chal = this[x], fp = 1, goal = EINF, bulk = E(0)
+        if (x == 17 && (hasElement(295) && (!CHALS.inChal(17)))) {
+            if (hasOrbUpg(5)) goal = lvl.gt(0) ? Decimal.pow('1e10',Decimal.pow(1.01,lvl.sub(1).pow(hasTree('glx16')?0.95:1.05))) : chal.start
+           else goal = lvl.gt(0) ? Decimal.pow('ee1000',Decimal.pow(1.01,lvl.sub(1).pow(1.25))) : chal.start
+           if (hasOrbUpg(5) && res.gte(chal.start)) bulk = res.log('1e10').max(1).log(1.01).root(hasTree('glx16')?0.95:1.05).add(1).floor()
+           else if (res.gte(chal.start)) bulk = res.log('ee1000').max(1).log(1.01).root(1.25).add(1).floor()
+            if (res.gte(hasOrbUpg(5)?'1e10':'ee1000')) bulk = bulk.add(1)
         }
-        if (x <= 12) s3 *= exoticAEff(0,3)
-        let pow = chal.pow
-        if (hasElement(10) && (x==3||x==4)) pow = pow.mul(0.95)
-        chal.pow = chal.pow.max(1)
-        let goal = chal.inc.pow(lvl.div(fp).pow(pow)).mul(chal.start)
-        let bulk = res.div(chal.start).max(1).log(chal.inc).root(pow).mul(fp).add(1).floor()
-        if (res.lt(chal.start)) bulk = E(0)
-        if (lvl.max(bulk).gte(s1)) {
-            let start = E(s1);
-            let exp = E(3).pow(this.getPower(x));
-            goal =
-            chal.inc.pow(
-                    lvl.div(fp).pow(exp).div(start.pow(exp.sub(1))).pow(pow)
-                ).mul(chal.start)
-            bulk = res
-                .div(chal.start)
-                .max(1)
-                .log(chal.inc)
-                .root(pow)
-                .times(start.pow(exp.sub(1)))
-                .root(exp).mul(fp)
-                .add(1)
-                .floor();
+        else if (x == 16 && (hasElement(295) && (!CHALS.inChal(16)))) {
+            goal = lvl.gt(0) ? Decimal.pow('ee300',Decimal.pow(1.05,lvl.sub(1).pow(1.15))) : chal.start
+            if (res.gte(chal.start)) bulk = res.log('ee300').max(1).log(1.05).root(1.15).add(1).floor()
+            if (res.gte('ee300')) bulk = bulk.add(1)
+        } else {
+            if (QCs.active() && x <= 12) fp /= tmp.qu.qc_eff[5]
+            let s1 = x > 8 ? 10 : 75
+            let s2 = 300
+            if (x == 8) s2 = 200
+            if (x > 8) s2 = 50
+            let s3 = 1000
+            if (x == 13 || x == 16) {
+                s1 = 2
+                s2 = 5
+                s3 = 10
+            }
+            if (x <= 12) s3 *= exoticAEff(0,3)
+            let pow = chal.pow
+            if (hasElement(10) && (x==3||x==4)) pow = pow.mul(0.95)
+            chal.pow = chal.pow.max(1)
+            goal = chal.inc.pow(lvl.div(fp).pow(pow)).mul(chal.start)
+            bulk = res.div(chal.start).max(1).log(chal.inc).root(pow).mul(fp).add(1).floor()
+            if (res.lt(chal.start)) bulk = E(0)
+            if (lvl.max(bulk).gte(s1)) {
+                let start = E(s1);
+                let exp = E(3).pow(this.getPower(x));
+                goal =
+                chal.inc.pow(
+                        lvl.div(fp).pow(exp).div(start.pow(exp.sub(1))).pow(pow)
+                    ).mul(chal.start)
+                bulk = res
+                    .div(chal.start)
+                    .max(1)
+                    .log(chal.inc)
+                    .root(pow)
+                    .times(start.pow(exp.sub(1)))
+                    .root(exp).mul(fp)
+                    .add(1)
+                    .floor();
+            }
+            if (lvl.max(bulk).gte(s2)) {
+                let start = E(s1);
+                let exp = E(3).pow(this.getPower(x));
+                let start2 = E(s2);
+                let exp2 = E(4.5).pow(this.getPower2(x))
+                goal =
+                chal.inc.pow(
+                        lvl.div(fp).pow(exp2).div(start2.pow(exp2.sub(1))).pow(exp).div(start.pow(exp.sub(1))).pow(pow)
+                    ).mul(chal.start)
+                bulk = res
+                    .div(chal.start)
+                    .max(1)
+                    .log(chal.inc)
+                    .root(pow)
+                    .times(start.pow(exp.sub(1)))
+                    .root(exp)
+                    .times(start2.pow(exp2.sub(1)))
+                    .root(exp2).mul(fp)
+                    .add(1)
+                    .floor();
+            }
+            if (lvl.max(bulk).gte(s3)) {
+                let start = E(s1);
+                let exp = E(3).pow(this.getPower(x));
+                let start2 = E(s2);
+                let exp2 = E(4.5).pow(this.getPower2(x))
+                let start3 = E(s3);
+                let exp3 = E(1.001).pow(this.getPower3(x))
+                goal =
+                chal.inc.pow(
+                        exp3.pow(lvl.div(fp).sub(start3)).mul(start3)
+                        .pow(exp2).div(start2.pow(exp2.sub(1))).pow(exp).div(start.pow(exp.sub(1))).pow(pow)
+                    ).mul(chal.start)
+                bulk = res
+                    .div(chal.start)
+                    .max(1)
+                    .log(chal.inc)
+                    .root(pow)
+                    .times(start.pow(exp.sub(1)))
+                    .root(exp)
+                    .times(start2.pow(exp2.sub(1)))
+                    .root(exp2)
+                    .div(start3)
+                    .max(1)
+                    .log(exp3)
+                    .add(start3).mul(fp)
+                    .add(1)
+                    .floor();
+            }
         }
-        if (lvl.max(bulk).gte(s2)) {
-            let start = E(s1);
-            let exp = E(3).pow(this.getPower(x));
-            let start2 = E(s2);
-            let exp2 = E(4.5).pow(this.getPower2(x))
-            goal =
-            chal.inc.pow(
-                    lvl.div(fp).pow(exp2).div(start2.pow(exp2.sub(1))).pow(exp).div(start.pow(exp.sub(1))).pow(pow)
-                ).mul(chal.start)
-            bulk = res
-                .div(chal.start)
-                .max(1)
-                .log(chal.inc)
-                .root(pow)
-                .times(start.pow(exp.sub(1)))
-                .root(exp)
-                .times(start2.pow(exp2.sub(1)))
-                .root(exp2).mul(fp)
-                .add(1)
-                .floor();
-        }
-        if (lvl.max(bulk).gte(s3)) {
-            let start = E(s1);
-            let exp = E(3).pow(this.getPower(x));
-            let start2 = E(s2);
-            let exp2 = E(4.5).pow(this.getPower2(x))
-            let start3 = E(s3);
-            let exp3 = E(1.001).pow(this.getPower3(x))
-            goal =
-            chal.inc.pow(
-                    exp3.pow(lvl.div(fp).sub(start3)).mul(start3)
-                    .pow(exp2).div(start2.pow(exp2.sub(1))).pow(exp).div(start.pow(exp.sub(1))).pow(pow)
-                ).mul(chal.start)
-            bulk = res
-                .div(chal.start)
-                .max(1)
-                .log(chal.inc)
-                .root(pow)
-                .times(start.pow(exp.sub(1)))
-                .root(exp)
-                .times(start2.pow(exp2.sub(1)))
-                .root(exp2)
-                .div(start3)
-			    .max(1)
-			    .log(exp3)
-			    .add(start3).mul(fp)
-                .add(1)
-                .floor();
-        }
-        return {goal: goal, bulk: bulk}
+
+        return {goal, bulk}
     },
     1: {
         title: "Instant Scale",
@@ -567,7 +585,7 @@ ret = overflow(ret,1e68,0.5)
         effDesc(x) { return "^"+format(x) },
     },
     17: {
-        unl() { return hasElement(265) },
+        unl() { return hasElement(265)||player.chal.comps[18].gte(1)||player.chal.comps[19].gte(1) },
         title: "Weaker Theorems",
         desc: `
         • Some elements will be [Overflowed].<br>
@@ -584,19 +602,21 @@ ret = overflow(ret,1e68,0.5)
         effect(x) {
             let step = x.mul(2.15).pow(10.5).add(1).softcap(1e13,0.15,0)
             let ret = x.mul(1.5).pow(0.25).add(1)
+            if (hasTree('glx4')) step = x.mul(5.15).pow(10.5).add(1)
             return {ret: ret, step: step}
         },
         effDesc(x) { return "x"+format(x.ret)+" to Muonic Calcium<br>x"+format(x.step)+" to Prestige Base" },
     },
     18: {
-        unl() { return player.chal.comps[17].gte(50)||player.chal.comps[18].gte(1) },
+        unl() { return player.chal.comps[17].gte(50)||player.chal.comps[18].gte(1)||player.chal.comps[19].gte(1) },
         title: "Challenge Madness",
         desc: `
         • Some elements will be [Overflowed].<br>
-        • You are trapped in C1-17, you can;t gain dark rays, but they're capped a 1e12.<br>
+        • You are trapped in C1-17.<br>
+        • Your dark rays are capped at 1e12.<br>
         • You can't enter Big Rip<br>
         `,
-        reward: `Boost Dimensional Mass gain.<br><span class='orange'>At 100 completions, unlock ???</span>`,
+        reward: `Boost Dimensional Mass gain.<br><span class='orange'>At 100 completions, unlock C19</span>`,
         max: E(100),
         inc: E('e11400000000'),
         pow: E(2),
@@ -607,7 +627,30 @@ ret = overflow(ret,1e68,0.5)
         },
         effDesc(x) { return "x"+format(x)},
     },
-    cols: 18,
+19: {
+    unl() { return player.chal.comps[18].gte(100)||player.chal.comps[19].gte(1) },
+    title: "Galactic Black Hole",
+    desc: `
+    • You can't buy elements.<br>
+    • You are trapped in Exotic-Quark and Exotic-Lepton.<br>
+    • Your dark rays are capped at 1e12.<br>
+    • You can't gain Rage Points, Dark Matters.<br>
+    • Parallel Extruder and Every Modificators are useless.<br>
+    • Pre-Infinity Global Speed is set to 1.00x.<br>
+    • You can't buy Prestige Level and Rank.<br>
+    `,
+    reward: `Grading cost formula is weaker.<br><span class='orange'>At 100 completions, unlock C20</span>`,
+    max: E(100),
+    inc: E('e1e72'),
+    pow: E(10),
+    start: E('e1e72'),
+    effect(x) {
+        let ret = x.root(12).div(5).add(1)
+        return ret
+    },
+    effDesc(x) { return formatMult(x)},
+},
+cols: 19,
 }
 
 /*

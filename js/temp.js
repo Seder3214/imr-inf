@@ -92,7 +92,14 @@ function resetTemp() {
             tree_afford: {},
             tree_afford2: [],
         },
-    
+        galaxy: {
+            maxlimit: E('1e100'),
+        },
+        grade: {
+            eff: [],
+            power: [],
+            w: [6,4,2,0],
+        },
         radiation: {
             unl: false,
             ds_gain: [],
@@ -395,11 +402,13 @@ function updateTemp() {
     tmp.brokenInf = hasInfUpgrade(16)
     tmp.ascensions_unl = hasElement(281)
     tmp.bpUnl = hasElement(294)
+    updateGradeTemp()
     updateOrbTemp()
     updateInfTemp()
     updateC16Temp()
     updateDarkTemp()
     updateQuantumTemp()
+    updateGalaxiesTemp()
     updateRadiationTemp()
     updateFermionsTemp()
     updateBosonsTemp()

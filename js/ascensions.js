@@ -1,7 +1,7 @@
 const ASCENSIONS = {
-    names: ['ascension'],
-    fullNames: ["Ascension"],
-    resetName: ['Ascend'],
+    names: ['ascension','transcension'],
+    fullNames: ["Ascension","Transcension"],
+    resetName: ['Ascend',"Transcend"],
     baseExponent() {
         let x = 0
 
@@ -15,7 +15,9 @@ x += tmp.fermions.effs[1][7]
 
         for (let i = 0; i < PRESTIGES.names.length; i++) {
             let r = player.prestiges[i]
-            x = x.mul(r.add(1).ln().add(1))
+            let br = E(tmp.beyond_pres.max_tier)
+                if (hasBeyondPres(1,2)) x = x.add(br).mul(r.add(1).add(1).ln().add(1))
+           else x = x.mul(r.add(1).add(1).ln().add(1))
         }
 
         return x.sub(1)
@@ -26,6 +28,9 @@ x += tmp.fermions.effs[1][7]
             case 0:
                 x = Decimal.pow(1.2,y.div(fp).pow(1.4)).mul(2300)
                 break;
+                case 1:
+                    x = Decimal.pow(1.2,y.div(fp)).mul(15)
+                    break;
             default:
                 x = EINF
                 break;
@@ -38,6 +43,9 @@ x += tmp.fermions.effs[1][7]
             case 0:
                 if (y.gte(2300)) x = y.div(2300).max(1).log(1.2).max(0).root(1.4).mul(fp).add(1)
                 break;
+              case 1:
+                    if (y.gte(15)) x = y.div(15).max(1).log(1.2).max(0).mul(fp).add(1)
+                    break;
             default:
                 x = E(0)
                 break;
@@ -50,11 +58,14 @@ x += tmp.fermions.effs[1][7]
     },
     unl: [
         ()=>true,
+        ()=>hasAscension(0,15)|| hasAscension(1,1),
     ],
     noReset: [
+        ()=>hasAscension(1,1),
         ()=>false,
     ],
     autoUnl: [
+        ()=>hasAscension(1,1),
         ()=>false,
     ],
     autoSwitch(x) { player.auto_asc[x] = !player.auto_asc[x] },
@@ -62,7 +73,12 @@ x += tmp.fermions.effs[1][7]
         {
             1: `The bonus of tickspeed, each mass upgrade (except Overflow) now multiplies its level instead of adding. Dalton Theorem is even stronger.`,
             2: `Meta-Prestige Level starts ^1.025 later per Ascension.`,
-            6: `Add +5% to Theorem's Power formula per Ascension.`,
+            6: `Add +1.25x to Theorem's Power formula per Ascension.`,
+10: `Remove Super-Renown Scaling`,
+15: `Unlock Transcension`,
+        },
+        {
+            1: `Automate Ascensions`
         },
     ],
     rewardEff: [
@@ -79,13 +95,14 @@ x += tmp.fermions.effs[1][7]
             6: [
                 ()=>{
 
-                    let x = E(1).add(player.ascensions[0].mul(5).div(100))
+                    let x = E(1).add(player.ascensions[0].mul(1.25))
 
                     return x
                 },
-                x=>"+"+formatPercent(x-1),
+                x=>"x"+format(x),
             ],
         },
+        {},
     ],
     reset(i, bulk = false) {
         let b = this.bulk(i)
@@ -158,7 +175,7 @@ function updateAscensionsHTML() {
             tmp.el["asc_desc_"+x].setTxt(desc)
             tmp.el["asc_req_"+x].setTxt(x==0?format(tmp.ascensions.req[x],0)+" of Ascension Base":ASCENSIONS.fullNames[x-1]+" "+format(tmp.ascensions.req[x],0))
             tmp.el["asc_auto_"+x].setDisplay(ASCENSIONS.autoUnl[x]())
-            tmp.el["asc_auto_"+x].setTxt(player.auto_pres[x]?"ON":"OFF")
+            tmp.el["asc_auto_"+x].setTxt(player.auto_asc[x]?"ON":"OFF")
         }
     }
 }

@@ -20,7 +20,8 @@ const SCALE_START = {
 		massUpg4: E(50),
 		FSS: E(5),
 		pe: E(25),
-		inf_theorem: E(10),
+		inf_theorem: E(15),
+		galaxy: E(5),
     },
 	hyper: {
 		rank: E(120),
@@ -38,8 +39,10 @@ const SCALE_START = {
 		prestige: E(80),
 		honor: E(60),
 		glory: E(60),
+		pe: E(210),
+renown: E(350),
 massUpg4: E(200),
-		inf_theorem: E(35),
+		inf_theorem: E(25),
 	},
 	ultra: {
 		rank: E(600),
@@ -101,7 +104,8 @@ const SCALE_POWER= {
 		massUpg4: 3,
 		FSS: 2,
 		pe: 2,
-		inf_theorem: 2,
+		inf_theorem: 3,
+		galaxy: 10,
     },
 	hyper: {
 		rank: 2.5,
@@ -119,7 +123,9 @@ const SCALE_POWER= {
 		prestige: 2,
 		honor: 2,
 		glory: 3,
-		inf_theorem: 10,
+        renown: 40,
+		pe: 3,
+		inf_theorem: 1.55,
 	},
 	ultra: {
 		rank: 4,
@@ -190,6 +196,7 @@ const SCALING_RES = {
 	FSS() { return player.dark.matters.final },
 	pe() { return player.inf.pe},
 	inf_theorem() { return player.inf.theorem},
+	galaxy() {return player.galaxy.times},
 }
 
 const NAME_FROM_RES = {
@@ -214,6 +221,7 @@ const NAME_FROM_RES = {
 	FSS: "Final Star Shard",
 	pe: "Parallel Extruder",
 	inf_theorem: "Infinity Theorem",
+	galaxy: " Galaxy",
 }
 
 function updateScalingHTML() {
@@ -336,7 +344,10 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(5,2)) start = start.add(beyondRankEffect(5,2,0))
 			if (hasBeyondRank(8,2)) start = start.add(beyondRankEffect(8,2))
 		}
-if (hasElement(252) && name !== ( 'FSS' || 'inf_theorem')) start = start.add(elemEffect(252))
+
+		else if (name!=='FSS' && name!=='inf_theorem' && name!=='galaxy') {
+			if (hasElement(252)) start = start.add(elemEffect(252))
+					}
 	}
 	else if (type==1) {
 		if (name=="tickspeed") {
@@ -403,6 +414,10 @@ if (hasElement(252) && name !== ( 'FSS' || 'inf_theorem')) start = start.add(ele
 			start = start.mul(exoticAEff(0,1))
 			if (hasAscension(0,2)) start = start.pow(ascensionEff(0,2))
 			if (tmp.inf_unl) start = start.pow(theoremEff('time',5))
+		}
+		else if (name == 'honor'){
+			if (hasBeyondPres(1,6)) start= start.mul(beyondPresEff(1,7))
+			if (hasElement(306)) start = start.mul(1.5)
 		}
 	} else if (type==4) {
 		if (name=="rank") {
@@ -522,6 +537,10 @@ function getScalingPower(type, name) {
 		else if (name =='honor'){
 			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7))
 		}
+else if (name=='glory') {
+if (hasPrestige(3,118)) power = power.mul(0.75)
+if (hasElement(311)) power = power.mul(0.7)
+}
 		else if (name=="tetr") {
 			if (hasElement(154)) power = power.mul(0.9)
 		}
@@ -618,6 +637,8 @@ function noScalings(type,name) {
 	else if (name=="prestige") {
 		if (type < 3 && hasBeyondRank(5,7)) return true
 	}
+else if (name=='glory') {
+if (type == 0 && hasAscension(0,10)) return true}
 	else if (name=="pent") {
 		if (type < 2 && hasBeyondRank(5,11)) return true
 		if (type = 2 && hasElement(240)) return true
