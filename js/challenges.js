@@ -92,8 +92,6 @@ const CHALS = {
         else if (x < 16) DARK.doReset(true)
         else if (x > 16) INF.doReset(true)
         else if (x == 19) {
-        let e = [275,283,229,249,260] 
- player.atom.elements = e
 GALAXY.doReset()}
         else MATTERS.final_star_shard.reset(true)
     },
