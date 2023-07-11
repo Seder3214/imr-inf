@@ -79,7 +79,7 @@ player.inf.theorem = E(6)
 player.inf.theorem_max = E(5),
 
 player.inf.upg = save_keep
-INF.doReset(}
+INF.doReset()
 }
 }
 function calcGalaxy(dt) {
