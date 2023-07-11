@@ -562,7 +562,8 @@ function loadGame(start=true, gotNaN=false) {
     updateQCModPresets()
 if (player.name == undefined) {createPrompt("Choose your name!",'import',loadbeta=>{
        player.name = loadbeta
-    }}
+    })
+}
     if (start) {
         setInterval(save,60000)
         for (let x = 0; x < 5; x++) updateTemp()
