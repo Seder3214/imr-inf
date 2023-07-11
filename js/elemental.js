@@ -1810,7 +1810,7 @@ cost: E('ee1290'),
             {
                 inf: true,
                 desc: `Bipentbium-252 is better.`,
-                cost: E(1e48),
+                cost: E(1e64),
          },
          {
             dark: true,
