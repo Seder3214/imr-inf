@@ -1062,7 +1062,7 @@ const ELEMENTS = {
             cost: E("e9.5e80"),
             effect() {
                 let x = Decimal.pow(1.1,player.qu.en.amt.add(1).log10().pow(.9))
-                return x
+                return x = overflow(x,'e2000000',0.1)
             },
             effDesc(x) { return "x"+format(x) },
         },{
