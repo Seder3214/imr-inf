@@ -182,7 +182,7 @@ function calc(dt) {
 function getPlayerData() {
     let s = {
         mass: E(0),
-name: "".
+name: "",
         ranks: {
             rank: E(0),
             tier: E(0),
