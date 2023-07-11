@@ -17,8 +17,8 @@ const INF = {
         if (hasInfUpgrade(3)) e.push(161)
         if (iu15) e.push(218)
 
-        for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
-
+          if (!player.chal.active == 19){ for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
+}
         player.atom.elements = e
 let me = []
         if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) me.push(player.atom.muonic_el[i])
