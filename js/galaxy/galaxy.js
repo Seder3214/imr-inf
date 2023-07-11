@@ -49,6 +49,8 @@ const GALAXY = {
         }
     },
     doReset() {
+
+if (!hasTree('glx18') {
         let e = [275,283,229,249,260]
 player.atom.elements = e
 player.galaxy.times = player.galaxy.times.max(tmp.supernova.bulkGal)
@@ -77,7 +79,7 @@ player.inf.theorem = E(6)
 player.inf.theorem_max = E(5),
 
 player.inf.upg = save_keep
-INF.doReset()
+INF.doReset(}
 }
 }
 function calcGalaxy(dt) {
