@@ -1274,12 +1274,12 @@ const TREE_UPGS = {
             cost: E(1e12),
         },
         glx11: {
-            branch: ['glx8','glx10'],
+            branch: ['glx8],
             desc: `Now you'll be able to get Nebula Galaxy.`,
             cost: E(1e18),
         },
         glx12: {
-            branch: ['glx7','glx9'],
+            branch: ['glx7'],
             desc: `Unhardcap [Strange] effect, but the effect will be weaker<br>[Strange] will be applied to Exponential 4th Photon upgrade effect.`,
             cost: E(1e20),
         },
@@ -1327,7 +1327,7 @@ const TREE_UPGS = {
             cost: E(1e33),
         },
         glx19: {
-            branch: ['glx16','glx15','glx19'],
+            branch: ['glx16','glx15'],
             desc: `Apply [glx13] effect to Galaxy Particle Generator's softcap^2 at reduced rate.`,
             effect() {
                 x = player.galaxy.times.add(1).pow(0.05)
