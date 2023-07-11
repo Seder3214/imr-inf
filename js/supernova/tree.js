@@ -1274,12 +1274,12 @@ const TREE_UPGS = {
             cost: E(1e12),
         },
         glx11: {
-            branch: ['glx8],
+            branch: ['glx8','glx10'],
             desc: `Now you'll be able to get Nebula Galaxy.`,
             cost: E(1e18),
         },
         glx12: {
-            branch: ['glx7'],
+            branch: ['glx7','glx9'],
             desc: `Unhardcap [Strange] effect, but the effect will be weaker<br>[Strange] will be applied to Exponential 4th Photon upgrade effect.`,
             cost: E(1e20),
         },
