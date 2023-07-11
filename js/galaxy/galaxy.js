@@ -76,7 +76,7 @@ player.inf.core[1].star = [true,true,true,true,true,true]
 player.inf.core[2].star = [true,true,true,true,true,true]
 player.inf.core[3].star = [true,true,true,true,true,true]
 player.inf.theorem = E(6)
-player.inf.theorem_max = E(5),
+player.inf.theorem_max = E(5)
 
 player.inf.upg = save_keep
 INF.doReset()
