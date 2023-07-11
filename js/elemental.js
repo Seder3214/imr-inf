@@ -1834,7 +1834,7 @@ cost: E('ee1290'),
             {
                 c16: true,
                 desc: `Hyper-Glory is 30% weaker.`,
-                cost: E('e1e600'),
+                cost: E('e1e620'),
             },
             {
                 inf: true,
@@ -1849,7 +1849,7 @@ cost: E('ee1290'),
          },
          {
             desc: 'Trinilennium-309 formula is better.',
-            cost: E('ee28000'),
+            cost: E('ee30000'),
             },
             {
                 dark: true,
