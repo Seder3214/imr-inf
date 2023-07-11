@@ -82,6 +82,7 @@ player.inf.upg = save_keep
 INF.doReset()
 }
 }
+}
 function calcGalaxy(dt) {
 if (player.galaxy.times.gt(0)) player.galaxy.stars = player.galaxy.stars.add(tmp.galaxy.gain.mul(dt))
 if (GRADE.unl()) {
