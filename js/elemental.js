@@ -1619,7 +1619,7 @@ x = overflow(x,1e180,0.1)
         },
         {
             desc: `Dalton Modificator's effect is better.`,
-            cost: E('e1e938'),
+            cost: E('e1e910'),
         },
         {
             inf: true,
