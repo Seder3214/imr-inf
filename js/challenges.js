@@ -644,7 +644,7 @@ ret = overflow(ret,1e68,0.5)
     reward: `Grading cost formula is weaker.<br><span class='orange'>At 250 completions, unlock C20</span>`,
     max: E(250),
     inc: E('e1e72'),
-    pow: E(10),
+    pow: E(50),
     start: E('e1e72'),
     effect(x) {
         let ret = x.root(12).div(5).add(1)
