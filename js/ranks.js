@@ -307,7 +307,7 @@ const PRESTIGES = {
             let br = E(tmp.beyond_ranks.max_tier)
             if (hasBeyondPres(1,2)) x = x.add(br).mul(r.add(1))
             if (hasPrestige(0,18) && i == 0) r = r.mul(2)
-           else x = x.mul(r.add(1))
+            x = x.mul(r.add(1))
         }
 
         if (tmp.dark.abEff.pb) x = x.mul(tmp.dark.abEff.pb)
