@@ -1143,7 +1143,7 @@ let tier = tmp.beyond_ranks.max_tier
         for (let x = 0; x < PRES_LEN; x++) {
             let unl = PRESTIGES.unl[x]?PRESTIGES.unl[x]():true
 
-            tmp.el["pres_div_"+x].setDisplay(unl && (!tmp.bpUnl || x > 4))
+            tmp.el["pres_div_"+x].setDisplay(unl && (!tmp.bpUnl || x > 3))
 
             if (unl) {
                 let p = player.prestiges[x] || E(0)
