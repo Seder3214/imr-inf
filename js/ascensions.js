@@ -6,7 +6,7 @@ const ASCENSIONS = {
         let x = 0
 
         x += 1
-        if (tmp.inf_unl) x += theoremEff('atom',5)/10
+        if (tmp.inf_unl) x += theoremEff('atom',5)
 x += tmp.fermions.effs[1][7]
         return x
     },
