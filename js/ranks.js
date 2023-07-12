@@ -327,7 +327,7 @@ if (hasBeyondPres(1,2)) x = x.add(br).mul(r.add(1))
                 x = Decimal.pow(1.1,y.scaleEvery('prestige',false,[0,0,0,fp]).pow(1.1)).mul(2e13)
                 break;
             case 1:
-                x = y.div(fp).div(ifp).scaleEvery('honor',false).pow(1.25).mul(3).add(4)
+                x = y.div(fp).scaleEvery('honor',false).pow(1.25).mul(3).add(4)
                 break;
             case 2:
                 x = hasElement(167)?y.div(fp).scaleEvery('glory',false).pow(1.25).mul(3.5).add(5):y.pow(1.3).mul(4).add(6)
@@ -1143,7 +1143,7 @@ let tier = tmp.beyond_ranks.max_tier
         for (let x = 0; x < PRES_LEN; x++) {
             let unl = PRESTIGES.unl[x]?PRESTIGES.unl[x]():true
 
-            tmp.el["pres_div_"+x].setDisplay(unl && (!tmp.bpUnl || x > 3))
+            tmp.el["pres_div_"+x].setDisplay(unl && (!tmp.bpUnl || x > 0))
 
             if (unl) {
                 let p = player.prestiges[x] || E(0)

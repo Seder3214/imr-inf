@@ -73,7 +73,7 @@ massUpg4: E(200),
 	exotic: {
 		rank: E(1e16),
 		tier: E(1e25),
-		prestige: E(1000000),
+		prestige: E(100000000),
 		supernova: E(2e5),
 	},
 	supercritical: {
