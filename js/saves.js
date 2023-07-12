@@ -369,6 +369,11 @@ function wipe(reload=false) {
     else player = getPlayerData()
 }
 
+function resetName() {
+   createPrompt("Choose your name!",'import',loadbeta=>{
+       player.name = loadbeta
+    })
+}
 function loadPlayer(load) {
     const DATA = getPlayerData()
     player = deepNaN(load, DATA)
