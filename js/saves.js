@@ -560,7 +560,7 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
-if (player.name == undefined) {createPrompt("Choose your name!",'import',loadbeta=>{
+if (player.name == '') {createPrompt("Choose your name!",'import',loadbeta=>{
        player.name = loadbeta
     })
 }
