@@ -1754,7 +1754,7 @@ ret = ret.div(2)
 },
 {
     desc: 'Einstein Theorem is better.',
-    cost: E('ee7250'),
+    cost: E('ee6050'),
     },
     {
         sn: true,
