@@ -20,7 +20,7 @@ const SCALE_START = {
 		massUpg4: E(50),
 		FSS: E(5),
 		pe: E(25),
-		inf_theorem: E(15),
+		inf_theorem: E(17),
 		galaxy: E(5),
     },
 	hyper: {
