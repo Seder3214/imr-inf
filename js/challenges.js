@@ -146,9 +146,9 @@ GALAXY.doReset()}
         else if (x < 9) return "Entering this challenge will force atom reset."
         else if (x < 13) return "Entering challenge will supernova reset."
         else if (x < 16) return "Entering challenge will force a Darkness reset."
+else if (x == 16) return "Entering challenge will force an FSS reset."
         else if (x < 19) return "Entering challenge will force a Infinity reset."
         else if (x < 20) return "Entering challenge will force a Galaxy reset."
-        return "Entering challenge will force an FSS reset."
     },
     getMax(i) {
         if (i <= 12 && hasPrestige(2,25)) return EINF 
