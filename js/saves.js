@@ -370,10 +370,10 @@ function wipe(reload=false) {
 }
 
 function resetName() {
-    createPrompt("Choose your name! Max Length - 10",'import',loadbeta=>{
-        if(loadbeta.length <= 10) player.name = loadbeta;
-        else if(loadbeta.length > 10) {
-             addNotify(`Why your name is so f***ing long?! Let's try again`)
+    createPrompt("Choose your name! Max Length - 12",'import',loadbeta=>{
+        if(loadbeta.length <= 12) player.name = loadbeta;
+        else if(loadbeta.length > 12) {
+             addNotify(`Why your name is so long?! Let's try again`)
             resetName()}
          })
 }
@@ -568,10 +568,10 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
-   if (player.name == ''){    createPrompt("Choose your name! Max Length - 10",'import',loadbeta=>{
-    if(loadbeta.length <= 10) player.name = loadbeta;
-    else if(loadbeta.length > 10) {
-         addNotify(`Why your name is so f***ing long?! Let's try again`)
+   if (player.name == ''){    createPrompt("Choose your name! Max Length - 12",'import',loadbeta=>{
+    if(loadbeta.length <= 12) player.name = loadbeta;
+    else if(loadbeta.length > 12) {
+         addNotify(`Why your name is so long?! Let's try again`)
         resetName()}
      })
     }
