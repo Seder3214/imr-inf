@@ -490,7 +490,7 @@ function exporty() {
     window.URL = window.URL || window.webkitURL;
     let a = document.createElement("a")
     a.href = window.URL.createObjectURL(file)
-    a.download = "Incremental Mass Rewritten Save - "+new Date().toGMTString()+".txt"
+    a.download = "IMR: New Path Save - "+new Date().toGMTString()+".txt"
     a.click()
 }
 
