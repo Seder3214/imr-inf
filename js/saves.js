@@ -370,8 +370,9 @@ function wipe(reload=false) {
 }
 
 function resetName() {
-   createPrompt("Choose your name!",'import',loadbeta=>{
-       player.name = loadbeta
+   createPrompt("Choose your name! Max Length - 10",'import',loadbeta=>{
+       if (loadbeta.length <= 10) player.name = loadbeta
+       else addNotify('Why your name is so f***ing long?!')
     })
 }
 function loadPlayer(load) {
