@@ -370,10 +370,12 @@ function wipe(reload=false) {
 }
 
 function resetName() {
-   createPrompt("Choose your name! Max Length - 10",'import',loadbeta=>{
-       if (loadbeta.length <= 10) player.name = loadbeta
-       else addNotify('Why your name is so f***ing long?!')
-    })
+    createPrompt("Choose your name! Max Length - 10",'import',loadbeta=>{
+        if(loadbeta.length <= 10) player.name = loadbeta;
+        else if(loadbeta.length > 10) {
+             addNotify(`Why your name is so f***ing long?! Let's try again`)
+            resetName()}
+         })
 }
 function loadPlayer(load) {
     const DATA = getPlayerData()
@@ -566,10 +568,13 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
-if (player.name == '') {createPrompt("Choose your name!",'import',loadbeta=>{
-       player.name = loadbeta
-    })
-}
+   if (player.name == ''){    createPrompt("Choose your name! Max Length - 10",'import',loadbeta=>{
+    if(loadbeta.length <= 10) player.name = loadbeta;
+    else if(loadbeta.length > 10) {
+         addNotify(`Why your name is so f***ing long?! Let's try again`)
+        resetName()}
+     })
+    }
     if (start) {
         setInterval(save,60000)
         for (let x = 0; x < 5; x++) updateTemp()
