@@ -983,7 +983,7 @@ function updateInfHTML() {
 
     tmp.el.hm_div.setDisplay(unl3);
     tmp.el.hm_base_div.setDisplay(unl3);
-    let hm_eff = tmp.emEffect
+    let hm_eff = tmp.hmEffect
     tmp.el.hm_scale.setTxt(getScalingName('hm'))
     tmp.el.hm_lvl.setTxt(format(player.inf.hm,0)+(hm_eff.bonus.gte(1)?" + "+format(hm_eff.bonus,0):""))
     tmp.el.hm_btn.setClasses({btn: true, locked: !INF.hm.can()})
