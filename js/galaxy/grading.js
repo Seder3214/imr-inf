@@ -143,7 +143,7 @@ function updateGradeTemp() {
     tp.bonus = []
     tp.t_base = E(2680)
 
-    tp.w = [6,4,2]
+    tp.w = [6,4,2,0]
     tp.total_w = 12
 
     let pt = player.galaxy.grade.theorems
