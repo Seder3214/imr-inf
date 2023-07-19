@@ -44,7 +44,7 @@ function setupHTML() {
 			<span id="pres_scale_${x}""></span>${PRESTIGES.fullNames[x]} <h3 id="pres_amt_${x}">X</h3><br><br>
 			<button onclick="PRESTIGES.reset(${x})" class="btn reset" id="pres_${x}">
 				${x>0?"Reset your "+PRESTIGES.fullNames[x-1]+"s":'Force a Quantum reset'}, but ${PRESTIGES.fullNames[x]} up.
-(<b>Requires</b> <span id="pres_req_${x}">X</span><hr><br><span id="pres_desc_${x}"></span><br>
+(<b>Requires</b> <span id="pres_req_${x}">X</span>)<hr><br><span id="pres_desc_${x}"></span><br>
 				
 			</button>
 		</div>`
