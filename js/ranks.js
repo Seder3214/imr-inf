@@ -1087,7 +1087,7 @@ function updateRanksHTML() {
             let h = ''
             for (let x = 0; x < 4; x++) {
                 let rn = RANKS.names[x]
-                h += '<div>' + getScalingName(rn) + RANKS.fullNames[x] + ' ' + format(player.ranks[rn],0) + '</div>'
+                h += '<div>' + getScalingName(rn) + RANKS.fullNames[x] + ' <h3>' + format(player.ranks[rn],0) + '</h3></div>'
             }
             tmp.el.pre_beyond_ranks.setHTML(h)
 
