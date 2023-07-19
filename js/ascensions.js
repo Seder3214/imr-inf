@@ -134,7 +134,7 @@ function setupAscensionsHTML() {
 			<span id="asc_scale_${x}""></span>${ASCENSIONS.fullNames[x]} <h3 id="asc_amt_${x}">X</h3><br><br>
 			<button onclick="ASCENSIONS.reset(${x})" class="btn reset" id="asc_${x}">
 				${ASCENSIONS.resetName[x]} (force an Infinity reset), but ${ASCENSIONS.fullNames[x]} up.
-(<b>Requires</b> <span id="asc_req_${x}">X</span>)<hr><br><span id="asc_desc_${x}"></span><br>
+(<b>Requires</b> <span id="asc_req_${x}">X</span>)<hr><span id="asc_desc_${x}"></span><br>
 			</button>
 		</div>`
 	}
