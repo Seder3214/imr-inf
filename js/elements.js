@@ -29,7 +29,7 @@ function setupHTML() {
 			<button id="ranks_auto_${x}" class="btn" style="width: 80px;" onclick="RANKS.autoSwitch('${rn}')">OFF</button>
 			<span id="ranks_scale_${x}""></span>${RANKS.fullNames[x]} <h3 id="ranks_amt_${x}">X</h3><br><br>
 			<button onclick="RANKS.reset('${rn}')" class="btn reset" id="ranks_${x}">
-				Reset your ${x>0?RANKS.fullNames[x-1]+"s":'mass and upgrades'}, but ${RANKS.fullNames[x]} up.
+				Reset your ${x>0?RANKS.fullNames[x-1]+"s":'mass and upgrades'}, but ${RANKS.fullNames[x]} up.<br>
 (<b>Requires </b> <span id="ranks_req_${x}">X</span>)<hr><br><span id="ranks_desc_${x}"></span><br>
 			</button>
 		</div>`
