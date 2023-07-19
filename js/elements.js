@@ -31,7 +31,6 @@ function setupHTML() {
 			<button onclick="RANKS.reset('${rn}')" class="btn reset" id="ranks_${x}">
 				Reset your ${x>0?RANKS.fullNames[x-1]+"s":'mass and upgrades'}, but ${RANKS.fullNames[x]} up.
 (<b>Requires </b> <span id="ranks_req_${x}">X</span>)<hr><br><span id="ranks_desc_${x}"></span><br>
-				R
 			</button>
 		</div>`
 	}
