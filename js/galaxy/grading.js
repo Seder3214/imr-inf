@@ -134,7 +134,7 @@ GRADE.particle.weight[3] = wThree
 tmp.grade.w[3] = wThree
 GRADE.particle.weight[2] = wTwo
 tmp.grade.w[2] = wTwo
-tmo.grade.total_w = totalW
+tmp.grade.total_w = totalW
 GRADE.particle.total_w = totalW
     for (let x in GRADE.particle.names) {
         sum += tmp.grade.w[x]
