@@ -30,7 +30,7 @@ function setupHTML() {
 			<span id="ranks_scale_${x}""></span>${RANKS.fullNames[x]} <h3 id="ranks_amt_${x}">X</h3><br><br>
 			<button onclick="RANKS.reset('${rn}')" class="btn reset" id="ranks_${x}">
 				Reset your ${x>0?RANKS.fullNames[x-1]+"s":'mass and upgrades'}, but ${RANKS.fullNames[x]} up.<br>
-(<b>Requires </b> <span id="ranks_req_${x}">X</span>)<hr><br><span id="ranks_desc_${x}"></span><br>
+(<b>Requires </b> <span id="ranks_req_${x}">X</span>)<hr><span id="ranks_desc_${x}"></span><br>
 			</button>
 		</div>`
 	}
@@ -44,7 +44,7 @@ function setupHTML() {
 			<span id="pres_scale_${x}""></span>${PRESTIGES.fullNames[x]} <h3 id="pres_amt_${x}">X</h3><br><br>
 			<button onclick="PRESTIGES.reset(${x})" class="btn reset" id="pres_${x}">
 				${x>0?"Reset your "+PRESTIGES.fullNames[x-1]+"s":'Force a Quantum reset'}, but ${PRESTIGES.fullNames[x]} up.
-(<b>Requires</b> <span id="pres_req_${x}">X</span>)<hr><br><span id="pres_desc_${x}"></span><br>
+(<b>Requires</b> <span id="pres_req_${x}">X</span>)<hr><span id="pres_desc_${x}"></span><br>
 				
 			</button>
 		</div>`
