@@ -123,8 +123,8 @@ function calcGradeChances() {
     if (hasTree('glx11')) {
         GRADE.particle.weight[3] = 3
         tmp.grade.w[3] = 3
-    GRADE.particle.total_w = 14
-tmp.grade.total_w = 14
+    GRADE.particle.total_w = 16
+tmp.grade.total_w = 16
     }
     if (hasTree('glx6')) {GRADE.particle.weight[2] = 3
         tmp.grade.w[2] = 3
