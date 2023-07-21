@@ -133,7 +133,7 @@ if (unl) {
     for (let x = 0; x < 4; x++) {
         let rn = PRESTIGES.names[x]
         if (x == 0) rn == 'prestige'
-        h += '<div>' + getScalingName(rn) + PRESTIGES.fullNames[x] + ' ' + format(player.prestiges[x],0) + '</div>'
+        h += '<div>' + getScalingName(rn) + PRESTIGES.fullNames[x] + ' <h3>' + format(player.prestiges[x],0) + '</h3></div>'
     }
     tmp.el.pre_beyond_pres.setHTML(h)
 

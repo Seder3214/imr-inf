@@ -120,17 +120,22 @@ function respecPGrading() {
 
 function calcGradeChances() {
     var sum = 0
+let wTwo = 2
+let wThree = 0
+let totalW = 12
     if (hasTree('glx11')) {
-        GRADE.particle.weight[3] = 3
-        tmp.grade.w[3] = 3
-    GRADE.particle.total_w = 14
-tmp.grade.total_w = 14
+        wThree = 3
+totalW += 3
     }
-    if (hasTree('glx6')) {GRADE.particle.weight[2] = 3
-        tmp.grade.w[2] = 3
-    GRADE.particle.total_w = 13
-tmp.grade.total_w = 13}
-
+    if (hasTree('glx6')) {
+wTwo = 3
+totalW += 1}
+GRADE.particle.weight[3] = wThree
+tmp.grade.w[3] = wThree
+GRADE.particle.weight[2] = wTwo
+tmp.grade.w[2] = wTwo
+tmp.grade.total_w = totalW
+GRADE.particle.total_w = totalW
     for (let x in GRADE.particle.names) {
         sum += tmp.grade.w[x]
         GRADE.particle.chance[x] = sum / tmp.grade.total_w
@@ -143,7 +148,7 @@ function updateGradeTemp() {
     tp.bonus = []
     tp.t_base = E(2680)
 
-    tp.w = [6,4,2]
+    tp.w = [6,4,2,0]
     tp.total_w = 12
 
     let pt = player.galaxy.grade.theorems
