@@ -1064,7 +1064,7 @@ function updateRanksHTML() {
                 let desc = "No rewards available..."
                 for (let i = 0; i < keys.length; i++) {
                     if (player.ranks[rn].lt(keys[i])) {
-                        desc = ` At ${RANKS.fullNames[x]} ${format(keys[i],0)}, <b>${RANKS.desc[rn][keys[i]]}</b>`
+                        desc = ` At ${RANKS.fullNames[x]} ${format(keys[i],0)}, ${RANKS.desc[rn][keys[i]]}`
                         break
                     }
                 }
