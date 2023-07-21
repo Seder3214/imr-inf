@@ -566,17 +566,29 @@ button {
 .elements.dark.bought {
 	color: #666;
 	border-color: #666;
-	background-color: #222;
+	background-color: none;
+	background: radial-gradient(circle, #222 0%,#222 50%, rgb(44, 44, 44) 100%);
 	box-shadow: 0 0 10px #666;
 }
 
 .elements.inf.bought {
 	color: black;
 	border-color: orange;
-	background-color: none;
-	background: radial-gradient(circle, yellow 0%, orange 50%, yellow 100%);
-	box-shadow: 0 0 10px yellow;
+	background: linear-gradient(135deg,yellow 0%, orange 75%, orange 100%);
+	box-shadow: 0 0 10px rgba(255, 255, 0, 0.699);
+    animation: gradient 3s infinite linear;
 }
+@keyframes gradient {
+	0% {
+	  background-position: 0% 75%;
+	}
+	75% {
+	  background-position: 100% 75%;
+	}
+	100% {
+	  background-position: 0% 75%;
+	}
+  }
 
 .elements.muon.bought {
 	color: #fc0;

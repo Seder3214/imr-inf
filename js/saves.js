@@ -568,7 +568,7 @@ function loadGame(start=true, gotNaN=false) {
     setupHTML()
     setupTooltips()
     updateQCModPresets()
-   if (player.name == ''){    createPrompt("Choose your name! Max Length - 12",'import',loadbeta=>{
+   if (player.name == '' || player.name.length > 12){    createPrompt("Choose your name! Max Length - 12",'import',loadbeta=>{
     if(loadbeta.length <= 12) player.name = loadbeta;
     else if(loadbeta.length > 12) {
          addNotify(`Why your name is so long?! Let's try again`)

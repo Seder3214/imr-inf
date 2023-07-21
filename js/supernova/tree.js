@@ -1316,7 +1316,7 @@ const TREE_UPGS = {
             desc: `C18's reward also affects Parallel Extruder Power.`,
             effect() {
                 x = (player.chal.comps[18].mul(25).pow(10)).add(1).log10().add(1).log10().sub(1)
-                return x
+                return x.max(0)
             },
             effDesc(x) { return "+"+format(x) },
             cost: E(1e32),
