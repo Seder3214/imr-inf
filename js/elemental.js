@@ -1773,7 +1773,7 @@ ret = ret.div(2)
         },
         {
             desc: 'Every Theorem in Core power will be equivalent to the highest power possible.',
-            cost: E('ee7400'),
+            cost: E('ee8000'),
             },
             {
                 inf: true,
