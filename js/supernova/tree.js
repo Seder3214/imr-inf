@@ -1284,8 +1284,8 @@ const TREE_UPGS = {
             cost: E(1e20),
         },
         glx13: {
-            req() {return player.galaxy.times.gte(8)},
-            reqDesc() {return "Get 8 Galaxies."},
+            req() {return player.galaxy.times.gte(6)},
+            reqDesc() {return "Get 6 Galaxies."},
             branch: ['glx9'],
             desc: `Galaxies scales Galaxy Particle Generator's softcap.`,
             
@@ -1309,7 +1309,7 @@ const TREE_UPGS = {
         glx16: {
             branch: ['glx12'],
             desc: `C17's goal scaling is even more weaker.`,
-            cost: E(5e26),
+            cost: E(1e26),
         },
         glx17: {
             branch: ['glx13'],

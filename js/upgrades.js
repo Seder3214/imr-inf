@@ -521,6 +521,7 @@ const UPGS = {
                 cost: E(1e33),
                 effect() {
                     let ret = E(2).pow(player.bh.dm.add(1).log10().softcap(11600,0.5,0))
+                    ret = overflow(ret,E('ee3000'),0.125)
                     return ret
                 },
                 effDesc(x=this.effect()) {

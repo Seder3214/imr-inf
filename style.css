@@ -719,7 +719,44 @@ button {
 	padding: 7px 25px;
 	text-decoration: none;
 }
-
+.presButton {
+	cursor: pointer;
+	background-color: #ffee00;
+	border-color: rgb(253, 187, 3);
+	color:#000;
+	font-size: 12px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
+.presButton.locked {
+	cursor: default;
+	color:#ffffff;
+	background-color: #29260183;
+	font-size: 12px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
+.ascButton {
+	cursor: pointer;
+	background-color: #00ffff;
+	border-color: rgb(3, 215, 253);
+	color:#000;
+	font-size: 12px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
+.ascButton.locked {
+	cursor: default;
+	color:#ffffff;
+	background-color: #01292981;
+	font-size: 12px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
 .btn.full {
 	width: 250px;
 	height: 120px;

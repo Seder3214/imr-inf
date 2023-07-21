@@ -378,7 +378,7 @@ const PRESTIGES = {
         if (player.prestiges[2].gte(1) && i < 2) fp *= 1.15
         if (player.prestiges[3].gte(1) && i < 3) fp *= 1.1
         if (hasUpgrade('br',19) && i < 3) fp *= upgEffect(4,19)
-        if (tmp.inf_unl) fp *=(theoremEff('mass',4))
+        if (tmp.inf_unl && i < 4) fp *=(theoremEff('mass',4))
         return fp
     },
     unl: [
@@ -1061,10 +1061,10 @@ function updateRanksHTML() {
             tmp.el["ranks_div_"+x].setDisplay(unl)
             if (unl) {
                 let keys = Object.keys(RANKS.desc[rn])
-                let desc = ""
+                let desc = "No rewards available..."
                 for (let i = 0; i < keys.length; i++) {
                     if (player.ranks[rn].lt(keys[i])) {
-                        desc = ` At ${RANKS.fullNames[x]} ${format(keys[i],0)}, ${RANKS.desc[rn][keys[i]]}`
+                        desc = ` At ${RANKS.fullNames[x]} ${format(keys[i],0)}, <b>${RANKS.desc[rn][keys[i]]}</b>`
                         break
                     }
                 }
@@ -1100,7 +1100,7 @@ function updateRanksHTML() {
             h = ''
 
             for (let x = Math.min(3,t)-1; x >= 0; x--) {
-                h += getRankTierName(t+5-x) + " " + (x == 0 ? tmp.beyond_ranks.latestRank.format(0) : BEYOND_RANKS.getRankFromTier(t-x).format(0)) + (x>0?'<br>':"")
+                h += getRankTierName(t+5-x) + "<h3>  " + (x == 0 ? tmp.beyond_ranks.latestRank.format(0) : BEYOND_RANKS.getRankFromTier(t-x).format(0)) + (x>0?'</h3> <br>':"")
             }
 
             tmp.el.br_amt.setHTML(h)
@@ -1122,12 +1122,12 @@ function updateRanksHTML() {
 
             h = `
                 Reset your Hexes (and force a darkness reset) but hept/oct/enne etc. up. ${r}<br>
-                To ${getRankTierName(t+5)} up, require ${getRankTierName(t+4)} ${
+                ${getRankTierName(t+5)}: (<b>Requires</b> ${getRankTierName(t+4)} ${
                     t == 1
                     ? tmp.beyond_ranks.req.format(0)
                     : BEYOND_RANKS.getRequirementFromTier(1,tmp.beyond_ranks.latestRank,t-1).format(0)
-                }.<br>
-                To ${getRankTierName(t+6)} up, require ${getRankTierName(t+5)} ${BEYOND_RANKS.getRequirementFromTier(1,0).format(0)}.
+                }).<br>
+                ${getRankTierName(t+6)}: (<b>Requires</b> ${getRankTierName(t+5)} ${BEYOND_RANKS.getRequirementFromTier(1,0).format(0)}).
             `
 let tier = tmp.beyond_ranks.max_tier
             tmp.el.br_desc.setHTML(h)
@@ -1147,7 +1147,7 @@ let tier = tmp.beyond_ranks.max_tier
             if (unl) {
                 let p = player.prestiges[x] || E(0)
                 let keys = Object.keys(PRESTIGES.rewards[x])
-                let desc = ""
+                let desc = "No rewards available..."
                 for (let i = 0; i < keys.length; i++) {
                     if (p.lt(keys[i]) && (tmp.chal13comp || p.lte(PRES_BEFOREC13[x]||Infinity))) {
                         desc = ` At ${PRESTIGES.fullNames[x]} ${format(keys[i],0)}, ${PRESTIGES.rewards[x][keys[i]]}`
@@ -1157,7 +1157,7 @@ let tier = tmp.beyond_ranks.max_tier
 
                 tmp.el["pres_scale_"+x].setTxt(getScalingName(PRESTIGES.names[x]))
                 tmp.el["pres_amt_"+x].setTxt(format(p,0))
-                tmp.el["pres_"+x].setClasses({btn: true, reset: true, locked: CHALS.inChal(19) || x==0?tmp.prestiges.base.lt(tmp.prestiges.req[x]):player.prestiges[x-1].lt(tmp.prestiges.req[x])})
+                tmp.el["pres_"+x].setClasses({presButton: true,reset: true, locked: CHALS.inChal(19) || x==0?tmp.prestiges.base.lt(tmp.prestiges.req[x]):player.prestiges[x-1].lt(tmp.prestiges.req[x])})
                 tmp.el["pres_desc_"+x].setTxt(desc)
                 tmp.el["pres_req_"+x].setTxt(x==0?format(tmp.prestiges.req[x],0)+" of Prestige Base":PRESTIGES.fullNames[x-1]+" "+format(tmp.prestiges.req[x],0))
                 tmp.el["pres_auto_"+x].setDisplay(PRESTIGES.autoUnl[x]())

@@ -308,11 +308,11 @@ const MUONIC_ELEM = {
                 return x.max(1)
             },
             effDesc: x=>"x"+format(x),
-            cost: E('e73500'),
+            cost: E('e70000'),
         },
         {
             desc: `Keep Muonic Elements on any reset.`,
-            cost: E('e25000'),
+            cost: E('e22500'),
         },
         /*
         {

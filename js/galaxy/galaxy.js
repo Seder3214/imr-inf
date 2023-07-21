@@ -45,7 +45,6 @@ const GALAXY = {
     },
     tier() {
         if (player.galaxy.stars.gte(tmp.galaxy.req)){ player.galaxy.generator = player.galaxy.generator.add(1)
-        player.galaxy.stars = E(0)
         }
     },
     doReset() {

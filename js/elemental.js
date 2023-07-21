@@ -1769,11 +1769,11 @@ ret = ret.div(2)
         {
             c16: true,
             desc: `Galaxy Particles gain formula is better.`,
-            cost: E('e5e218'),
+            cost: E('e1e194'),
         },
         {
             desc: 'Every Theorem in Core power will be equivalent to the highest power possible.',
-            cost: E('ee9000'),
+            cost: E('ee7400'),
             },
             {
                 inf: true,
@@ -1783,40 +1783,40 @@ ret = ret.div(2)
          {
             dark: true,
             desc: `Galaxy Particles gain formula is better again, and Unlock More Muonic Elements.`,
-            cost: E('e4e9'),
+            cost: E('e1.55e9'),
         },
         {
             desc: 'Add 10000 C17 completions.',
-            cost: E('ee18500'),
+            cost: E('ee12750'),
             },
             {
                 c16: true,
                 desc: `[Exotic-Lepton] effect is better.`,
-                cost: E('e1.75e513'),
+                cost: E('e1.5e424'),
             },
             {
                 inf: true,
                 desc: `[glx1] effect is better and remove first softcap of Galaxy Particle Generator's effect.`,
-                cost: E(5e61),
+                cost: E(1e59),
          },
          {
             dark: true,
             desc: `Meta-Honor starts x1.5 later.`,
-            cost: E('e9e9'),
+            cost: E('e3.1e9'),
         },
         {
             desc: '[Meta-boost II] is ^1.25 stronger.',
-            cost: E('ee27500'),
+            cost: E('ee18800'),
             },
             {
                 inf: true,
                 desc: `Bipentbium-252 is better.`,
-                cost: E(1e64),
+                cost: E(5e61),
          },
          {
             dark: true,
             desc: `Galaxy Particles gain is boosted by Infinity Points.`,
-            cost: E('e1.1e10'),
+            cost: E('e4.325e9'),
             effect() {let x = E(1)
                 if (hasElement(313)) x = player.inf.points.max(1).root(10).add(1)
                 else x = player.inf.points.max(1).log10().add(1)
@@ -1825,7 +1825,7 @@ ret = ret.div(2)
         },
         {
             desc: 'Pre-Infinity Global Speed reduces Galaxy Requirement.',
-            cost: E('ee28000'),
+            cost: E('ee20250'),
             effect() {let x = E(1)
                 x = tmp.preInfGlobalSpeed.max(1).log10().add(1).log10()
             return x},
@@ -1835,7 +1835,7 @@ ret = ret.div(2)
             {
                 c16: true,
                 desc: `Hyper-Glory is 30% weaker.`,
-                cost: E('e1e615'),
+                cost: E('e1e572'),
             },
             {
                 inf: true,
@@ -1846,16 +1846,16 @@ ret = ret.div(2)
                     return x
                 },
                 effDesc: x=>"+"+format(x),
-                cost: E(1e66),
+                cost: E(2.5e64),
          },
          {
             desc: 'Trinilennium-309 formula is better.',
-            cost: E('ee30000'),
+            cost: E('ee23800'),
             },
             {
                 dark: true,
                 desc: `Apply C18's reward to Galaxy Particles gain at reduced rate.`,
-                cost: E('e1.9e10'),
+                cost: E('e8.4e9'),
                 effect() {let x = E(1)
                    x = (player.chal.comps[18].mul(25).pow(10).add(1)).log(1.1)
                 return x},

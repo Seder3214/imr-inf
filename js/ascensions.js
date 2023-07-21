@@ -133,7 +133,7 @@ function setupAscensionsHTML() {
 			<button id="asc_auto_${x}" class="btn" style="width: 80px;" onclick="ASCENSIONS.autoSwitch(${x})">OFF</button>
 			<span id="asc_scale_${x}""></span>${ASCENSIONS.fullNames[x]} <h3 id="asc_amt_${x}">X</h3><br><br>
 			<button onclick="ASCENSIONS.reset(${x})" class="btn reset" id="asc_${x}">
-				${ASCENSIONS.resetName[x]} (force an Infinity reset), but ${ASCENSIONS.fullNames[x]} up.
+				${ASCENSIONS.resetName[x]} (force an Infinity reset), but ${ASCENSIONS.fullNames[x]} up.<br>
 (<b>Requires</b> <span id="asc_req_${x}">X</span>)<hr><span id="asc_desc_${x}"></span><br>
 			</button>
 		</div>`
@@ -171,7 +171,7 @@ function updateAscensionsHTML() {
             }
             tmp.el["asc_scale_"+x].setTxt(getScalingName("ascension"+x))
             tmp.el["asc_amt_"+x].setTxt(format(p,0))
-            tmp.el["asc_"+x].setClasses({btn: true, reset: true, locked: x==0?tmp.ascensions.base.lt(tmp.ascensions.req[x]):player.ascensions[x-1].lt(tmp.ascensions.req[x])})
+            tmp.el["asc_"+x].setClasses({ascButton: true, reset: true, locked: x==0?tmp.ascensions.base.lt(tmp.ascensions.req[x]):player.ascensions[x-1].lt(tmp.ascensions.req[x])})
             tmp.el["asc_desc_"+x].setTxt(desc)
             tmp.el["asc_req_"+x].setTxt(x==0?format(tmp.ascensions.req[x],0)+" of Ascension Base":ASCENSIONS.fullNames[x-1]+" "+format(tmp.ascensions.req[x],0))
             tmp.el["asc_auto_"+x].setDisplay(ASCENSIONS.autoUnl[x]())
