@@ -1773,7 +1773,7 @@ ret = ret.div(2)
         },
         {
             desc: 'Every Theorem in Core power will be equivalent to the highest power possible.',
-            cost: E('ee8000'),
+            cost: E('ee8500'),
             },
             {
                 inf: true,
@@ -1861,6 +1861,10 @@ ret = ret.div(2)
                 return x},
                 effDesc(x) { return "x"+format(x,3)+"" },
             },
+            {
+                desc: 'Uncorrupt Unhexbium-162.',
+                cost: E('ee25700'),
+                },
     ],
     /*
     {
@@ -1911,6 +1915,7 @@ ret = ret.div(2)
         if (hasElement(253)) u += 16
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
+        if (hasTree('glx20')) u += 1
         return u
     },
 }
@@ -2141,6 +2146,7 @@ function updateElementsTemp() {
     let decor = []
     if (hasElement(10,1)) decor.push(187)
     if (hasCharger(9)) decor.push(40,64,67,150,199,200,204)
+    if (hasElement(315)) decor.push(162)
     tElem.deCorrupt = decor
 
     let cannot = []

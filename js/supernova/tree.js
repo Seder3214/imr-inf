@@ -1339,7 +1339,7 @@ const TREE_UPGS = {
         glx20: {
             branch: ['glx18','glx17','glx19'],
             desc: `Unlock more elements [ENDGAME].`,
-            cost: E(1e41),
+            cost: E(1e40),
         },
         glx21: {
             branch: ['glx4','glx11','glx12','glx19'],
