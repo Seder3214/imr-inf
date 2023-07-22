@@ -1787,12 +1787,12 @@ ret = ret.div(2)
         },
         {
             desc: 'Add 10000 C17 completions.',
-            cost: E('ee12750'),
+            cost: E('ee13000'),
             },
             {
                 c16: true,
                 desc: `[Exotic-Lepton] effect is better.`,
-                cost: E('e1.5e424'),
+                cost: E('e1.5e430'),
             },
             {
                 inf: true,
