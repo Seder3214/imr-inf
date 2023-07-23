@@ -40,8 +40,7 @@ const BEYOND_PRES = {
             8: `Automate Element Tier 3.`,
         },
         2: {    
-     1: `Automatically Beyond-Prestige up.`,
-     2: `Auto-buy Antimatter Generator, every Modificators and Parallel Extruder.<br>They cost nothing.`,
+     1: `Automatically Beyond-Prestige up.<br>Auto-buy Antimatter Generator, every Modificators and Parallel Extruder.<br>They cost nothing`,
     },
     },
 
@@ -59,7 +58,7 @@ const BEYOND_PRES = {
                 ()=>{
                     let x = Decimal.pow(1.5,tmp.beyond_pres.max_tier)
 
-                    return x
+                    return x = overflow(x,1.75,0.15)
                 },
                 x=>"x"+format(x),
             ],

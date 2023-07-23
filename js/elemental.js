@@ -1661,14 +1661,14 @@ cost: E('ee1290'),
         },
         {
             c16: true,
-            desc: `[Meta-Lepton] reward effect is better based on Infinity Points.<br>Reduce Meta-Prestige Level power based on Infinity Points.`,
+            desc: `[Meta-Lepton] reward effect is better based on Infinity Points.<br>Reduce Meta-Prestige Level and Meta-Honor power based on Infinity Points.`,
             effect() {let x = E(1)
             x = player.inf.points.max(1).log10().log2().add(1)
             let ret = E(1)
-            ret = Decimal.pow(1.05,player.inf.points.max(1).log10().max(1).log10())
-ret = ret.div(2)
+             ret = Decimal.pow(0.75,player.inf.points.max(1).log10().max(1).log10())
+if (hasElement(317)) ret = ret.mul(1.5)
         return {eff: x, ret: ret}},
-        effDesc(x) { return "x"+format(x.eff,3)+" to [Meta-Lepton] effect. <br> " + formatReduction(1-x.ret) + " weaker" },
+        effDesc(x) { return "x"+format(x.eff,3)+" to [Meta-Lepton] effect. <br> " + formatReduction(x.ret) + " weaker" },
             cost: E('e3.5e75'),
         },
         {
@@ -1863,8 +1863,23 @@ ret = ret.div(2)
             },
             {
                 desc: 'Uncorrupt Unhexbium-162.',
-                cost: E('ee25700'),
+                cost: E('ee27000'),
                 },
+            {
+                c16: true,
+                desc: `[glx13] Effect is better.`,
+                cost: E('e1.75e617'),
+            },
+            {
+                inf: true,
+                desc: `Reduce Meta-Scaling Power Hardcap to <b>25%</b>, but Bioctnilium-280 is weaker.`,
+                cost: E(1e68),
+         },
+         {
+            dark: true,
+            desc: `Unsoftcap Dalton Fragments effects.`,
+            cost: E('e2.55e10'),
+        },
     ],
     /*
     {
@@ -1915,7 +1930,7 @@ ret = ret.div(2)
         if (hasElement(253)) u += 16
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
-        if (hasTree('glx20')) u += 1
+        if (hasTree('glx20')) u += 4
         return u
     },
 }

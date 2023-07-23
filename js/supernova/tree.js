@@ -1290,7 +1290,8 @@ const TREE_UPGS = {
             desc: `Galaxies scales Galaxy Particle Generator's softcap.`,
             
             effect() {
-                x = player.galaxy.times.add(1).pow(0.25).mul(1.15)
+                if (hasElement(316)) x = player.galaxy.times.add(1).pow(0.45).mul(1.15)
+               else x = player.galaxy.times.add(1).pow(0.25).mul(1.15)
                 return x
             },
             effDesc(x) { return "^"+format(x) },
@@ -1330,7 +1331,8 @@ const TREE_UPGS = {
             branch: ['glx16','glx15'],
             desc: `Apply [glx13] effect to Galaxy Particle Generator's softcap^2 at reduced rate.`,
             effect() {
-                x = player.galaxy.times.add(1).pow(0.05)
+                if (hasElement(316)) x = player.galaxy.times.add(1).pow(0.1)
+                else x = player.galaxy.times.add(1).pow(0.05)
                 return x
             },
             effDesc(x) { return "^"+format(x) },

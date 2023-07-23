@@ -176,7 +176,7 @@ const DARK = {
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2)) player.dark.am_mass = player.dark.am_mass.sub(this.cost(tmp.amBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1)) player.dark.am_mass = player.dark.am_mass.sub(this.cost(tmp.amBulk.sub(1))).max(0)
                 player.dark.am = tmp.amBulk
             }
         },

@@ -214,7 +214,7 @@ const NAME_FROM_RES = {
 	supernova: "Supernova",
 	fTier: "Fermion Tier",
 	cosmic_str: "Cosmic String",
-	prestige: "prestige",
+	prestige: "Prestige Level",
 	honor: "Honor",
 	glory: "Glory",
 	renown: "Renown",
@@ -574,9 +574,12 @@ if (hasElement(311)) power = power.mul(0.7)
 		if (name=='supernova') {
 			if (hasElement(78)) power = power.mul(0.8)
 		}
-		else if (name='prestige') {
-			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7))
+		else if (name=='prestige') {
+			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7)*10)
 			if (hasElement(280)) power = power.mul(elemEffect(280).ret)
+		}
+		else if (name=='honor') {
+			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7)*5)
 		}
  	}
 	else if (type==4) {
@@ -604,7 +607,8 @@ if (hasElement(311)) power = power.mul(0.7)
 	if (PreQ_SCALES.includes(name) && type<3) power = power.mul(getEnRewardEff(5))
 	if (hasPrestige(0,388) && ['prestige','honor'].includes(name) && type<3) power = power.mul(prestigeEff(0,388,1))
 	if (hasPrestige(1,66) && name=="fTier") power = power.mul(0.8)
-	return power.max(type==3?0.5:0)
+	let scale = hasElement(317)?0.25:0.5
+	return power.max(type==3?scale:0)
 }
 
 function noScalings(type,name) {

@@ -433,6 +433,7 @@ dark.matters.am = E(0)
         soft() {
             let soft = E(10000000)
             if (hasElement(270)) soft = soft.pow(2)
+            if (hasElement(318)) soft = Infinity
             return soft
         },
         boost() {
@@ -482,7 +483,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(this.cost(tmp.peBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1))  player.inf.points = player.inf.points.sub(this.cost(tmp.peBulk.sub(1))).max(0)
                 player.inf.pe = tmp.peBulk
             }
         },
@@ -515,7 +516,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(this.cost(tmp.nmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1))  player.inf.points = player.inf.points.sub(this.cost(tmp.nmBulk.sub(1))).max(0)
                 player.inf.nm = tmp.nmBulk
             }
         },
@@ -550,7 +551,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2)) player.inf.points = player.inf.points.sub(this.cost(tmp.pmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1)) player.inf.points = player.inf.points.sub(this.cost(tmp.pmBulk.sub(1))).max(0)
                 player.inf.pm = tmp.pmBulk
             }
         },
@@ -571,13 +572,13 @@ dark.matters.am = E(0)
         can() { return player.inf.points.gte(tmp.dmCost) },
         buy() {
             if (this.can()) {
-                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(tmp.dmCost).max(0)
+                if (!hasBeyondPres(2,1))  player.inf.points = player.inf.points.sub(tmp.dmCost).max(0)
                 player.inf.dm = player.inf.dm.add(1)
             }
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2)) player.inf.points = player.inf.points.sub(this.cost(tmp.dmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1)) player.inf.points = player.inf.points.sub(this.cost(tmp.dmBulk.sub(1))).max(0)
                 player.inf.dm = tmp.dmBulk
             }
         },
@@ -604,7 +605,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2)) player.inf.points = player.inf.points.sub(this.cost(tmp.emBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1)) player.inf.points = player.inf.points.sub(this.cost(tmp.emBulk.sub(1))).max(0)
                 player.inf.em = tmp.emBulk
             }
         },
@@ -631,7 +632,7 @@ dark.matters.am = E(0)
         },
         buyMax() { 
             if (this.can()) {
-                if (!hasBeyondPres(2,2))  player.inf.points = player.inf.points.sub(this.cost(tmp.hmBulk.sub(1))).max(0)
+                if (!hasBeyondPres(2,1))  player.inf.points = player.inf.points.sub(this.cost(tmp.hmBulk.sub(1))).max(0)
                 player.inf.hm = tmp.hmBulk
             }
         },
@@ -967,7 +968,7 @@ function updateInfHTML() {
     tmp.el.dm_step.setHTML(formatMult(dm_eff.step))
     tmp.el.dm_eff.setTxt(formatMult(dm_eff.eff))
     tmp.el.dm_base.setTxt(formatMass(player.inf.dm_base)+" "+player.inf.dm_base.formatGain(tmp.dm_base_gain,true))
-    tmp.el.dm_base_eff.setHTML("x"+tmp.dm_base_eff.format()+(tmp.dm_base_eff.gte(tmp.dm_base_soft)?"<span class='soft'>(softcapped)</span>":'')+"</br><span class='infsoftcap_text'>Effect will be softcapped at "+format(tmp.dm_base_soft)+"</span>")
+    tmp.el.dm_base_eff.setHTML("x"+tmp.dm_base_eff.format()+(tmp.dm_base_eff.gte(tmp.dm_base_soft)?"<span class='soft'>(softcapped)</span>":'')+(hasElement(318)?"":"</br><span class='infsoftcap_text'>Effect will be softcapped at "+format(tmp.dm_base_soft)+"</span>"))
 
     let unl3 = hasOrbUpg(4)
     tmp.el.em_div.setDisplay(unl3);

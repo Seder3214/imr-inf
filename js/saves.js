@@ -133,7 +133,7 @@ function calc(dt) {
             }
         }
         if (hasElement(38,1)) GALAXY.tier()
-        if (hasBeyondPres(2,2)) {
+        if (hasBeyondPres(2,1)) {
             DARK.am.buyMax()
          INF.nm.buyMax()
          INF.dm.buyMax()

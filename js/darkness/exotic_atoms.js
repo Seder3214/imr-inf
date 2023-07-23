@@ -455,7 +455,7 @@ const EXOTIC_ATOM = {
                 if (player.dark.exotic_atom.tier >= 16) x = Decimal.pow(0.95,a.add(10).log(5).pow(0.65).sub(1))
                 else x = E(1)
                 return x.toNumber()
-            },x=>`Reduce Hyper-Glory and Meta-Prestige Level scaling power by <b>${formatReduction(x)}</b>. Req: 16th Tier`],
+            },x=>`Reduce Hyper-Glory, Meta-Honor and Meta-Prestige Level scaling power.<br> Hyper-Glory: <b>${formatReduction(x)}</b>, Meta-Honor: <b>${formatReduction(x*5)}</b>, Meta-Prestige Level: <b>${formatReduction(x*10)}</b>. Req: 16th Tier`],
         ],[
             [a=>{
                 let x = hasElement(12,1) ? expMult(a.add(1),2.5) : a.add(1).pow(2)

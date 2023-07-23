@@ -504,7 +504,7 @@ const PRESTIGES = {
             },x=>"+"+format(x)],
             "388": [()=>{
                 let x = tmp.qu.chroma_eff[1][1].root(2)
-                return x
+                return x.min(1.5)
             },x=>formatReduction(x)+" weaker"],
             "607": [()=>{
                 let x = tmp.prestiges.base.max(1).pow(1.5).softcap('e7500',0.1,0)
@@ -534,7 +534,7 @@ const PRESTIGES = {
             },x=>"x"+x.format()],
             "7": [()=>{
                 let x = player.prestiges[1].add(1).root(3)
-                return x
+                return x = overflow(x,55,0.25)
             },x=>"^"+x.format()],
             "15": [()=>{
                 let x = player.prestiges[1].root(1.5).div(10).add(1).pow(-1)
@@ -823,6 +823,7 @@ const BEYOND_RANKS = {
         },
         10: {
             1: `Overpower softcap^2 starts 1.25x later per beyond-ranks' maximum tier (Starts at Pentadec).`,
+            13: `The formula of Ascension Base is better.`
         },
     },
 
