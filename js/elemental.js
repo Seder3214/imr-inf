@@ -1666,7 +1666,7 @@ cost: E('ee1290'),
             x = player.inf.points.max(1).log10().log2().add(1)
             let ret = E(1)
              ret = Decimal.pow(0.75,player.inf.points.max(1).log10().max(1).log10())
-if (hasElement(317)) ret = ret.mul(1.5)
+if (hasElement(317)) ret = ret.mul(1.15)
         return {eff: x, ret: ret}},
         effDesc(x) { return "x"+format(x.eff,3)+" to [Meta-Lepton] effect. <br> " + formatReduction(x.ret) + " weaker" },
             cost: E('e3.5e75'),
