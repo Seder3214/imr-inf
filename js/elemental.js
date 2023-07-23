@@ -1868,7 +1868,7 @@ if (hasElement(317)) ret = ret.mul(1.5)
             {
                 c16: true,
                 desc: `[glx13] Effect is better.`,
-                cost: E('e1.75e617'),
+                cost: E('e1.75e608'),
             },
             {
                 inf: true,
