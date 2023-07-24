@@ -577,11 +577,11 @@ if (hasElement(311)) power = power.mul(0.7)
 			if (hasElement(78)) power = power.mul(0.8)
 		}
 		else if (name=='prestige') {
-			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7)*10)
+			if (player.dark.exotic_atom.tier >= 16) power = power.mul(hasElement(317)?exoticAEff(0,7)*10:exoticAEff(0,7))
 			if (hasElement(280)) power = power.mul(elemEffect(280).ret)
 		}
 		else if (name=='honor') {
-			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7)*5)
+			if (player.dark.exotic_atom.tier >= 16) power = power.mul(hasElement(317)?exoticAEff(0,7)*5:exoticAEff(0,7))
 		}
  	}
 	else if (type==4) {
