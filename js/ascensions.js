@@ -101,7 +101,7 @@ x += tmp.fermions.effs[1][7]
 
                     let x = E(1).add(player.ascensions[0].mul(1.25))
 
-                    return x
+                    return x = overflow(x,24.5,0.1)
                 },
                 x=>"x"+format(x),
             ],
