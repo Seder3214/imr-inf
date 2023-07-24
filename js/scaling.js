@@ -429,7 +429,9 @@ function getScalingStart(type, name) {
 			if (hasBeyondPres(1,6)) start= start.mul(beyondPresEff(1,7))
 			if (hasElement(306)) start = start.mul(1.5)
 		}
-	} else if (type==4) {
+	else if (name=='fTier') {
+			start = start.pow(tmp.fermions.effs[0][7])
+		}	} else if (type==4) {
 		if (name=="rank") {
 			start = start.mul(glyphUpgEff(3))
 			if (hasElement(178)) start = start.mul(elemEffect(178))
@@ -439,10 +441,7 @@ function getScalingStart(type, name) {
 			if (hasPrestige(0,552)) start = start.mul(1.25)
 			if (hasPrestige(3,2)) start = start.mul(prestigeEff(3,2))
 			if (hasBeyondRank(2,17)) start = start.mul(beyondRankEffect(2,17)[1])
-		}
-		else if (name=='fTier' && type == 3) {
-			start = start.pow(tmp.fermions.effs[0][7])
-		}
+		}	
 	} else if (type==5) {
 		if (name=="rank") {
 			if (tmp.chal && hasBeyondRank(2,20)) start = start.mul(tmp.chal.eff[1].scrank)
