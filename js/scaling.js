@@ -85,6 +85,9 @@ fTier: E(6000000000),
 		rank: E(1e37),
 		supernova: E(1e7),
 	},
+},
+instant: {
+rank: E(1e200)
 }
 
 const SCALE_POWER= {
@@ -173,7 +176,11 @@ fTier: 10
 		rank: 50,
 		supernova: 75,
 	},
+},
+instant: {
+rank: 3
 }
+
 
 const SCALE_FP = {
 	tickspeed() { return [1,1,1,tmp.tickspeedFP] },
@@ -181,8 +188,8 @@ const SCALE_FP = {
 const INF_SCALES = ['pe','FSS','inf_theorem','galaxy']
 const QCM8_SCALES = ['rank','tier','tetr','pent','hex','massUpg','tickspeed','bh_condenser','gamma_ray','supernova','fTier']
 const PreQ_SCALES = ['rank','tier','tetr','massUpg','tickspeed','bh_condenser','gamma_ray']
-const SCALE_TYPE = ['super', 'hyper', 'ultra', 'meta', 'exotic', 'supercritical'] // super, hyper, ultra, meta, exotic
-const FULL_SCALE_NAME = ['Super', 'Hyper', 'Ultra', 'Meta', 'Exotic', 'Supercritical']
+const SCALE_TYPE = ['super', 'hyper', 'ultra', 'meta', 'exotic', 'supercritical','instant'] // super, hyper, ultra, meta, exotic
+const FULL_SCALE_NAME = ['Super', 'Hyper', 'Ultra', 'Meta', 'Exotic', 'Supercritical','Instant']
 
 const SCALING_RES = {
     rank(x=0) { return player.ranks.rank },
@@ -452,6 +459,8 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(4,1)) start = start.add(beyondRankEffect(4,1,0))
 		}
 	}
+else if (type=='6') {
+}
 	if (name=='supernova' && type < 4) {
 		start = start.add(tmp.prim.eff[7])
 	}
