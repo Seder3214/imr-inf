@@ -126,7 +126,7 @@ const CORE = {
             s => {
                 let x = Decimal.pow(1.5,Math.log2(s+1))
 
-                return x
+                return x.max(1)
             },
             s => {
                 let x = E(1).pow(s)
@@ -203,7 +203,7 @@ const CORE = {
             s => {
                 let x = Decimal.pow(1.05,Math.log10(s+1))
 
-                return x
+                return x.max(1)
             },
             s => {
                 let x = E(1).pow(s)
@@ -271,7 +271,7 @@ const CORE = {
             s => {
                 let x = Decimal.pow(1.025,E(Math.log10(s-1)).max(1).log10())
 
-                return x
+                return x.max(1)
             },
             s => {
                 let x = E(1).pow(s)
