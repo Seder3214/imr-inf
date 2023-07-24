@@ -216,7 +216,7 @@ const MUONIC_ELEM = {
         },
         {
             cs: true,
-            desc: `Remove the softcap of last Abyssal Blot effect.`,
+            desc: `Softcap of last Abyssal Blot effect starts +2 later.`,
             cost: E('e2990'),
         },
         {
