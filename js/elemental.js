@@ -1442,7 +1442,7 @@ const ELEMENTS = {
             effect() {
                 if (CHALS.inChal(17)|| CHALS.inChal(18)) x = E(0)
                 else x = player.inf.dim_mass.add(1).root(2.25).add(1)
-                return x = overflow(x,1e250,0.1)
+                return x.min(1e250)
             },
             effDesc(x) { return "+"+format(x,3) },
         },
