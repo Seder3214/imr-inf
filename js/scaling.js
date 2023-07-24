@@ -22,6 +22,7 @@ const SCALE_START = {
 		pe: E(25),
 		inf_theorem: E(17),
 		galaxy: E(5),
+asc: E(20),
     },
 	hyper: {
 		rank: E(120),
@@ -44,6 +45,7 @@ renown: E(350),
 massUpg4: E(200),
 		inf_theorem: E(25),
 		galaxy: E(20),
+valor: E(290),
 	},
 	ultra: {
 		rank: E(600),
@@ -108,6 +110,7 @@ const SCALE_POWER= {
 		pe: 2,
 		inf_theorem: 3,
 		galaxy: 10,
+asc: 2,
     },
 	hyper: {
 		rank: 2.5,
@@ -129,6 +132,7 @@ const SCALE_POWER= {
 		pe: 3,
 		inf_theorem: 1.55,
 		galaxy: 15,
+valor: 5
 	},
 	ultra: {
 		rank: 4,
@@ -201,6 +205,7 @@ const SCALING_RES = {
 	pe() { return player.inf.pe},
 	inf_theorem() { return player.inf.theorem},
 	galaxy() {return player.galaxy.times},
+asc() {return player.ascensions[0]}
 }
 
 const NAME_FROM_RES = {
@@ -226,6 +231,7 @@ const NAME_FROM_RES = {
 	pe: "Parallel Extruder",
 	inf_theorem: "Infinity Theorem",
 	galaxy: " Galaxy",
+asc: "Ascension",
 }
 
 function updateScalingHTML() {
