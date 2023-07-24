@@ -440,7 +440,7 @@ function getScalingStart(type, name) {
 			if (hasPrestige(3,2)) start = start.mul(prestigeEff(3,2))
 			if (hasBeyondRank(2,17)) start = start.mul(beyondRankEffect(2,17)[1])
 		}
-		else if (name='fTier' && type == 4) {
+		else if (name=='fTier' && type == 3) {
 			start = start.pow(tmp.fermions.effs[0][7])
 		}
 	} else if (type==5) {
