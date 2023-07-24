@@ -78,6 +78,7 @@ valor: E(290),
 		rank: E(1e16),
 		tier: E(1e25),
 		prestige: E(100000000),
+fTier: E(6000000000),
 		supernova: E(2e5),
 	},
 	supercritical: {
@@ -166,6 +167,7 @@ valor: 5
 		prestige: 50,
 		tier: 20,
 		supernova: 20,
+fTier: 10
 	},
 	supercritical: {
 		rank: 50,
