@@ -92,7 +92,7 @@ x += tmp.fermions.effs[1][7]
 
                     let x = Decimal.pow(1.025,player.ascensions[0])
 
-                    return x
+                    return x = overflow(x,1.65,0.1)
                 },
                 x=>"^"+format(x),
             ],
