@@ -46,8 +46,7 @@ Decimal.prototype.scaleName = function (type, id, rev=false) {
         let s = tmp.scaling_start[type][id]
         let p = tmp.scaling_power[type][id]
         let e = Decimal.pow(SCALE_POWER[type][id],p)
-        
-        x = x.scale(s,e,type=="meta"?1:0,rev)
+        x = x.scale(s,e,type=='instant'?3:type=='meta'?1:0,rev)
     }
     return x
 }
