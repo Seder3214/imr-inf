@@ -1737,7 +1737,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         desc: `Impossible Challenge scaling is weaker based on Ascension Base.`,
         effect() {
             x = Decimal.pow(0.75,tmp.ascensions.base.max(1).log10().root(10))
-            return x
+            return x.min(0.7)
         },
         effDesc(x) { return formatReduction(x)+' weaker' },
         cost: E('e1e180'),
