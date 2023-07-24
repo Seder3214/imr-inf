@@ -1513,7 +1513,7 @@ const ELEMENTS = {
         {
             inf: true,
             desc: `Unlock Modificators.`,
-            cost: E('3e26'),
+            cost: E('1e26'),
         },
         {
             desc: `Mass overflow^3 starts later based on Newton Fragments (outside of C16).`,
