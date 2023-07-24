@@ -162,6 +162,7 @@ const DARK = {
         if (a.gte('ee7')) {
             x.ea = a.div('ee7').log10().div(1e6).add(1).root(2).softcap(hasElement(31,1)?3:1.75,0.25,0).add(hasElement(312)?elemEffect(312):0)
         }
+x.ea = overflow(x.ea,10,0.1)
 
         return x
     },
