@@ -269,7 +269,7 @@ const CORE = {
                 return Math.floor(x)
             },
             s => {
-                let x = Decimal.pow(1.025,E(Math.log10(s-1)).max(1).log10())
+                let x = Decimal.pow(1.025,E(Math.log10(s+1)).max(1).log10())
 
                 return x.max(1)
             },
