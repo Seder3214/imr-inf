@@ -18,8 +18,8 @@ x += tmp.fermions.effs[1][7]
             let br = E(tmp.beyond_pres.max_tier)
             let lr = E(tmp.beyond_pres.latestRank)
             
-            if (hasBeyondRank(10,13)) x = x.add(hasAscension(1,2)?br.mul(lr.add(1)):br).mul(r.add(1).add(1).log(2.25).add(1))
-                else if (hasBeyondPres(1,2)) x = x.add(hasAscension(1,2)?br.mul(lr.add(1)):br).mul(r.add(1).add(1).ln().add(1))
+            if (hasBeyondRank(10,13)) x = x.add(hasAscension(1,2)?br.add(lr):br).mul(r.add(1).add(1).log(2.25).add(1))
+                else if (hasBeyondPres(1,2)) x = x.add(hasAscension(1,2)?br.add(lr):br).mul(r.add(1).add(1).ln().add(1))
            else x = x.mul(r.add(1).add(1).ln().add(1))
         }
 
