@@ -1570,7 +1570,7 @@ x = overflow(x,1e180,0.1)
         },
         {
             desc: `Unseptseptium-177 formula is better .`,
-            cost: E('e1e864'),
+            cost: E('e1e850'),
         },
         {
             c16: true,
