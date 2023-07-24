@@ -1638,7 +1638,7 @@ cost: E('ee1290'),
 {
     inf: true,
     desc: 'Unlock 5th dot to every Theorem.',
-    cost: E(5e36),
+    cost: E(1e36),
 },
 {
     desc: 'W+ Boson first effect will now be exponential',
