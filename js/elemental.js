@@ -1561,12 +1561,12 @@ x = overflow(x,1e180,0.1)
         {
             inf: true,
             desc: `Remove the softcap of 7th Abyssal Blot effect.<br>Also, Fourth and Fifth Core Slot Theorem level will be based on max theorem level on infinity (Only if Theorem Type is 4th: Dalton,5th:Hawking)`,
-            cost: E('1e28'),
+            cost: E('1e27'),
         },
         {
             inf: true,
             desc: `Unlock Dalton Modificator.`,
-            cost: E('2e30'),
+            cost: E('1e28'),
         },
         {
             desc: `Unseptseptium-177 formula is better .`,
