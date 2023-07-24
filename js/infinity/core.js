@@ -396,7 +396,7 @@ debug.generateTheorem = (chance=CORE_CHANCE_MIN) => {
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
-    if (hasElement(321)) a += 2
+    if (hasElement(322)) a += 2
     while (c.length == 0) {
         let m = [], n = false
         for (let i = 0; a; i++) {
@@ -427,7 +427,7 @@ debug.addRandomTheorem = (level=1,power=1,max_chance=CORE_CHANCE_MIN) => {
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
-    if (hasElement(321)) a += 2
+    if (hasElement(322)) a += 2
     while (c.length == 0) {
         let m = [], n = false
         for (let i = 0; i < a; i++) {
@@ -449,7 +449,7 @@ function getTheoremHTML(data,sub=false) {
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
-    if (hasElement(321)) a += 2
+    if (hasElement(322)) a += 2
     for (let i = 0; i < a; i++) s += `<div>${data.star[i]?"◉":""}</div>`
     let w = `
     <div class="c_type">${CORE[data.type].icon}</div>
@@ -469,7 +469,7 @@ function getTheoremPreEffects(t,s) {
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
-    if (hasElement(321)) a += 2
+    if (hasElement(322)) a += 2
     for (let i = 0; i < a; i++) if (s[i]) e += CORE[t].preEff[i]+"<br>"
     return e+`(Based on <b>${CORE[t].res}</b>)`
 }
@@ -563,7 +563,7 @@ function updateTheoremCore() {
             let a = MAX_DOTS_LENGTH
             if (hasElement(275)) a += 1
             if (hasElement(283)) a += 1
-            if (hasElement(321)) a += 2
+            if (hasElement(322)) a += 2
             let type = p.type, l = p.level, s = p.star, ct = core_tmp[type]
             ct.total_p *= p.power
             for (let i = 0; i < a; i++) ct.total_s[i] += l * s[i]
@@ -618,7 +618,7 @@ function createPreTheorem() {
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
-    if (hasElement(321)) a += 2
+    if (hasElement(322)) a += 2
     while (c.length == 0) {
         let m = [], n = false
         for (let i = 0; i < a; i++) {
@@ -697,7 +697,7 @@ function isTheoremHigher(t,t_target) {
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
-    if (hasElement(321)) a += 2
+    if (hasElement(322)) a += 2
     for (let i = 0; i < a; i++) if (t.star[i] > t_target.star[i]) return false
 
     return true
@@ -732,7 +732,7 @@ function updateCoreTemp() {
         let a = MAX_DOTS_LENGTH
         if (hasElement(275)) a += 1
         if (hasElement(283)) a += 1
-        if (hasElement(321)) a += 2
+        if (hasElement(322)) a += 2
         for (let j = 0; j < a; j++) {
             let sc = Decimal.pow(ct.total_s[j] * Math.pow(boost, Math.log10(ct.total_s[j]+1)+1),ct.total_p)
             sc = overflow(sc,1000,0.5)
