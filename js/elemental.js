@@ -1535,7 +1535,7 @@ x = overflow(x,1e180,0.1)
         {
             inf: true,
             desc: `Unlock Protoversal Modificator.`,
-            cost: E('2e27'),
+            cost: E('2e26'),
         },
         {
             desc: `Biquadseptuim-247 applies to BH mass overflow^3.`,
@@ -1566,7 +1566,7 @@ x = overflow(x,1e180,0.1)
         {
             inf: true,
             desc: `Unlock Dalton Modificator.`,
-            cost: E('1e28'),
+            cost: E('1e27'),
         },
         {
             desc: `Unseptseptium-177 formula is better .`,
