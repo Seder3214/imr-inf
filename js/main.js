@@ -149,6 +149,9 @@ let op4 = E(0.7)
             os2 = os2.pow(p)
             os = os.pow(p)
         }
+if (hasElement(263) && CHALS.inChal(16)) {
+let p = elemEffect(263)
+            os3 = os3.pow(p)}
 if (hasElement(274)) {
 op = op.mul(1.05)
 op2 = op2.mul(1.05)
