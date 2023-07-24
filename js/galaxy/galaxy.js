@@ -9,6 +9,8 @@ const GALAXY = {
  if (player.galaxy.grade.type[0].gte(1)) x = x.mul(tmp.grade.eff[0][0])
  if (hasElement(309)) x = x.mul(elemEffect(309))
  if (hasElement(314)) x = x.mul(elemEffect(314))
+ if (hasUpgrade('rp',21)) x = x.mul(upgEffect(1,21))
+ if (tmp.inf_unl) x = x.mul(theoremEff('bh',6))
         return x
     },
     cost() {

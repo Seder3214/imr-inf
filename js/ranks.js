@@ -292,7 +292,7 @@ const PRESTIGES = {
         if (hasPrestige(0,32)) x += prestigeEff(0,32,0)
         x += tmp.fermions.effs[1][6]||0
         x += glyphUpgEff(10,0)
-        if (tmp.inf_unl) x += theoremEff('mass',3,0)
+        if (tmp.inf_unl) x += theoremEff('mass',3)
         x += 1
 
         if (hasBeyondRank(4,2)) x *= beyondRankEffect(4,2)
@@ -728,7 +728,7 @@ const BEYOND_RANKS = {
     broke() {
         let x = E(1)
         if (tmp.beyond_ranks.max_tier > 9) {
-            x = player.ranks.hex.max(1).log10().max(1).log10().div(1.15)
+            x = player.ranks.hex.max(1).log10().max(1).log10().div(1.15).div(hasUpgrade('bh',21)?(upgEffect(2,21)):1)
             return x
         }
         else return

@@ -182,6 +182,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         if (hasElement(279) && i==17) x = x.add(1000)
         if (tmp.inf_unl && i==17) x = x.add(Math.min(theoremEff('mass',5)))
         if (hasElement(303) && i==18) x = x.add(10000)
+        if (tmp.inf_unl && i==18 && hasElement(319)) x = x.add(Math.min(theoremEff('mass',5)))
         return x.floor()
     },
     getScaleName(i) {
@@ -648,6 +649,7 @@ ret = overflow(ret,1e68,0.5)
     start: E('e1e72'),
     effect(x) {
         let ret = x.root(12).div(5).add(1)
+        if (tmp.inf_unl) ret = ret.mul(theoremEff('proto',6))
         return ret
     },
     effDesc(x) { return formatMult(x)},

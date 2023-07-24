@@ -256,7 +256,7 @@ const UPGS = {
                 }
             },
             auto_unl() { return player.mainUpg.bh.includes(5) || tmp.inf_unl },
-            lens: 20,
+            lens: 21,
             1: {
                 desc: "Boosters add Musclers.",
                 cost: E(1),
@@ -426,6 +426,18 @@ const UPGS = {
                     return "^"+format(x)
                 },
             },
+            21: {
+                unl() { return elemEffect(321)>=1 && hasElement(321) },
+                desc: `Rage Powers boosts Galaxy Particles Gain.`,
+                cost: E('e1e8950'),
+                effect() {
+                    let x = player.rp.points.add(1).log10().add(1).log10()
+                    return overflow(x,10,0.5).pow(2)
+                },
+                effDesc(x=this.effect()) {
+                    return "x"+format(x)
+                },
+            },
         },
         2: {
             title: "Black Hole Upgrades",
@@ -440,7 +452,7 @@ const UPGS = {
                     player.mainUpg.bh.push(x)
                 }
             },
-            lens: 20,
+            lens: 21,
             1: {
                 desc: "Mass Upgardes no longer spend mass.",
                 cost: E(1),
@@ -620,6 +632,18 @@ const UPGS = {
                     return "^"+format(x)
                 },
             },
+            21: {
+                unl() { return elemEffect(321)>=1 && hasElement(321) },
+                desc: `Black Hole Mass weakens Broken Beyond-Ranks nerf.`,
+                cost: E('e1e16870'),
+                effect() {
+                    let x = player.bh.mass.add(1).log10().add(1).log10().add(1).log10().root(10)
+                    return x
+                },
+                effDesc(x=this.effect()) {
+                    return "/"+format(x)
+                },
+            },
         },
         3: {
             title: "Atom Upgrades",
@@ -634,7 +658,7 @@ const UPGS = {
                 }
             },
             auto_unl() { return hasTree("qol1") || tmp.inf_unl },
-            lens: 20,
+            lens: 21,
             1: {
                 desc: "Start with Mass upgrades unlocked.",
                 cost: E(1),
@@ -788,6 +812,18 @@ const UPGS = {
                     return "+"+format(x,0)
                 },
             },
+            21: {
+                unl() { return elemEffect(321)>=1 && hasElement(321) },
+                desc: `Antimatter Generator Power is much better based on Quarks.`,
+                cost: E('e1e25700'),
+                effect() {
+                    let x = player.atom.quarks.add(1).log10().add(1).log10()
+                    return x
+                },
+                effDesc(x=this.effect()) {
+                    return "x"+format(x)
+                },
+            },
         },
         4: {
             title: "Big Rip Upgrades",
@@ -802,7 +838,7 @@ const UPGS = {
                 }
             },
             auto_unl() { return hasElement(132) || tmp.inf_unl },
-            lens: 20,
+            lens: 21,
             1: {
                 desc: `Start with Hydrogen-1 unlocked in Big Rip.`,
                 cost: E(5),
@@ -934,6 +970,18 @@ const UPGS = {
                 },
                 effDesc(x=this.effect()) {
                     return "x"+format(x)
+                },
+            },
+            21: {
+                unl() { return elemEffect(321)>=1 && hasElement(321) },
+                desc: `Death Shards raises Pre-Infinity Global Speed.`,
+                cost: E('e845000'),
+                effect() {
+                    let x = player.qu.rip.amt.add(1).log10().add(1).log10().add(1).log(5)
+                    return x
+                },
+                effDesc(x=this.effect()) {
+                    return "^"+format(x)
                 },
             },
         },

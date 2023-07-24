@@ -24,6 +24,7 @@ const FORMS = {
         if (tmp.inf_unl) x = x.mul(10).mul(theoremEff('time',0))
         if (hasElement(29,1)) x = x.mul(muElemEff(29))
         if (hasElement(39,1)) x = x.mul(elemEffect(39,1))
+        if (hasUpgrade('br',21)) x = x.pow(upgEffect(4,21))
 
         return x
     },
@@ -350,7 +351,7 @@ if (hasElement(290) && !(CHALS.inChal(16)|| CHALS.inChal(17)|| CHALS.inChal(19)|
         autoSwitch() { player.autoTickspeed = !player.autoTickspeed },
     },
     accel: {
-        cost(x=player.accelerator) { return Decimal.pow(10,Decimal.pow(1.5,x)).floor() },
+        cost(x=player.accelerator) { return Decimal.pow(10,Decimal.pow(1.5,x).root(hasElement(320)?elemEffect(310):1)).floor() },
         can() { return player.rp.points.gte(tmp.accelCost) },
         buy() {
             if (this.can()) {

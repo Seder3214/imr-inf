@@ -187,6 +187,7 @@ const DARK = {
 
             let step = E(1.5)
             if (tmp.inf_unl) step = step.mul(theoremEff('proto',4))
+            if (hasUpgrade('atom',21)) step = step.mul(upgEffect(3,21))
             let eff = step.mul(t.add(bonus)).add(1)
 
             return {step: step, eff: eff, bonus: bonus}

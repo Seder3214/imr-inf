@@ -43,6 +43,7 @@ const SCALE_START = {
 renown: E(350),
 massUpg4: E(200),
 		inf_theorem: E(25),
+		galaxy: E(20),
 	},
 	ultra: {
 		rank: E(600),
@@ -127,6 +128,7 @@ const SCALE_POWER= {
         renown: 40,
 		pe: 3,
 		inf_theorem: 1.55,
+		galaxy: 15,
 	},
 	ultra: {
 		rank: 4,

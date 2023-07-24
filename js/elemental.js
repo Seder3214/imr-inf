@@ -1639,27 +1639,27 @@ cost: E('ee1290'),
     inf: true,
     desc: 'Unlock 5th dot to every Theorem.',
     cost: E(5e36),
-    },
-    {
+},
+{
     desc: 'W+ Boson first effect will now be exponential',
     cost: E('ee1425'),
-    },
-    {
+},
+{
         dark: true,
         desc: `Uncap [Charm] effect.`,
         cost: E('e47000000'),
-    },
-    {
+},
+{
         c16: true,
         desc: `Muonic Copper-29 is better.`,
         cost: E('e2.15e74'),
-    },
-    {
+},
+{
         inf: true,
         desc: 'Add 1000 C17 max completions.',
         cost: E(2e39),
-        },
-        {
+},
+{
             c16: true,
             desc: `[Meta-Lepton] reward effect is better based on Infinity Points.<br>Reduce Meta-Prestige Level and Meta-Honor power based on Infinity Points.`,
             effect() {let x = E(1)
@@ -1670,36 +1670,36 @@ if (hasElement(317)) ret = ret.mul(1.15)
         return {eff: x, ret: ret}},
         effDesc(x) { return "x"+format(x.eff,3)+" to [Meta-Lepton] effect. <br> " + formatReduction(x.ret) + " weaker" },
             cost: E('e3.5e75'),
-        },
-        {
+},
+{
             dark: true,
             desc: `Unlock <span class='ascend_text_no_anim'>Ascensions</span>.<br>Keep Valor 2 reward on infinity reset.`,
             cost: E('e64500000'),
-        },
-        {
+},
+{
             desc: `Unlock Exotic Fermions. Meta Fermions won't activate all u-quarks above them`,
             cost: E('ee1812'),
-            },
-            {
+},
+{
                 inf: true,
                 desc: 'Unlock 6th dots for Theorems.',
                 cost: E(3e40),
-         },
-         {
+},
+{
             desc: 'Muonized effects are even better.',
             cost: E('ee2600'),
-    },
-    {
+},
+{
         dark: true,
         desc: `Softcap of [Top] will start at 3.00x`,
         cost: E('e173000000'),
-    },
-    {
+},
+{
         inf: true,
         desc: 'Binilennium-209 is overpowered.',
         cost: E(6e40),
- },
- {
+},
+{
     dark: true,
     desc: `FSS's first reward in C16 is slightly stronger.`,
     cost: E('e212000000'),
@@ -1707,8 +1707,8 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     desc: 'Bibihexium-226 is slightly better.',
     cost: E('ee3050'),
-    },
-    {
+},
+{
         c16: true,
         desc: `Stronger overflow^1-2 starts later by Bipentquadium-254.`,
         effect() {
@@ -1717,13 +1717,13 @@ if (hasElement(317)) ret = ret.mul(1.15)
         },
         effDesc(x) { return "^"+format(x,0)+' later' },
         cost: E('e6e119'),
-    },
-    {
+},
+{
         inf: true,
         desc: 'Chromas gain are slightly better<br>Mass Overflow^4 starts slightly more later.',
         cost: E(1e41),
- },
- {
+},
+{
     dark: true,
     desc: `[Meta-Lepton] effect is even better.`,
     cost: E('e246000000'),
@@ -1731,8 +1731,8 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     desc: 'Xenon-54 now provides an exponential boost.',
     cost: E('ee4050'),
-    },
-    {
+},
+{
         c16: true,
         desc: `Impossible Challenge scaling is weaker based on Ascension Base.`,
         effect() {
@@ -1741,13 +1741,13 @@ if (hasElement(317)) ret = ret.mul(1.15)
         },
         effDesc(x) { return formatReduction(x)+' weaker' },
         cost: E('e1e180'),
-    },
-    {
+},
+{
         inf: true,
         desc: 'Unlock Beyond-Prestiges.',
         cost: E(1e44),
- },
- {
+},
+{
     c16: true,
     desc: `Automatically complete C16 and C17 challenges outside of them.<br>Bitriennium-239 effect formula is much more better.`,
     cost: E('e1e187'),
@@ -1755,65 +1755,65 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     desc: 'Einstein Theorem is better.',
     cost: E('ee6050'),
-    },
-    {
-        sn: true,
+},
+{
+       sn: true,
         desc: 'Unlock Galaxies.',
         cost: E('1e16'),
-        },
-        {
+},
+{
             dark: true,
             desc: `Unseptennium-179 is even better (Per Prestige Level - 1.25x => <b>Per log3(Hex) - 1.25x</b>).`,
             cost: E('e685000000'),
-        },
-        {
+},
+{
             c16: true,
             desc: `Galaxy Particles gain formula is better.`,
             cost: E('e1e194'),
-        },
-        {
+},
+{
             desc: 'Every Theorem in Core power will be equivalent to the highest power possible.',
             cost: E('ee8500'),
-            },
-            {
-                inf: true,
-                desc: `<span class='red'>Remove</span> Mass Overflow^3-4.`,
-                cost: E(1e48),
-         },
-         {
+},
+{
+             inf: true,
+             desc: `<span class='red'>Remove</span> Mass Overflow^3-4.`,
+             cost: E(1e48),
+},
+{
             dark: true,
             desc: `Galaxy Particles gain formula is better again, and Unlock More Muonic Elements.`,
             cost: E('e1.55e9'),
-        },
-        {
+},
+{
             desc: 'Add 10000 C17 completions.',
             cost: E('ee13000'),
-            },
-            {
-                c16: true,
-                desc: `[Exotic-Lepton] effect is better.`,
-                cost: E('e1.5e430'),
-            },
-            {
-                inf: true,
-                desc: `[glx1] effect is better and remove first softcap of Galaxy Particle Generator's effect.`,
-                cost: E(1e59),
-         },
-         {
+},
+{
+            c16: true,
+            desc: `[Exotic-Lepton] effect is better.`,
+            cost: E('e1.5e430'),
+},
+{
+            inf: true,
+            desc: `[glx1] effect is better and remove first softcap of Galaxy Particle Generator's effect.`,
+            cost: E(1e59),
+},
+{
             dark: true,
             desc: `Meta-Honor starts x1.5 later.`,
             cost: E('e3.1e9'),
-        },
-        {
+},
+{
             desc: '[Meta-boost II] is ^1.25 stronger.',
             cost: E('ee18800'),
-            },
-            {
-                inf: true,
-                desc: `Bipentbium-252 is better.`,
-                cost: E(5e61),
-         },
-         {
+},
+{
+            inf: true,
+            desc: `Bipentbium-252 is better.`,
+            cost: E(5e61),
+},
+{
             dark: true,
             desc: `Galaxy Particles gain is boosted by Infinity Points.`,
             cost: E('e4.325e9'),
@@ -1822,64 +1822,91 @@ if (hasElement(317)) ret = ret.mul(1.15)
                 else x = player.inf.points.max(1).log10().add(1)
             return x},
             effDesc(x) { return "x"+format(x,3)+"" },
-        },
-        {
+},
+{
             desc: 'Pre-Infinity Global Speed reduces Galaxy Requirement.',
             cost: E('ee20250'),
             effect() {let x = E(1)
                 x = tmp.preInfGlobalSpeed.max(1).log10().add(1).log10()
+                if (tmp.inf_unl) x = x.mul(theoremEff('mass',6))
             return x},
             effDesc(x) { return "rooted by "+format(x,3)+"" },
             
-            },
-            {
-                c16: true,
-                desc: `Hyper-Glory is 30% weaker.`,
-                cost: E('e1e572'),
-            },
-            {
-                inf: true,
-                desc: `Boost last Abyssal Blot effect by Galaxy Particle Generators amount.`,
-                effect() {
+},
+{
+            c16: true,
+            desc: `Hyper-Glory is 30% weaker.`,
+            cost: E('e1e572'),
+},
+{
+            inf: true,
+            desc: `Boost last Abyssal Blot effect by Galaxy Particle Generators amount.`,
+            effect() {
                     let x = E(1)
                     x = player.galaxy.generator.root(5).add(1)
                     return x
-                },
-                effDesc: x=>"+"+format(x),
-                cost: E(2.5e64),
-         },
-         {
+            },
+            effDesc: x=>"+"+format(x),
+            cost: E(2.5e64),
+},
+{
             desc: 'Trinilennium-309 formula is better.',
             cost: E('ee23800'),
-            },
-            {
-                dark: true,
-                desc: `Apply C18's reward to Galaxy Particles gain at reduced rate.`,
-                cost: E('e8.4e9'),
-                effect() {let x = E(1)
-                   x = (player.chal.comps[18].mul(25).pow(10).add(1)).log(1.1)
+},
+{
+            dark: true,
+            desc: `Apply C18's reward to Galaxy Particles gain at reduced rate.`,
+            cost: E('e8.4e9'),
+            effect() {let x = E(1)
+                 x = (player.chal.comps[18].mul(25).pow(10).add(1)).log(1.1)
                 return x},
-                effDesc(x) { return "x"+format(x,3)+"" },
-            },
-            {
-                desc: 'Uncorrupt Unhexbium-162.',
-                cost: E('ee27000'),
-                },
-            {
-                c16: true,
-                desc: `[glx13] Effect is better.`,
-                cost: E('e1.75e615'),
-            },
-            {
-                inf: true,
-                desc: `Reduce Meta-Scaling Power Hardcap to <b>25%</b>, but Bioctnilium-280 is weaker.`,
-                cost: E(1e68),
-         },
-         {
+            effDesc(x) { return "x"+format(x,3)+"" },
+},
+{
+            desc: 'Uncorrupt Unhexbium-162.',
+            cost: E('ee27000'),
+},
+{
+            c16: true,
+            desc: `[glx13] Effect is better.`,
+            cost: E('e1.75e617'),
+},
+{
+            inf: true,
+            desc: `Reduce Meta-Scaling Power Hardcap to <b>25%</b>, but Bioctnilium-280 is weaker.`,
+            cost: E(1e68),
+},
+{
+
             dark: true,
             desc: `Unsoftcap Dalton Fragments effects.`,
             cost: E('e2.55e10'),
+},
+{
+            desc: 'Newton Theorem sixth star now applies to C18 max completions.',
+            cost: E('ee45500'),
+},
+{
+            c16: true,
+            desc: `Reduce Accelerators cost by Triunnilium-310 effect.`,
+            cost: E('e1e715'),
+},
+{
+        inf: true,
+        desc: `Unlock fifth row main upgrades per 25 Spent Gradings.`,
+        effect() {
+            let x = E(0)
+            x = player.galaxy.grade.theorems.div(25)
+            return x.floor()
         },
+        effDesc(x) { return "+"+format(x) },
+        cost: E('1e78'),
+},
+{
+    dark: true,
+    desc: `Unlock 7th and 8th stars for Theorems.`,
+    cost: E('e3.175e10'),
+},
     ],
     /*
     {
@@ -1930,7 +1957,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(253)) u += 16
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
-        if (hasTree('glx20')) u += 4
+        if (hasTree('glx20')) u += 8
         return u
     },
 }

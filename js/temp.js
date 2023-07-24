@@ -323,9 +323,9 @@ function updateTickspeedTemp() {
 }
 
 function updateAcceleratorTemp() {
-    tmp.accelCost = Decimal.pow(10,Decimal.pow(1.5,player.accelerator)).floor()
+    tmp.accelCost = Decimal.pow(10,Decimal.pow(1.5,player.accelerator).root(hasElement(320)?elemEffect(310):1)).floor()
     tmp.accelBulk = E(0)
-    if (player.rp.points.gte(10)) tmp.accelBulk = player.rp.points.max(1).log10().max(1).log(1.5).add(1).floor()
+    if (player.rp.points.gte(10)) tmp.accelBulk = player.rp.points.max(1).log10().max(1).pow(hasElement(320)?elemEffect(310):1).log(1.5).add(1).floor()
     tmp.accelEffect = FORMS.accel.effect()
 }
 

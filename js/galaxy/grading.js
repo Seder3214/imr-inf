@@ -46,33 +46,25 @@ power: [
 ],
         eff: [
             p=>{
-                for (let i = 0; i < player.galaxy.grade.type.length; i++) {
-                let pow = tmp.grade.power[i]
+                let pow = tmp.grade.power[0]
                 let x = [p.add(1).root(2).pow(pow),p.add(1).pow(1.75).pow(pow)]
                 return x
-                }
             },
             p=>{
-                for (let i = 0; i < player.galaxy.grade.type.length; i++) {
-                let pow = tmp.grade.power[i]
+                let pow = tmp.grade.power[1]
                 
                 let x = [p.add(1).pow(4.35).pow(pow),p.add(1).root(20).pow(pow)]
                 return x
-                }
-            },
+                },
             p=>{
-                for (let i = 0; i < player.galaxy.grade.type.length; i++) {
-                let pow = tmp.grade.power[i]
+                let pow = tmp.grade.power[2]
                 let x = [p.add(1).pow(1.5).div(10).pow(pow)]
                 return x
-                }
             },
             p=>{
-                for (let i = 0; i < player.galaxy.grade.type.length; i++) {
-                let pow = tmp.grade.power[i]
+                let pow = tmp.grade.power[3]
                 let x = [p.pow(0.5).div(10).pow(pow)]
                 return x
-                }
             },
         ],
         effDesc: [

@@ -1258,6 +1258,7 @@ const TREE_UPGS = {
             desc: `Dalton Theorem's Meta-score is boosted by Galaxy Particles.`,
             effect() {
                 let x = player.galaxy.stars.add(1).log10().add(1).log(2).div(2)
+                if (tmp.inf_unl) x = x.mul(theoremEff('atom',6))
                 return x.softcap('1e15000',0.5,0)
             },
             effDesc(x) { return "x"+format(x) },

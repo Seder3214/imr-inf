@@ -16,8 +16,10 @@ x += tmp.fermions.effs[1][7]
         for (let i = 0; i < PRESTIGES.names.length; i++) {
             let r = player.prestiges[i]
             let br = E(tmp.beyond_pres.max_tier)
-            if (hasBeyondRank(10,13)) x = x.add(br).mul(r.add(1).add(1).log(2.25).add(1))
-                else if (hasBeyondPres(1,2)) x = x.add(br).mul(r.add(1).add(1).ln().add(1))
+            let lr = E(tmp.beyond_pres.latestRank)
+            
+            if (hasBeyondRank(10,13)) x = x.add(hasAscension(1,2)?br.add(lr):br).mul(r.add(1).add(1).log(2.25).add(1))
+                else if (hasBeyondPres(1,2)) x = x.add(hasAscension(1,2)?br.mul(lr):br).mul(r.add(1).add(1).ln().add(1))
            else x = x.mul(r.add(1).add(1).ln().add(1))
         }
 
@@ -79,7 +81,8 @@ x += tmp.fermions.effs[1][7]
 14: `Unlock Transcension`,
         },
         {
-            1: `Automate Ascensions`
+            1: `Automate Ascensions`,
+            2: `Change the Beyond-Prestiges effect in Ascension Base formula. (Based on Max Tier + its amount)`
         },
     ],
     rewardEff: [
