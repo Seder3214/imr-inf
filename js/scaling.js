@@ -85,11 +85,10 @@ fTier: E(6000000000),
 		rank: E(1e37),
 		supernova: E(1e7),
 	},
-},
 instant: {
 rank: E(1e200)
 }
-
+}
 const SCALE_POWER= {
     super: {
 		rank: 1.5,
@@ -176,11 +175,10 @@ fTier: 10
 		rank: 50,
 		supernova: 75,
 	},
-},
 instant: {
 rank: 3
 }
-
+}
 
 const SCALE_FP = {
 	tickspeed() { return [1,1,1,tmp.tickspeedFP] },
