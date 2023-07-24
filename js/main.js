@@ -375,6 +375,7 @@ if (hasElement(290) && !(CHALS.inChal(16)|| CHALS.inChal(17)|| CHALS.inChal(19)|
             if (hasElement(33,1)) step = step.add(muElemEff(33))
             let x = player.accelerator.mul(step).add(1)
             x = overflow(x,100,0.5)
+            x = overflow(x,10000,0.1)
             return {step: step, eff: x}
         },
         autoUnl() { return true },
