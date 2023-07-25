@@ -34,7 +34,7 @@ const CORE = {
             s => {
                 let x = s**0.5
 
-                return x
+                return x = overflow(x,1e10,0.25)
             },
             s => {
                 let x = Decimal.root(s**0.35/5+1,2)
