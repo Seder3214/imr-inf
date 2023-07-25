@@ -33,8 +33,7 @@ const CORE = {
             },
             s => {
                 let x = s**0.5
-                if (x>=1e10) x = s**0.5**0.75
-                return x
+                return x.min(1e10)
             },
             s => {
                 let x = Decimal.root(s**0.35/5+1,2)
