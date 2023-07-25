@@ -61,6 +61,7 @@ valor: E(290),
 		prestige: E(320),
 		honor: E(200),
 		glory: E(9500),
+galaxy: E(250),
 	},
 	meta: {
 		rank: E(1e4),
@@ -73,6 +74,7 @@ valor: E(290),
 		fTier: E(1.25e4),
 		prestige: E(3500),
 		honor: E(3500),
+galaxy: E(1000),
 	},
 	exotic: {
 		rank: E(1e16),
@@ -152,6 +154,7 @@ valor: 5
 		prestige: 3,
 		honor: 3,
 		glory: 6,
+galaxy: 30,
 	},
 	meta: {
 		rank: 1.0025,
@@ -164,6 +167,7 @@ valor: 5
 		fTier: 1.001,
 		prestige: 1.0025,
 		honor: 1.0025,
+galaxy: 1.175,
 	},
 	exotic: {
 		rank: 15,
