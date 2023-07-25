@@ -116,7 +116,7 @@ const CORE = {
 
                 if (tmp.c16active) x = x.log10().add(1)
 
-                return x = overflow(x,E('e20000'),0.25)
+                return x = overflow(x,E('e10000'),0.25)
             },
             s => {
                 let x = Decimal.pow(1.05,Math.log10(s+1))
