@@ -241,16 +241,15 @@ const CORE = {
             s => {
                 let x = E(Math.log10(s+1)/2+1)
 
-                return x = overflow(x,6,0.1)
+                return x
             },
             s => {
                 let x = Decimal.pow(1.25,Math.log10(s+1))
 
-                return x = overflow(x,10,0.1)
+                return x
             },
             s => {
                 let x = E(Math.pow(1+Math.log10(s+1)/100,-1))
-x = overflow(x,0.9,0.1)
                 return x
             },
             s => {
