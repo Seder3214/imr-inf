@@ -20,11 +20,10 @@ const FORMS = {
     getPreInfGlobalSpeed() {
         if (CHALS.inChal(19)) return E(1)
         let x = E(1)
-        
+                if (hasElement(29,1)) x = x.mul(muElemEff(29)) 
+         if (hasElement(39,1)) x = x.mul(elemEffect(39,1)) 
+         if (hasUpgrade('br',21)) x = x.pow(upgEffect(4,21))
         if (tmp.inf_unl) x = x.mul(10).mul(theoremEff('time',0))
-        if (hasElement(29,1)) x = x.mul(muElemEff(29))
-        if (hasElement(39,1)) x = x.mul(elemEffect(39,1))
-        if (hasUpgrade('br',21)) x = x.pow(upgEffect(4,21))
 
         return x
     },
