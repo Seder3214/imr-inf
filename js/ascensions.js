@@ -32,7 +32,7 @@ x += tmp.fermions.effs[1][7]
                 x = Decimal.pow(1.2,y.div(fp).pow(1.4)).mul(2300)
                 break;
                 case 1:
-                    x = Decimal.pow(1.2,y.div(fp)).mul(14)
+                    x = Decimal.pow(1.2,y.div(fp).scaleEvery('asc',false)).mul(14)
                     break;
             default:
                 x = EINF
@@ -44,7 +44,7 @@ x += tmp.fermions.effs[1][7]
         let x = E(0), y = i==0?tmp.ascensions.base:player.ascensions[i-1], fp = this.fp(i)
         switch (i) {
             case 0:
-                if (y.gte(2300)) x = y.div(2300).max(1).log(1.2).max(0).root(1.4).mul(fp).add(1)
+                if (y.gte(2300)) x = y.div(2300).scaleEvery('asc',true).max(1).log(1.2).max(0).root(1.4).mul(fp).add(1)
                 break;
               case 1:
                     if (y.gte(14)) x = y.div(14).max(1).log(1.2).max(0).mul(fp).add(1)
