@@ -17,13 +17,14 @@ const CORE = {
         eff: [
             s => {
                 let x = Decimal.pow(s+1,s**0.5)
-
-                return overflow(x,100,0.5)
+                x = overflow(x,100,0.5)
+                return overflow(x,'e15000',0.25)
             },
             s => {
                 let x = Decimal.pow(s+1,s**0.5*2)
 
-                return overflow(x,100,0.5)
+                x = overflow(x,100,0.5)
+                return overflow(x,'e15000',0.25)
             },
             s => {
                 let x = Decimal.root(s**0.5/10+1,2)
@@ -88,7 +89,7 @@ const CORE = {
 
                 if (tmp.c16active) x = x.log10().add(1)
 
-                return x
+                return x = overflow(x,'e100000',0.25)
             },
             s => {
                 let x = Decimal.pow(s+1,s**0.5*2)
@@ -97,7 +98,7 @@ const CORE = {
 
                 if (tmp.c16active) x = x.log10().add(1)
 
-                return x
+                return x = overflow(x,'e100000',0.25)
             },
             s => {
                 let x = Math.pow(1+Math.log10(s+1)/100,-1)
