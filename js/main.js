@@ -503,7 +503,7 @@ if (hasElement(290) && !(CHALS.inChal(16)|| CHALS.inChal(17)|| CHALS.inChal(19)|
             if (hasElement(187)) os = os.pow(elemEffect(187))
             if (hasElement(200)) os = os.pow(tmp.chal.eff[15])
             if (hasTree('ct11')) os = os.pow(treeEff('ct11'))
-            if (tmp.inf_unl){ os = os.pow(theoremEff('bh',1))
+            if (tmp.inf_unl){ os2 = os2.pow(theoremEff('bh',1))
                 os3 = os3.pow(theoremEff('bh',4))}
 
             if (hasPrestige(2,45)) os2 = os2.pow(prestigeEff(2,45))
