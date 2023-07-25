@@ -319,7 +319,7 @@ const CORE = {
                 return x
             },
             s => {
-                let x = Math.log10(s+1)/100+1
+                let x = E(Math.log10(s+1)/100+1)
 
                 return x = overflow(x,1.75,0.25)
             },
