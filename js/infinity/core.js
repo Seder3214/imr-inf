@@ -196,10 +196,10 @@ const CORE = {
                 return x = overflow(x, 'e50000', 0.25)
             },
             s => {
-                let x = Decimal.pow(s+1,s**0.05*1.025).div(30)
+                let x = Decimal.pow(s+1,s**0.05*1.025).div(300)
 
                 x = overflow(x,0.05,0.5)
-                return x.div(10)
+                return x
             },
             s => {
                 let x = Decimal.pow(1.05,Math.log10(s+1))
