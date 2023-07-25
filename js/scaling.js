@@ -84,7 +84,7 @@ fTier: E(6000000000),
 	supercritical: {
 		rank: E(1e37),
 		supernova: E(1e7),
-tier: E(1e100),
+tier: E(1e80),
 	},
 instant: {
 rank: E(1e200)
