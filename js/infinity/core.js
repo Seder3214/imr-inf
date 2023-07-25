@@ -33,7 +33,7 @@ const CORE = {
             },
             s => {
                 let x = s**0.5
-                if (x>=1e10) = s**0.25
+                if (x>=1e10) x = s**0.5**0.75
                 return x
             },
             s => {
