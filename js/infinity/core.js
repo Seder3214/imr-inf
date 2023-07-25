@@ -192,7 +192,7 @@ const CORE = {
                 
                 x = overflow(x,100,0.5)
 
-                return x
+                return x = overflow(x, 'e50000', 0.25)
             },
             s => {
                 let x = Decimal.pow(s-1,s**0.05*0.025).div(30)
