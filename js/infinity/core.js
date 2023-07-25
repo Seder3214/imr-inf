@@ -88,7 +88,7 @@ const CORE = {
 
                 if (tmp.c16active) x = x.log10().add(1)
 
-                return x = overflow(x,'e100000',0.25)
+                return x = overflow(x,'e100000',0.1)
             },
             s => {
                 let x = Decimal.pow(s+1,s**0.5*2)
@@ -97,7 +97,7 @@ const CORE = {
 
                 if (tmp.c16active) x = x.log10().add(1)
 
-                return x = overflow(x,'e100000',0.25)
+                return x = overflow(x,'e100000',0.1)
             },
             s => {
                 let x = Math.pow(1+Math.log10(s+1)/100,-1)
