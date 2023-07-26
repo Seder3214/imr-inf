@@ -324,7 +324,7 @@ const ELEMENTS = {
 
                 x = overflow(x,'ee112',0.5)
                 x = overflow(x,'ee30000',0.1)
-if (player.c16.active) x = overflow(x,'ee500',0.1)
+if (tmo.c16active) x = overflow(x,'ee500',0.1)
 
                 return x
             },
@@ -474,7 +474,7 @@ if (player.c16.active) x = overflow(x,'ee500',0.1)
             cost: E('e1.7e6'),
             effect() {
                 let x = player.stars.points.add(1)
-if (player.c16.active) x = overflow(x,'ee500',0.1)
+if (tmp.c16active) x = overflow(x,'ee500',0.1)
                 return overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
 
             },
