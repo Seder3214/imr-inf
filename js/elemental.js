@@ -323,6 +323,7 @@ const ELEMENTS = {
                 let x = player.stars.points.add(1).pow(1/3)
 
                 x = overflow(x,'ee112',0.5)
+                x = overflow(x,'e30000',0.1)
 
                 return x
             },
