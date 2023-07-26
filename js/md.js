@@ -167,7 +167,7 @@ const MASS_DILATION = {
                 bulk() { return player.md.mass.gte('1.50001e536')?player.md.mass.div('1.50001e536').max(1).log(5).add(1).floor():E(0) },
                 effect(x) {
 let a = E(2).pow(x).softcap(1e25,2/3,0)
-if (tmp.c16active)a = overflow(a,'ee2500',0.1)
+if (tmp.c16active)a = overflow(a,'ee1500',0.01)
                     return a//.softcap("ee12",0.8,2)
                 },
                 effDesc(x) { return format(x)+"x"+(x.gte(1e25)?" <span class='soft'>(softcapped)</span>":"") },
