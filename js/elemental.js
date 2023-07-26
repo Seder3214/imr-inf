@@ -324,7 +324,7 @@ const ELEMENTS = {
 
                 x = overflow(x,'ee112',0.5)
                 x = overflow(x,'ee30000',0.1)
-if (tmo.c16active) x = overflow(x,'ee500',0.1)
+if (tmp.c16active) x = overflow(x,'ee500',0.1)
 
                 return x
             },
