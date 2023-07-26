@@ -22,6 +22,7 @@ const SCALE_START = {
 		pe: E(25),
 		inf_theorem: E(17),
 		galaxy: E(5),
+asc: E(20),
     },
 	hyper: {
 		rank: E(120),
@@ -44,6 +45,7 @@ renown: E(350),
 massUpg4: E(200),
 		inf_theorem: E(25),
 		galaxy: E(20),
+valor: E(290),
 	},
 	ultra: {
 		rank: E(600),
@@ -59,6 +61,7 @@ massUpg4: E(200),
 		prestige: E(320),
 		honor: E(200),
 		glory: E(9500),
+galaxy: E(250),
 	},
 	meta: {
 		rank: E(1e4),
@@ -71,19 +74,24 @@ massUpg4: E(200),
 		fTier: E(1.25e4),
 		prestige: E(3500),
 		honor: E(3500),
+galaxy: E(1000),
 	},
 	exotic: {
 		rank: E(1e16),
 		tier: E(1e25),
 		prestige: E(100000000),
+fTier: E(6000000000),
 		supernova: E(2e5),
 	},
 	supercritical: {
 		rank: E(1e37),
 		supernova: E(1e7),
+tier: E(1e80),
 	},
+instant: {
+rank: E(1e200)
 }
-
+}
 const SCALE_POWER= {
     super: {
 		rank: 1.5,
@@ -108,6 +116,7 @@ const SCALE_POWER= {
 		pe: 2,
 		inf_theorem: 3,
 		galaxy: 10,
+asc: 2,
     },
 	hyper: {
 		rank: 2.5,
@@ -129,6 +138,7 @@ const SCALE_POWER= {
 		pe: 3,
 		inf_theorem: 1.55,
 		galaxy: 15,
+valor: 5
 	},
 	ultra: {
 		rank: 4,
@@ -144,6 +154,7 @@ const SCALE_POWER= {
 		prestige: 3,
 		honor: 3,
 		glory: 6,
+galaxy: 30,
 	},
 	meta: {
 		rank: 1.0025,
@@ -156,17 +167,23 @@ const SCALE_POWER= {
 		fTier: 1.001,
 		prestige: 1.0025,
 		honor: 1.0025,
+galaxy: 1.175,
 	},
 	exotic: {
 		rank: 15,
 		prestige: 50,
 		tier: 20,
 		supernova: 20,
+fTier: 10
 	},
 	supercritical: {
 		rank: 50,
 		supernova: 75,
+tier: 50,
 	},
+instant: {
+rank: 3
+}
 }
 
 const SCALE_FP = {
@@ -175,8 +192,8 @@ const SCALE_FP = {
 const INF_SCALES = ['pe','FSS','inf_theorem','galaxy']
 const QCM8_SCALES = ['rank','tier','tetr','pent','hex','massUpg','tickspeed','bh_condenser','gamma_ray','supernova','fTier']
 const PreQ_SCALES = ['rank','tier','tetr','massUpg','tickspeed','bh_condenser','gamma_ray']
-const SCALE_TYPE = ['super', 'hyper', 'ultra', 'meta', 'exotic', 'supercritical'] // super, hyper, ultra, meta, exotic
-const FULL_SCALE_NAME = ['Super', 'Hyper', 'Ultra', 'Meta', 'Exotic', 'Supercritical']
+const SCALE_TYPE = ['super', 'hyper', 'ultra', 'meta', 'exotic', 'supercritical','instant'] // super, hyper, ultra, meta, exotic
+const FULL_SCALE_NAME = ['Super', 'Hyper', 'Ultra', 'Meta', 'Exotic', 'Supercritical','Instant']
 
 const SCALING_RES = {
     rank(x=0) { return player.ranks.rank },
@@ -201,6 +218,7 @@ const SCALING_RES = {
 	pe() { return player.inf.pe},
 	inf_theorem() { return player.inf.theorem},
 	galaxy() {return player.galaxy.times},
+asc() {return player.ascensions[0]}
 }
 
 const NAME_FROM_RES = {
@@ -226,6 +244,7 @@ const NAME_FROM_RES = {
 	pe: "Parallel Extruder",
 	inf_theorem: "Infinity Theorem",
 	galaxy: " Galaxy",
+asc: "Ascension",
 }
 
 function updateScalingHTML() {
@@ -423,7 +442,9 @@ function getScalingStart(type, name) {
 			if (hasBeyondPres(1,6)) start= start.mul(beyondPresEff(1,7))
 			if (hasElement(306)) start = start.mul(1.5)
 		}
-	} else if (type==4) {
+	else if (name=='fTier') {
+			start = start.pow(tmp.fermions.effs[0][7])
+		}	} else if (type==4) {
 		if (name=="rank") {
 			start = start.mul(glyphUpgEff(3))
 			if (hasElement(178)) start = start.mul(elemEffect(178))
@@ -433,10 +454,10 @@ function getScalingStart(type, name) {
 			if (hasPrestige(0,552)) start = start.mul(1.25)
 			if (hasPrestige(3,2)) start = start.mul(prestigeEff(3,2))
 			if (hasBeyondRank(2,17)) start = start.mul(beyondRankEffect(2,17)[1])
-		}
-		else if (name='fTier' && type == 4) {
+		}	
+	else if (name=='tier') {
 			start = start.pow(tmp.fermions.effs[0][7])
-		}
+		}	
 	} else if (type==5) {
 		if (name=="rank") {
 			if (tmp.chal && hasBeyondRank(2,20)) start = start.mul(tmp.chal.eff[1].scrank)
@@ -445,6 +466,8 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(4,1)) start = start.add(beyondRankEffect(4,1,0))
 		}
 	}
+else if (type=='6') {
+}
 	if (name=='supernova' && type < 4) {
 		start = start.add(tmp.prim.eff[7])
 	}
@@ -577,11 +600,11 @@ if (hasElement(311)) power = power.mul(0.7)
 			if (hasElement(78)) power = power.mul(0.8)
 		}
 		else if (name=='prestige') {
-			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7)*10)
+			if (player.dark.exotic_atom.tier >= 16) power = power.mul(hasElement(317)?exoticAEff(0,7)*10:exoticAEff(0,7))
 			if (hasElement(280)) power = power.mul(elemEffect(280).ret)
 		}
 		else if (name=='honor') {
-			if (player.dark.exotic_atom.tier >= 16) power = power.mul(exoticAEff(0,7)*5)
+			if (player.dark.exotic_atom.tier >= 16) power = power.mul(hasElement(317)?exoticAEff(0,7)*5:exoticAEff(0,7))
 		}
  	}
 	else if (type==4) {

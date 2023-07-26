@@ -19,7 +19,7 @@ x += tmp.fermions.effs[1][7]
             let lr = E(tmp.beyond_pres.latestRank)
             
             if (hasBeyondRank(10,13)) x = x.add(hasAscension(1,2)?br.add(lr):br).mul(r.add(1).add(1).log(2.25).add(1))
-                else if (hasBeyondPres(1,2)) x = x.add(hasAscension(1,2)?br.mul(lr):br).mul(r.add(1).add(1).ln().add(1))
+                else if (hasBeyondPres(1,2)) x = x.add(hasAscension(1,2)?br.add(lr):br).mul(r.add(1).add(1).ln().add(1))
            else x = x.mul(r.add(1).add(1).ln().add(1))
         }
 
@@ -32,7 +32,7 @@ x += tmp.fermions.effs[1][7]
                 x = Decimal.pow(1.2,y.div(fp).pow(1.4)).mul(2300)
                 break;
                 case 1:
-                    x = Decimal.pow(1.2,y.div(fp)).mul(14)
+                    x = Decimal.pow(1.2,y.div(fp).scaleEvery('asc',false)).mul(14)
                     break;
             default:
                 x = EINF
@@ -44,7 +44,7 @@ x += tmp.fermions.effs[1][7]
         let x = E(0), y = i==0?tmp.ascensions.base:player.ascensions[i-1], fp = this.fp(i)
         switch (i) {
             case 0:
-                if (y.gte(2300)) x = y.div(2300).max(1).log(1.2).max(0).root(1.4).mul(fp).add(1)
+                if (y.gte(2300)) x = y.div(2300).max(1).log(1.2).max(0).root(1.4).mul(fp).scaleEvery('asc',true).add(1)
                 break;
               case 1:
                     if (y.gte(14)) x = y.div(14).max(1).log(1.2).max(0).mul(fp).add(1)
@@ -92,7 +92,7 @@ x += tmp.fermions.effs[1][7]
 
                     let x = Decimal.pow(1.025,player.ascensions[0])
 
-                    return x
+                    return x = overflow(x,1.65,0.1)
                 },
                 x=>"^"+format(x),
             ],
@@ -101,7 +101,7 @@ x += tmp.fermions.effs[1][7]
 
                     let x = E(1).add(player.ascensions[0].mul(1.25))
 
-                    return x
+                    return x = overflow(x,24.5,0.1)
                 },
                 x=>"x"+format(x),
             ],

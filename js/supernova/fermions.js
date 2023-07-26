@@ -253,10 +253,10 @@ const FERMIONS = {
                 eff(i, t) {
                     let x = i.add(1).log10().add(1).log10().add(1).log2().div(10000).mul(t.pow(0.15)).add(1)
 
-                    return x
+                    return x = overflow(x,1.65,0.1)
                 },
                 desc(x) {
-                    return `Meta-Fermions starts ^${x.format()} later`
+                    return `Meta-Fermions and Exotic-Tier starts ^${x.format()} later`
                 },
                 inc: "mass",
                 cons: "Max Theorem's level is 0 and all u-quarks at once, and force infinity reset.",

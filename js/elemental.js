@@ -1442,7 +1442,7 @@ const ELEMENTS = {
             effect() {
                 if (CHALS.inChal(17)|| CHALS.inChal(18)) x = E(0)
                 else x = player.inf.dim_mass.add(1).root(2.25).add(1)
-                return x
+                return x.min(1e250)
             },
             effDesc(x) { return "+"+format(x,3) },
         },
@@ -1513,7 +1513,7 @@ const ELEMENTS = {
         {
             inf: true,
             desc: `Unlock Modificators.`,
-            cost: E('3e26'),
+            cost: E('1e26'),
         },
         {
             desc: `Mass overflow^3 starts later based on Newton Fragments (outside of C16).`,
@@ -1535,7 +1535,7 @@ x = overflow(x,1e180,0.1)
         {
             inf: true,
             desc: `Unlock Protoversal Modificator.`,
-            cost: E('2e27'),
+            cost: E('2e26'),
         },
         {
             desc: `Biquadseptuim-247 applies to BH mass overflow^3.`,
@@ -1561,16 +1561,16 @@ x = overflow(x,1e180,0.1)
         {
             inf: true,
             desc: `Remove the softcap of 7th Abyssal Blot effect.<br>Also, Fourth and Fifth Core Slot Theorem level will be based on max theorem level on infinity (Only if Theorem Type is 4th: Dalton,5th:Hawking)`,
-            cost: E('1e28'),
+            cost: E('1e27'),
         },
         {
             inf: true,
             desc: `Unlock Dalton Modificator.`,
-            cost: E('2e30'),
+            cost: E('1e27'),
         },
         {
             desc: `Unseptseptium-177 formula is better .`,
-            cost: E('e1e864'),
+            cost: E('e1e850'),
         },
         {
             c16: true,
@@ -1638,7 +1638,7 @@ cost: E('ee1290'),
 {
     inf: true,
     desc: 'Unlock 5th dot to every Theorem.',
-    cost: E(5e36),
+    cost: E(1e36),
 },
 {
     desc: 'W+ Boson first effect will now be exponential',
@@ -1737,7 +1737,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         desc: `Impossible Challenge scaling is weaker based on Ascension Base.`,
         effect() {
             x = Decimal.pow(0.75,tmp.ascensions.base.max(1).log10().root(10))
-            return x
+            return x.min(0.7)
         },
         effDesc(x) { return formatReduction(x)+' weaker' },
         cost: E('e1e180'),

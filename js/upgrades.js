@@ -815,7 +815,7 @@ const UPGS = {
             21: {
                 unl() { return elemEffect(321)>=1 && hasElement(321) },
                 desc: `Antimatter Generator Power is much better based on Quarks.`,
-                cost: E('e1e25700'),
+                cost: E('e1e24500'),
                 effect() {
                     let x = player.atom.quarks.add(1).log10().add(1).log10()
                     return x
@@ -975,7 +975,7 @@ const UPGS = {
             21: {
                 unl() { return elemEffect(321)>=1 && hasElement(321) },
                 desc: `Death Shards raises Pre-Infinity Global Speed.`,
-                cost: E('e845000'),
+                cost: E('e785000'),
                 effect() {
                     let x = player.qu.rip.amt.add(1).log10().add(1).log10().add(1).log(5)
                     return x

@@ -20,11 +20,10 @@ const FORMS = {
     getPreInfGlobalSpeed() {
         if (CHALS.inChal(19)) return E(1)
         let x = E(1)
-        
+                if (hasElement(29,1)) x = x.mul(muElemEff(29)) 
+         if (hasElement(39,1)) x = x.mul(elemEffect(39,1)) 
+         if (hasUpgrade('br',21)) x = x.pow(upgEffect(4,21))
         if (tmp.inf_unl) x = x.mul(10).mul(theoremEff('time',0))
-        if (hasElement(29,1)) x = x.mul(muElemEff(29))
-        if (hasElement(39,1)) x = x.mul(elemEffect(39,1))
-        if (hasUpgrade('br',21)) x = x.pow(upgEffect(4,21))
 
         return x
     },
@@ -149,6 +148,9 @@ let op4 = E(0.7)
             os2 = os2.pow(p)
             os = os.pow(p)
         }
+if (hasElement(263) && CHALS.inChal(16)) {
+let p = elemEffect(263)
+            os3 = os3.pow(p)}
 if (hasElement(274)) {
 op = op.mul(1.05)
 op2 = op2.mul(1.05)
@@ -372,6 +374,7 @@ if (hasElement(290) && !(CHALS.inChal(16)|| CHALS.inChal(17)|| CHALS.inChal(19)|
             if (hasElement(33,1)) step = step.add(muElemEff(33))
             let x = player.accelerator.mul(step).add(1)
             x = overflow(x,100,0.5)
+            x = overflow(x,10000,0.1)
             return {step: step, eff: x}
         },
         autoUnl() { return true },
@@ -499,7 +502,7 @@ if (hasElement(290) && !(CHALS.inChal(16)|| CHALS.inChal(17)|| CHALS.inChal(19)|
             if (hasElement(187)) os = os.pow(elemEffect(187))
             if (hasElement(200)) os = os.pow(tmp.chal.eff[15])
             if (hasTree('ct11')) os = os.pow(treeEff('ct11'))
-            if (tmp.inf_unl){ os = os.pow(theoremEff('bh',1))
+            if (tmp.inf_unl){ os2 = os2.pow(theoremEff('bh',1))
                 os3 = os3.pow(theoremEff('bh',4))}
 
             if (hasPrestige(2,45)) os2 = os2.pow(prestigeEff(2,45))

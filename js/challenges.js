@@ -600,7 +600,7 @@ ret = overflow(ret,1e68,0.5)
         reward: `Improve Muonic Calcium. <span class="yellow">Get more Prestige Base.</span><br><span class='orange'>At 50 completions, unlock C18</span>`,
         max: E(100),
         inc: E('e1.25e30'),
-        pow: E(8),
+        pow: E(4),
         start: E('e1.25e30'),
         effect(x) {
             let step = x.mul(2.15).pow(10.5).add(1).softcap(1e13,0.15,0)
