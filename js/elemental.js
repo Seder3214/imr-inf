@@ -1897,10 +1897,13 @@ if (hasElement(317)) ret = ret.mul(1.15)
 },
 {
         inf: true,
-        desc: `Unlock fifth row main upgrades per 25 Spent Gradings.`,
+        desc: `Unlock fifth row main upgrades per Silver Grading.`,
         effect() {
             let x = E(0)
-            x = player.galaxy.grade.theorems.div(25)
+           if (player.galaxy.grade.type[0].gte(20)) x = x.add(1)
+           if (player.galaxy.grade.type[1].gte(20)) x = x.add(1)
+           if (player.galaxy.grade.type[2].gte(20)) x = x.add(1)
+           if (player.galaxy.grade.type[3].gte(20)) x = x.add(1)
             return x.floor()
         },
         effDesc(x) { return "+"+format(x) },
