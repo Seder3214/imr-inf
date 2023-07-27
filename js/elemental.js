@@ -1909,7 +1909,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     dark: true,
     desc: `Unlock 7th and 8th stars for Theorems.`,
-    cost: E('e3.175e10'),
+    cost: E('e3.5e10'),
 },
     ],
     /*
