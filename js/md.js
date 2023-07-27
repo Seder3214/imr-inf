@@ -145,8 +145,10 @@ const MASS_DILATION = {
                 maxLvl: 1,
                 cost(x) { return E(1.5e191) },
                 bulk() { return player.md.mass.gte(1.5e191)?E(1):E(0) },
-                effect(x) { return E(5).pow(player.md.mass.max(1).log10().root(2)) },
-                effDesc(x) { return format(x)+"x" },
+                effect(x) {let a = E(5).pow(player.md.mass.max(1).log10().root(2)) 
+ if (tmp.c16active) a = overflow(a,'ee1500',0.01)
+ return a },
+   effDesc(x) { return format(x)+"x" },
             },{
                 desc: `Mass Dilation upgrade 2 effect's formula is better.`,
                 maxLvl: 1,
