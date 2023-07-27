@@ -656,7 +656,7 @@ ret = overflow(ret,1e68,0.5)
     effDesc(x) { return formatMult(x)},
 },
 20: {
-    unl() { return true },
+    unl() { return player.chal.comps[19].gte(100)||player.chal.comps[20].gte(1)},
     title: "The <wind>Reality</wind> III",
     desc: `
     • You can't buy elements.<br>
