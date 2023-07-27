@@ -320,7 +320,7 @@ const PRESTIGES = {
         let x = EINF, fp = this.fp(i), y = player.prestiges[i]
         let ifp = E(1)
         if (tmp.inf_unl) ifp = ifp.mul(theoremEff('mass',4))
-        if (!CHALS.inChal(19)) {
+        if (!CHALS.inChal(19) && !(CHALS.inChal(20))) {
         switch (i) {
             case 0:
                 x = Decimal.pow(1.1,y.scaleEvery('prestige',false,[0,0,0,fp]).pow(1.1)).mul(2e13)
@@ -348,7 +348,7 @@ const PRESTIGES = {
     bulk(i) {
         let x = E(0), y = i==0?tmp.prestiges.base:player.prestiges[i-1], fp = this.fp(i)
         let ifp = E(1)
-       if (!CHALS.inChal(19)) {
+       if (!CHALS.inChal(19) && !(CHALS.inChal(20))) {
         switch (i) {
             case 0:
                 if (y.gte(2e13)) x = y.div(2e13).max(1).log(1.1).max(0).root(1.1).scaleEvery('prestige',true,[0,0,0,fp]).add(1)
