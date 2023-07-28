@@ -6,7 +6,7 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mrredshark77.github.io/imr-inf/" />
-    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.7.1.2p2" />
+    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.7.1.2p3" />
     <meta property="og:description" content="Incremental Mass Rewritten: New Path Reloaded made by Seder3214, based on Incremental Mass Rewritten made by MrRedShark77." />
     <meta property="og:image" content="https://seder3214.github.io/imr-inf//images/thumbnail.jpg" />
 
@@ -107,7 +107,7 @@
     <div id='app' style='display: none;'>
         <div id="star"></div>
         <div class="table_center" style="height: 100%; width: 100%;">
-            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.7.1.2p2 | Player Name: <span id='playerName'></span></div>
+            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.7.1.2p3 | Player Name: <span id='playerName'></span></div>
             <div id="tabs">
             </div>
             <div id="main_app" style="width: calc(100% - 450px); height: 100%; overflow-y: auto; overflow-x: hidden; position: relative;">
@@ -247,12 +247,13 @@
                                 </div><button id="tickspeed_btn" class="btn" style="width: 300px;" onclick="FORMS.tickspeed.buy()">Cost: <span id="tickspeed_cost">X</span> Rage Power</button>
                                 <button class="btn" style="width: 120px;" onclick="FORMS.tickspeed.buyMax()">Buy Max</button>
                                 <button id="tickspeed_auto" class="btn" style="width: 80px;" onclick="FORMS.tickspeed.autoSwitch()">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Tickspeed Power: <span id="tickspeed_step">X</span><br>
-                                    Tickspeed Effect: <span id="tickspeed_eff">X</span> to mass gain
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+			<b>Effect: <span id="tickspeed_eff">X</span> to Mass gain</b><br><span style='font-size: 11px'>(Power: <span id="tickspeed_step">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div><div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="accel_div">
+                                
                                 <div style="width: 300px">
+                                    
                                     <div class="resources">
                                         <img src="images/accelerator.png">
                                         <span style="margin-left: 5px; text-align: left;"><span id="accel_scale"></span>Accelerators [<span id="accel_lvl">X</span>]</span>
@@ -260,9 +261,8 @@
                                 </div><button id="accel_btn" class="btn" style="width: 300px;" onclick="FORMS.accel.buy()">Cost: <span id="accel_cost">X</span> Rage Power</button>
                                 <button class="btn" style="width: 120px;" onclick="FORMS.accel.buyMax()">Buy Max</button>
                                 <button id="accel_auto" class="btn" style="width: 80px;" onclick="FORMS.accel.autoSwitch()">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Accelerator Power: <span id="accel_step">X</span><br>
-                                    Accelerator Effect: <span id="accel_eff">X</span>
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="accel_eff">X</span></b><br><span style='font-size: 11px'>(Power: <span id="accel_step">X</span>)</b>
                                 </div>
                             </div><br><div>
                                 <span id="massSoft1" class="red">After <b id="massSoftStart1">X</b> of mass gain, mass gain will be softcapped!<br></span>
@@ -303,8 +303,8 @@
                                 </div><button id="bhCondenser_btn" class="btn" style="width: 300px;" onclick="FORMS.bh.condenser.buy()">Cost: <span id="bhCondenser_cost">X</span> Dark Matters</button>
                                 <button class="btn" style="width: 120px;" onclick="FORMS.bh.condenser.buyMax()">Buy Max</button>
                                 <button id="bhCondenser_auto" class="btn" style="width: 80px;" onclick="FORMS.bh.condenser.autoSwitch()">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    BH Condenser Power: <span id="bhCondenser_pow">X</span>x<br>
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Power: <span id="bhCondenser_pow">X</span></b><hr style='width: 75px;'>
                                 </div>
                             </div><div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="falseVacuumDiv">
                                 <div style="width: 300px">
@@ -315,9 +315,8 @@
                                 </div><button id="fvm_btn" class="btn" style="width: 300px;" onclick="UNSTABLE_BH.fvm.buy()">Cost: <span id="fvm_cost">X</span> Dark Matters in C16</button>
                                 <button class="btn" style="width: 120px;" onclick="UNSTABLE_BH.fvm.buyMax()">Buy Max</button>
                                 <button id="fvm_auto" class="btn" style="width: 80px;" onclick="player.bh.autoFVM = !player.bh.autoFVM">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    FV Manipulator Power: <span id="fvm_pow">X</span>x<br>
-                                    FV Manipulator Effect: <span id="fvm_eff">X</span>x<br> to Unstable BH production speed
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                         <b>Effect: <span id="fvm_eff">X</span></b><br><span style='font-size: 11px'>(Power: <span id="fvm_pow">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div><br><div>
                                 <span id="massSoft2" class="red">After <b id="massSoftStart2">X</b> of mass gain from black hole, its mass gain will be softcapped!</span><br>
@@ -340,9 +339,8 @@
                                 </div><button id="gamma_ray_btn" class="btn" style="width: 300px;" onclick="ATOM.gamma_ray.buy()">Cost: <span id="gamma_ray_cost">X</span> Atoms</button>
                                 <button class="btn" style="width: 120px;" onclick="ATOM.gamma_ray.buyMax()">Buy Max</button>
                                 <button id="gamma_ray_auto" class="btn" style="width: 80px;" onclick="player.atom.auto_gr = !player.atom.auto_gr">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Cosmic Ray Power: <span id="gamma_ray_pow">X</span>x<br>
-                                    Cosmic Ray Effect: <span id="gamma_ray_eff">X</span>
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="gamma_ray_eff">X</span></b><br><span style='font-size: 11px'>(Power: <span id="gamma_ray_pow">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div><br><div>
                                 <span id="atomicOverflow"></span>
@@ -366,9 +364,8 @@
                                 </div><button id="cosmic_str_btn" class="btn" style="width: 300px;" onclick="QUANTUM.cosmic_str.buy()">Cost: <span id="cosmic_str_cost">X</span> Quantum Foam</button>
                                 <button class="btn" style="width: 120px;" onclick="QUANTUM.cosmic_str.buyMax()">Buy Max</button>
                                 <button id="cosmic_str_auto" class="btn" style="width: 80px;" onclick="player.qu.auto_cr = !player.qu.auto_cr">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Cosmic Strings Power: <span id="cosmic_str_pow">X</span>x<br>
-                                    Cosmic Strings Effect: <span id="cosmic_str_eff">X</span>x
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="cosmic_str_eff">X</span> to blueprint particles</b><br><span style='font-size: 11px'>(Power: <span id="cosmic_str_pow">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div>
                         </div><div id="stab_frame0_5">
@@ -384,9 +381,8 @@
                                 </div><button id="pe_btn" class="btn" style="width: 300px;" onclick="INF.pe.buy()">Cost: <span id="pe_cost">X</span> Infinity Points</button>
                                 <button class="btn" style="width: 120px;" onclick="INF.pe.buyMax()">Buy Max</button>
                                 <button id="pe_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Parallel Extruder Power: <span id="pe_step">X</span><br>
-                                    Parallel Extruder Effect: <span id="pe_eff">X</span> to dimensional mass gain
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="pe_eff">X</span> to dimensional mass gain</b><br><span style='font-size: 11px'>(Power: <span id="pe_step">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div>
                         </div><div id="stab_frame0_6">
@@ -403,9 +399,8 @@
                             </div><button id="am_btn" class="btn" style="width: 300px;" onclick="DARK.am.buy()">Cost: <span id="am_cost">X</span> Antimatter</button>
                             <button class="btn" style="width: 120px;" onclick="DARK.am.buyMax()">Buy Max</button>
                             <button id="am_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                            <div style="margin-left: 5px; text-align: left; width: 400px">
-                                Antimatter Generator Power: <span id="am_step">X</span><br>
-                                Antimatter Generator Effect: <span id="am_eff">X</span> to Antimatter gain
+                            <div style="margin-left: 5px; text-align: center; width: 400px">
+                                <b>Effect: <span id="am_eff">X</span> to Antimatter gain</b><br><span style='font-size: 11px'>(Power: <span id="am_step">X</span>)</b><hr style='width: 75px;'>
                             </div>
                         </div></div>
                     </div><div id="tab_frame1">
@@ -672,8 +667,9 @@
                                 <button class="btn" style="width: 120px;" onclick="INF.nm.buyMax()">Buy Max</button>
                                 <button id="nm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
                                 <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Newton Modificator Power: <span id="nm_step">X</span><br>
-                                    Newton Modificator Effect: <span id="nm_eff">X</span> to Newton Fragments gain
+                                    <div style="margin-left: 5px; text-align: center; width: 400px">
+                                        <b>Effect: <span id="nm_eff">X</span> to Newton Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="nm_step">X</span>)</b><hr style='width: 75px;'>
+                                    </div>
                                 </div>
                             </div><br>
                             <div id='pm_base_div'>
@@ -691,9 +687,8 @@
                                 </div><button id="pm_btn" class="btn" style="width: 300px;" onclick="INF.pm.buy()">Cost: <span id="pm_cost">X</span> Infinity Points</button>
                                 <button class="btn" style="width: 120px;" onclick="INF.pm.buyMax()">Buy Max</button>
                                 <button id="pm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Protoversal Modificator Power: <span id="pm_step">X</span><br>
-                                    Protoversal Modificator Effect: <span id="pm_eff">X</span> to Protoversal Fragments gain
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="pm_eff">X</span> to Protoversal Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="pm_step">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div>
                             <div id='dm_base_div'><br>
@@ -710,9 +705,8 @@
                                 </div><button id="dm_btn" class="btn" style="width: 300px;" onclick="INF.dm.buy()">Cost: <span id="dm_cost">X</span> Infinity Points</button>
                                 <button class="btn" style="width: 120px;" onclick="INF.dm.buyMax()">Buy Max</button>
                                 <button id="dm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Dalton Modificator Power: <span id="dm_step">X</span><br>
-                                    Dalton Modificator Effect: <span id="dm_eff">X</span> to Dalton Fragments gain
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="dm_eff">X</span> to Dalton Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="dm_step">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div><br>
                             <div id='em_base_div'>
@@ -729,9 +723,8 @@
                                 </div><button id="em_btn" class="btn" style="width: 300px;" onclick="INF.em.buy()">Cost: <span id="em_cost">X</span> Infinity Points</button>
                                 <button class="btn" style="width: 120px;" onclick="INF.em.buyMax()">Buy Max</button>
                                 <button id="em_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Einstein Modificator Power: <span id="em_step">X</span><br>
-                                    Einstein Modificator Effect: <span id="em_eff">X</span> to Einstein Fragments gain
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="em_eff">X</span> to Einstein Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="em_step">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div><br>
                             <div id='hm_base_div'>
@@ -748,9 +741,8 @@
                                 </div><button id="hm_btn" class="btn" style="width: 300px;" onclick="INF.hm.buy()">Cost: <span id="hm_cost">X</span> Infinity Points</button>
                                 <button class="btn" style="width: 120px;" onclick="INF.hm.buyMax()">Buy Max</button>
                                 <button id="hm_auto" class="btn" style="width: 80px; display: none;" onclick="">OFF</button>
-                                <div style="margin-left: 5px; text-align: left; width: 400px">
-                                    Hawking Modificator Power: <span id="hm_step">X</span><br>
-                                    Hawking Modificator Effect: <span id="hm_eff">X</span> to Hawking Fragments gain
+                                <div style="margin-left: 5px; text-align: center; width: 400px">
+                                    <b>Effect: <span id="hm_eff">X</span> to Hawking Fragments gain</b><br><span style='font-size: 11px'>(Power: <span id="hm_step">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div>
                         </div><div id="stab_frame8_4">
@@ -795,7 +787,7 @@
                             <h2>Confirmation Settings</h2><br>
                             <div id="confirm_table" class="table_center"></div>
                             <br><br>
-                            Incremental Mass Rewritten: New Path Reloaded - v0.7.1.2p2 - made by Seder3214<br>
+                            Incremental Mass Rewritten: New Path Reloaded - v0.7.1.2p3 - made by Seder3214<br>
                             Based on Incremental Mass Rewritten -  v0.7.0.1 - made by MrRedShark77<br>
                             The game is inspired by Distance Incremental & Synergism<br>
                             Contributors: <span style="cursor: pointer;" onclick='addNotify(`frfrfr<br><img src="https://5.imimg.com/data5/HO/DK/MY-8155364/lemon-500x500.jpg" style="width:100%">`)'>Lemon</span>, 16777216 & Aarex (Artists)<br><br><br>

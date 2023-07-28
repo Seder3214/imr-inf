@@ -63,9 +63,9 @@ function setupHTML() {
 			</div><button id="massUpg_btn_${x}" class="btn" style="width: 300px;" onclick="UPGS.mass.buy(${x}, true)">Cost: <span id="massUpg_cost_${x}">X</span></button>
 			<button class="btn" style="width: 120px;" onclick="UPGS.mass.buyMax(${x})">Buy Max</button>
 			<button id="massUpg_auto_${x}" class="btn" style="width: 80px;" onclick="UPGS.mass.autoSwitch(${x})">OFF</button>
-			<div style="margin-left: 5px; text-align: left; width: 400px">
-				${upg.title} Power: <span id="massUpg_step_${x}">X</span><br>
-				${upg.title} Effect: <span id="massUpg_eff_${x}">X</span>
+			<div style="margin-left: 5px; text-align: center; width: 400px">
+			
+			<b>Effect: <span id="massUpg_eff_${x}">X</span></b><br><span style='font-size: 11px'>(Power: <span id="massUpg_step_${x}">X</span>)</b><hr style='width: 75px'>
 			</div>
 		</div>`
 	}
