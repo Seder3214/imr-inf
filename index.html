@@ -6,8 +6,8 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mrredshark77.github.io/imr-inf/" />
-    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.7.1.2p3" />
-    <meta property="og:description" content="Incremental Mass Rewritten: New Path Reloaded made by Seder3214, based on Incremental Mass Rewritten made by MrRedShark77." />
+    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.7.1.4" />
+    <meta property="og:description" content="Incremental Mass Rewritten: New Path Reloaded made by Seder3214." />
     <meta property="og:image" content="https://seder3214.github.io/imr-inf//images/thumbnail.jpg" />
 
     <link rel="image_src" href="images/thumbnail.jpg">
@@ -107,7 +107,7 @@
     <div id='app' style='display: none;'>
         <div id="star"></div>
         <div class="table_center" style="height: 100%; width: 100%;">
-            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.7.1.2p3 | Player Name: <span id='playerName'></span></div>
+            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.7.1.4 | Player Name: <span id='playerName'></span></div>
             <div id="tabs">
             </div>
             <div id="main_app" style="width: calc(100% - 450px); height: 100%; overflow-y: auto; overflow-x: hidden; position: relative;">
@@ -304,7 +304,7 @@
                                 <button class="btn" style="width: 120px;" onclick="FORMS.bh.condenser.buyMax()">Buy Max</button>
                                 <button id="bhCondenser_auto" class="btn" style="width: 80px;" onclick="FORMS.bh.condenser.autoSwitch()">OFF</button>
                                 <div style="margin-left: 5px; text-align: center; width: 400px">
-                                    <b>Power: <span id="bhCondenser_pow">X</span></b><hr style='width: 75px;'>
+                                    <b>Effect: <span id="bhCondenser_pow">X</span> to mass of black hole</b><hr style='width: 75px;'>
                                 </div>
                             </div><div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="falseVacuumDiv">
                                 <div style="width: 300px">
@@ -316,7 +316,7 @@
                                 <button class="btn" style="width: 120px;" onclick="UNSTABLE_BH.fvm.buyMax()">Buy Max</button>
                                 <button id="fvm_auto" class="btn" style="width: 80px;" onclick="player.bh.autoFVM = !player.bh.autoFVM">OFF</button>
                                 <div style="margin-left: 5px; text-align: center; width: 400px">
-                                         <b>Effect: <span id="fvm_eff">X</span></b><br><span style='font-size: 11px'>(Power: <span id="fvm_pow">X</span>)</b><hr style='width: 75px;'>
+                                         <b>Effect: <span id="fvm_eff">X</span> to Unstable BH production speed</b> <br><span style='font-size: 11px'>(Power: <span id="fvm_pow">X</span>)</b><hr style='width: 75px;'>
                                 </div>
                             </div><br><div>
                                 <span id="massSoft2" class="red">After <b id="massSoftStart2">X</b> of mass gain from black hole, its mass gain will be softcapped!</span><br>
@@ -752,7 +752,7 @@
                     </div><div id="tab_frame9">
                         <div id="stab_frame9_0">
                             You have <h4 id="stars_amt">0</h4>  <h4 id="stars_gain">0</h4> Galaxy Particles<br>
-                            <span class='green'>Which boosts all-star resources gain by x<span id="stars_eff"></span></span><br>
+                            <span class='green'>Which boosts all-star resources gain by ^<span id="stars_eff"></span></span><br>
                              <button class="btn half_full tooltip" id="gen_btn" tooltip-html="Tiering will result in forcing Supernova Reset." onclick="GALAXY.tier()"></button><br>
                          </div><div id="stab_frame9_1">
                             You have <span id="grade_theorem">0</span> Unspent Gradings (based on Galaxy Particles)<br>
@@ -787,7 +787,7 @@
                             <h2>Confirmation Settings</h2><br>
                             <div id="confirm_table" class="table_center"></div>
                             <br><br>
-                            Incremental Mass Rewritten: New Path Reloaded - v0.7.1.2p3 - made by Seder3214<br>
+                            Incremental Mass Rewritten: New Path Reloaded - v0.7.1.4 - made by Seder3214<br>
                             Based on Incremental Mass Rewritten -  v0.7.0.1 - made by MrRedShark77<br>
                             The game is inspired by Distance Incremental & Synergism<br>
                             Contributors: <span style="cursor: pointer;" onclick='addNotify(`frfrfr<br><img src="https://5.imimg.com/data5/HO/DK/MY-8155364/lemon-500x500.jpg" style="width:100%">`)'>Lemon</span>, 16777216 & Aarex (Artists)<br><br><br>

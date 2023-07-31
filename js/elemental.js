@@ -85,7 +85,9 @@ const ELEMENTS = {
             cost: E(2.5e16),
             effect() {
                 let x = player.atom?player.atom.powers[0].max(1).log10().pow(0.8).div(50).add(1):E(1)
-                return overflow(x.softcap(1e45,0.1,0),'e60000',0.5).min('ee6')
+                
+                if (!hasElement(324)) return overflow(x.softcap(1e45,0.1,0),'e60000',0.5).min('ee6')
+                else return overflow(x.max(1).root(10).softcap(1e45,0.1,0),'e60000',0.5).softcap('ee6',0.5,0)
             },
             effDesc(x) { return format(x)+"x stronger" },
         },
@@ -475,7 +477,8 @@ if (tmp.c16active) x = overflow(x,'ee1000',0.1)
             effect() {
                 let x = player.stars.points.add(1)
 if (tmp.c16active) x = overflow(x,'ee1000',0.1)
-                return overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
+x = overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
+                return overflow(x,'ee50000',0.15)
 
             },
             effDesc(x) { return format(x)+"x" },
@@ -1911,8 +1914,37 @@ if (hasElement(317)) ret = ret.mul(1.15)
 },
 {
     dark: true,
-    desc: `Unlock 7th and 8th stars for Theorems.`,
+    desc: `Unlock 7th star for Theorems.`,
     cost: E('e3.5e10'),
+},
+{
+    c16: true,
+    desc: `Remove Challenge 12 reward effect softcap.`,
+    cost: E('e5e916'),
+},
+{
+    desc: 'Change Beryllium-4 Hardcap to Softcap.',
+    cost: E('ee96400'),
+},
+{
+    inf: true,
+    desc: `Unlock Post-17th Fusion Tiers, that will muonize all of the effects.`,
+    cost: E(1e100),
+},
+{
+    desc: 'Galaxy Particles main effect is overpowered.',
+    cost: E('ee100670'),
+},
+{
+    dark: true,
+    desc: `Exotic-Prestige Level and Meta-Honor starts later based on Infinity Points.`,
+    effect() {
+        let x = E(0)
+        x = player.inf.points.add(1).log10().max(1).log2()
+        return x
+    },
+    effDesc(x) { return "x"+format(x) },
+    cost: E('e1.795e11'),
 },
     ],
     /*
@@ -1965,6 +1997,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
         if (hasTree('glx20')) u += 8
+        if (hasElement(322)) u += 5
         return u
     },
 }

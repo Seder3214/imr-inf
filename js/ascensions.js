@@ -82,7 +82,8 @@ x += tmp.fermions.effs[1][7]
         },
         {
             1: `Automate Ascensions`,
-            2: `Change the Beyond-Prestiges effect in Ascension Base formula. (Based on Max Tier + its amount)`
+            2: `Change the Beyond-Prestiges effect in Ascension Base formula. (Based on Max Tier + its amount)`,
+            4: `Nebula Galaxy effect is better based on Ascension Base.`
         },
     ],
     rewardEff: [
@@ -106,7 +107,15 @@ x += tmp.fermions.effs[1][7]
                 x=>"x"+format(x),
             ],
         },
-        {},
+        {
+            4:  [
+                ()=>{
+                let x = tmp.ascensions.base.log10().mul(1.5)
+                return x
+                },
+                x=>"x"+format(x),
+            ],
+        },
     ],
     reset(i, bulk = false) {
         let b = this.bulk(i)

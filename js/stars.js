@@ -95,7 +95,7 @@ const STARS = {
             x = x.mul(tmp.stars.generator_boost_eff)
             x = hasElement(213) ? x.pow(tmp.bosons.upgs.photon[3].effect) : x.mul(tmp.bosons.upgs.photon[3].effect)
             if (hasPrestige(1,1)) x = x.pow(2)
-            if (player.galaxy.stars.gte(1)) x = x.mul(tmp.galaxy.eff)
+            if (player.galaxy.times.gte(1)) x = x.pow(tmp.galaxy.eff)
 
             if (QCs.active()) x = expMult(x,tmp.qu.qc_eff[0][0])
             return x

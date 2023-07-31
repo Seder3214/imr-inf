@@ -137,8 +137,8 @@ asc: 2,
         renown: 40,
 		pe: 3,
 		inf_theorem: 1.55,
-		galaxy: 15,
-valor: 5
+		galaxy: 20,
+valor: 2.25,
 	},
 	ultra: {
 		rank: 4,
@@ -441,6 +441,7 @@ function getScalingStart(type, name) {
 		else if (name == 'honor'){
 			if (hasBeyondPres(1,6)) start= start.mul(beyondPresEff(1,7))
 			if (hasElement(306)) start = start.mul(1.5)
+			if (hasElement(327)) start = start.mul(elemEffect(327))
 		}
 	else if (name=='fTier') {
 			start = start.pow(tmp.fermions.effs[0][7])
@@ -458,12 +459,16 @@ function getScalingStart(type, name) {
 	else if (name=='tier') {
 			start = start.pow(tmp.fermions.effs[0][7])
 		}	
+		else if (name=='prestige') {
+			if (hasElement(327)) start = start.mul(elemEffect(327))
+		}
 	} else if (type==5) {
 		if (name=="rank") {
 			if (tmp.chal && hasBeyondRank(2,20)) start = start.mul(tmp.chal.eff[1].scrank)
 		}
 		else if (name=="supernova") {
 			if (hasBeyondRank(4,1)) start = start.add(beyondRankEffect(4,1,0))
+			if (tmp.inf_unl) start=start.mul(theoremEff('time',6))
 		}
 	}
 else if (type=='6') {

@@ -64,7 +64,7 @@ power: [
             },
             p=>{
                 let pow = tmp.grade.power[3]
-                let x = [p.pow(0.5).div(10).pow(pow)]
+                let x = [p.pow(0.5).div(10).pow(pow).mul(hasAscension(1,4)?ascensionEff(1,4):1)]
                 return x
             },
         ],

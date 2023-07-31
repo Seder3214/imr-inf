@@ -135,6 +135,7 @@ const MUONIC_ELEM = {
             cost: E(Number.MAX_VALUE),
             eff() {
                 let x = tmp.exotic_atom.amount.div(Number.MAX_VALUE).max(1).log(hasElement(25,1)?1.001:1.1).add(1)
+                if (hasElement(42,1)) x = tmp.exotic_atom.amount.max(1).log(hasElement(25,1)?1.001:1.1).pow(1.25).add(1)
                 if (player.chal.comps[17].gte(1)) x = x.mul(player.chal.comps[17].mul(1.5).pow(0.25).add(1))
                 return x
             },
@@ -314,6 +315,20 @@ const MUONIC_ELEM = {
             desc: `Keep Muonic Elements on any reset.`,
             cost: E('e22500'),
         },
+        {
+            desc: `Add free Parallel Extruders based on Galaxies.`,
+            eff() {
+                let x = E(1)
+                x = player.galaxy.times
+                return x.max(1)
+            },
+            effDesc: x=>"+"+format(x),
+            cost: E('e29750'),
+        },
+        {
+            desc: `Muonic Calcium-20 starts at 1 Exotic Atoms and its effect is better.`,
+            cost: E('e30600'),
+        },
         /*
         {
             desc: `Placeholder.`,
@@ -334,7 +349,7 @@ const MUONIC_ELEM = {
 
         if (tmp.brokenInf) u += 12
         if (hasElement(30,1)) u+= 6
-        if (hasElement(302)) u+= 4
+        if (hasElement(302)) u+= 2
         return u
     },
 }
@@ -368,11 +383,11 @@ function updateMuonSymbol(start=false) {
 }
 
 const EXOTIC_ATOM = {
-    requirement: [E(0),E(5e4),E(1e6),E(1e12),E(1e25),E(1e34),E(1e44),E(1e66),E(1e88),E(1e121),E(1e222),E('e321'),E('e490'),E('e628'),E('e650'),E('e850'),E('e1930')],
+    requirement: [E(0),E(5e4),E(1e6),E(1e12),E(1e25),E(1e34),E(1e44),E(1e66),E(1e88),E(1e121),E(1e222),E('e321'),E('e490'),E('e628'),E('e650'),E('e850'),E('e1930'),'Locked'],
     req() {
         let t = player.dark.exotic_atom.tier
         let r = this.requirement[t]||EINF
-
+        if (player.dark.exotic_atom.tier >= 17 && (hasElement(325))) r = E('e25000').pow((E(player.dark.exotic_atom.tier).sub(17).add(1).div(5).add(1)))
         return r
     },
     tier() {
@@ -491,9 +506,10 @@ else x = E(0)
             },x=>`Reduce FSS requirement by <b>${formatReduction(x)}</b>. Req: 15th Tier.`],
             [a=>{
                 if (player.dark.exotic_atom.tier >= 17) x = a.add(1).log(1.01).pow(27).add(1)
+                if (player.dark.exotic_atom.tier >= 18) x = a.add(1).log(1.01).pow(500).add(1)
 else x = E(1)
-                return x.toNumber()
-            },x=>`Mass overflow^1-3 starts <b>^${format(x)} later</b>. Req: 17th Tier.`],
+                return x
+            },x=>`Mass overflow^1-3 starts <b>^${format(x)} later</b>. Req: 17th Tier. <span style='color: orange'>${player.dark.exotic_atom.tier >= E(18)?`[Muonized]</span>`:`</span>`}`],
         ],
     ],
 }

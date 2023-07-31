@@ -636,19 +636,7 @@ transform: scale(1.25)}
 	border-color: orange;
 	background: linear-gradient(135deg,yellow 0%, orange 75%, orange 100%);
 	box-shadow: 0 0 10px rgba(255, 255, 0, 0.699);
-    animation: gradient 3s infinite linear;
 }
-@keyframes gradient {
-	0% {
-	  background-position: 0% 75%;
-	}
-	75% {
-	  background-position: 100% 75%;
-	}
-	100% {
-	  background-position: 0% 75%;
-	}
-  }
 
 .elements.muon.bought {
 	color: #fc0;

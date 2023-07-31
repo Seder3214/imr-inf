@@ -37,7 +37,7 @@ const BEYOND_PRES = {
             2: `Beyond-Prestiges's max tier applies to Ascension Base and Beyond-Ranks's max tier applies to Prestige Base`,
             3: `Graviton effect's formula is even better.`,
             7: `Meta-Honor starts 1.5x later per Beyond-Prestige's max tier.`,
-            8: `Automate Element Tier 3.`,
+            8: `Automate Element Tier 3 (219-300).`,
         },
         2: {    
      1: `Automatically Beyond-Prestige up.<br>Auto-buy Antimatter Generator, every Modificators and Parallel Extruder.<br>They cost nothing`,

@@ -515,11 +515,11 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         start: uni('e8.4e8'),
         effect(x) {
             let ret = x.root(hasTree("chal7a")?1.5:2)
-            ret = ret.softcap(50,0.5,0)
-ret = overflow(ret,1e68,0.5)
+            ret = ret.softcap(50,hasElement(323)?1:0.5,0)
+ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
             return overflow(ret,1e90,0.15)
         },
-        effDesc(x) { return "+"+format(x)+softcapHTML(x,50)+ (x.gte(1e68)?"<span class='overflowed_text'></span>":"") },
+        effDesc(x) { return "+"+format(x)+(!hasElement(323)?softcapHTML(x,50):'')+ (x.gte(1e68)?"<span class='overflowed_text'></span>":"") },
     },
     13: {
         unl() { return hasElement(132) },
@@ -646,7 +646,7 @@ ret = overflow(ret,1e68,0.5)
     reward: `Grading cost formula is weaker.<br><span class='orange'>At 100 completions, unlock C20</span>`,
     max: E(250),
     inc: E('e1e72'),
-    pow: E(20),
+    pow: E(12),
     start: E('e1e72'),
     effect(x) {
         let ret = x.root(12).div(5).add(1)
@@ -676,7 +676,7 @@ ret = overflow(ret,1e68,0.5)
     pow: E(200),
     start: E('e7.5e347'),
     effect(x) {
-        let ret = x.mul(25).pow(5).add(1)
+        let ret = x.mul(2).pow(2.5).add(1)
         return ret
     },
     effDesc(x) { return formatMult(x)},

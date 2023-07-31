@@ -491,7 +491,7 @@ dark.matters.am = E(0)
             let t = player.inf.pe
 
             let bonus = E(0)
-
+            if (hasElement(41,1)) bonus = bonus.add(muElemEff(41))
             let step = E(2).add(exoticAEff(1,4,0))
 
             if (hasElement(225)) step = step.add(elemEffect(225,0))

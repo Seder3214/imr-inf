@@ -96,7 +96,9 @@ const MASS_DILATION = {
                 effect(x) {
                     let b = 2
                     if (hasElement(25)) b++
-                    return E(b).pow(x.mul(tmp.md.upgs[11].eff||1)).softcap('e1.2e4',0.96,2)//.softcap('e2e4',0.92,2)
+                    let a = E(b).pow(x.mul(tmp.md.upgs[11].eff||1)).softcap('e1.2e4',0.96,2)//.softcap('e2e4',0.92,2)
+                    if (tmp.c16active) a = overflow(a,'ee3000',0.5)
+                    return a
                 },
                 effDesc(x) { return format(x,0)+"x"+(x.gte('e1.2e4')?` <span class='soft'>(softcapped${x.gte('e2e400')?"^2":""})</span>`:"")},
             },{
@@ -147,7 +149,8 @@ const MASS_DILATION = {
                 bulk() { return player.md.mass.gte(1.5e191)?E(1):E(0) },
                 effect(x) {let a = E(5).pow(player.md.mass.max(1).log10().root(2)) 
  if (tmp.c16active) a = overflow(a,'ee1500',0.01)
- return a },
+ 
+ return overflow(a,'ee100000',0.1) },
    effDesc(x) { return format(x)+"x" },
             },{
                 desc: `Mass Dilation upgrade 2 effect's formula is better.`,
@@ -170,7 +173,7 @@ const MASS_DILATION = {
                 effect(x) {
 let a = E(2).pow(x).softcap(1e25,2/3,0)
 if (tmp.c16active)a = overflow(a,'ee1500',0.01)
-                    return a//.softcap("ee12",0.8,2)
+                    return overflow(a,'ee200000',0.1)//.softcap("ee12",0.8,2)
                 },
                 effDesc(x) { return format(x)+"x"+(x.gte(1e25)?" <span class='soft'>(softcapped)</span>":"") },
             },{

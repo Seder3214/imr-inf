@@ -11,6 +11,7 @@ const GALAXY = {
  if (hasElement(314)) x = x.mul(elemEffect(314))
  if (hasUpgrade('rp',21)) x = x.mul(upgEffect(1,21))
  if (tmp.inf_unl) x = x.mul(theoremEff('bh',6))
+ if (tmp.chal) x = x.mul(tmp.chal.eff[20])
         return x
     },
     cost() {
@@ -39,6 +40,7 @@ const GALAXY = {
     effect() {
         let x = E(1)
         x = player.galaxy.stars.pow(12.5).mul(10)
+        if (hasElement(326)) x = player.galaxy.stars.pow(50).mul(10)
         return x
     },
     getGalaxy() {
