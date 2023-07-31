@@ -92,7 +92,7 @@ const CHALS = {
         else if (x < 16) DARK.doReset(true)
         else if (x > 16) INF.doReset(true)
         else if (x > 18)  {
-            GALAXY.doReset()
+            GALAXY.doReset(force=true)
         }
         else MATTERS.final_star_shard.reset(true)
     },
