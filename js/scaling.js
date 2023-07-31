@@ -138,7 +138,7 @@ asc: 2,
 		pe: 3,
 		inf_theorem: 1.55,
 		galaxy: 20,
-valor: 2.25,
+valor: 5,
 	},
 	ultra: {
 		rank: 4,
