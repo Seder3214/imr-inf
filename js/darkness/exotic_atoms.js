@@ -383,7 +383,7 @@ function updateMuonSymbol(start=false) {
 }
 
 const EXOTIC_ATOM = {
-    requirement: [E(0),E(5e4),E(1e6),E(1e12),E(1e25),E(1e34),E(1e44),E(1e66),E(1e88),E(1e121),E(1e222),E('e321'),E('e490'),E('e628'),E('e650'),E('e850'),E('e1930'),'Locked'],
+    requirement: [E(0),E(5e4),E(1e6),E(1e12),E(1e25),E(1e34),E(1e44),E(1e66),E(1e88),E(1e121),E(1e222),E('e321'),E('e490'),E('e628'),E('e650'),E('e850'),E('e1930')],
     req() {
         let t = player.dark.exotic_atom.tier
         let r = this.requirement[t]||EINF
