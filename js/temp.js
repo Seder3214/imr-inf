@@ -92,9 +92,6 @@ function resetTemp() {
             tree_afford: {},
             tree_afford2: [],
         },
-        galaxy: {
-            maxlimit: E('1e100'),
-        },
         grade: {
             eff: [],
             power: [],
@@ -163,23 +160,11 @@ function resetTemp() {
             quark: E(1),
             stronger: E(1),
         },
-        tetraflow: {
-            mass: E(1),
-            dm: E(1),
-            bh: E(1),
-            star: E(1),
-            atomic: E(1),
-            quark: E(1),
-            stronger: E(1),
-        },
         overflowBefore: {
             dm: E(0),
             mass: E(0),
             bh: E(0),
             quark: E(0),
-        },
-        tetraflowBefore: {
-            mass: E(0),
         },
         overflow_start: {
             dm: E('ee30'),
@@ -194,13 +179,6 @@ function resetTemp() {
             mass: E(.5),
             bh: E(0.5),
             stronger: E(.5),
-        },
-        tetraflow_start: {
-            mass: E('ee1400'),
-        },
-
-        tetraflow_power: {
-            mass: E(.5),
         },
         mass_glyph_msg: 0,
 
