@@ -349,7 +349,7 @@ const MUONIC_ELEM = {
 
         if (tmp.brokenInf) u += 12
         if (hasElement(30,1)) u+= 6
-        if (hasElement(302)) u+= 4
+        if (hasElement(302)) u+= 6
         return u
     },
 }
