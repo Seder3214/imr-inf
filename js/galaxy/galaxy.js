@@ -59,6 +59,29 @@ player.dark.c16.shard = E(0)
     if (hasElement(322)) e.push(322)
     if (hasElement(300)) e.push(300)
 player.atom.elements = e
+let save_keep = [6,8,10,0,11,13,15,16]
+if (hasTree('glx10')) save_keep=[1,2,3,4,5,6,7,8,9,10,0,11,12,13,14,15,16,20]
+player.inf.points = E(0)
+player.inf.total = E(0)
+player.inf.nm = E(0)
+player.inf.pm = E(0)
+player.inf.dm = E(0)
+player.inf.hm = E(0)
+player.inf.em = E(0)
+player.inf.nm_base = E(0)
+player.inf.pm_base = E(0)
+player.inf.dm_base = E(0)
+player.inf.hm_base = E(0)
+player.inf.em_base = E(0)
+player.inf.core[0].star = [true,true,true,true,true,true]
+player.inf.core[1].star = [true,true,true,true,true,true]
+player.inf.core[2].star = [true,true,true,true,true,true]
+player.inf.core[3].star = [true,true,true,true,true,true]
+player.inf.theorem = E(6)
+player.inf.theorem_max = E(5)
+
+player.inf.upg = save_keep
+INF.doReset()
 }
 else if (!hasTree('glx18')) {
     let e = [275,283,229,249,260,281,284]
