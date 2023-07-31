@@ -54,6 +54,7 @@ const GALAXY = {
     doReset(force=false) {
 player.galaxy.times = player.galaxy.times.max(tmp.supernova.bulkGal)
  if (force) {
+player.dark.c16.shard = E(0)
     let e = [275,283,229,249,260,281,284]
     if (hasElement(322)) e.push(322)
     if (hasElement(300)) e.push(300)
