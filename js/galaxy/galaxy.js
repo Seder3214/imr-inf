@@ -51,6 +51,10 @@ player.dark.c16.shard = E(0)
     let e = [275,283,229,249,260,281,284]
     if (hasElement(322)) e.push(322)
     if (hasElement(300)) e.push(300)
+    for (let x = 0; x < player.atom.elements.length; x++) {
+        let a = player.atom.elements[x]
+        if (hasElement(161) || (hasElement(143) ? a != 118 : (a < 87 || a > 118))) e.push(a)
+    }
 player.atom.elements = e
 }
 else if (!hasTree('glx18')) {
