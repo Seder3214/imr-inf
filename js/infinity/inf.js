@@ -17,10 +17,11 @@ const INF = {
         if (hasInfUpgrade(3)) e.push(161)
         if (iu15) e.push(218)
 
-    if (hasTree('glx18')) e.push(275,283,229,249,260,281,284)
-     if (hasElement(322)) e.push(322) 
-     if (hasElement(300)) e.push(300) 
-if (player.chal.active > 18) for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
+if (player.chal.active < 19) for (let i = 0; i < player.atom.elements.length; i++) if (player.atom.elements[i] > 218) e.push(player.atom.elements[i])
+
+if (hasTree('glx18')) e.push(275,283,229,249,260,281,284)
+if (hasElement(322)) e.push(322) 
+if (hasElement(300)) e.push(300) 
 
      player.atom.elements = e
 let me = []

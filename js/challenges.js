@@ -128,8 +128,7 @@ const CHALS = {
         } else if (ch != player.chal.active) {
             this.exit(true)
             player.chal.active = ch
-           if (ch == 19 || ch == 20){ GALAXY.doReset(force=true) }
-else this.reset(ch, false)
+ this.reset(ch, false)
         }
     },
     getResource(x) {
