@@ -123,7 +123,7 @@ function calc(dt) {
         if (hasTree("qol1")) for (let x = 1; x <= (player.dark.unl?118:117); x++) if (x<=tmp.elements.upg_length) ELEMENTS.buyUpg(x)
         if (hasBeyondPres(1,8)&& (player.chal.active <= 19)) { 
             let a = 300
-            if (hasAscension(1,30)) a = 314
+            if (hasAscension(0,30)) a = 314
             for (let x = 1; x <= a; x++) if (x<=tmp.elements.upg_length) ELEMENTS.buyUpg(x)}
         player.md.mass = player.md.mass.add(tmp.md.mass_gain.mul(du_gs))
         if (hasTree("qol3")) player.md.particles = player.md.particles.add(player.md.active ? tmp.md.rp_gain.mul(du_gs) : tmp.md.passive_rp_gain.mul(du_gs))
