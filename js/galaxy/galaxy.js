@@ -84,6 +84,7 @@ player.inf.theorem_max = E(5)
 player.inf.upg = save_keep
 }
     }
+INF.doReset()
 }
 function calcGalaxy(dt) {
 if (player.galaxy.times.gt(0)) player.galaxy.stars = player.galaxy.stars.add(tmp.galaxy.gain.mul(dt))
