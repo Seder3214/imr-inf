@@ -92,6 +92,7 @@ function resetTemp() {
             tree_afford: {},
             tree_afford2: [],
         },
+        galaxy: {},
         grade: {
             eff: [],
             power: [],
