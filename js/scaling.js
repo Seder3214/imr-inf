@@ -23,6 +23,7 @@ const SCALE_START = {
 		inf_theorem: E(17),
 		galaxy: E(5),
 asc: E(20),
+fusionTier: E(30),
     },
 	hyper: {
 		rank: E(120),
@@ -46,6 +47,7 @@ massUpg4: E(200),
 		inf_theorem: E(25),
 		galaxy: E(20),
 valor: E(290),
+fusionTier: E(100),
 	},
 	ultra: {
 		rank: E(600),
@@ -62,6 +64,7 @@ valor: E(290),
 		honor: E(200),
 		glory: E(9500),
 galaxy: E(250),
+fusionTier: E(1500),
 	},
 	meta: {
 		rank: E(1e4),
@@ -75,6 +78,7 @@ galaxy: E(250),
 		prestige: E(3500),
 		honor: E(3500),
 galaxy: E(1000),
+fusionTier: E(10000),
 	},
 	exotic: {
 		rank: E(1e16),
@@ -117,6 +121,7 @@ const SCALE_POWER= {
 		inf_theorem: 3,
 		galaxy: 10,
 asc: 2,
+fusionTier: 2,
     },
 	hyper: {
 		rank: 2.5,
@@ -139,6 +144,7 @@ asc: 2,
 		inf_theorem: 1.55,
 		galaxy: 20,
 valor: 5,
+fusionTier: 4,
 	},
 	ultra: {
 		rank: 4,
@@ -155,6 +161,7 @@ valor: 5,
 		honor: 3,
 		glory: 6,
 galaxy: 30,
+fusionTier: 8,
 	},
 	meta: {
 		rank: 1.0025,
@@ -168,13 +175,14 @@ galaxy: 30,
 		prestige: 1.0025,
 		honor: 1.0025,
 galaxy: 1.175,
+fusionTier: 1.075,
 	},
 	exotic: {
 		rank: 15,
 		prestige: 50,
 		tier: 20,
 		supernova: 20,
-fTier: 10
+fTier: 10,
 	},
 	supercritical: {
 		rank: 50,
@@ -218,7 +226,8 @@ const SCALING_RES = {
 	pe() { return player.inf.pe},
 	inf_theorem() { return player.inf.theorem},
 	galaxy() {return player.galaxy.times},
-asc() {return player.ascensions[0]}
+asc() {return player.ascensions[0]},
+fusionTier() {return player.dark.exotic_atom.tier},
 }
 
 const NAME_FROM_RES = {
@@ -245,6 +254,7 @@ const NAME_FROM_RES = {
 	inf_theorem: "Infinity Theorem",
 	galaxy: " Galaxy",
 asc: "Ascension",
+fusionTier: "Muon-Catalyzed Fusion Tier",
 }
 
 function updateScalingHTML() {

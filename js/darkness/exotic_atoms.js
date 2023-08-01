@@ -387,7 +387,7 @@ const EXOTIC_ATOM = {
     req() {
         let t = player.dark.exotic_atom.tier
         let r = this.requirement[t]||EINF
-        if (player.dark.exotic_atom.tier >= 17 && (hasElement(325))) r = E('e25000').pow((E(player.dark.exotic_atom.tier).sub(17).add(1).div(5).add(1)))
+        if (player.dark.exotic_atom.tier >= 17 && (hasElement(325))) r = E('e25000').pow((E(player.dark.exotic_atom.tier).scaleEvery('fusionTier').sub(17).add(1).div(5).add(1)))
         return r
     },
     tier() {
