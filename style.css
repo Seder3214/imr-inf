@@ -645,11 +645,33 @@ transform: scale(1.25)}
 	box-shadow: 0 0 10px #f60;
 }
 .elements.cs.bought {
-	color: #ff4aa5;
+	color: #ff85c2;
 	border-color: #ff1f8e;
-	background-color: rgb(114, 4, 59);
+	background-color: #72043b;
 	box-shadow: 0 0 10px rgb(255, 0, 128);
+	background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
+	animation: AnimateBG 20s ease infinite;
 }
+
+@keyframes AnimateBG {
+	0% {
+		background-position-x: 0px;
+		background-position-y: 0px;
+	}
+	30% {
+		background-position-x: -48px;
+		background-position-y: -48px;
+	}
+	70% {
+		background-position-x: 0px;
+		background-position-y: 0px;
+	}
+	100% {
+		background-position-x: 48px;
+		background-position-y: 48px;
+	}
+}
+
 .elements.sn.bought {
 	color: #ff6bb5;
 	border-color: #f83f9b;
