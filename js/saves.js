@@ -312,7 +312,7 @@ name: "",
             stars: E(0),
             generator: E(0),
             grade: {
-                type: [E(0),E(0),E(0),E(0)],
+                type: [E(0),E(0),E(0),E(0),E(0)],
                 theorems: E(0),
             },
         },

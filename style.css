@@ -634,7 +634,7 @@ transform: scale(1.25)}
 .elements.inf.bought {
 	color: black;
 	border-color: orange;
-	background: linear-gradient(135deg,yellow 0%, orange 75%, orange 100%);
+	background: repeating-linear-gradient(135deg,yellow 0%, orange 75%, orange 100%);
 	box-shadow: 0 0 10px rgba(255, 255, 0, 0.699);
 }
 
@@ -652,7 +652,6 @@ transform: scale(1.25)}
 	background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
 	animation: AnimateBG 20s ease infinite;
 }
-
 @keyframes AnimateBG {
 	0% {
 		background-position-x: 0px;

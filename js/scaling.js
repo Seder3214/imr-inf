@@ -469,6 +469,7 @@ function getScalingStart(type, name) {
 		else if (name=="supernova") {
 			if (hasBeyondRank(4,1)) start = start.add(beyondRankEffect(4,1,0))
 			if (tmp.inf_unl) start=start.mul(theoremEff('time',6))
+			if (player.galaxy.grade.type[4].gte(1)) start = start.pow(tmp.grade.eff[4][0])
 		}
 	}
 else if (type=='6') {

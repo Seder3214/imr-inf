@@ -1907,6 +1907,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
            if (player.galaxy.grade.type[1].gte(20)) x = x.add(1)
            if (player.galaxy.grade.type[2].gte(20)) x = x.add(1)
            if (player.galaxy.grade.type[3].gte(20)) x = x.add(1)
+           if (player.galaxy.grade.type[4].gte(20)) x = x.add(1)
             return x.floor()
         },
         effDesc(x) { return "+"+format(x) },
@@ -1945,6 +1946,11 @@ if (hasElement(317)) ret = ret.mul(1.15)
     },
     effDesc(x) { return "x"+format(x) },
     cost: E('e1.795e11'),
+},
+{
+    inf: true,
+    desc: `Unlock the chances to get last grading type.`,
+    cost: E(1e110),
 },
     ],
     /*
@@ -1997,7 +2003,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
         if (hasTree('glx20')) u += 8
-        if (hasElement(322)) u += 5
+        if (hasElement(322)) u += 10
         return u
     },
 }
