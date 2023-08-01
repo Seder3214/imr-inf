@@ -23,7 +23,7 @@ const SCALE_START = {
 		inf_theorem: E(17),
 		galaxy: E(5),
 asc: E(20),
-fusionTier: E(30),
+fusionTier: E(20),
     },
 	hyper: {
 		rank: E(120),
@@ -144,7 +144,7 @@ fusionTier: 2,
 		inf_theorem: 1.55,
 		galaxy: 20,
 valor: 5,
-fusionTier: 4,
+fusionTier: 5,
 	},
 	ultra: {
 		rank: 4,
@@ -161,7 +161,7 @@ fusionTier: 4,
 		honor: 3,
 		glory: 6,
 galaxy: 30,
-fusionTier: 8,
+fusionTier: 10,
 	},
 	meta: {
 		rank: 1.0025,
@@ -378,7 +378,7 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(8,2)) start = start.add(beyondRankEffect(8,2))
 		}
 
-		else if (name!=='FSS' && name!=='inf_theorem' && name!=='galaxy') {
+		else if (name!=='FSS' && name!=='inf_theorem' && name!=='galaxy' && name!=='fusionTier') {
 			if (hasElement(252)) start = start.add(elemEffect(252))
 					}
 	}
