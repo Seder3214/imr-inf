@@ -47,7 +47,7 @@ massUpg4: E(200),
 		inf_theorem: E(25),
 		galaxy: E(20),
 valor: E(290),
-fusionTier: E(100),
+fusionTier: E(50),
 	},
 	ultra: {
 		rank: E(600),

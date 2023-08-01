@@ -30,23 +30,28 @@ const GRADE = {
 power: [
     p=>{
         let pow = E(1).mul(p.gte(100)?3:p.gte(90)?2.8:p.gte(80)?2.6:p.gte(70)?2.4:p.gte(60)?2.2:p.gte(50)?2:p.gte(40)?1.8:p.gte(30)?1.6:p.gte(20)?1.4:p.gte(10)?1.2:1)
-        return pow
+        let tierPow = E(1).mul(p.gte(1000)?2.5:p.gte(900)?2.4:p.gte(800)?2.3:p.gte(700)?2.2:p.gte(600)?2.1:p.gte(500)?2:p.gte(400)?1.8:p.gte(300)?1.6:p.gte(200)?1.4:p.gte(100)?1.2:1)
+        return pow.mul(tierPow)
     },
     p=>{
         let pow = E(1).mul(p.gte(100)?3:p.gte(90)?2.8:p.gte(80)?2.6:p.gte(70)?2.4:p.gte(60)?2.2:p.gte(50)?2:p.gte(40)?1.8:p.gte(30)?1.6:p.gte(20)?1.4:p.gte(10)?1.2:1)
-        return pow
+        let tierPow = E(1).mul(p.gte(1000)?3:p.gte(900)?2.8:p.gte(800)?2.6:p.gte(700)?2.4:p.gte(600)?2.2:p.gte(500)?2:p.gte(400)?1.8:p.gte(300)?1.6:p.gte(200)?1.4:p.gte(100)?1.2:1)
+        return pow.mul(tierPow)
     },
     p=>{
         let pow = E(1).mul(p.gte(100)?3:p.gte(90)?2.8:p.gte(80)?2.6:p.gte(70)?2.4:p.gte(60)?2.2:p.gte(50)?2:p.gte(40)?1.8:p.gte(30)?1.6:p.gte(20)?1.4:p.gte(10)?1.2:1)
-        return pow
+        let tierPow = E(1).mul(p.gte(1000)?3:p.gte(900)?2.8:p.gte(800)?2.6:p.gte(700)?2.4:p.gte(600)?2.2:p.gte(500)?2:p.gte(400)?1.8:p.gte(300)?1.6:p.gte(200)?1.4:p.gte(100)?1.2:1)
+        return pow.mul(tierPow)
     },
     p=>{
         let pow = E(1).mul(p.gte(100)?3:p.gte(90)?2.8:p.gte(80)?2.6:p.gte(70)?2.4:p.gte(60)?2.2:p.gte(50)?2:p.gte(40)?1.8:p.gte(30)?1.6:p.gte(20)?1.4:p.gte(10)?1.2:1)
-        return pow
+        let tierPow = E(1).mul(p.gte(1000)?3:p.gte(900)?2.8:p.gte(800)?2.6:p.gte(700)?2.4:p.gte(600)?2.2:p.gte(500)?2:p.gte(400)?1.8:p.gte(300)?1.6:p.gte(200)?1.4:p.gte(100)?1.2:1)
+        return pow.mul(tierPow)
     },
     p=>{
         let pow = E(1).mul(p.gte(100)?3:p.gte(90)?2.8:p.gte(80)?2.6:p.gte(70)?2.4:p.gte(60)?2.2:p.gte(50)?2:p.gte(40)?1.8:p.gte(30)?1.6:p.gte(20)?1.4:p.gte(10)?1.2:1)
-        return pow
+        let tierPow = E(1).mul(p.gte(1000)?3:p.gte(900)?2.8:p.gte(800)?2.6:p.gte(700)?2.4:p.gte(600)?2.2:p.gte(500)?2:p.gte(400)?1.8:p.gte(300)?1.6:p.gte(200)?1.4:p.gte(100)?1.2:1)
+        return pow.mul(tierPow)
     },
 ],
         eff: [
@@ -191,7 +196,7 @@ function updateGradeHTML() {
         let pp = player.galaxy.grade.type[i]
         let h = Math.floor(pp / 10) % 10
         let x = Math.floor(pp / 100) % 100
-tmp.el['grade_scale'+i].setHTML(`<span class='grade_color${h}'>${FULL_GRADE_NAME[0][h]}</span>`+`<span class='grade_tier_color${x}'>${FULL_GRADE_NAME[1][x]}</span>`)
+tmp.el['grade_scale'+i].setHTML(`<span class='grade_color${h}'>${FULL_GRADE_NAME[0][h]}</span>`+` <span class='grade_tier_color${x}'>${FULL_GRADE_NAME[1][x]}</span>`)
         tmp.el["grade_part"+i].setTxt(format(tmp.grade.parts[i],0)+(tmp.grade.bonus[i].gt(0)?" + "+tmp.grade.bonus[i].format(0):""))
         tmp.el["grade_part_pow"+i].setHTML(GRADE.particle.effPow[i](tmp.grade.power[i]))
         tmp.el["grade_part_eff"+i].setHTML(GRADE.particle.effDesc[i](tmp.grade.eff[i]))
