@@ -79,6 +79,7 @@ x += tmp.fermions.effs[1][7]
             6: `Add +1.25x to Theorem's Power formula per Ascension.`,
 10: `Remove Super-Renown Scaling`,
 14: `Unlock Transcension`,
+30: `Element Tier 3 autobuyer now buys elements up to 314th`,
         },
         {
             1: `Automate Ascensions`,

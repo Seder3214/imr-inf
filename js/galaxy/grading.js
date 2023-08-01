@@ -73,7 +73,7 @@ power: [
             },
             p=>{
                 let pow = tmp.grade.power[4]
-                let x = [p.add(1).root(10).pow(pow)]
+                let x = [p.add(1).root(10).pow(pow).softcap(1.75,0.1,0)]
                 return x
             },
         ],
