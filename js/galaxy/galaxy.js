@@ -44,7 +44,6 @@ const GALAXY = {
         }
     },
     doReset(force=false) {
-INF.doReset()
 player.galaxy.times = player.galaxy.times.max(tmp.supernova.bulkGal)
  if (force) {
 player.dark.c16.shard = E(0)
@@ -87,6 +86,7 @@ player.inf.theorem = E(6)
 player.inf.theorem_max = E(5)
 
 player.inf.upg = save_keep
+INF.doReset()
 }
     }
 }
