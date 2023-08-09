@@ -265,8 +265,8 @@ if (x>=1e10) return x = 1e10
             },
             s => {
                 let x = Math.log10(s+3)/2+1
-
-                return Math.floor(x)
+                if (hasElement(329)) x = Math.log2(s+3)/2+1
+                return x
             },
             s => {
                 let x = Decimal.pow(1.025,E(Math.log10(s+1)).max(1).log10())

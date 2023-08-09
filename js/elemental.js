@@ -656,6 +656,7 @@ x = overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
             effect() {
                 let pent = player.ranks.pent
                 let x = hasElement(195) ? pent.softcap(2e5,0.25,0).root(1.5).div(400) : pent.root(2).div(1e3)
+                if (hasElement(330)) x = x.pow(tmp.elements.effect[330])
                 return x.toNumber()
             },
             effDesc(x) { return "+^"+format(x) },
@@ -1925,7 +1926,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 },
 {
     desc: 'Change Beryllium-4 Hardcap to Softcap.',
-    cost: E('ee96400'),
+    cost: E('ee100400'),
 },
 {
     inf: true,
@@ -1951,6 +1952,21 @@ if (hasElement(317)) ret = ret.mul(1.15)
     inf: true,
     desc: `Unlock the chances to get last grading type.`,
     cost: E(1e110),
+},
+{
+    desc: 'Protoversal Theorem 6th star effect formula is better.',
+    cost: E('ee103650'),
+},
+{
+    dark: true,
+    desc: `Fermium-100 is much better based on Dark Rays.`,
+    effect() {
+        let x = E(0)
+        x = player.dark.rays.add(1).log10().max(1).log10().root(5).div(5).add(1)
+        return x
+    },
+    effDesc(x) { return "^"+format(x) },
+    cost: E('e2.83975e11'),
 },
     ],
     /*
@@ -2003,7 +2019,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
         if (hasTree('glx20')) u += 8
-        if (hasElement(322)) u += 10
+        if (hasElement(322)) u += 8
         return u
     },
 }
