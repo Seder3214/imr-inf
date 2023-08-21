@@ -256,8 +256,7 @@ const UPGS = {
         },
         buy(x, manual=false) {
             let cost = manual ? this.getData(x).cost : tmp.upgs.mv[x].cost
-            if (player.mv.points.gte(cost)) {
-                if (!player.mainUpg.bh.includes(1)) player.mv.points = player.mv.points.sub(cost)
+            if (player.mv.points.gte(cost)) { player.mv.points = player.mv.points.sub(cost)
                 if (!player.mvUpg[x]) player.mvUpg[x] = E(0)
                 player.mvUpg[x] = player.mvUpg[x].add(1)
             }
