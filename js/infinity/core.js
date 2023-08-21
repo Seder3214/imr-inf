@@ -612,6 +612,11 @@ function removeTheorem() {
 
     updateTheoremInv()}
 }
+function resetTheorems() {
+    for (i=0;i<4;i++) {
+        delete player.inf.core[i]
+    }
+}
 
 function createPreTheorem() {
     let c = [], t = CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)]

@@ -58,7 +58,7 @@ function setupHTML() {
 			<div style="width: 300px">
 				<div class="resources">
 					<img src="images/mass_upg${x}.png">
-					<span style="margin-left: 5px; text-align: left;"><span id="massUpg_scale_${x}"></span>${upg.title} [<span id="massUpg_lvl_${x}">X</span>]</span>
+					<span style="margin-left: 5px; text-align: left;"><span id="massUpg_scale_${x}"></span>${upg.title} [<span id="massUpg_lvl_${x}">X</span>]</span><br>
 				</div>
 			</div><button id="massUpg_btn_${x}" class="btn" style="width: 300px;" onclick="UPGS.mass.buy(${x}, true)">Cost: <span id="massUpg_cost_${x}">X</span></button>
 			<button class="btn" style="width: 120px;" onclick="UPGS.mass.buyMax(${x})">Buy Max</button>
@@ -66,6 +66,18 @@ function setupHTML() {
 			<div style="margin-left: 5px; text-align: center; width: 400px">
 			
 			<b>Effect: <span id="massUpg_eff_${x}">X</span></b><br><span style='font-size: 11px'>(Power: <span id="massUpg_step_${x}">X</span>)</b><hr style='width: 75px'>
+			</div><br>
+			<div style="width: 100%; margin-left: 100px;" class="table_center upgrade" id='mvUpg_div_${x}'>
+			<div class="resources">
+			<span style="margin-left: 5px; text-align: left;"><span id="mvUpg_scale_${x}"></span>Multiverse ${upg.title} [<span class="orangeText"id="mvUpg_lvl_${x}">X</span>]</span><br>
+		</div>
+			<button id="mvUpg_btn_${x}" class="btn" style="width: 300px;" onclick="UPGS.mv.buy(${x}, true)">Cost: <span id="mvUpg_cost_${x}">X</span></button>
+			<button id="mvUpg_btn_max${x}" class="btn" style="width: 120px;" onclick="UPGS.mv.buyMax(${x})">Buy Max</button>
+			<button id="mvUpg_auto_${x}" class="mvBtn" style="width: 80px;" onclick="UPGS.mv.autoSwitch(${x})">OFF</button>
+			<div style="margin-left: 5px; text-align: center; width: 500px">
+			
+			<b><span class='orangeText'>Effect: <span id="mvUpg_eff_${x}">X</span></span></b><br><span style='font-size: 11px'><span class='darkOrangeText'>(Power: <span id="mvUpg_step_${x}">X</span>)</span></b><hr style='width: 75px'>
+			</div>
 			</div>
 		</div>`
 	}
@@ -316,7 +328,8 @@ function updateMvUpgradesHTML() {
 		if (upg.unl()) {
 			tmp.el["mvUpg_scale_"+x].setTxt(x==4?getScalingName("mvUpg4"):getScalingName("mvUpg", x))
 			tmp.el["mvUpg_lvl_"+x].setTxt(format(player.mvUpg[x]||0,0)+(tmp.upgs.mv[x].bonus.gt(0)?(" + ")+format(tmp.upgs.mv[x].bonus,0):""))
-			tmp.el["mvUpg_btn_"+x].setClasses({btn: true, locked: player.mv.points.lt(tmp.upgs.mv[x].cost)})
+			tmp.el["mvUpg_btn_"+x].setClasses({mvBtn: true, locked: player.mv.points.lt(tmp.upgs.mv[x].cost)})
+			tmp.el["mvUpg_btn_max"+x].setClasses({mvBtn: true, locked: player.mv.points.lt(tmp.upgs.mv[x].cost)})
 			tmp.el["mvUpg_cost_"+x].setTxt(format(tmp.upgs.mv[x].cost)+" Multiverse Fragments")
 			tmp.el["mvUpg_step_"+x].setTxt(tmp.upgs.mv[x].effDesc.step)
 			tmp.el["mvUpg_eff_"+x].setHTML(tmp.upgs.mv[x].effDesc.eff)

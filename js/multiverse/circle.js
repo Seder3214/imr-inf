@@ -31,9 +31,9 @@ const SPELL = {
     },
     getCycle() {
         if (tmp.mv_time.gte(tmp.mv.cycleTime)) {
+            player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
             if (player.mv.firstReset == false) {
                 player.dark.c16.shard = E(0)
-                player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
                 player.mv.firstReset = true
                 player.dark.c16.bestBH = E(0)
                 player.supernova.tree = []
@@ -62,11 +62,7 @@ const SPELL = {
             player.inf.dm_base = E(0)
             player.inf.hm_base = E(0)
             player.inf.em_base = E(0)
-            player.inf.core[0].star = [false,false,false,false,false,false]
-            player.inf.core[1].star = [false,false,false,false,false,false]
-            player.inf.core[2].star = [false,false,false,false,false,false]
-            player.inf.core[3].star = [false,false,false,false,false,false]
-            player.inf.core[4].star = [false,false,false,false,false,false]
+            resetTheorems()
             player.inf.theorem = E(0)
             player.inf.theorem_max = E(1) 
             player.inf.reached = false
@@ -267,6 +263,15 @@ const SPELL = {
     ],
 },
     }
+
+    function circleEffects() {
+        let a = E(tmp.mv.cycleGain), eff = {}
+    
+        eff.theoremLvl = a.add(1).pow(1.75).root(2).floor()
+        return eff
+    }
+    
+    function appleEffect(id,def=1) { return tmp.ouro.apple_eff[id] ?? def }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     function calcMv(dt) {
         tmp.mv_time = tmp.mv_time.add(dt).min(tmp.mv.cycleTime)
@@ -274,6 +279,7 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     }
     function updateSpellTemp() {
         tmp.mv.cycleTime = SPELL.cycleTime()
+        tmp.mv.circleEff = circleEffects()
         tmp.mv.cycleGain = SPELL.cycleGain()
         tmp.mv.ringEff = SPELL.ringEff()
         tmp.mv.orbitNerf = SPELL.orbitNerf()
@@ -333,4 +339,10 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
                 tmp.el["circle_upg"+x+"_cost"].setTxt("Cost: "+format(tmp.mv.upgs[x].cost)+" Multiversal Fragments")
             }
         }
+        let h = ``, eff = tmp.mv.circleEff
+
+        if (eff.theoremLvl) h += `<br>+${format(eff.theoremLvl,2)} to Theorem's Level.`
+        if (eff.cp) h += `<br>${formatMult(eff.cp,2)} to Calm Powers`
+
+        tmp.el.circleEffects.setHTML(`<b class='sky'>${h}</b>`)
     }

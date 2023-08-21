@@ -73,6 +73,7 @@ const UPGS = {
                 let step = E(1)
                 if (player.ranks.rank.gte(3)) step = step.add(RANKS.effect.rank[3]())
                 step = step.mul(tmp.upgs.mass[2]?tmp.upgs.mass[2].eff.eff:1)
+                step = step.pow(tmp.upgs.mv[1].eff?tmp.upgs.mv[1].eff.eff:1)
                 let ret = step.mul(x.add(tmp.upgs.mass[1].bonus))
                 if (hasElement(209)) ret = ret.pow(elemEffect(209))
                 return {step: step, eff: ret}
@@ -100,6 +101,7 @@ const UPGS = {
                 let step = E(2)
                 if (player.ranks.rank.gte(5)) step = step.add(RANKS.effect.rank[5]())
                 step = step.pow(tmp.upgs.mass[3]?tmp.upgs.mass[3].eff.eff:1)
+                step = step.pow(tmp.upgs.mv[2].eff?tmp.upgs.mv[2].eff.eff:1)
                 let ret = step.mul(x.add(tmp.upgs.mass[2].bonus)).add(1)//.softcap("ee14",0.95,2)
                 if (hasElement(203)) ret = ret.pow(elemEffect(203))
                 return {step: step, eff: ret}
@@ -136,6 +138,7 @@ const UPGS = {
                 if (hasElement(4)) step = step.mul(tmp.elements.effect[4])
                 if (player.md.upgs[3].gte(1)) step = step.mul(tmp.md.upgs[3].eff)
                 step = step.pow(tmp.upgs.mass[4]?tmp.upgs.mass[4].eff.eff:1)
+                step = step.pow(tmp.upgs.mv[3].eff?tmp.upgs.mv[3].eff.eff:1)
 
                 let sp = 0.5
                 if (player.mainUpg.atom.includes(9)) sp *= 1.15
@@ -209,6 +212,7 @@ const UPGS = {
 
                 if (hasUpgrade('rp',19)) step = step.mul(upgEffect(1,19,0))
                 if (player.inf.nm) step = step.add(tmp.nm_base_eff)
+                step = step.pow(tmp.upgs.mv[4].eff?tmp.upgs.mv[4].eff.eff:1)
                 let ss = E(10)
                 let ss2 = E(50)
                 if (hasBeyondRank(7,78)) ss2 = ss2.mul(1.15)
@@ -236,7 +240,6 @@ const UPGS = {
     mv: {
         cols: 4,
         temp() {
-            tmp.massFP = 1;
             for (let x = this.cols; x >= 1; x--) {
                 let d = tmp.upgs.mv
                 let data = this.getData(x)
@@ -1170,6 +1173,7 @@ const UPGS = {
 */
 
 function hasUpgrade(id,x) { return player.mainUpg[id].includes(x) }
+function mvEff(a,def=1) {tmp.upgs.mv[a]?tmp.upgs.mv[a].eff.eff:def}
 function upgEffect(id,x,def=E(1)) { return tmp.upgs.main[id][x]?tmp.upgs.main[id][x].effect:def }
 function resetMainUpgs(id,keep=[]) {
     let k = []

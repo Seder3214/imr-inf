@@ -879,6 +879,49 @@ table-layout: auto;
 	padding: 7px 25px;
 	text-decoration: none;
 }
+.mvBtn.locked {
+	cursor: default;
+	color:#ffffff;
+	background-color: #1f0e01;
+	font-size: 12px;
+	height: 40px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
+.mvBtn {
+	cursor: pointer;
+	background-color: #ff8800;
+	border-color: rgb(253, 116, 3);
+	height: 40px;
+	color:#000;
+	font-size: 12px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
+.mvBtn.locked:hover {
+	background-color: #2e1501;
+}
+.mvBtn:hover {
+	background-color: #ffa339;
+}
+.orangeText {
+	color: rgb(253, 116, 3);
+}
+.darkOrangeText {
+	color: rgb(173, 82, 8);
+}
+.mvBtnMax {
+	cursor: pointer;
+	background-color: #ff8800;
+	border-color: rgb(253, 116, 3);
+	color:#000;
+	font-size: 12px;
+	max-width: 250px;
+	padding: 7px 25px;
+	text-decoration: none;
+}
 .presButton.locked {
 	cursor: default;
 	color:#ffffff;

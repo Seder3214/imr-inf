@@ -201,12 +201,13 @@ dark.matters.am = E(0)
         }
     },
     level() {
+        eff = tmp.mv.circleEff
         let s = player.mass.add(1).log10().add(1).log10().div(308).max(1).log(1.1).add(1)
         s = s.mul(player.dark.c16.bestBH.add(1).log10().div(3.5e6).max(1).log(1.1).add(1))
 
         if (hasElement(16,1)) s = s.mul(player.inf.dim_mass.add(1).log(1e6).add(1))
 
-        return s.max(1).root(2).softcap(tmp.inf_level_ss,1/3,0).toNumber()
+        return s.max(1).root(2).softcap(tmp.inf_level_ss,1/3,0).add(eff.theoremLvl?eff.theoremLvl:0).toNumber()
     },
     gain() {
         if (player.mass.lt(this.req)) return E(0)
