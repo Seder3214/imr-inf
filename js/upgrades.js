@@ -300,7 +300,8 @@ const UPGS = {
             return {cost: cost, bulk: bulk}
         },
         1: {
-            unl() { return player.ranks.rank.gte(1) || player.mainUpg.atom.includes(1) },
+            unl() { return player.ranks.rank.gte(1) || 
+player.mv.firstReset == true },
             title: "Multiverse Muscler",
             start: E(10),
             inc: E(1.5),
@@ -321,7 +322,7 @@ const UPGS = {
             },
         },
         2: {
-            unl() { return player.ranks.rank.gte(2) || player.mainUpg.atom.includes(1) },
+            unl() { return player.ranks.rank.gte(2) || player.mv.firstReset == true },
             title: "Multiverse Booster",
             start: E(100),
             inc: E(4),
@@ -342,7 +343,8 @@ const UPGS = {
             },
         },
         3: {
-            unl() { return player.ranks.rank.gte(3) || player.mainUpg.atom.includes(1) },
+            unl() { return player.ranks.rank.gte(3) || 
+player.mv.firstReset == true },
             title: "Multiverse Stronger",
             start: E(1000),
             inc: E(9),
