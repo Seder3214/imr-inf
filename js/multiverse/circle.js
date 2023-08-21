@@ -254,7 +254,7 @@ const SPELL = {
         {
             desc: `Increase the Spell Circle' Core Power.`,
             cost(x) { return Decimal.pow(10,Decimal.pow(2,x)).floor() },
-            bulk() { return player.mv.points.max(1).log2().max(1).log(2).add(1).floor() },
+            bulk() { return player.mv.points.max(1).log10().max(1).log(2).add(1).floor() },
             effect(x) {
                 return x.pow(0.75).mul(1.5).max(1)
             },
