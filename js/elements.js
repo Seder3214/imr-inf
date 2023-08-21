@@ -67,14 +67,14 @@ function setupHTML() {
 			
 			<b>Effect: <span id="massUpg_eff_${x}">X</span></b><br><span style='font-size: 11px'>(Power: <span id="massUpg_step_${x}">X</span>)</b><hr style='width: 75px'>
 			</div><br>
-			<div style="width: 100%; margin-left: 100px;" class="table_center upgrade" id='mvUpg_div_${x}'>
+			<div style="width: 100%; margin-left: 30px;" class="table_center upgrade" id='mvUpg_div_${x}'>
 			<div class="resources">
 			<span style="margin-left: 5px; text-align: left;"><span id="mvUpg_scale_${x}"></span>Multiverse ${upg.title} [<span class="orangeText"id="mvUpg_lvl_${x}">X</span>]</span><br>
 		</div>
 			<button id="mvUpg_btn_${x}" class="btn" style="width: 300px;" onclick="UPGS.mv.buy(${x}, true)">Cost: <span id="mvUpg_cost_${x}">X</span></button>
 			<button id="mvUpg_btn_max${x}" class="btn" style="width: 120px;" onclick="UPGS.mv.buyMax(${x})">Buy Max</button>
 			<button id="mvUpg_auto_${x}" class="mvBtn" style="width: 80px;" onclick="UPGS.mv.autoSwitch(${x})">OFF</button>
-			<div style="margin-left: 5px; text-align: center; width: 500px">
+			<div style="margin-left: 5px; text-align: center; width: 300px">
 			
 			<b><span class='orangeText'>Effect: <span id="mvUpg_eff_${x}">X</span></span></b><br><span style='font-size: 11px'><span class='darkOrangeText'>(Power: <span id="mvUpg_step_${x}">X</span>)</span></b><hr style='width: 75px'>
 			</div>
