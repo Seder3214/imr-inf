@@ -280,21 +280,11 @@ const UPGS = {
             let lvl = player.mvUpg[i]||E(0)
             let cost, bulk = E(0), fp
 
-            if (i==4) {
-                let pow = 1.5
-                cost = Decimal.pow(10,Decimal.pow(inc,lvl.scaleEvery('mvUpg4').pow(pow)).mul(start))
-                if (player.mv.points.gte(10000)) bulk = player.mv.points.max(1).log10().div(start).max(1).log(inc).max(0).root(pow).scaleEvery('mvUpg4',true).add(1).floor()
-            } else {
                 fp = tmp.massFP
                 
-                if (i == 1 && player.ranks.rank.gte(2)) inc = inc.pow(0.8)
-                if (i == 2 && player.ranks.rank.gte(3)) inc = inc.pow(0.8)
-                if (i == 3 && player.ranks.rank.gte(4)) inc = inc.pow(0.8)
-                if (player.ranks.tier.gte(3)) inc = inc.pow(0.8)
                 cost = inc.pow(lvl.div(fp).scaleEvery("mvUpg")).mul(start)
                 bulk = E(0)
                 if (player.mv.points.gte(start)) bulk = player.mv.points.div(start).max(1).log(inc).scaleEvery("mvUpg",true).mul(fp).add(1).floor()
-            }
         
             return {cost: cost, bulk: bulk}
         },
@@ -305,7 +295,7 @@ player.mv.firstReset == true },
             start: E(10),
             inc: E(1.5),
             effect(x) {
-                let step = E(0.1)
+                let step = E(2)
                 let ret = step.mul(x.add(tmp.upgs.mv[1].bonus)).add(1)
                 return {step: step, eff: ret}
             },
@@ -326,7 +316,7 @@ player.mv.firstReset == true },
             start: E(100),
             inc: E(4),
             effect(x) {
-                let step = E(0.05)
+                let step = E(1)
                 let ret = step.mul(x.add(tmp.upgs.mv[2].bonus)).add(1)//.softcap("ee14",0.95,2)
                 return {step: step, eff: ret}
             },
@@ -349,7 +339,7 @@ player.mv.firstReset == true },
             inc: E(9),
             effect(x) {
                 let xx = x.add(tmp.upgs.mv[3].bonus)
-                let step = E(0.01)
+                let step = E(0.5)
                 let ret = step.mul(xx).add(1)
                 return {step: step, eff: ret}
             },
@@ -372,7 +362,7 @@ player.mv.firstReset == true },
             effect(i) {
                 let xx = i.add(tmp.upgs.mv[4].bonus)
                 
-                let step = E(.005)
+                let step = E(.25)
                 let x = step.mul(xx).add(1)
                 
                 return {step: step, eff: x}

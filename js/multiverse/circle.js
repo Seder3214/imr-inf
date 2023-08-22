@@ -16,12 +16,12 @@ const SPELL = {
     },
     ringEff() {
         let x = E(1)
-        x = player.mv.upgs[0].max(1).pow(0.75).mul(2)
+        x = player.mv.upgs[0].max(1).pow(1.5).mul(2)
         return x
     },
     coreEff() {
-        let step = E(1.05)
-      let x = Decimal.pow(step,player.mv.upgs[2])
+        let step = player.mv.coreLvl.add(0.15)
+      let x = Decimal.pow(step,spellEff(2))
        return x
     },
     orbitNerf() {
@@ -33,6 +33,8 @@ const SPELL = {
         if (tmp.mv_time.gte(tmp.mv.cycleTime)) {
             player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
             if (player.mv.firstReset == false) {
+                player.dark.am_mass = E(0)
+                player.dark.am = E(0)
                 player.dark.c16.shard = E(0)
                 player.mv.firstReset = true
                 player.dark.c16.bestBH = E(0)
