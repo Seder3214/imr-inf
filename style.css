@@ -900,6 +900,14 @@ table-layout: auto;
 	padding: 7px 25px;
 	text-decoration: none;
 }
+.questionBox {
+	border-color: rgb(253, 116, 3);
+  border: 2px solid;
+  width: 100%;
+  text-align: center;
+  font-family: 'Nova Mono';
+  src: url('fonts/NovaMono-Regular.ttf'); 
+}
 .mvBtn.locked:hover {
 	background-color: #2e1501;
 }
