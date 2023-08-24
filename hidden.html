@@ -1,25 +1,45 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nothing Happened</title>
-
-    <link rel="stylesheet" href="hidden_style.css">
-
-    <script src="js/hidden.js"></script>
+<title>Secret Invasion</title>
+<script src="sha512.js"></script>
+<link rel="stylesheet" href="style.css">
+<script>
+setInterval(function(){
+var t = Math.floor(Date.now()/3600000)
+var c = Math.floor(t**(2*(Math.sin(t**3/Math.PI)+1))).toString(36)
+window.answer5 = sha512_256(c.replace(/\s/g, '').toUpperCase())
+},100);
+function check(a,b){
+	return sha512_256(document.getElementById(a).value.replace(/\s/g, '').toUpperCase()) == b;
+}
+function confirm(){
+	if(check("answer1",'7c9e26d82a7523df0d5be5465a5621245daab77c0efc45799179109934fab505') && 
+	check("answer2",'a83bab416ffa0dbd717d8e2b504f92e38e2a83a305118219435f81722350f6df') && 
+	check("answer3",'53cfde235d5a6c1c6d537d344fd0430a8d1aa83887dc039ac6b4de510d198d79') && 
+	check("answer4",'4bb7af58c6487b941b81ecae924ae2e91411f96777f187b5a69d78e31ca17acb') &&
+	check("answer5",'eb5a3c84ebb849c91a5dd8cf9c5822abc3354ce1914843e09be2a7db77a8de15')){
+		alert("Congretulations! You unlocked the Multiverse Badge in Incremental Mass Rewritten: New Path Reloaded!")
+		localStorage.imr_secret_badge1="1";
+	}else{
+		alert("Try Again!")
+	}
+}
+</script>
 </head>
-<body onload="s()">
-    <div id="no">Nothing Happened...</div>
-    <div id="yes">
-        <div id="life">123</div>
-        <div style="color: red">
-            <div id="st_html"></div><br>
-            <div class="table_center">
-                <input id="answer" type="text"><button id="enter">Enter</button>
-            </div>
-        </div>
-    </div>
-    <div id="sc"></div>
+<body>
+<button class='btn' style="font-family: 'Bahnschrift'" onclick="window.open('https://seder3214.github.io/imr-inf/')">Back To Incremental Mass Rewritten: New Path Reloaded<br></button><br>
+<div class="questionBox">
+Question 1: How much questions were in original omega badge secret?<br>
+Question 2: What if we will add Hassium and Unoctbium position numbers? What element will we get (Type a number.)?<br>
+Question 3: Is there something in my discord profile description?.<br>
+Question 4: What was the release date of 0.7.2? (Example: 24.03.23).<br>
+Question 5: Type the order of elements' position numbers to get "Secret Invasion". (With spaces between the numbers)<br>
+</div>
+Answer 1:<input id="answer1"><br>
+Answer 2:<input id="answer2"><br>
+Answer 3:<input id="answer3"><br>
+Answer 4:<input id="answer4"><br>
+Answer 5:<input id="answer5"><br>
+<a href="javascript:confirm();">Confirm</a><br>
 </body>
 </html>

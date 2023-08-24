@@ -4,9 +4,9 @@ var ss = ["",""]
 const ssf = [
     x=>{
         ss[0] += x.toLowerCase()
-        if (!"secretinvasion".includes(ss[0]) && !"shark".includes(ss[0])) {
+        if (!"newpath".includes(ss[0]) && !"shark".includes(ss[0])) {
             ss[0] = ""
-        } else if (ss[0] == "secretinvasion") {
+        } else if (ss[0] == "newpath") {
             ss[0] = ""
             createPopup(`"Secret Invasion"?<br><br>Ok, here code is ${ss[1]}<br><br>
             <b>The code expires in next nearest hour, and is happening!</b>`,'secretinvasion')
@@ -22,7 +22,7 @@ const ssf = [
     x=>{
         if (x == ss[1]) {
             localStorage.setItem("imr_secret",ss[1])
-            window.open("https://mrredshark77.github.io/incremental-mass-rewritten/hidden.html","_self")
+            window.open("https://seder3214.github.io/imr-inf/hidden.html","_self")
             return true
         }
         return false
