@@ -48,7 +48,7 @@ upgs: [
         cost: E(1),
     },
     {
-        desc: `Now you can get Rage Points and Buy Tickspeeds in C18.`,
+        desc: `Now you can get Rage Powers and Buy Tickspeeds in C18.`,
         cost: E(2),
     },
     {
