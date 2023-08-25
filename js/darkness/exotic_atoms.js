@@ -7,6 +7,8 @@ const MUONIC_ELEM = {
     },
     buyUpg(x) {
         if (this.canBuy(x)) player.atom.muonic_el.push(x)
+        let u = this.upgs[x]
+        if (u.mlt) player.mv.points = player.mv.points.sub(u.cost)
         if (x==43) player.mv.durability = tmp.mv.maxDurability.add(muElemEff(43))
     },
     upgs: [

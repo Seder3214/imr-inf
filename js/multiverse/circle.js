@@ -4,6 +4,11 @@ const SPELL = {
             player.mv.totalCycles = player.mv.totalCycles.add(1)
             player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
             player.mv.durability = player.mv.durability.sub(1)
+            player.mv.currentCount = player.mv.currentCount.add(1)
+            if (player.mv.currentCount.gte(tmp.mv.addOrbit_req)) {
+                player.mv.currentCount = E(0)
+                player.mv.orbits = player.mv.orbits.add(1)
+            }
             if (player.mv.firstReset == false) {
                 player.mv.durability = tmp.mv.maxDurability
                 player.dark.am_mass = E(0)
@@ -205,6 +210,11 @@ const SPELL = {
         if (hasElement(43,1)) x = x.add(muElemEff(43))
         return x  
     },
+    cyclesToOrbit() {
+        let x = E(tmp.mv.cycleTime)
+        x = x.pow(0.5).mul(1.5).floor()
+        return x
+    },
     coreLvlUp() {
         let x = E(15)
         x = x.mul(player.mv.coreLvl.pow(3))
@@ -294,6 +304,7 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
         player.mv.best = Math.max(player.mv.points)
     }
     function updateSpellTemp() {
+        tmp.mv.addOrbit_req = SPELL.cyclesToOrbit()
         tmp.mv.coreLvl_req = SPELL.coreLvlUp()
         tmp.mv.maxDurability = SPELL.maxDurability()
         tmp.mv.cycleTime = SPELL.cycleTime()
@@ -334,6 +345,8 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
         circle_upg_table.setHTML(table)
     }
     function updateSpellHTML() {
+        tmp.el.addOrbit_req.setHTML(format(tmp.mv.addOrbit_req))
+        tmp.el.currentCount.setHTML(format(player.mv.currentCount))
         tmp.el.total.setHTML(format(player.mv.totalCycles))
         tmp.el.coreLvl_req.setHTML(format(tmp.mv.coreLvl_req))
         tmp.el.orbitNerf.setHTML(formatMult(tmp.mv.orbitNerf))
