@@ -21,7 +21,7 @@ const SPELL = {
                 player.supernova.tree = keep
                 player.atom.elements = []
                 player.inf.upg = []
-            for (let x = 0; x < 4; x++) player.galaxy.grade.type[x] = E(0)
+            for (let x = 0; x < 5; x++) player.galaxy.grade.type[x] = E(0)
             player.galaxy.grade.theorems = E(0)
             player.galaxy.times = E(0)
             player.atom.muonic_el = []

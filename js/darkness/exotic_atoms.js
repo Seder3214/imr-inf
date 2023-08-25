@@ -353,7 +353,7 @@ const MUONIC_ELEM = {
             desc: `Increase the power of Multiverse Muscler based on Muscler.`,
             eff() {
                 let x = E(1)
-                x = player.massUpg[1].add(1).log10().div(5).max(1)
+                x = player.massUpg[1]?player.massUpg[1].add(1).log10().div(5).max(1):E(1)
                 return x
             },
             effDesc: x=>"+"+format(x),
