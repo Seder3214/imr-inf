@@ -83,7 +83,7 @@ String.prototype.corrupt = function (active=true) { return active ? this.strike(
 function calc(dt) {
     let du_gs = tmp.preQUGlobalSpeed.mul(dt)
     let inf_gs = tmp.preInfGlobalSpeed.mul(dt)
-
+    player.mv.durability = player.mv.durability.min(tmp.mv.maxDurability).max(0)
     if (tmp.pass<=0 && tmp.inf_time == 0) {
         player.mass = player.mass.add(tmp.massGain.mul(du_gs))
         if (!tmp.brokenInf) player.mass = player.mass.min(tmp.inf_limit)
@@ -330,6 +330,7 @@ name: "",
             coreLvl: E(1),
             firstReset: false,
             best: E(0),
+            durability: E(10),
         },
         reset_msg: "",
         main_upg_msg: [0,0],

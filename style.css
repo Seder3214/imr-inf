@@ -657,60 +657,26 @@ transform: scale(1.25)
 	background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
 	animation: AnimateBG 20s ease infinite;
 }
-@keyframes AnimateBG {
+.elements.mlt.bought {
+	color: rgb(255, 198, 133);
+	border-color: rgb(255, 102, 0);
+	background-color: rgb(124, 52, 4);
+	box-shadow: 0 0 10px rgb(255, 102, 0);
+	animation: mltAnim 10s ease infinite;
+}
+.mltText {
+	color:rgb(255, 146, 74);
+	text-shadow:0 0 10px rgb(255, 102, 0);
+}
+@keyframes mltAnim {
 	0% {
-		background-position-x: 0px;
-		background-position-y: 0px;
-	}
-	10% {
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	12% {
-		background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
-	}
-	20% {
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	30% {
-		background-position-x: -48px;
-		background-position-y: -48px;
-		background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
-	}
-	32% {
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	38% {
-		background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
-	}
-	40% {
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	45% {
-		background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
+		background-color: rgb(153, 67, 9);
 	}
 	50% {
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	55% {
-		background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
-	}
-	70% {
-		background-position-x: 0px;
-		background-position-y: 0px;
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	80% {
-		background-image: repeating-linear-gradient(0deg, #e4338b, #e4338b 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #e4338b, #e4338b  1px, transparent 1px, transparent 10px);
-	}
-	85% {
-		background-image: repeating-linear-gradient(0deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #a1165c, #a1165c 1px, transparent 1px, transparent 10px);
-	}
-	89% {
-		background-image: repeating-linear-gradient(0deg, #d31a77, #d31a77 1px, transparent 1px, transparent 10px),repeating-linear-gradient(-90deg, #d31a77 , #d31a77 1px, transparent 1px, transparent 10px);
+		background-color: rgb(255, 102, 0);
 	}
 	100% {
-		background-position-x: 48px;
-		background-position-y: 48px;
+		background-color: rgb(153, 67, 9);
 	}
 }
 

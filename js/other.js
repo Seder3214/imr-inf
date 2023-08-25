@@ -220,7 +220,7 @@ const QUOTES = [
     `,`
     <h2>Chapter 14: Multiverse</h2><br>
     <img class='quote' src='images/quotes/13.png'><br>
-    Your power grants you the strange energy. <i>You feel many of universes in your hand...</i>
+    Your power grants you the strange energy. <i>You feel many of universes in your hand...</i> More elements unlocked!
     `,
 ]
 

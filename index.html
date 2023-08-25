@@ -773,20 +773,21 @@
                     </div><div id="tab_frame10">
                         <div id="stab_frame10_0">
                             <div class="table_center"><div style="width: 50%; min-width: 500px;">
-                                <b style="font-size:20px">Current cycle time is <span id="cycleTime"></span></b><br>
-                                Completing the cycle will give you <b style="font-size:20px" id="cycleGain"></b> Multiversal Fragments
+                                You have compleled <h3 id="total"></h3> cycles in total.<br>
+                                <b style="font-size:20px">Current cycle time is <span id="cycleTime"></span>.</b><br>
+                                Completing the cycle will give you <b style="font-size:20px" id="cycleGain"></b> Multiversal Fragments.
                                 <div class='table_center' id="circle_upg_table"></div><br>
-                                You have <h3 id="orbitAmt"></h3> orbits, that weakens your Multiversal Fragments gain/cycle<br>
-                                Your ring length is <h3 id="ringLength"></h3> mm, that boosts your Multiversal Fragments gain/cycle<br>
-                                Your core level is <h3 id="coreLvl"></h3>, that boosts the base of core effect<br>
-                                Your core power is <h3 id="corePower"></h3>, that affects core effect and giving you a boost to Multiversal Fragments gain/cycle<br>
+                                You have <h3 id="orbitAmt"></h3> orbits, that weakens your Multiversal Fragments gain/cycle.<br>
+                                Your ring length is <h3 id="ringLength"></h3> mm (Durability: <h3 id='currentDurability'></h3>/<h3 id="maxDurability"></h3>, reducing on every cycle completion), that boosts your Multiversal Fragments gain/cycle.<br>
+                                Your core level is <h3 id="coreLvl"></h3> (To level up, complete <h3 id='coreLvl_req'></h3> cycles in total), that boosts the base of core effect.<br>
+                                Your core power is <h3 id="corePower"></h3>, that affects core effect and giving you a boost to Multiversal Fragments gain/cycle.<br>
                                 Note: Every boosting cicrle part are making the cycle time higher!
                     </div>
                     <div class='circleDebuff'style="width: 25%; min-width: 250px;">
-                        <h3>Portal Spell's Circle Debuffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is weakened by <h3 id="orbitNerf"></h3></span><br>(Based on Orbits)<br><span class="sky">Your circle's parts are boosting cycle time by +<h3 id="timeScale"></h3></span><br>(Based on Everyting)</span><br>
+                        <h3>Portal Spell's Circle Debuffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is weakened by <h3 id="orbitNerf"></h3></span>.<br>(Based on Orbits)<br><hr style='width: 75px;'><span class="sky">Your circle's parts are boosting cycle time by +<h3 id="timeScale"></h3></span><br>(Based on Everyting)</span><br>
             </div>
             <div class='circleBuff'style="width: 25%; min-width: 250px;">
-                <h3>Portal Spell's Circle Buffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="ringEff"></h3></span><br>(Based on Ring Length)<br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="coreEff"></h3></span><br>(Based on Core Level and Core Power)
+                <h3>Portal Spell's Circle Buffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="ringEff"></h3></span><br>(Based on Ring Length.)<hr style='width: 75px;'>Note: If the ring durability reaches 0 - the effect will be useless<br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="coreEff"></h3></span><br>(Based on Core Level and Core Power)
             </div>
             <div>
                 <h3>Circle effects:</h3><br><span id="circleEffects"></span><br> (Note: This effects are boosted by current gain/cycle.)

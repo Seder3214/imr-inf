@@ -1,44 +1,19 @@
 const SPELL = {
-    cycleTime() {
-        let time = E(5)
-        time = E(5).add(tmp.mv.timeScale)
-        return time
-    },
-    timeScale() {
-        let x = E(1)
-       x = player.mv.upgs[0].add(1).mul(spellEff(2).div(5).add(1)).mul(player.mv.orbits.sub(player.mv.upgs[1]).div(20).add(1)).mul(player.mv.totalCycles.pow(0.15).root(2))
-       return x
-    },
-    cycleGain() {
-        let eff = E(1)
-        eff = E(tmp.mv.ringEff).pow(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
-        return eff
-    },
-    ringEff() {
-        let x = E(1)
-        x = player.mv.upgs[0].max(1).pow(1.5).mul(2)
-        return x
-    },
-    coreEff() {
-        let step = player.mv.coreLvl.add(0.15)
-      let x = Decimal.pow(step,spellEff(2))
-       return x
-    },
-    orbitNerf() {
-        let x = E(1)
-     x = player.mv.orbits.sub(player.mv.upgs[1]).max(1).root(5)
-     return x
-    },
     getCycle() {
         if (tmp.mv_time.gte(tmp.mv.cycleTime)) {
+            player.mv.totalCycles = player.mv.totalCycles.add(1)
             player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
+            player.mv.durability = player.mv.durability.sub(1)
             if (player.mv.firstReset == false) {
+                player.mv.durability = tmp.mv.maxDurability
                 player.dark.am_mass = E(0)
                 player.dark.am = E(0)
                 player.dark.c16.shard = E(0)
                 player.mv.firstReset = true
                 player.dark.c16.bestBH = E(0)
-                player.supernova.tree = []
+                let keep = ["qu_qol1", "qu_qol2", "qu_qol3", "qu_qol4", "qu_qol5", "qu_qol6", "qu_qol7", "qu_qol8", "qu_qol9", "qu_qol8a", "unl1", "unl2", "unl3", "unl4",
+                "qol1", "qol2", "qol3", "qol4", "qol5", "qol6", "qol7", "qol8", "qol9", 'qu_qol10', 'qu_qol11', 'qu_qol12', 'qu0']
+                player.supernova.tree = keep
                 player.atom.elements = []
                 player.inf.upg = []
             for (let x = 0; x < 4; x++) player.galaxy.grade.type[x] = E(0)
@@ -48,6 +23,7 @@ const SPELL = {
             player.md.break.active = false
            for (let x = 1; x <= 20; x++) player.chal.comps[x] = E(0)
            for (let x = 0; x < ASCENSIONS.names.length; x++) player.ascensions[x] = E(0)
+           player.ranks.beyond = E(0)
            tmp.beyond_pres.max_tier = E(0)
            tmp.beyond_pres.latestRank = E(0)
             player.inf.points = E(0)
@@ -175,8 +151,7 @@ const SPELL = {
             dark.abyssalBlot = E(0)
     
             dark.run.active = false
-            dark.run.glyphs = [0,0,0,0,0,0]
-            if (!hasInfUpgrade(3)) dark.run.upg = []
+            dark.run.upg = [null,10,10,5,1,10,100,1,10,5,10]
     
             dark.matters = darkSave.matters
     
@@ -189,10 +164,7 @@ const SPELL = {
         dark.matters.am_mass = E(dark.matters.am_mass)
     dark.matters.am = E(0)
             dark.c16 = darkSave.c16
-    
-            if (hasInfUpgrade(8)) {
-                for (let i = 0; i < infUpgEffect(8); i++) dark.c16.tree.push(...TREE_IDS[i][5])
-            }
+
             dark.exotic_atom = darkSave.exotic_atom
     
             player.bh.fvm = E(0)
@@ -226,19 +198,60 @@ const SPELL = {
             tmp.pass = 2
             }
             tmp.mv_time = E(0)
-            player.mv.totalCycles = player.mv.totalCycles.add(1)
         }
+    },
+    maxDurability() {
+        let x = E(10)
+        if (hasElement(43,1)) x = x.add(muElemEff(43))
+        return x  
+    },
+    coreLvlUp() {
+        let x = E(15)
+        x = x.mul(player.mv.coreLvl.pow(3))
+        return x.floor()
+    },
+    cycleTime() {
+        let time = E(5)
+        time = E(5).add(tmp.mv.timeScale)
+        return time
+    },
+    timeScale() {
+        let x = E(1)
+       x = player.mv.upgs[0].add(1).mul(spellEff(2).div(5).add(1)).mul(player.mv.orbits.sub(player.mv.upgs[1]).div(20).add(1)).mul(player.mv.totalCycles.pow(0.15).root(2))
+       return x
+    },
+    cycleGain() {
+        let eff = E(1)
+        eff = E(tmp.mv.ringEff).mul(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
+        return eff
+    },
+    ringEff() {
+        let x = E(1)
+        if (player.mv.durability <= 0) return E(1)
+        x = player.mv.upgs[0].add(1).pow(1.5).mul(2)
+        return x
+    },
+    coreEff() {
+        let step = player.mv.coreLvl.add(0.15)
+      let x = step.mul(spellEff(2))
+       return x
+    },
+    orbitNerf() {
+        let x = E(1)
+     x = player.mv.orbits.sub(player.mv.upgs[1]).max(1).pow(0.3)
+     return x
     },
     upgs: {
         buy(x) {
                 player.mv.points = player.mv.points.sub(this.ids[x].cost(tmp.mv.upgs[x].bulk.sub(1))).max(0)
                 player.mv.upgs[x] = player.mv.upgs[x].max(tmp.mv.upgs[x].bulk)
+                if (x==0) player.mv.durability = tmp.mv.maxDurability
         },
     ids : [
         {
-            desc: `Increase the length of Spell Circle' Ring.`,
-            cost(x) { return Decimal.pow(5,Decimal.pow(1.5,x)).floor() },
-            bulk() { return player.mv.points.max(1).log(5).max(1).log(1.5).add(1).floor() },
+            desc: `Increase the length of Spell Circle' Ring and repair the ring.`,
+            cost(x) { return Decimal.pow(7,Decimal.pow(2,x)).floor() },
+            bulk() { return player.mv.points.max(1).log(7).max(1).log(2).add(1).floor() },
             effect(x) {
                 return x.pow(1.25)
             },
@@ -246,8 +259,8 @@ const SPELL = {
         },
         {
             desc: `Remove one of Spell Circle' orbits.`,
-            cost(x) { return Decimal.pow(2,Decimal.pow(2,x)).floor() },
-            bulk() { return player.mv.points.max(1).log2().max(1).log(2).add(1).floor() },
+            cost(x) { return Decimal.pow(1.5,Decimal.pow(2,x)).floor() },
+            bulk() { return player.mv.points.max(1).log(1.5).max(1).log(2).add(1).floor() },
             effect(x) {
                 return x
             },
@@ -268,18 +281,21 @@ const SPELL = {
 
     function circleEffects() {
         let a = E(tmp.mv.cycleGain), eff = {}
-    
-        eff.theoremLvl = a.add(1).pow(1.75).root(2).floor()
+        eff.cs = expMult(a.pow(2).add(1), a.div(10).add(1))
+       if (hasElement(44,1)) eff.theoremLvl = a.add(1).pow(1.75).root(2).floor()
         return eff
     }
     
     function appleEffect(id,def=1) { return tmp.ouro.apple_eff[id] ?? def }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     function calcMv(dt) {
+        if (player.mv.totalCycles.gte(tmp.mv.coreLvl_req)) player.mv.coreLvl = player.mv.coreLvl.add(1)
         tmp.mv_time = tmp.mv_time.add(dt).min(tmp.mv.cycleTime)
         player.mv.best = Math.max(player.mv.points)
     }
     function updateSpellTemp() {
+        tmp.mv.coreLvl_req = SPELL.coreLvlUp()
+        tmp.mv.maxDurability = SPELL.maxDurability()
         tmp.mv.cycleTime = SPELL.cycleTime()
         tmp.mv.circleEff = circleEffects()
         tmp.mv.cycleGain = SPELL.cycleGain()
@@ -318,8 +334,12 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
         circle_upg_table.setHTML(table)
     }
     function updateSpellHTML() {
+        tmp.el.total.setHTML(format(player.mv.totalCycles))
+        tmp.el.coreLvl_req.setHTML(format(tmp.mv.coreLvl_req))
         tmp.el.orbitNerf.setHTML(formatMult(tmp.mv.orbitNerf))
         tmp.el.orbitAmt.setHTML(format(player.mv.orbits.sub(player.mv.upgs[1])))
+        tmp.el.currentDurability.setHTML(format(player.mv.durability))
+        tmp.el.maxDurability.setHTML(format(tmp.mv.maxDurability))
         tmp.el.ringLength.setHTML(format(spellEff(0)))
         tmp.el.coreLvl.setHTML(format(player.mv.coreLvl))
         tmp.el.corePower.setHTML(format(spellEff(2)))
@@ -342,9 +362,8 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
             }
         }
         let h = ``, eff = tmp.mv.circleEff
-
+        if (eff.cs) h += `<br>${formatMult(eff.cs,2)} to Corrupted Shards`
         if (eff.theoremLvl) h += `<br>+${format(eff.theoremLvl,2)} to Theorem's Level.`
-        if (eff.cp) h += `<br>${formatMult(eff.cp,2)} to Calm Powers`
 
         tmp.el.circleEffects.setHTML(`<b class='sky'>${h}</b>`)
     }

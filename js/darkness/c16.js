@@ -179,6 +179,8 @@ let x = Decimal.pow(10,overflow(bh.max(1).log10(),1e9,0.5).div(100).root(hasElem
     x = x.mul(exoticAEff(0,0))
     if (player.inf.pm) x = x.mul(tmp.pm_base_eff)
     if (hasBeyondRank(6,27)) x=x.mul(beyondRankEffect(6,27))
+    eff = tmp.mv.circleEff
+ if(eff.cs) x = x.mul(eff.cs)
 
     return x.floor()
 }

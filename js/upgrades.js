@@ -289,13 +289,14 @@ const UPGS = {
             return {cost: cost, bulk: bulk}
         },
         1: {
-            unl() { return player.ranks.rank.gte(1) || 
+            unl() { return player.ranks.rank.gte(1) &&
 player.mv.firstReset == true },
             title: "Multiverse Muscler",
             start: E(10),
             inc: E(1.5),
             effect(x) {
                 let step = E(2)
+                if (hasElement(45,1)) step = step.add(muElemEff(45))
                 let ret = step.mul(x.add(tmp.upgs.mv[1].bonus)).add(1)
                 return {step: step, eff: ret}
             },
@@ -311,7 +312,7 @@ player.mv.firstReset == true },
             },
         },
         2: {
-            unl() { return player.ranks.rank.gte(2) || player.mv.firstReset == true },
+            unl() { return player.ranks.rank.gte(2) && player.mv.firstReset == true },
             title: "Multiverse Booster",
             start: E(100),
             inc: E(4),
@@ -332,7 +333,7 @@ player.mv.firstReset == true },
             },
         },
         3: {
-            unl() { return player.ranks.rank.gte(3) || 
+            unl() { return player.ranks.rank.gte(3) && 
 player.mv.firstReset == true },
             title: "Multiverse Stronger",
             start: E(1000),
@@ -355,7 +356,7 @@ player.mv.firstReset == true },
             },
         },
         4: {
-            unl() { return hasElement(202) || hasInfUpgrade(2) },
+            unl() { return player.mv.firstReset == true },
             title: "Multiverse Overpower",
             start: E(100000),
             inc: E(1.5),

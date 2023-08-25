@@ -24,6 +24,7 @@ const SCALE_START = {
 		galaxy: E(5),
 asc: E(20),
 fusionTier: E(20),
+grading: E(75),
     },
 	hyper: {
 		rank: E(120),
@@ -121,6 +122,7 @@ const SCALE_POWER= {
 		inf_theorem: 3,
 		galaxy: 10,
 asc: 2,
+grading: 2,
 fusionTier: 2,
     },
 	hyper: {
@@ -202,6 +204,7 @@ const QCM8_SCALES = ['rank','tier','tetr','pent','hex','massUpg','tickspeed','bh
 const PreQ_SCALES = ['rank','tier','tetr','massUpg','tickspeed','bh_condenser','gamma_ray']
 const SCALE_TYPE = ['super', 'hyper', 'ultra', 'meta', 'exotic', 'supercritical','instant'] // super, hyper, ultra, meta, exotic
 const FULL_SCALE_NAME = ['Super', 'Hyper', 'Ultra', 'Meta', 'Exotic', 'Supercritical','Instant']
+const PostInf_SCALES = ['FSS','inf_theorem','galaxy','fusionTier','grading']
 
 const SCALING_RES = {
     rank(x=0) { return player.ranks.rank },
@@ -228,6 +231,7 @@ const SCALING_RES = {
 	galaxy() {return player.galaxy.times},
 asc() {return player.ascensions[0]},
 fusionTier() {return player.dark.exotic_atom.tier},
+grading() {return player.galaxy.grade.theorems},
 }
 
 const NAME_FROM_RES = {
@@ -255,6 +259,7 @@ const NAME_FROM_RES = {
 	galaxy: " Galaxy",
 asc: "Ascension",
 fusionTier: "Muon-Catalyzed Fusion Tier",
+grading: "Grading",
 }
 
 function updateScalingHTML() {
@@ -311,11 +316,14 @@ function updateScalingTemp() {
 		}
 	}
 	let sqc8 = []
+	let pinf = []
 	if (!CHALS.inChal(14) && !player.dark.run.active && !tmp.c16active && !CHALS.inChal(15)) {
 		if (player.mainUpg.br.includes(2)) sqc8.push("massUpg","rank","tier","tetr","pent",'hex')
 		if (player.md.break.active) sqc8.push("bh_condenser","gamma_ray")
 	}
+pinf.push('FSS','inf_theorem','galaxy','fusionTier','grading')
 	tmp.scaling_qc8 = sqc8
+	tmp.scaling_pinf = pinf
 }
 
 function scalingActive(name, amt, type) {
@@ -378,7 +386,7 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(8,2)) start = start.add(beyondRankEffect(8,2))
 		}
 
-		else if (name!=='FSS' && name!=='inf_theorem' && name!=='galaxy' && name!=='fusionTier') {
+		else if (!tmp.scaling_pinf.includes(name)) {
 			if (hasElement(252)) start = start.add(elemEffect(252))
 					}
 	}

@@ -29,7 +29,7 @@ function resetTemp() {
         rank_tab: 0,
 
         scaling_qc8: [],
-
+        scaling_pinf: [],
         prestiges: {
             req: [],
             bulk: [],
@@ -379,17 +379,17 @@ function updateTemp() {
 
     tmp.c16active = CHALS.inChal(16)
 
-    tmp.inf_unl = player.inf.theorem.gte(1)
+    tmp.inf_unl = player.inf.theorem.gte(1) || tmp.mlt_unl
 
     tmp.chal13comp = player.chal.comps[13].gte(1)
     tmp.chal14comp = player.chal.comps[14].gte(1)
     tmp.chal15comp = player.chal.comps[15].gte(1)
-    tmp.darkRunUnlocked = hasElement(161)
-    tmp.matterUnl = hasElement(188)
+    tmp.darkRunUnlocked = hasElement(161) || tmp.mlt_unl
+    tmp.matterUnl = hasElement(188) || tmp.mlt_unl
     tmp.moreUpgs = hasElement(192)
-    tmp.mass4Unl = hasElement(202)
-    tmp.brUnl = hasElement(208)
-    tmp.eaUnl = hasCharger(5)
+    tmp.mass4Unl = hasElement(202) || tmp.mlt_unl
+    tmp.brUnl = hasElement(208) || tmp.mlt_unl
+    tmp.eaUnl = hasCharger(5) || tmp.mlt_unl
     tmp.brokenInf = hasInfUpgrade(16)
     tmp.ascensions_unl = hasElement(281)
     tmp.bpUnl = hasElement(294)
