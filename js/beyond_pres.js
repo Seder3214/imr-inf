@@ -70,11 +70,11 @@ const BEYOND_PRES = {
 const BPNS = [
     ['Level','Prestige','Honor','Glory','Renown','Valor','Merit','Excellence','Royalty','Divinity'],
     ['','Multi-','Power-','Mega-','Giga-','Tera-','Peta-','Exa-','Zetta-','Yotta-'],
-    ['','Alpha-','Beta-','Theta-','Gamma-','Delta-','Epsilon-','Zeta-','Eta-','Teta-'],
-    ['','Iota-','Kappa-','Lambda-','Mu-','Nu-','Xi-','Omicron-','Pi-','Rho-'],
+    ['','Alpha-','Beta-','Gamma-','Delta-','Epsilon-','Zeta-','Eta-','Theta-','Iota-'],
+    ['','Kappa-','Lambda-','Mu-','Nu-','Xi-','Omicron-','Pi-','Rho-','Sigma-'],
     ['','Prestigious-','Honorous-','Glorious-','Renownful-','Valorous-','Meritous-','Excellent-','Royal-','Divine-'], 
     ['','Unreal-','Real-','Authentic-','True-','Pure-'],// h>1 -> ct
-    ['','Fantastic-Endless-Divine-Rho-Teta-Yotta-Prestige-Level'],
+    ['','Fantastic-Endless-Divine-Sigma-Iota-Yotta-Prestige-Level'],
 ]
 
 const BPNS2 = [
