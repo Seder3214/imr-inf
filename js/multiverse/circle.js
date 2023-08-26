@@ -291,12 +291,10 @@ const SPELL = {
 
     function circleEffects() {
         let a = E(tmp.mv.cycleGain), eff = {}
-        eff.cs = expMult(a.div(10).root(2).add(1), a.div(10).add(1))
+        eff.cs = expMult(a.div(10).pow(5).add(1), a.div(100).add(1))
        if (hasElement(44,1)) eff.theoremLvl = a.add(1).pow(1.75).root(2).floor()
         return eff
     }
-    
-    function appleEffect(id,def=1) { return tmp.ouro.apple_eff[id] ?? def }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     function calcMv(dt) {
         if (player.mv.totalCycles.gte(tmp.mv.coreLvl_req)) player.mv.coreLvl = player.mv.coreLvl.add(1)
