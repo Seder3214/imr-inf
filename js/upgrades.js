@@ -212,7 +212,7 @@ const UPGS = {
 
                 if (hasUpgrade('rp',19)) step = step.mul(upgEffect(1,19,0))
                 if (player.inf.nm) step = step.add(tmp.nm_base_eff)
-                step = step.pow(tmp.upgs.mv[4].eff?tmp.upgs.mv[4].eff.eff:1)
+                step = step.mul(tmp.upgs.mv[4].eff?tmp.upgs.mv[4].eff.eff:1)
                 let ss = E(10)
                 let ss2 = E(50)
                 if (hasBeyondRank(7,78)) ss2 = ss2.mul(1.15)
@@ -370,8 +370,8 @@ player.mv.firstReset == true },
             },
             effDesc(eff) {
                 return {
-                    step: "+^"+format(eff.step),
-                    eff: "^"+format(eff.eff)+" to Overpower Power"
+                    step: "+x"+format(eff.step),
+                    eff: "x"+format(eff.eff)+" to Overpower Power"
                 }
             },
             bonus() {
