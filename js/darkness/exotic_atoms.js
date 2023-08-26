@@ -10,10 +10,9 @@ const MUONIC_ELEM = {
              let upg = this.upgs[x] 
              if (upg.mlt) player.mv.points = player.mv.points.sub(upg.cost)
              else if (upg.cs) player.dark.c16.shard = player.dark.c16.shard.sub(upg.cost) 
-  
+  if (x==43) player.mv.durability = tmp.mv.maxDurability.add(muElemEff(43))
              player.atom.muonic_el.push(x) 
          }
-        if (x==43) player.mv.durability = tmp.mv.maxDurability.add(muElemEff(43))
     },
     upgs: [
         null,
