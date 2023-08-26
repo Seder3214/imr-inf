@@ -291,7 +291,7 @@ const SPELL = {
 
     function circleEffects() {
         let a = E(tmp.mv.cycleGain), eff = {}
-        eff.cs = expMult(a.pow(2).add(1), a.div(10).add(1))
+        eff.cs = expMult(a.div(10).root(2).add(1), a.div(10).add(1))
        if (hasElement(44,1)) eff.theoremLvl = a.add(1).pow(1.75).root(2).floor()
         return eff
     }
