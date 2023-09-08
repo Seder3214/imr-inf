@@ -88,8 +88,11 @@ const TABS = {
             { id: "Grading", unl() { return player.galaxy.times.gte(1) }, style: "glx" },
         ],
         10: [
-            { id: "Travel", style: "mlt" },
-            { id: "Circle Perks", unl() { return player.galaxy.times.gte(1) }, style: "mlt" },
+            { id: "Circle", style: "mlt" },
+            { id: "Circle Perks", unl() { return true }, style: "mlt" },
+            { id: "Travel", unl() { return true }, style: "mlt" },
+            { id: "Challenge Switcher", unl() { return true }, style: "mlt" },
+
         ],
         11: [
             { id: "Options" },
