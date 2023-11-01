@@ -100,7 +100,7 @@ const RESOURCES_DIS = {
         resetBtn() { DARK.reset() },
     },
     fss: {
-        unl: ()=>player.dark.matters.final.gt(0) || tmp.inf_unl&&hasElement(188),
+        unl: ()=>player.dark.matters.final.gt(0) || tmp.inf_unl&&hasElement(188) || tmp.mlt_unl,
         icon: "fss",
 
         desc: (gs)=>format(player.dark.matters.final,0)+"<br>(+"+(tmp.matters.FSS_base.gte(tmp.matters.FSS_req)?1:0)+")",
@@ -108,7 +108,7 @@ const RESOURCES_DIS = {
         resetBtn() { MATTERS.final_star_shard.reset() },
     },
     corrupt: {
-        unl: ()=>player.dark.c16.first,
+        unl: ()=>player.dark.c16.first || tmp.mlt_unl,
         icon: "corrupted",
         class: "corrupted_text",
 
@@ -140,6 +140,15 @@ const RESOURCES_DIS = {
         desc: (gs)=>player.inf.c18.orb.format(0)+"<br>(+"+format(tmp.orbGain,0)+")",
 
         resetBtn() { ORB.getOrb() },
+    },
+    mlt: {
+        unl: ()=>tmp.mlt_unl,
+        icon: "mlt",
+        class: "orange",
+
+        desc: (gs)=>format(tmp.mv_time)+'s / '+ format(tmp.mv.cycleTime)+"s | " + format(player.mv.points)+"<br>"+"(+"+(tmp.mv_time.gte(tmp.mv.cycleTime)?format(tmp.mv.cycleGain):'0')+")",
+
+        resetBtn() { CONFIRMS_FUNCTION.multiverse() },
     },
     /*
     mass: {

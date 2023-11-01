@@ -27,6 +27,10 @@ if (hasElement(300)) e.push(300)
 let me = []
         if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) me.push(player.atom.muonic_el[i])
         if (hasElement(30,1)) me.push(30)
+        for (let i = 0; i < player.atom.muonic_el.length; i++) {
+            let u = MUONIC_ELEM.upgs[player.atom.muonic_el[i]]
+            if (u.mlt) me.push(player.atom.muonic_el[i])
+        }
        player.atom.muonic_el = me
        if (!hasTree('glx14')) for (let x = 1; x <= 16; x++) player.chal.comps[x] = E(0)
         let keep = ["qu_qol1", "qu_qol2", "qu_qol3", "qu_qol4", "qu_qol5", "qu_qol6", "qu_qol7", "qu_qol8", "qu_qol9", "qu_qol8a", "unl1", "unl2", "unl3", "unl4",
@@ -134,7 +138,7 @@ let me = []
 
         dark.run.active = false
         dark.run.glyphs = [0,0,0,0,0,0]
-        if (!hasInfUpgrade(3)) dark.run.upg = []
+        if (!hasInfUpgrade(3) && (!tmp.mlt_unl)) dark.run.upg = []
 
         dark.matters = darkSave.matters
 
@@ -201,12 +205,13 @@ dark.matters.am = E(0)
         }
     },
     level() {
+        eff = tmp.mv.circleEff
         let s = player.mass.add(1).log10().add(1).log10().div(308).max(1).log(1.1).add(1)
         s = s.mul(player.dark.c16.bestBH.add(1).log10().div(3.5e6).max(1).log(1.1).add(1))
 
         if (hasElement(16,1)) s = s.mul(player.inf.dim_mass.add(1).log(1e6).add(1))
 
-        return s.max(1).root(2).softcap(tmp.inf_level_ss,1/3,0).toNumber()
+        return s.max(1).root(2).softcap(tmp.inf_level_ss,1/3,0).add(eff.theoremLvl?eff.theoremLvl:0).toNumber()
     },
     gain() {
         if (player.mass.lt(this.req)) return E(0)

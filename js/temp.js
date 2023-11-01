@@ -29,7 +29,7 @@ function resetTemp() {
         rank_tab: 0,
 
         scaling_qc8: [],
-
+        scaling_pinf: [],
         prestiges: {
             req: [],
             bulk: [],
@@ -56,6 +56,7 @@ function resetTemp() {
         upgs: {
             main: {},
             mass: {},
+            mv: {},
         },
 
         elements: {
@@ -92,7 +93,13 @@ function resetTemp() {
             tree_afford: {},
             tree_afford2: [],
         },
-        galaxy: {},
+        galaxy: {
+            
+        },
+
+        mv: {
+            upgs: {},
+        },
         grade: {
             eff: [],
             power: [],
@@ -206,7 +213,6 @@ function resetTemp() {
             gain: [E(0),E(0)],
             eff: [[],[]],
         },
-
         prevSave: "",
         ascensions: {
             req: [],
@@ -220,6 +226,7 @@ function resetTemp() {
 
         inf_reached: false,
         inf_time: 0,
+        mv_time: E(0),
         inf_limit: Decimal.pow(10,Number.MAX_VALUE),
 
         inf_unl: false,
@@ -232,9 +239,11 @@ function resetTemp() {
         iu_eff: [],
     }
     for (let x = 0; x < PRES_LEN; x++) tmp.prestiges.eff[x] = {}
+    for (let x = 0; x < ASCENSIONS.names.length; x++) tmp.ascensions.eff[x] = {}
     for (let x in BEYOND_RANKS.rewardEff) tmp.beyond_ranks.eff[x] = {}
     for (let x in BEYOND_PRES.rewardEff) tmp.beyond_pres.eff[x] = {}
     for (let x = UPGS.mass.cols; x >= 1; x--) tmp.upgs.mass[x] = {}
+    for (let x = UPGS.mv.cols; x >= 1; x--) tmp.upgs.mv[x] = {}
     for (let x = 1; x <= UPGS.main.cols; x++) tmp.upgs.main[x] = {}
     for (let j = 0; j < TREE_TAB.length; j++) {
         tmp.supernova.tree_had2[j] = []
@@ -255,6 +264,7 @@ function resetTemp() {
         }
     }
     for (let x = 0; x < MASS_DILATION.break.upgs.ids.length; x++) tmp.bd.upgs[x] = {}
+    for (let x = 0; x < SPELL.upgs.ids.length; x++) tmp.mv.upgs[x] = {}
     for (let x = 0; x < SCALE_TYPE.length; x++) {
         let st = SCALE_TYPE[x]
 
@@ -311,6 +321,7 @@ function updateAcceleratorTemp() {
 function updateUpgradesTemp() {
     UPGS.main.temp()
     UPGS.mass.temp()
+    UPGS.mv.temp()
 }
 
 function updateRagePowerTemp() {
@@ -362,25 +373,27 @@ function updateBlackHoleTemp() {
 }
 
 function updateTemp() {
+    updateSpellTemp()
     tmp.offlineActive = player.offline.time > 1
     tmp.offlineMult = tmp.offlineActive?player.offline.time+1:1
 
     tmp.c16active = CHALS.inChal(16)
 
-    tmp.inf_unl = player.inf.theorem.gte(1)
+    tmp.inf_unl = player.inf.theorem.gte(1) || tmp.mlt_unl
 
     tmp.chal13comp = player.chal.comps[13].gte(1)
     tmp.chal14comp = player.chal.comps[14].gte(1)
     tmp.chal15comp = player.chal.comps[15].gte(1)
-    tmp.darkRunUnlocked = hasElement(161)
-    tmp.matterUnl = hasElement(188)
+    tmp.darkRunUnlocked = hasElement(161) || tmp.mlt_unl
+    tmp.matterUnl = hasElement(188) || tmp.mlt_unl
     tmp.moreUpgs = hasElement(192)
-    tmp.mass4Unl = hasElement(202)
-    tmp.brUnl = hasElement(208)
-    tmp.eaUnl = hasCharger(5)
+    tmp.mass4Unl = hasElement(202) || tmp.mlt_unl
+    tmp.brUnl = hasElement(208) || tmp.mlt_unl
+    tmp.eaUnl = hasCharger(5) || tmp.mlt_unl
     tmp.brokenInf = hasInfUpgrade(16)
     tmp.ascensions_unl = hasElement(281)
     tmp.bpUnl = hasElement(294)
+    tmp.mlt_unl = player.chal.comps[20].gte(3) || player.mv.points.gt(0) || player.mv.firstReset == true
     updateGradeTemp()
     updateOrbTemp()
     updateInfTemp()

@@ -6,12 +6,12 @@ const GRADE = {
     unl() { return hasTree('glx5') },
     getGrade() {
         let b = tmp.grade.t_base
-        let x = player.galaxy.stars.max(1).log(b).mul(2.15).mul(tmp.chal?tmp.chal.eff[19]:1)
+        let x = player.galaxy.stars.max(1).log(b).mul(2.15).mul(tmp.chal?tmp.chal.eff[19]:1).scaleEvery('grading',true)
         return x.floor()
     },
     getNextGrade() {
         let b = tmp.grade.t_base
-        let x = E(b).pow(player.galaxy.grade.theorems.add(1).div(2.15).div(tmp.chal?tmp.chal.eff[19]:1))
+        let x = E(b).pow(player.galaxy.grade.theorems.scaleEvery('grading').add(1).div(2.15).div(tmp.chal?tmp.chal.eff[19]:1))
 
         return x
     },

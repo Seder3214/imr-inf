@@ -1,12 +1,18 @@
 const MUONIC_ELEM = {
     canBuy(x) {
         let u = this.upgs[x]
-        let base = u.cs?player.dark.c16.shard:tmp.exotic_atom.amount
+        let base = u.mlt?player.mv.points:u.cs?player.dark.c16.shard:tmp.exotic_atom.amount
         if (player.atom.muonic_el.includes(x)) return false
         return base.gte(this.upgs[x].cost||EINF)
     },
     buyUpg(x) {
-        if (this.canBuy(x)) player.atom.muonic_el.push(x)
+                if (this.canBuy(x)) { 
+/*  let upg = this.upgs[x] 
+             if (upg.mlt) player.mv.points = player.mv.points.sub(upg.cost)
+             else if (upg.cs) player.dark.c16.shard = player.dark.c16.shard.sub(upg.cost) */
+  if (x==43) player.mv.durability = tmp.mv.maxDurability.add(muElemEff(43))
+             player.atom.muonic_el.push(x) 
+         }
     },
     upgs: [
         null,
@@ -329,6 +335,53 @@ const MUONIC_ELEM = {
             desc: `Muonic Calcium-20 starts at 1 Exotic Atoms and its effect is better.`,
             cost: E('e30600'),
         },
+        {
+            mlt: true,
+            desc: `Increase ring durability based on its length (buying this will repair your circle).`,
+            eff() {
+                let x = E(1)
+                x = spellEff(0).pow(1.5).mul(2).floor()
+                return x
+            },
+            effDesc: x=>"+"+format(x),
+            cost: E(250),
+        },
+        {
+            mlt: true,
+            desc: `Unlock a new Circle' effect.`,
+            cost: E(1000),
+        },
+        {
+            mlt: true,
+            desc: `Increase the power of Multiverse Muscler based on Muscler.`,
+            eff() {
+                let x = E(1)
+                x = player.massUpg[1]?player.massUpg[1].add(1).log2().div(5).max(1):E(1)
+                return x
+            },
+            effDesc: x=>"+"+format(x),
+            cost: E(27500),
+        },
+        {
+            mlt: true,
+            desc: `Increase the amount of cycles needed to get Orbits based on unlocked circle' effects amount.`,
+            cost: E(183000),
+        },
+        {
+            mlt: true,
+            desc: `Unlock a new Circle' effect.`,
+            cost: E(1.75e6),
+        },
+        {
+            mlt: true,
+            desc: `Remove softcaps from Modificator's effect that boosts each other.`,
+            cost: E(1.34e7),
+        },
+        {
+            mlt: true,
+            desc: `[Chaotic Matter Annihilation] effect also applies to Triunquadium-314.`,
+            cost: E(1e9),
+        },
         /*
         {
             desc: `Placeholder.`,
@@ -350,6 +403,7 @@ const MUONIC_ELEM = {
         if (tmp.brokenInf) u += 12
         if (hasElement(30,1)) u+= 6
         if (hasElement(302)) u+= 6
+        if (tmp.mlt_unl) u = 42 + 7
         return u
     },
 }

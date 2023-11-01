@@ -95,7 +95,7 @@ const CONFIRMS_FUNCTION = {
         if (player.qu.rip.active) player.qu.rip.amt = player.qu.rip.amt.add(tmp.rip.gain)
         player.qu.qc.active = false
         player.qu.rip.first = true
-        player.qu.rip.active = !player.qu.rip.active
+        for (x=16; x<21 ; x++) if (!hasInfUpgrade(6) || (CHALS.inChal(x))) player.qu.rip.active = !player.qu.rip.active
         QUANTUM.enter(false,true,true)
 
         addQuote(8)
@@ -142,6 +142,10 @@ const CONFIRMS_FUNCTION = {
        GALAXY.doReset()
       addQuote(13)
     },
+    multiverse() {
+        SPELL.getCycle()
+       addQuote(14)
+     },
     t_switch() {
         
     },

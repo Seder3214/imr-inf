@@ -67,11 +67,13 @@ const UPGS = {
             unl() { return player.ranks.rank.gte(1) || player.mainUpg.atom.includes(1) },
             title: "Muscler",
             start: E(10),
+            mltCost() {},
             inc: E(1.5),
             effect(x) {
                 let step = E(1)
                 if (player.ranks.rank.gte(3)) step = step.add(RANKS.effect.rank[3]())
                 step = step.mul(tmp.upgs.mass[2]?tmp.upgs.mass[2].eff.eff:1)
+                step = step.pow(tmp.upgs.mv[1].eff?tmp.upgs.mv[1].eff.eff:1)
                 let ret = step.mul(x.add(tmp.upgs.mass[1].bonus))
                 if (hasElement(209)) ret = ret.pow(elemEffect(209))
                 return {step: step, eff: ret}
@@ -99,6 +101,7 @@ const UPGS = {
                 let step = E(2)
                 if (player.ranks.rank.gte(5)) step = step.add(RANKS.effect.rank[5]())
                 step = step.pow(tmp.upgs.mass[3]?tmp.upgs.mass[3].eff.eff:1)
+                step = step.pow(tmp.upgs.mv[2].eff?tmp.upgs.mv[2].eff.eff:1)
                 let ret = step.mul(x.add(tmp.upgs.mass[2].bonus)).add(1)//.softcap("ee14",0.95,2)
                 if (hasElement(203)) ret = ret.pow(elemEffect(203))
                 return {step: step, eff: ret}
@@ -135,6 +138,7 @@ const UPGS = {
                 if (hasElement(4)) step = step.mul(tmp.elements.effect[4])
                 if (player.md.upgs[3].gte(1)) step = step.mul(tmp.md.upgs[3].eff)
                 step = step.pow(tmp.upgs.mass[4]?tmp.upgs.mass[4].eff.eff:1)
+                step = step.pow(tmp.upgs.mv[3].eff?tmp.upgs.mv[3].eff.eff:1)
 
                 let sp = 0.5
                 if (player.mainUpg.atom.includes(9)) sp *= 1.15
@@ -208,13 +212,16 @@ const UPGS = {
 
                 if (hasUpgrade('rp',19)) step = step.mul(upgEffect(1,19,0))
                 if (player.inf.nm) step = step.add(tmp.nm_base_eff)
+                step = step.mul(tmp.upgs.mv[4].eff?tmp.upgs.mv[4].eff.eff:1)
                 let ss = E(10)
                 let ss2 = E(50)
                 if (hasBeyondRank(7,78)) ss2 = ss2.mul(1.15)
                 if (hasBeyondRank(10,1)) ss2 = ss2.mul(beyondRankEffect(10,1))
-                let x = step.mul(xx).add(1).softcap(ss,0.5,0).softcap(ss2,0.15,0)
+                let sc2 = E(0.15)
+                if (hasUpgrade('rp',22)) sc2 = sc2.mul(upgEffect(1,22))
+                let x = step.mul(xx).add(1).softcap(ss,0.5,0).softcap(ss2,sc2,0)
                 
-                return {step: step, eff: x, ss: ss, ss2: ss2}
+                return {step: step, eff: x, ss: ss, ss2: ss2,sc2:sc2}
             },
             effDesc(eff) {
                 return {
@@ -226,6 +233,149 @@ const UPGS = {
                 let x = E(0)
                 if (hasUpgrade('atom',20)) x = x.add(upgEffect(3,20))
                 if (tmp.inf_unl) x =x.add(theoremEff('proto',5))
+                return x
+            },
+        },
+    },
+    mv: {
+        cols: 4,
+        temp() {
+            for (let x = this.cols; x >= 1; x--) {
+                let d = tmp.upgs.mv
+                let data = this.getData(x)
+                d[x].cost = data.cost
+                d[x].bulk = data.bulk
+                
+                d[x].bonus = this[x].bonus?this[x].bonus():E(0)
+                d[x].eff = this[x].effect(player.mvUpg[x]||E(0))
+                d[x].effDesc = this[x].effDesc(d[x].eff)
+            }
+        },
+        autoSwitch(x) {
+            player.autoMvUpg[x] = !player.autoMvUpg[x]
+        },
+        buy(x, manual=false) {
+            let cost = manual ? this.getData(x).cost : tmp.upgs.mv[x].cost
+            if (player.mv.points.gte(cost)) { player.mv.points = player.mv.points.sub(cost)
+                if (!player.mvUpg[x]) player.mvUpg[x] = E(0)
+                player.mvUpg[x] = player.mvUpg[x].add(1)
+            }
+        },
+        buyMax(x) {
+            let d = tmp.upgs.mv[x]
+            let bulk = d.bulk
+            let cost = d.cost
+            if (player.mv.points.gte(cost)) {
+                let m = player.mvUpg[x]
+                if (!m) m = E(0)
+                m = m.max(bulk.floor().max(m.plus(1)))
+                player.mvUpg[x] = m
+                player.mv.points = player.mv.points.sub(cost)
+            }
+        },
+        getData(i) {
+            let upg = this[i]
+            let inc = upg.inc
+            let start = upg.start
+            let lvl = player.mvUpg[i]||E(0)
+            let cost, bulk = E(0), fp
+
+                fp = tmp.massFP
+                
+                cost = inc.pow(lvl.div(fp).scaleEvery("mvUpg")).mul(start)
+                bulk = E(0)
+                if (player.mv.points.gte(start)) bulk = player.mv.points.div(start).max(1).log(inc).scaleEvery("mvUpg",true).mul(fp).add(1).floor()
+        
+            return {cost: cost, bulk: bulk}
+        },
+        1: {
+            unl() { return player.ranks.rank.gte(1) &&
+player.mv.firstReset == true },
+            title: "Multiverse Muscler",
+            start: E(10),
+            inc: E(1.5),
+            effect(x) {
+                let step = E(2)
+                if (hasElement(45,1)) step = step.add(muElemEff(45))
+                let ret = step.mul(x.add(tmp.upgs.mv[1].bonus)).add(1)
+                return {step: step, eff: ret}
+            },
+            effDesc(eff) {
+                return {
+                    step: "+^"+formatMass(eff.step),
+                    eff: "^"+formatMass(eff.eff)+" to Muscler Power"
+                }
+            },
+            bonus() {
+                let x = E(0)
+                return x
+            },
+        },
+        2: {
+            unl() { return player.ranks.rank.gte(2) && player.mv.firstReset == true },
+            title: "Multiverse Booster",
+            start: E(100),
+            inc: E(4),
+            effect(x) {
+                let step = E(1)
+                let ret = step.mul(x.add(tmp.upgs.mv[2].bonus)).add(1)//.softcap("ee14",0.95,2)
+                return {step: step, eff: ret}
+            },
+            effDesc(eff) {
+                return {
+                    step: "+^"+format(eff.step),
+                    eff: "^"+format(eff.eff)+" to Booster Power"
+                }
+            },
+            bonus() {
+                let x = E(0)
+                return x
+            },
+        },
+        3: {
+            unl() { return player.ranks.rank.gte(3) && 
+player.mv.firstReset == true },
+            title: "Multiverse Stronger",
+            start: E(1000),
+            inc: E(9),
+            effect(x) {
+                let xx = x.add(tmp.upgs.mv[3].bonus)
+                let step = E(0.5)
+                let ret = step.mul(xx).add(1)
+                return {step: step, eff: ret}
+            },
+            effDesc(eff) {
+                return {
+                    step: "+^"+format(eff.step),
+                    eff: "^"+format(eff.eff)+" to Stronger Power"
+                }
+            },
+            bonus() {
+                let x = E(0)
+                return x
+            },
+        },
+        4: {
+            unl() { return player.mv.firstReset == true },
+            title: "Multiverse Overpower",
+            start: E(100000),
+            inc: E(1.5),
+            effect(i) {
+                let xx = i.add(tmp.upgs.mv[4].bonus)
+                
+                let step = E(.25)
+                let x = step.mul(xx).add(1)
+                
+                return {step: step, eff: x}
+            },
+            effDesc(eff) {
+                return {
+                    step: "+x"+format(eff.step),
+                    eff: "x"+format(eff.eff)+" to Overpower Power"
+                }
+            },
+            bonus() {
+                let x = E(0)
                 return x
             },
         },
@@ -256,7 +406,7 @@ const UPGS = {
                 }
             },
             auto_unl() { return player.mainUpg.bh.includes(5) || tmp.inf_unl },
-            lens: 21,
+            lens: 22,
             1: {
                 desc: "Boosters add Musclers.",
                 cost: E(1),
@@ -436,6 +586,18 @@ const UPGS = {
                 },
                 effDesc(x=this.effect()) {
                     return "x"+format(x)
+                },
+            },
+            22: {
+                unl() { return elemEffect(321)>=2 && hasElement(321) },
+                desc: `Overpower' softcap^2 is weaker by Galaxy Particles.`,
+                cost: E('e1e20000'),
+                effect() {
+                    let x = Decimal.pow(1.05,player.galaxy.stars.add(1).log10().div(20))
+                    return x
+                },
+                effDesc(x=this.effect()) {
+                    return formatPercent(x-1)
                 },
             },
         },
@@ -1003,6 +1165,7 @@ const UPGS = {
 */
 
 function hasUpgrade(id,x) { return player.mainUpg[id].includes(x) }
+function mvEff(a,def=1) {tmp.upgs.mv[a]?tmp.upgs.mv[a].eff.eff:def}
 function upgEffect(id,x,def=E(1)) { return tmp.upgs.main[id][x]?tmp.upgs.main[id][x].effect:def }
 function resetMainUpgs(id,keep=[]) {
     let k = []

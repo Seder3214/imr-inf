@@ -656,6 +656,7 @@ x = overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
             effect() {
                 let pent = player.ranks.pent
                 let x = hasElement(195) ? pent.softcap(2e5,0.25,0).root(1.5).div(400) : pent.root(2).div(1e3)
+                if (hasElement(330)) x = x.pow(tmp.elements.effect[330])
                 return x.toNumber()
             },
             effDesc(x) { return "+^"+format(x) },
@@ -1925,7 +1926,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 },
 {
     desc: 'Change Beryllium-4 Hardcap to Softcap.',
-    cost: E('ee96400'),
+    cost: E('ee100400'),
 },
 {
     inf: true,
@@ -1951,6 +1952,21 @@ if (hasElement(317)) ret = ret.mul(1.15)
     inf: true,
     desc: `Unlock the chances to get last grading type.`,
     cost: E(1e110),
+},
+{
+    desc: 'Protoversal Theorem 6th star effect formula is better.',
+    cost: E('ee103650'),
+},
+{
+    dark: true,
+    desc: `Fermium-100 is much better based on Dark Rays.`,
+    effect() {
+        let x = E(0)
+        x = player.dark.rays.add(1).log10().max(1).log10().root(5).div(5).add(1)
+        return x
+    },
+    effDesc(x) { return "^"+format(x) },
+    cost: E('e2.83975e11'),
 },
     ],
     /*
@@ -2003,7 +2019,8 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
         if (hasTree('glx20')) u += 8
-        if (hasElement(322)) u += 10
+        if (hasElement(322)) u += 8
+        if (tmp.mlt_unl) u = 332
         return u
     },
 }
@@ -2167,7 +2184,7 @@ function updateElementsHTML() {
     let tElem = tmp.elements, c16 = tmp.c16active,c17 = CHALS.inChal(17),c18 = CHALS.inChal(18)
     let et = player.atom.elemTier, elayer = player.atom.elemLayer
 
-    tmp.el.elemLayer.setDisplay(tmp.eaUnl)
+    tmp.el.elemLayer.setDisplay(tmp.eaUnl || tmp.mlt_unl)
     tmp.el.elemLayer.setHTML("Elements' Layer: "+["Normal","Muonic"][elayer])
 
     tmp.el.elemTierDiv.setDisplay(tElem.max_tier[elayer]>1)
@@ -2178,12 +2195,12 @@ function updateElementsHTML() {
     tmp.el.elem_ch_div.setVisible(ch>0)
     if (ch) {
         let eu = elem_const.upgs[ch]
-        let res = [eu.sn? " Supernovas" :eu.inf?" Infinity Points":eu.dark?" Dark Shadows":" Quarks",eu.cs?" Corrupted Shards":" Exotic Atoms"][elayer]
+        let res = [eu.sn? " Supernovas" :eu.inf?" Infinity Points":eu.dark?" Dark Shadows":" Quarks",eu.mlt?" <span class='mltText'>Multiverse Shards</span>":eu.cs?" Corrupted Shards":" Exotic Atoms"][elayer]
         let eff = tElem[["effect","mu_effect"][elayer]]
 
         tmp.el.elem_desc.setHTML("<b>["+["","Muonic "][elayer]+ELEMENTS.fullNames[ch]+"]</b> "+eu.desc)
         tmp.el.elem_desc.setClasses({sky: true, corrupted_text2: c16 && isElemCorrupted(ch,elayer),overflowed_text: c17 && isElemOverflowed(ch,elayer)})
-        tmp.el.elem_cost.setTxt(format(eu.cost,0)+res+(eu.c16?" in Challenge 16":BR_ELEM.includes(ch)?" in Big Rip":"")+(player.qu.rip.active&&tElem.cannot.includes(ch)?" [CANNOT AFFORD in Big Rip]":""))
+        tmp.el.elem_cost.setHTML(format(eu.cost,0)+res+(eu.c16?" in Challenge 16":BR_ELEM.includes(ch)?" in Big Rip":"")+(player.qu.rip.active&&tElem.cannot.includes(ch)?" [CANNOT AFFORD in Big Rip]":""))
         tmp.el.elem_eff.setHTML(eu.effDesc?"Currently: "+eu.effDesc(eff[ch]):"")
     }
 
@@ -2212,7 +2229,7 @@ function updateElementsHTML() {
                         let u = MUONIC_ELEM.upgs[x]
                        if ((c16 || c18) && isElemCorrupted(x,elayer)) upg.setClasses({elements: true, locked: true, corrupted: true})
                           else if ((c17 || c18) && isElemOverflowed(x,elayer))upg.setClasses({elements: true, locked: true,overflowed: true})
-                          else upg.setClasses({elements: true, locked: !elem_const.canBuy(x), bought: hasElement(x,elayer), muon: elayer == 1, cs: elayer == 1&& u.cs, br: elayer == 0 && BR_ELEM.includes(x), final: elayer == 0 && x == 118, dark: elayer == 0 && eu.dark, c16: elayer == 0 && eu.c16, inf: elayer == 0 && eu.inf,sn: elayer == 0 && SN_ELEM.includes(x)})
+                          else upg.setClasses({elements: true, locked: !elem_const.canBuy(x), bought: hasElement(x,elayer), muon: elayer == 1, cs: elayer == 1&& u.cs, mlt: elayer == 1&& u.mlt,br: elayer == 0 && BR_ELEM.includes(x), final: elayer == 0 && x == 118, dark: elayer == 0 && eu.dark, c16: elayer == 0 && eu.c16, inf: elayer == 0 && eu.inf,sn: elayer == 0 && SN_ELEM.includes(x)})
                         
                     }
                 }
@@ -2253,5 +2270,5 @@ function updateElementsTemp() {
 
     tElem.max_tier = [1,1]
     if (player.dark.unl) tElem.max_tier[0]++
-    if (tmp.brokenInf) tElem.max_tier[0]++
+    if (tmp.brokenInf || tmp.mlt_unl) tElem.max_tier[0]++
 }
