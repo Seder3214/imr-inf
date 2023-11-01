@@ -24,7 +24,12 @@ const SPELL = {
             for (let x = 0; x < 5; x++) player.galaxy.grade.type[x] = E(0)
             player.galaxy.grade.theorems = E(0)
             player.galaxy.times = E(0)
-            player.atom.muonic_el = []
+            let me = []
+            for (let i = 0; i < player.atom.muonic_el.length; i++) {
+                let u = MUONIC_ELEM.upgs[player.atom.muonic_el[i]]
+                if (u.mlt) me.push(player.atom.muonic_el[i])
+            }
+           player
             player.md.break.active = false
            for (let x = 1; x <= 20; x++) player.chal.comps[x] = E(0)
            for (let x = 0; x < ASCENSIONS.names.length; x++) player.ascensions[x] = E(0)
