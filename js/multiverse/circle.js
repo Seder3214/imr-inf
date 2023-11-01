@@ -297,11 +297,12 @@ const SPELL = {
     function circleEffects() {
         let a = E(tmp.mv.cycleGain), eff = {}
         eff.cs = Decimal.pow(a.add(1).div(10),a.div(2))
-       if (hasElement(44,1)) eff.theoremLvl = a.add(1).pow(1.75).root(2).floor()
+       if (hasElement(44,1)) eff.theoremLvl = a.add(1).root(4).floor()
         return eff
     }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     function calcMv(dt) {
+        player.mv.orbits = player.mv.orbits.max(0)
         if (player.mv.totalCycles.gte(tmp.mv.coreLvl_req)) player.mv.coreLvl = player.mv.coreLvl.add(1)
         tmp.mv_time = tmp.mv_time.add(dt).min(tmp.mv.cycleTime)
         player.mv.best = Math.max(player.mv.points)
@@ -347,13 +348,27 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
         }
         circle_upg_table.setHTML(table)
     }
+    function getCircleHTML(sub=false) {
+        let s = ""
+        let data=player.mv
+        let w = `
+        <div class="c_ring">${format(spellEff(0))} mm</div>
+        <div class="c_lvl">${format(data.coreLvl,0)}</div>
+        <div>${s}</div>
+        `
+        return sub?w:`
+        <div class="circle_div">
+            ${w}
+        </div>
+        `
+    }
     function updateSpellHTML() {
         tmp.el.addOrbit_req.setHTML(format(tmp.mv.addOrbit_req))
         tmp.el.currentCount.setHTML(format(player.mv.currentCount))
         tmp.el.total.setHTML(format(player.mv.totalCycles))
         tmp.el.coreLvl_req.setHTML(format(tmp.mv.coreLvl_req))
         tmp.el.orbitNerf.setHTML(formatMult(tmp.mv.orbitNerf))
-        tmp.el.orbitAmt.setHTML(format(player.mv.orbits.sub(player.mv.upgs[1])))
+        tmp.el.orbitAmt.setHTML(format(player.mv.orbits.sub(player.mv.upgs[1]).max(0)))
         tmp.el.currentDurability.setHTML(format(player.mv.durability))
         tmp.el.maxDurability.setHTML(format(tmp.mv.maxDurability))
         tmp.el.ringLength.setHTML(format(spellEff(0)))
