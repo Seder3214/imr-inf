@@ -364,10 +364,10 @@ const MUONIC_ELEM = {
         },
         {
             mlt: true,
-            desc: `Increase the amount of cycles needed to get Orbits based on unlocked circle' effects amount.`,
+            desc: `Increase the amount of cycles needed to get Orbits based on Core Level.`,
             cost: E(183000),
 eff() {let x = E(0)
-x = E(2).mul(1.15).round()
+x = player.mv.coreLvl.mul(1.75).pow(1.25).round()
 return x},
 effDesc: x=>"+"+format(x),
         },
