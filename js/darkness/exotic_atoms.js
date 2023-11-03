@@ -366,6 +366,10 @@ const MUONIC_ELEM = {
             mlt: true,
             desc: `Increase the amount of cycles needed to get Orbits based on unlocked circle' effects amount.`,
             cost: E(183000),
+eff() {let x = E(0)
+x = E(2).mul(1.15).round()
+return x},
+effDesc: x=>"+"+format(x),
         },
         {
             mlt: true,
