@@ -866,10 +866,10 @@ table-layout: auto;
 
 }
 .circleText {
-	background-image: repeating-linear-gradient(90deg, #ff8800 0%, #ff4800 46%,#ff6600 75%, #ff8800 100%);
+	background-image: repeating-linear-gradient(60deg, #ffca1e 0%, #ff4800 46%,#ff6600 75%, #ffca1e 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	animation: circle_spin2 20s ease-out infinite;
+	animation: circle_spin2 20s linear infinite;
 }
 .circleBuff {
 	width: 400px;
@@ -1813,11 +1813,8 @@ h4 {
 	0% {
 		background-position-x: 0px;
 	}
-	50% {
-		background-position-x: -480px;
-	}
 	100% {
-		background-position-x: 0px;
+		background-position-x: -480px;
 	}
 }
 @keyframes implode {
