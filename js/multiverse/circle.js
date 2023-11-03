@@ -377,7 +377,7 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
         tmp.el.corePower.setHTML(format(spellEff(2),2))
         tmp.el.ringEff.setHTML(formatMult(tmp.mv.ringEff))
         tmp.el.coreEff.setHTML(formatMult(tmp.mv.coreEff))
-        tmp.el.timeScale.setHTML(format(tmp.mv.timeScale,0))
+        tmp.el.timeScale.setHTML(format(tmp.mv.timeScale))
         tmp.el.cycleGain.setHTML(format(tmp.mv.cycleGain))
         tmp.el.cycleTime.setHTML(formatTime(tmp.mv_time)+'s / '+formatTime(tmp.mv.cycleTime)+'s')
         for (let x = 0; x < SPELL.upgs.ids.length; x++) {

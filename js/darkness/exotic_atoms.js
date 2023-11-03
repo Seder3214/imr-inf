@@ -350,7 +350,7 @@ let upg = this.upgs[x]
             desc: `Increase Multiverse Fragments gain/cycle based on cycle time (less cycle time = more bouns).`,
             eff() {
                 let x = E(1)
-                x = x.mul(E(100).pow(Decimal.pow(0.9,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(60))).add(1)
+                x = x.mul(E(100).pow(Decimal.pow(0.8,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(40))).add(1)
                 return x
             },
             effDesc: x=>"x"+format(x),

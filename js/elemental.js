@@ -1325,7 +1325,7 @@ x = overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
         },
         {
             inf: true,
-            desc: `First Core Slot Theorem level will be based on max theorem level on infinity (Only if Theorem Type is Newton).`,
+            desc: `First Core Slot Theorem level will be based on max theorem level on infinity.`,
             cost: E('3e16'),
             effect() {
                 let x = player.inf.theorem_max.floor()
@@ -1486,7 +1486,7 @@ x = overflow(x.softcap('e3e15',0.85,2),'ee100',0.5)
         },
         {
             inf: true,
-            desc: `Second and Third Core Slot Theorem level will be based on max theorem level on infinity (Only if Theorem Type is 2nd: Protoversal,3rd:Einstein).`,
+            desc: `Second and Third Core Slot Theorem level will be based on max theorem level on infinity.`,
             cost: E('7e25'),
             effect() {
                 let x = player.inf.theorem_max.floor()
@@ -1568,7 +1568,7 @@ x = overflow(x,1e180,0.1)
         },
         {
             inf: true,
-            desc: `Remove the softcap of 7th Abyssal Blot effect.<br>Also, Fourth and Fifth Core Slot Theorem level will be based on max theorem level on infinity (Only if Theorem Type is 4th: Dalton,5th:Hawking)`,
+            desc: `Remove the softcap of 7th Abyssal Blot effect.<br>Also, Fourth and Fifth Core Slot Theorem level will be based on max theorem level on infinity`,
             cost: E('1e27'),
         },
         {
