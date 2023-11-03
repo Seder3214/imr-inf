@@ -211,19 +211,19 @@ const SPELL = {
         }
     },
     maxDurability() {
-        let x = E(10)
+        let x = E(15)
         if (hasElement(43,1)) x = x.add(muElemEff(43))
         return x  
     },
     cyclesToOrbit() {
         let x = E(tmp.mv.cycleTime)
         x = x.pow(0.5).mul(1.5).floor()
-if (hasElement(46,1)) x = x.add(muElemEff(46))
+if (hasElement(47,1)) x = x.add(muElemEff(47))
         return x
     },
     coreLvlUp() {
         let x = E(15)
-        x = x.mul(player.mv.coreLvl.pow(3))
+        x = x.mul(player.mv.coreLvl.pow(2.15))
         return x.floor()
     },
     cycleTime() {
@@ -243,7 +243,6 @@ if (hasElement(46,1)) x = x.add(muElemEff(46))
     },
     ringEff() {
         let x = E(1)
-        if (player.mv.durability <= 0) return E(1)
         x = player.mv.upgs[0].add(1).pow(1.5).mul(2)
         return x
     },
@@ -287,7 +286,7 @@ if (hasElement(46,1)) x = x.add(muElemEff(46))
             cost(x) { return Decimal.pow(10,Decimal.pow(2,x)).floor() },
             bulk() { return player.mv.points.max(1).log10().max(1).log(2).add(1).floor() },
             effect(x) {
-                return x.pow(0.75).mul(1.5).max(1)
+                return x.pow(0.75).mul(2).max(1)
             },
             effDesc(x) { return "x"+format(x) },
         },
@@ -303,6 +302,7 @@ if (hasElement(46,1)) x = x.add(muElemEff(46))
     }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     function calcMv(dt) {
+        player.mv.durability = player.mv.durability.max(0)
         player.mv.orbits = player.mv.orbits.max(0)
         if (player.mv.totalCycles.gte(tmp.mv.coreLvl_req)) player.mv.coreLvl = player.mv.coreLvl.add(1)
         tmp.mv_time = tmp.mv_time.add(dt).min(tmp.mv.cycleTime)
@@ -364,20 +364,19 @@ function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
         `
     }
     function updateSpellHTML() {
-        tmp.el.addOrbit_req.setHTML(format(tmp.mv.addOrbit_req))
-        tmp.el.currentCount.setHTML(format(player.mv.currentCount))
-        tmp.el.total.setHTML(format(player.mv.totalCycles))
-        tmp.el.coreLvl_req.setHTML(format(tmp.mv.coreLvl_req))
+        tmp.el.addOrbit_req.setHTML(format(tmp.mv.addOrbit_req,0))
+        tmp.el.currentCount.setHTML(format(player.mv.currentCount,0))
+        tmp.el.total.setHTML(format(player.mv.totalCycles,0))
+        tmp.el.coreLvl_req.setHTML(format(tmp.mv.coreLvl_req,0))
         tmp.el.orbitNerf.setHTML(formatMult(tmp.mv.orbitNerf))
-        tmp.el.orbitAmt.setHTML(format(player.mv.orbits.sub(player.mv.upgs[1]).max(0)))
-        tmp.el.currentDurability.setHTML(format(player.mv.durability))
-        tmp.el.maxDurability.setHTML(format(tmp.mv.maxDurability))
-        tmp.el.ringLength.setHTML(format(spellEff(0)))
-        tmp.el.coreLvl.setHTML(format(player.mv.coreLvl))
-        tmp.el.corePower.setHTML(format(spellEff(2)))
+        tmp.el.orbitAmt.setHTML(format(player.mv.orbits.sub(player.mv.upgs[1]).max(0),0))
+        tmp.el.durability.setHTML(format(player.mv.durability,0)+'/'+format(tmp.mv.maxDurability,0))
+        tmp.el.ringLength.setHTML(format(spellEff(0),0))
+        tmp.el.coreLvl.setHTML(format(player.mv.coreLvl,0))
+        tmp.el.corePower.setHTML(format(spellEff(2),2))
         tmp.el.ringEff.setHTML(formatMult(tmp.mv.ringEff))
         tmp.el.coreEff.setHTML(formatMult(tmp.mv.coreEff))
-        tmp.el.timeScale.setHTML(format(tmp.mv.timeScale))
+        tmp.el.timeScale.setHTML(format(tmp.mv.timeScale,0))
         tmp.el.cycleGain.setHTML(format(tmp.mv.cycleGain))
         tmp.el.cycleTime.setHTML(formatTime(tmp.mv_time)+'s / '+formatTime(tmp.mv.cycleTime)+'s')
         for (let x = 0; x < SPELL.upgs.ids.length; x++) {

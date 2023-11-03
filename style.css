@@ -671,12 +671,15 @@ transform: scale(1.25)
 @keyframes mltAnim {
 	0% {
 		background-color: rgb(153, 67, 9);
+		color:rgb(255, 181, 132);
 	}
 	50% {
 		background-color: rgb(255, 102, 0);
+		color:rgb(255, 183, 135);
 	}
 	100% {
 		background-color: rgb(153, 67, 9);
+		color:rgb(255, 181, 132);
 	}
 }
 
@@ -861,6 +864,12 @@ padding-top: 40px;
 padding-bottom: 40px;
 table-layout: auto;
 
+}
+.circleText {
+	background-image: repeating-linear-gradient(90deg, #ff8800 0%, #ff4800 46%,#ff6600 75%, #ff8800 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: circle_spin2 10s linear infinite;
 }
 .circleBuff {
 	width: 400px;
@@ -1797,6 +1806,14 @@ h4 {
 		background-position-x: 0px;
 	}
 	100% {
+		background-position-x: -500px;
+	}
+}
+@keyframes circle_spin2 {
+	0% {
+		background-position-x: 0px;
+	}
+	100% {
 		background-position-x: -480px;
 	}
 }
@@ -1805,7 +1822,17 @@ h4 {
     50% {transform:scale(0); filter:blur(5px)}
     100% {transform:scale(1); filter:blur(0px)}
 }
-
+@keyframes circle_text_spin {
+	50% {
+		text-shadow: repeating-linear-gradient(135deg,yellow 0%, orange 75%, yellow 100%);
+	}
+	50% {
+		text-shadow: repeating-linear-gradient(135deg,yellow 0%, orange 75%, yellow 100%);
+	}
+	100% {
+		text-shadow: repeating-linear-gradient(135deg,yellow 0%, orange 75%, orange 100%);
+	}
+}
 @keyframes final_star_animation {
 	100%,0%{
 		background-color: rgb(255,0,0,.133);

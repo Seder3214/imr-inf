@@ -359,7 +359,18 @@ let upg = this.upgs[x]
                 return x
             },
             effDesc: x=>"+"+format(x),
-            cost: E(27500),
+            cost: E(8500),
+        },
+        {
+            mlt: true,
+            desc: `Increase Multiverse Fragments gain/cycle based on cycle time (less cycle time = more bouns).`,
+            eff() {
+                let x = E(1)
+                x = x.mul(E(100).pow(Decimal.pow(0.9,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(60))).add(1)
+                return x
+            },
+            effDesc: x=>"x"+format(x),
+            cost: E(14670),
         },
         {
             mlt: true,
