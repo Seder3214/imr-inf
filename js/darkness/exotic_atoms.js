@@ -347,7 +347,13 @@ let upg = this.upgs[x]
         },
         {
             mlt: true,
-            desc: `Unlock a new Circle' effect.`,
+            desc: `Increase Multiverse Fragments gain/cycle based on cycle time (less cycle time = more bouns).`,
+            eff() {
+                let x = E(1)
+                x = x.mul(E(100).pow(Decimal.pow(0.9,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(60))).add(1)
+                return x
+            },
+            effDesc: x=>"x"+format(x),
             cost: E(1000),
         },
         {
@@ -363,13 +369,7 @@ let upg = this.upgs[x]
         },
         {
             mlt: true,
-            desc: `Increase Multiverse Fragments gain/cycle based on cycle time (less cycle time = more bouns).`,
-            eff() {
-                let x = E(1)
-                x = x.mul(E(100).pow(Decimal.pow(0.9,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(60))).add(1)
-                return x
-            },
-            effDesc: x=>"x"+format(x),
+            desc: `Unlock new [Circle] effect.`,
             cost: E(14670),
         },
         {

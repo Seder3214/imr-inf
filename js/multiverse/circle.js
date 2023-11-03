@@ -239,6 +239,7 @@ if (hasElement(47,1)) x = x.add(muElemEff(47))
     cycleGain() {
         let eff = E(1)
         eff = E(tmp.mv.ringEff).mul(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
+        if (hasElement(46,1)) eff = eff.mul(muElemEff(46))
         return eff
     },
     ringEff() {
@@ -297,7 +298,7 @@ if (hasElement(47,1)) x = x.add(muElemEff(47))
     function circleEffects() {
         let a = E(tmp.mv.cycleGain), eff = {}
         eff.cs = Decimal.pow(a.add(1).div(10),a.div(2))
-       if (hasElement(44,1)) eff.theoremLvl = a.add(1).root(4).floor()
+       if (hasElement(46,1)) eff.theoremLvl = a.add(1).root(4).floor()
         return eff
     }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
