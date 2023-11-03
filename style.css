@@ -869,7 +869,7 @@ table-layout: auto;
 	background-image: repeating-linear-gradient(90deg, #ff8800 0%, #ff4800 46%,#ff6600 75%, #ff8800 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	animation: circle_spin2 10s linear infinite;
+	animation: circle_spin2 20s ease-out infinite;
 }
 .circleBuff {
 	width: 400px;
@@ -1813,8 +1813,11 @@ h4 {
 	0% {
 		background-position-x: 0px;
 	}
-	100% {
+	50% {
 		background-position-x: -480px;
+	}
+	100% {
+		background-position-x: 0px;
 	}
 }
 @keyframes implode {
