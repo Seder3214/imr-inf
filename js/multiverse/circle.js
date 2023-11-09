@@ -239,7 +239,7 @@ if (hasElement(47,1)) x = x.add(muElemEff(47))
     cycleGain() {
         let eff = E(1)
         eff = E(tmp.mv.ringEff).mul(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
-        if (hasElement(46,1)) eff = eff.mul(muElemEff(46))
+        if (hasElement(44,1)) eff = eff.mul(muElemEff(44))
         return eff
     },
     ringEff() {
