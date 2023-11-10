@@ -851,7 +851,7 @@ if (FERMIONS.onActive('07')|| CHALS.inChal(19)||CHALS.inChal(20)) {
         player.inf.theorem_max = E(1)
     }
     power = Math.round(100+getPowerMult(tmp.core_lvl)*100)/100
-    lvl = tmp.core_lvl
+    lvl = player.inf.theorem_max
     for (let i = 0; i < MAX_CORE_LENGTH; i++) if (player.inf.core[i] && hasElement(300)) {
      player.inf.core[i].power=power
     }
@@ -864,13 +864,13 @@ player.inf.core[4].level = E(player.inf.theorem_max).floor()
     player.inf.theorem_max = E(tmp.core_lvl)
 }
 for (let i = 0; i < 1; i++) if (player.inf.core[i] && hasElement(229)) {
-    player.inf.core[i].lvl=lvl
+    player.inf.core[i].level=lvl
    }
    for (let i = 1; i < 3; i++) if (player.inf.core[i] && hasElement(249)) {
-    player.inf.core[i].lvl=lvl
+    player.inf.core[i].level=lvl
    }
    for (let i = 2; i < 5; i++) if (player.inf.core[i] && hasElement(260)) {
-    player.inf.core[i].lvl=lvl
+    player.inf.core[i].level=lvl
    }
    if (!CHALS.inChal(19)&&(!CHALS.inChal(20))) { player.inf.dim_mass = player.inf.dim_mass.add(tmp.dim_mass_gain.mul(dt))
     player.inf.nm_base = player.inf.nm_base.add(tmp.nm_base_gain.mul(dt))
