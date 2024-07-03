@@ -31,7 +31,7 @@ const GALAXY = {
        else x = player.galaxy.generator.add(tmp.galaxy.bonus).add(1).pow(pow).mul(player.galaxy.stars.add(1).log(1.15).max(1)).max(1)
 
        x = overflow(x,E(1e9).pow(hasTree('glx13')?treeEff('glx13'):1),hasElement(305)?0.5:0.25)
-        return x = overflow(x,E(1e15).pow(hasTree('glx19')?treeEff('glx19'):1),0.25)
+        return x = overflow(x,E(1e15).pow(hasTree('glx19')?treeEff('glx19'):1),0.285)
     },
     effect() {
         let x = E(1)
