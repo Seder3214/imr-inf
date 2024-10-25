@@ -393,7 +393,7 @@ function updateTemp() {
     tmp.brokenInf = hasInfUpgrade(16)
     tmp.ascensions_unl = hasElement(281)
     tmp.bpUnl = hasElement(294)
-    tmp.mlt_unl = player.chal.comps[20].gte(3) || player.mv.points.gt(0) || player.mv.firstReset == true
+    tmp.mlt_unl = player.chal.comps[20].gte(2) || player.mv.points.gt(0) || player.mv.firstReset == true
     updateGradeTemp()
     updateOrbTemp()
     updateInfTemp()
