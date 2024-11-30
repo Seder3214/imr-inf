@@ -117,7 +117,7 @@ const DARK_RUN = {
             effDesc: x=>"^"+format(x,2),
         },{
             max:10,
-            canUpdateMax() {return tmp.inf_unl},
+            canUpdateMax() {return tmp.inf_unl&&(hasElement(47,1))},
             maxUpdated(){let x = 10
                 if (tmp.inf_unl) x = x+(Math.floor(theoremEff('mv',4)))
                     return x
@@ -129,7 +129,7 @@ const DARK_RUN = {
                 return {0: Math.floor(270+10*i), 3: Math.floor(150+10*i), 4: Math.floor(140+10*i)} 
             },
             eff(i) { let x = i/50
-                if (tmp.inf_unl) x = (x+0.85)**(theoremEff('mv',4))
+                if (tmp.inf_unl&&hasElement(47,1)) x = (x+0.85)**(theoremEff('mv',4))
                 return x },
             effDesc: x=>"+"+format(x,2),
         },{

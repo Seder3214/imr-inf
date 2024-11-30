@@ -415,7 +415,7 @@ if (x>=1e10) return x = 1e10
                 return x
             },
             s => {
-                let x = Decimal.pow(1.35,Math.log2(s+1)).max(1)
+                let x = Decimal.pow(1.35,Math.log2(s+1))
                 x2=x/3.5
                 return x = overflow(x,15,0.05)
             },
