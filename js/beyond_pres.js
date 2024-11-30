@@ -25,7 +25,7 @@ const BEYOND_PRES = {
             player.pres.beyond = auto ? player.pres.beyond.max(tmp.beyond_pres.bulk) : player.pres.beyond.add(1)
 
 
-            if (!hasBeyondRank(2,10)) {player.prestiges[4] = E(0)
+            if (!hasBeyondPres(2,10)) {player.prestiges[4] = E(0)
             INF.doReset()}
         }
     },
