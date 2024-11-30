@@ -813,7 +813,7 @@ player.mv.firstReset == true },
             22: {
                 unl() { return elemEffect(321)>=2 && hasElement(321) && tmp.mlt_unl },
                 desc: `First Circle effect formula is much better.`,
-                cost: E('e1e102000'),
+                cost: E('e1e88300'),
             },
         },
         3: {
@@ -998,7 +998,7 @@ player.mv.firstReset == true },
             22: {
                 unl() { return elemEffect(321)>=2 && hasElement(321) && tmp.mlt_unl },
                 desc: `Remove the softcaps of Modificators self-boosts and boost their effect.`,
-                cost: E('e1e90000'),
+                cost: E('e1e80000'),
             },
         },
         4: {

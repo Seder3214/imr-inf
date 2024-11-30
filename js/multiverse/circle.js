@@ -257,7 +257,7 @@ if (hasElement(52,1)) x = x.add(muElemEff(52))
         let eff = E(1)
         eff = E(tmp.mv.ringEff).mul(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
         if (hasElement(44,1)) eff = eff.mul(muElemEff(44))
-            if (tmp.inf_unl) eff = eff.mul(theoremEff("mv",7))
+        if (tmp.inf_unl) eff = eff.mul(theoremEff("mv",7))
         return eff
     },
     ringEff() {

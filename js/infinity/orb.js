@@ -8,7 +8,7 @@ const ORB = {
     unl() {
         let x = 0
         if (player.inf.c18.orb.gte(1)) x += 2
-        if (player.inf.c18.orb.gte(1)) x += 2
+        if (player.inf.c18.orb.gte(1)) x += 4
         if (hasElement(342)) x += 2
         return x
     },
@@ -30,7 +30,7 @@ const ORB = {
         }
     },
 requirement: [E('e1.060e10'),E('e1.45e10'),E('e1.63e10'),mlt(159000),mlt(1100000),mlt(5.5e18)],
-requirementAfter: [E(`ee10500`),E(`ee17500`)],
+requirementAfter: [E(`ee11630`),E(`ee17500`)],
 canBuy(x) {
     let u = this.upgs[x]
     let res = player.inf.c18.orb

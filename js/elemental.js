@@ -1999,7 +1999,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     inf: true,
     desc: `Get 1/10 of Ring's Durability per Orbit addition.`,
-    cost: E('1e325'),
+    cost: E('1e370'),
 },
 {
     desc: 'Remove Hyper-Valor scaling.',
@@ -2018,7 +2018,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     inf: true,
     desc: 'Six Slot theorem will be at the max theorem level.',
-    cost: E('1e370'),
+    cost: E('1e450'),
 },
 {
     c16: true,
@@ -2038,12 +2038,12 @@ if (hasElement(317)) ret = ret.mul(1.15)
         return x
     },
     effDesc(x){return formatMult(x)},
-    cost: E('e2.9e12'),
+    cost: E('e3.1e12'),
 },
 {
     inf: true,
     desc: 'Second Circle effect formula is slightly better.',
-    cost: E('5e406'),
+    cost: E('5e470'),
 },
 {
     dark:true,
@@ -2057,7 +2057,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 {
     inf: true,
     desc: 'Unlock Eight Dot for theorems.',
-    cost: E('1e460'),
+    cost: E('1e490'),
 },
 {
     dark:true,
