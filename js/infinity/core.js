@@ -524,7 +524,7 @@ debug.addRandomTheorem = (level=0,power=1,max_chance=CORE_CHANCE_MIN) => {
         if (n) c = m
     }
 
-    addTheorem(CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)],c,level,power,max_chance)
+    addTheorem(CORE_TYPE[Math.floor(Math.random() * coreTypeLength())],c,level,power,max_chance)
 }
 
 function theoremEff(t,i,def=1) { return tmp.core_eff[t][i]||def }
@@ -709,7 +709,7 @@ function resetTheorems() {
 }
 
 function createPreTheorem() {
-    let c = [], t = CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)]
+    let c = [], t = CORE_TYPE[Math.floor(Math.random() * coreTypeLength())]
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
