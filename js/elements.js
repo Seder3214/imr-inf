@@ -82,26 +82,6 @@ function setupHTML() {
 		</div>`
 	}
 	mass_upgs_table.setHTML(table)
-	let mv_upgs_table = new Element("mv_upgs_table")
-	table = ""
-	for (let x = 1; x <= UPGS.mv.cols; x++) {
-		let upg = UPGS.mv[x]
-		table += `<div style="width: 100%; margin-bottom: 5px;" class="table_center upgrade" id="mvUpg_div_${x}">
-			<div style="width: 300px">
-				<div class="resources">
-					<img src="images/mv_upg${x}.png">
-					<span style="margin-left: 5px; text-align: left;"><span id="mvUpg_scale_${x}"></span>${upg.title} [<span id="mvUpg_lvl_${x}">X</span>]</span>
-				</div>
-			</div><button id="mvUpg_btn_${x}" class="btn" style="width: 300px;" onclick="UPGS.mv.buy(${x}, true)">Cost: <span id="mvUpg_cost_${x}">X</span></button>
-			<button class="btn" style="width: 120px;" onclick="UPGS.mv.buyMax(${x})">Buy Max</button>
-			<button id="mvUpg_auto_${x}" class="btn" style="width: 80px;" onclick="UPGS.mv.autoSwitch(${x})">OFF</button>
-			<div style="margin-left: 5px; text-align: center; width: 400px">
-			
-			<b>Effect: <span id="mvUpg_eff_${x}">X</span></b><br><span style='font-size: 11px'>(Power: <span id="mvUpg_step_${x}">X</span>)</b><hr style='width: 75px'>
-			</div>
-		</div>`
-	}
-	mv_upgs_table.setHTML(table)
 	let ranks_rewards_table = new Element("ranks_rewards_table")
 	table = ""
 	for (let x = 0; x < RANKS.names.length; x++) {
@@ -628,9 +608,6 @@ tmp.el.playerName.setHTML(player.name)
 			}
 			else if (tmp.stab[0] == 3) {
 				updateStarsHTML()
-			}
-			else if (tmp.stab[0] == 7) {
-				updateMvUpgradesHTML()
 			}
 		}
 		else if (tmp.tab == 1) {
