@@ -405,7 +405,7 @@ if (x>=1e10) return x = 1e10
                else return x = overflow(x,1.25,0.05)
             },
             s => {
-                let x = E(Math.pow(s+1,0.425)/(E(s).add(1).log2().max(1)))
+                let x = E(Math.pow(s+1,0.425)/(E(s+1).add(1).log2().max(1)))
 
                 return x = overflow(x,E(1.6735e5),0.05)
             },
@@ -420,7 +420,7 @@ if (x>=1e10) return x = 1e10
                 return x = overflow(x,15,0.05)
             },
             s => {
-                let x = E(10).pow(Math.pow(s+1,0.055)/(E(s).add(1).log10().add(1).log2()))
+                let x = E(10).pow(Math.pow(s+1,0.055)/(E(s+1).add(1).log10().add(1).log2()))
                 return x
             },
             s => {
@@ -429,8 +429,8 @@ if (x>=1e10) return x = 1e10
                 return x
             },
             s => {
-                let x = E(Math.pow(s+1,0.055)/(E(s).add(1).log10().add(1).log2())).max(1)
-                return x.max(1)
+                let x = E(Math.pow(s+1,0.035)/(E(s+1).add(1).log10().add(1).log2()))
+                return x
             },
         ],
         effDesc: [

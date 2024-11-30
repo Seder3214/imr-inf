@@ -15,7 +15,6 @@ const SPELL = {
                 if (hasElement(333)) player.mv.durability = player.mv.durability.add(tmp.mv.maxDurability.div(10).floor())
             }
             if (player.mv.firstReset == false) {
-                let darkerSave = getDarkSave()
                 player.mv.durability = tmp.mv.maxDurability
                 player.dark.shadow = E(0)
                 player.dark.abyssalBlot = E(0)
@@ -23,8 +22,8 @@ const SPELL = {
                 player.dark.run.active = false
                 player.dark.run.glyphs = [0,0,0,0,0,0]
                 player.dark.run.upg = []
-        
-                dark.matters = darkerSave.matters
+                let darkerSave = getDarkSave()
+                player.dark.matters = darkerSave.matters
                 player.dark.am_mass = E(0)
                 player.dark.am = E(0)
                 player.dark.c16.shard = E(0)
@@ -258,7 +257,7 @@ if (hasElement(52,1)) x = x.add(muElemEff(52))
         let eff = E(1)
         eff = E(tmp.mv.ringEff).mul(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
         if (hasElement(44,1)) eff = eff.mul(muElemEff(44))
-            if (tmp.inf_unl) x = x.mul(theoremEff("mv",7))
+            if (tmp.inf_unl) eff = eff.mul(theoremEff("mv",7))
         return eff
     },
     ringEff() {
