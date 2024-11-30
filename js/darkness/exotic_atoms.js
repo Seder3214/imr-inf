@@ -10,6 +10,7 @@ const MUONIC_ELEM = {
 let upg = this.upgs[x] 
              if (upg.mlt) player.mv.points = player.mv.points.sub(upg.cost)
   if (x==43) player.mv.durability = tmp.mv.maxDurability.add(muElemEff(43))
+if (x==52) player.mv.orbits = player.mv.orbits.div(2).floor()
              player.atom.muonic_el.push(x) 
          }
     },
@@ -141,7 +142,7 @@ let upg = this.upgs[x]
             eff() {
                 let x = tmp.exotic_atom.amount.div(Number.MAX_VALUE).max(1).log(hasElement(25,1)?1.001:1.1).add(1)
                 if (hasElement(42,1)) x = tmp.exotic_atom.amount.max(1).log(hasElement(25,1)?1.001:1.1).pow(1.25).add(1)
-                if (player.chal.comps[17].gte(1)) x = x.mul(player.chal.comps[17].mul(1.5).pow(0.25).add(1))
+                if (tmp.chal) x = x.mul(tmp.chal.eff[17].ret)
                 return x
             },
             effDesc: x=>formatMult(x),
@@ -343,58 +344,67 @@ let upg = this.upgs[x]
                 return x
             },
             effDesc: x=>"+"+format(x),
-            cost: E(250),
+            cost: E(100),
         },
         {
             mlt: true,
             desc: `Increase Multiverse Fragments gain/cycle based on cycle time (less cycle time = more bouns).`,
             eff() {
                 let x = E(1)
-                x = x.mul(E(100).pow(Decimal.pow(0.8,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(40))).add(1)
+                x = x.mul(E(10).pow(Decimal.pow(0.8,tmp.mv.cycleTime)).div(tmp.mv.cycleTime.div(25))).add(1)
                 return x
             },
             effDesc: x=>"x"+format(x),
-            cost: E(1000),
+            cost: E(300),
         },
         {
             mlt: true,
             desc: `Increase the power of Multiverse Muscler based on Muscler.`,
             eff() {
                 let x = E(1)
-                x = player.massUpg[1]?player.massUpg[1].add(1).log2().div(5).max(1):E(1)
-                return x
+                x = player.massUpg[1]?player.massUpg[1].add(1).pow(0.1).max(1):E(1)
+                return x =overflow(x,E(1e200),0.1)
             },
             effDesc: x=>"+"+format(x),
-            cost: E(8500),
+            cost: E(350),
         },
         {
             mlt: true,
             desc: `Unlock new [Circle] effect.`,
-            cost: E(14670),
+            cost: E(650),
         },
         {
             mlt: true,
-            desc: `Increase the amount of cycles needed to get Orbits based on Core Level.`,
-            cost: E(183000),
+            desc: `Unlock String Theorem and 6th Theorem Slot.`,
+            cost: E(1000),
+        },
+        {
+            mlt: true,
+            desc: `Unlock more elements (both muonic and normal).`,
+            cost: E(1750),
+        },
+        {
+            desc: `Triunbium-313 is better.`,
+            cost: E(`1e270100`),
+        },
+        {
+
+            desc: `[Chaotic Matter Annihilation] effect also applies to Triunquadium-314.`,
+            cost: E(`1e280000`),
+        },
+        {
+            mlt: true,
+            desc: `When Ring's Durability reaches 0, get a 25% change to refill 1/2 of max durability.`,
+            cost: E(18750),
+        },
+        {
+            mlt: true,
+            desc: `Increase the amount of cycles needed to get Orbits based on Core Level (buying this element will remove half of orbits).`,
+            cost: E(100000),
 eff() {let x = E(0)
 x = player.mv.coreLvl.mul(1.75).pow(1.25).round()
 return x},
 effDesc: x=>"+"+format(x),
-        },
-        {
-            mlt: true,
-            desc: `Unlock a new Circle' effect.`,
-            cost: E(1.75e6),
-        },
-        {
-            mlt: true,
-            desc: `Remove softcaps from Modificator's effect that boosts each other.`,
-            cost: E(1.34e7),
-        },
-        {
-            mlt: true,
-            desc: `[Chaotic Matter Annihilation] effect also applies to Triunquadium-314.`,
-            cost: E(1e9),
         },
         /*
         {
@@ -417,7 +427,8 @@ effDesc: x=>"+"+format(x),
         if (tmp.brokenInf) u += 12
         if (hasElement(30,1)) u+= 6
         if (hasElement(302)) u+= 6
-        if (tmp.mlt_unl) u = 42 + 7
+        if (tmp.mlt_unl) u = 42 + 6
+        if (hasElement(48,1)) u+=4
         return u
     },
 }
@@ -569,9 +580,10 @@ const EXOTIC_ATOM = {
             },x=>`Increase matter exponent by <b>+${format(x)}</b>`],
             [a=>{
                 if (player.dark.exotic_atom.tier >= 15) x = Decimal.pow(0.95,overflow(a.add(1).log10(),2,0.5).root(4)).div(player.dark.am?tmp.am_mass_eff.max(1):1)
+                if (player.dark.exotic_atom.tier >= 24) x =  Decimal.pow(0.635,overflow(a.add(1).log2(),2,0.5).root(4)).div(player.dark.am?tmp.am_mass_eff.max(1):1)
 else x = E(0)
                 return x.toNumber()
-            },x=>`Reduce FSS requirement by <b>${formatReduction(x)}</b>. Req: 15th Tier.`],
+            },x=>`Reduce FSS requirement by <b>${formatReduction(x)}</b>. Req: 15th Tier. <span style='color: orange'>${player.dark.exotic_atom.tier >= E(24)?`[Muonized]</span>`:`</span>`}`],
             [a=>{
                 if (player.dark.exotic_atom.tier >= 17) x = a.add(1).log(1.01).pow(27).add(1)
                 if (player.dark.exotic_atom.tier >= 18) x = a.add(1).log(1.01).pow(500).add(1)

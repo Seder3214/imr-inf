@@ -860,9 +860,8 @@ width: 400px;
 margin: auto;
 background-color: rgba(250, 0, 0, 0.05);
 text-align: center;
-padding-top: 40px;
-padding-bottom: 40px;
-table-layout: auto;
+padding-top: 30px;
+height: 150px;
 
 }
 .circleText {
@@ -876,9 +875,8 @@ table-layout: auto;
 	margin: auto;
 	background-color: rgba(250, 71, 0, 0.05);
 	text-align: center;
-	padding-top: 40px;
-	padding-bottom: 40px;
-	table-layout: auto;
+	padding-top: 30px;
+	height: 150px;
 }
 .mltButton {
 	cursor: pointer;
@@ -1592,7 +1590,25 @@ h4 {
 	color: pink;
 	border-color: pink;
 }
-
+.theorem_div.mv {
+	color: rgb(255, 136, 0);
+	border-color: rgb(255, 136, 0);
+	animation: mltAnimT 3s ease infinite;
+}
+@keyframes mltAnimT {
+	0% {
+		border-color: rgb(194, 98, 35);
+		color:rgb(194, 98, 35);
+	}
+	50% {
+		border-color: rgb(247, 134, 59);
+		color:rgb(247, 134, 59);
+	}
+	100% {
+		border-color: rgb(194, 98, 35);
+		color:rgb(194, 98, 35);
+	}
+}
 .theorem_div > .c_pow {
 	position: absolute;
 	top: 0;

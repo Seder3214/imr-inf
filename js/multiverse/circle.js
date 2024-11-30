@@ -1,16 +1,30 @@
 const SPELL = {
     getCycle() {
         if (tmp.mv_time.gte(tmp.mv.cycleTime)) {
+            if (hasElement(51,1)) {
+                let chance = Math.random()
+                if (player.mv.durability==0 && chance > 0.75) player.mv.durability = player.mv.durability.add(tmp.mv.maxDurability.div(2).floor())
+            }
             player.mv.totalCycles = player.mv.totalCycles.add(1)
             player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
-            player.mv.durability = player.mv.durability.sub(1)
+            player.mv.durability = player.mv.durability.sub(1).max(0)
             player.mv.currentCount = player.mv.currentCount.add(1)
             if (player.mv.currentCount.gte(tmp.mv.addOrbit_req)) {
                 player.mv.currentCount = E(0)
                 player.mv.orbits = player.mv.orbits.add(1)
+                if (hasElement(333)) player.mv.durability = player.mv.durability.add(tmp.mv.maxDurability.div(10).floor())
             }
             if (player.mv.firstReset == false) {
+                let darkerSave = getDarkSave()
                 player.mv.durability = tmp.mv.maxDurability
+                player.dark.shadow = E(0)
+                player.dark.abyssalBlot = E(0)
+        
+                player.dark.run.active = false
+                player.dark.run.glyphs = [0,0,0,0,0,0]
+                player.dark.run.upg = []
+        
+                dark.matters = darkerSave.matters
                 player.dark.am_mass = E(0)
                 player.dark.am = E(0)
                 player.dark.c16.shard = E(0)
@@ -23,19 +37,20 @@ const SPELL = {
                 player.inf.upg = []
             for (let x = 0; x < 5; x++) player.galaxy.grade.type[x] = E(0)
             player.galaxy.grade.theorems = E(0)
+        player.galaxy.stars = E(0)
             player.galaxy.times = E(0)
             let me = []
-            for (let i = 0; i < player.atom.muonic_el.length; i++) {
+            for (let i = 0; i > 43; i++) {
                 let u = MUONIC_ELEM.upgs[player.atom.muonic_el[i]]
                 if (u.mlt) me.push(player.atom.muonic_el[i])
             }
-           player
             player.md.break.active = false
            for (let x = 1; x <= 20; x++) player.chal.comps[x] = E(0)
            for (let x = 0; x < ASCENSIONS.names.length; x++) player.ascensions[x] = E(0)
            player.ranks.beyond = E(0)
            tmp.beyond_pres.max_tier = E(0)
            tmp.beyond_pres.latestRank = E(0)
+           player.pres.beyond = E(0)
             player.inf.points = E(0)
             player.inf.pe = E(0)
             player.inf.dim_mass = E(0)
@@ -218,32 +233,37 @@ const SPELL = {
     cyclesToOrbit() {
         let x = E(tmp.mv.cycleTime)
         x = x.pow(0.5).mul(1.5).floor()
-if (hasElement(47,1)) x = x.add(muElemEff(47))
+if (hasElement(50,1)) x = x.add(muElemEff(50))
         return x
     },
     coreLvlUp() {
         let x = E(15)
-        x = x.mul(player.mv.coreLvl.pow(2.15))
+        x = x.mul(player.mv.coreLvl.pow(1.35))
         return x.floor()
     },
     cycleTime() {
-        let time = E(5)
-        time = E(5).add(tmp.mv.timeScale)
+        let time = E(3)
+        if (tmp.inf_unl) time= time.mul(theoremEff('mv',6))
+        time = time.add(tmp.mv.timeScale)
+        if (CHALS.inChal(23)) time=time.mul(player.mass.add(1).log10().add(1).log10().add(1).log(2).pow(2.25))
         return time
     },
     timeScale() {
         let x = E(1)
        x = player.mv.upgs[0].add(1).mul(spellEff(2).div(5).add(1)).mul(player.mv.orbits.sub(player.mv.upgs[1]).div(20).add(1)).mul(player.mv.totalCycles.pow(0.15).root(2))
+       if (tmp.inf_unl) x= x.mul(theoremEff('mv',3))
        return x
     },
     cycleGain() {
         let eff = E(1)
         eff = E(tmp.mv.ringEff).mul(tmp.mv.coreEff).div(tmp.mv.orbitNerf)
         if (hasElement(44,1)) eff = eff.mul(muElemEff(44))
+            if (tmp.inf_unl) x = x.mul(theoremEff("mv",7))
         return eff
     },
     ringEff() {
         let x = E(1)
+        if (player.mv.durability==0) return x = player.mv.upgs[0].add(1).pow(0.85)
         x = player.mv.upgs[0].add(1).pow(1.5).mul(2)
         return x
     },
@@ -297,16 +317,19 @@ if (hasElement(47,1)) x = x.add(muElemEff(47))
 
     function circleEffects() {
         let a = E(tmp.mv.cycleGain), eff = {}
-        eff.cs = Decimal.pow(a.add(1).div(10),a.div(2))
-       if (hasElement(46,1)) eff.theoremLvl = a.add(1).root(4).floor()
+        eff.cs = E(1e100).pow(a).add(1).log10().pow(1.85)
+        if (player.mainUpg.bh.includes(22)) eff.cs = E(`e1e8`).pow(a).add(1).root(1000).pow(1.15)
+       if (hasElement(46,1)) eff.theoremLvl = a.add(1).root(2).floor()
+        if (hasElement(341)) eff.theoremLvl = a.add(1).pow(0.75).floor().softcap(300,0.5,0)
         return eff
     }
 function spellEff(id,def=E(1)) { return tmp.mv.upgs[id].eff??def }
     function calcMv(dt) {
+        let c23_gs= player.chal.active==23?player.bh.mass.add(1).log10().add(1).log10().pow(0.5).mul(dt):dt
         player.mv.durability = player.mv.durability.max(0)
         player.mv.orbits = player.mv.orbits.max(0)
         if (player.mv.totalCycles.gte(tmp.mv.coreLvl_req)) player.mv.coreLvl = player.mv.coreLvl.add(1)
-        tmp.mv_time = tmp.mv_time.add(dt).min(tmp.mv.cycleTime)
+        tmp.mv_time = tmp.mv_time.add(c23_gs).min(tmp.mv.cycleTime)
         player.mv.best = Math.max(player.mv.points)
     }
     function updateSpellTemp() {

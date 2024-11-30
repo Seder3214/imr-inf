@@ -167,6 +167,7 @@ function calc(dt) {
             if (hasElement(131)) player.chal.comps[12] = player.chal.comps[12].max(tmp.chal.bulk[12].min(tmp.chal.max[12]))
             if (hasInfUpgrade(12)) for (let x = 13; x <= 15; x++) player.chal.comps[x] = player.chal.comps[x].max(tmp.chal.bulk[x].min(tmp.chal.max[x]))
             if (hasElement(295)) for (let x = 16; x <= 17; x++) player.chal.comps[x] = player.chal.comps[x].max(tmp.chal.bulk[x].min(tmp.chal.max[x]))
+            if (hasTree("qu_qol3")) for (let x = 21; x <= 22; x++) player.chal.comps[x] = player.chal.comps[x].max(tmp.chal.bulk[x].min(tmp.chal.max[x]))
         }
     }
 
@@ -584,14 +585,15 @@ function loadGame(start=true, gotNaN=false) {
     if (!gotNaN) tmp.prevSave = localStorage.getItem("testSave")
     wipe()
     load(tmp.prevSave)
-    setupHTML()
     setupTooltips()
+    setupHTML()
     updateQCModPresets()
+    
     if (start) {
         setInterval(save,60000)
         for (let x = 0; x < 5; x++) updateTemp()
-
         updateHTML()
+
         if (player.name == '' || player.name.length > 12){    createPrompt("Choose your name! Max Length - 12",'import',loadbeta=>{
             if(loadbeta.length <= 12) player.name = loadbeta;
             else if(loadbeta.length > 12) {
@@ -599,7 +601,6 @@ function loadGame(start=true, gotNaN=false) {
                 resetName()}
              })
             }
-
         let t = (Date.now() - player.offline.current)/1000
         if (player.offline.active && t > 60) simulateTime(t)
 

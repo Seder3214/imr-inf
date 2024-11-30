@@ -24,6 +24,7 @@ const FORMS = {
          if (hasElement(39,1)) x = x.mul(elemEffect(39,1)) 
          if (hasUpgrade('br',21)) x = x.pow(upgEffect(4,21))
         if (tmp.inf_unl) x = x.mul(10).mul(theoremEff('time',0))
+            if (hasBeyondPres(2,2)) x = x.mul(beyondPresEff(2,2))
 
         return x
     },
@@ -120,6 +121,8 @@ let t = x
         let op3 = E(.25)
 let os4 = E('ee1500')
 let op4 = E(0.7)
+let os5 = E('ee100000')
+let op5 = E(0.25)
         if (hasTree('ct6')) os = os.pow(treeEff('ct6'))
         if (tmp.inf_unl) os = os.pow(theoremEff('mass',1))
 
@@ -160,16 +163,19 @@ if (hasElement(290) && !(CHALS.inChal(16)|| CHALS.inChal(17)|| CHALS.inChal(19) 
     os4 = os4.pow('1e1000')}
     if (hasElement(301)) {os3 = E('eeee10000')
     os4 = E('eeee10000')}
+
+    if (tmp.inf_unl) os5 = os5.pow(theoremEff("mass",7))
         x = overflow(x,os,op)
 
         x = overflow(x,os2,op2)
 
         x = overflow(x,os3,op3)
         x =overflow(x,os4,op4)
+        x =overflow(x,os5,op5)
         tmp.overflowBefore.mass = o
         tmp.overflow.mass = calcOverflow(o,x,os)
-        tmp.overflow_start.mass = [os,os2,os3,os4]
-        tmp.overflow_power.mass = [op,op2,op3,op4]
+        tmp.overflow_start.mass = [os,os2,os3,os4,os5]
+        tmp.overflow_power.mass = [op,op2,op3,op4,op5]
 
         if (CHALS.inChal(13)|| CHALS.inChal(18)) x = x.max(1).log10().tetrate(1.5)
         if (hasTree('glx21')) x = x.pow(treeEff('glx21'))

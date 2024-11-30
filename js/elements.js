@@ -191,6 +191,7 @@ function setupHTML() {
 	setupOrbHTML()
 setupGradeHTML()
 setupSpellHTML()
+setupChalChangeHTML()
 	/*
 	function setupTestHTML() {
 		let test_table = new Element("test_table")
@@ -248,8 +249,8 @@ function updateUpperHTML() {
 	tmp.el.chal_upper.setVisible(chal_unl)
 	if (chal_unl) {
 		let data = CHALS.getChalData(player.chal.active, tmp.chal.bulk[player.chal.active].max(player.chal.comps[player.chal.active]))
-		tmp.el.chal_upper.setHTML(`You are now in [${CHALS[player.chal.active].title}] Challenge! Go over ${tmp.chal.format(tmp.chal.goal[player.chal.active])+CHALS.getResName(player.chal.active)} to complete.
-		<br>+${tmp.chal.gain} Completions (+1 at ${tmp.chal.format(data.goal)+CHALS.getResName(player.chal.active)})`)
+		tmp.el.chal_upper.setHTML(`You are now in [${CHALS[player.chal.active].title}] Challenge! Go over ${player.chal.active==23?formatTime(tmp.chal.goal[player.chal.active])+CHALS.getResName(player.chal.active):tmp.chal.format(tmp.chal.goal[player.chal.active])+CHALS.getResName(player.chal.active)} to complete.
+		<br>+${tmp.chal.gain} Completions (+1 at ${player.chal.active==23?formatTime(data.goal)+CHALS.getResName(player.chal.active):tmp.chal.format(data.goal)+CHALS.getResName(player.chal.active)})`)
 	}
 
 	/*
@@ -546,7 +547,7 @@ function updateOptionsHTML() {
 		tmp.el.tree_anim_btn.setDisplay(player.supernova.times.gte(1) || quUnl())
 		tmp.el.tree_anim.setTxt(TREE_ANIM[player.options.tree_animation])
 		tmp.el.mass_dis.setTxt(["Default",'Always show g','Always show mlt','Important units only'][player.options.massDis])
-		tmp.el.omega_badge.setDisplay(localStorage.getItem("imr_secret_badge1") == "1")
+		tmp.el.omega_badge.setVisible(localStorage.getItem("imr_secret_badge1") == "1")
 	} else if (tmp.stab[11] == 1) {
 		updateResourcesHiderHTML()
 	}
@@ -611,6 +612,8 @@ tmp.el.playerName.setHTML(player.name)
     			tmp.el.massOverflow3.setHTML(`Because of mass overflow^3 at <b>${formatMass(tmp.overflow_start.mass[2])}</b>, your mass overflow is even stronger!`)
 				tmp.el.massOverflow4.setDisplay(player.mass.gte(tmp.overflow_start.mass[3]))
     			tmp.el.massOverflow4.setHTML(`Because of mass overflow^4 at <b>${formatMass(tmp.overflow_start.mass[3])}</b>, your mass overflow is even stronger!`)
+				tmp.el.massOverflow5.setDisplay(player.mass.gte(tmp.overflow_start.mass[4]))
+    			tmp.el.massOverflow5.setHTML(`Because of mass overflow^4 at <b>${formatMass(tmp.overflow_start.mass[4])}</b>, your mass overflow is even stronger!`)
 				tmp.el.strongerOverflow.setDisplay(tmp.upgs.mass[3].eff.eff.gte(tmp.overflow_start.stronger[0]))
     			tmp.el.strongerOverflow.setHTML(`Because of stronger overflow at <b>${format(tmp.overflow_start.stronger[0])}</b>, your stronger effect is ${overflowFormat(tmp.overflow.stronger||1)}!`)
 			

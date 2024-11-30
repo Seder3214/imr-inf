@@ -825,6 +825,17 @@ const BEYOND_RANKS = {
             1: `Overpower softcap^2 starts 1.25x later per beyond-ranks' maximum tier (Starts at Pentadec).`,
             13: `The formula of Ascension Base is better.`
         },
+        11: {
+        },
+        12: {
+        },
+        13: {
+            7: `Make C17's first reward formula much better`,
+            8: `Make C18's reward formula better`,
+        },
+        14: {
+            3: `Add +90 Max C20 completions.`
+        }
     },
 
     rewardEff: {

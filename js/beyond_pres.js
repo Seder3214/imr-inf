@@ -25,8 +25,8 @@ const BEYOND_PRES = {
             player.pres.beyond = auto ? player.pres.beyond.max(tmp.beyond_pres.bulk) : player.pres.beyond.add(1)
 
 
-            player.prestiges[4] = E(0)
-            INF.doReset()
+            if (!hasBeyondRank(2,10)) {player.prestiges[4] = E(0)
+            INF.doReset()}
         }
     },
     autoSwitch() { player.auto_beyond_pres = !player.auto_beyond_pres },
@@ -41,6 +41,8 @@ const BEYOND_PRES = {
         },
         2: {    
      1: `Automatically Beyond-Prestige up.<br>Auto-buy Antimatter Generator, every Modificators and Parallel Extruder.<br>They cost nothing`,
+     2: `Pre-Infinity Global Speed is boosted by beyond-prestiges max tier (Weaker in C20).`,
+     10: `Beyond-Prestiges no longer resets anything.`
     },
     },
 
@@ -63,7 +65,16 @@ const BEYOND_PRES = {
                 x=>"x"+format(x),
             ],
         },
-        2: {},
+        2: {
+            2: [
+                ()=>{
+                    let x = ((E(CHALS.inChal(20)?25.5:17683)**tmp.beyond_pres.max_tier)**0.95)/(tmp.beyond_pres.max_tier*2.783)
+
+                    return x
+                },
+                x=>"x"+format(x),
+            ],
+        },
     },
 }
 

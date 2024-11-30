@@ -41,6 +41,7 @@ const DARK_RUN = {
         null,
         {
             max: 10,
+            canUpdateMax() {return false},
             desc: `Raise mass gain by 1.5 every level.`,
             cost(i) {
                 i *= Math.max(1,i-4)**0.5
@@ -50,6 +51,7 @@ const DARK_RUN = {
             effDesc: x=>"^"+format(x,2),
         },{
             max: 10,
+            canUpdateMax() {return false},
             desc: `Raise mass of black hole gain by 1.5 every level.`,
             cost(i) {
                 i *= Math.max(1,i-4)**0.5
@@ -59,6 +61,7 @@ const DARK_RUN = {
             effDesc: x=>"^"+format(x,2),
         },{
             max: 5,
+            canUpdateMax() {return false},
             desc: `Exotic rank starts x1.25 later every level.`,
             cost(i) {
                 return {1: 6*i+10, 2: 6*i+5}
@@ -67,10 +70,12 @@ const DARK_RUN = {
             effDesc: x=>"x"+format(x,2)+" later",
         },{
             max: 1,
+            canUpdateMax() {return false},
             desc: `Rank tiers' nerf power from 8th QC modifier is weaker while dark running.`,
             cost() { return {2: 15, 5: 5} },
         },{
             max: 10,
+            canUpdateMax() {return false},
             desc: `Raise atom gain by 1.5 every level.`,
             cost(i) {
                 return {2: 75+5*i, 3: 5*i+5}
@@ -79,6 +84,7 @@ const DARK_RUN = {
             effDesc: x=>"^"+format(x,2),
         },{
             max: 100,
+            canUpdateMax() {return false},
             desc: `Triple dark ray gain for each level.`,
             cost(i) {
                 i *= Math.max(1,i-4)**0.5
@@ -88,11 +94,13 @@ const DARK_RUN = {
             effDesc: x=>"x"+format(x,0),
         },{
             max: 1,
+            canUpdateMax() {return false},
             desc: `Gain x1.5 more Cyrillic Glyphs.`,
             cost() { return {5: 25} },
             eff(i) { return 1.5**i },
         },{
             max: 10,
+            canUpdateMax() {return false},
             desc: `Dilated mass's overflow starts ^10 later every level.`,
             cost(i) {
                 i *= Math.max(1,i-4)**0.5
@@ -102,35 +110,48 @@ const DARK_RUN = {
             effDesc: x=>"^"+format(x,0),
         },{
             max: 5,
+            canUpdateMax() {return false},
             desc: `Star generators are ^1.5 stronger every level.`,
             cost(i) { return {1: 200+10*i, 2: 200+10*i, 5: 40+5*i} },
             eff(i) { return 1.5**i },
             effDesc: x=>"^"+format(x,2),
         },{
-            max: 10,
+            max:10,
+            canUpdateMax() {return tmp.inf_unl},
+            maxUpdated(){let x = 10
+                if (tmp.inf_unl) x = x+(Math.floor(theoremEff('mv',4)))
+                    return x
+            },
             desc: `Prestige base's exponent is increased by 0.02 per level.`,
             cost(i) {
                 i *= Math.max(1,i-4)**0.5
+                if (i>=10) i *= Math.max(1,i-2)**0.85
                 return {0: Math.floor(270+10*i), 3: Math.floor(150+10*i), 4: Math.floor(140+10*i)} 
             },
-            eff(i) { return i/50 },
+            eff(i) { let x = i/50
+                if (tmp.inf_unl) x = (x+0.85)**(theoremEff('mv',4))
+                return x },
             effDesc: x=>"+"+format(x,2),
         },{
             max: 2,
+            canUpdateMax() {return false},
             desc: `Add 0.1 to matter exponent.`,
             cost(i) { return {5: 80+46*i} },
             eff(i) { return i/10 },
             effDesc: x=>"+"+format(x,1),
         },{
             max: 1,
+            canUpdateMax() {return false},
             desc: `Cosmic ray effect is now an exponent at a super reduced rate.`,
             cost(i) { return {0: 487, 4: 271, 5: 121} },
         },{
             max: 1,
+            canUpdateMax() {return false},
             desc: `Green Chromas gain is squared.`,
             cost(i) { return {0: 542, 2: 404} },
         },{
             max: 10,
+            canUpdateMax() {return false},
             desc: `Each matter's exponent is increased by 12.5% per level.`,
             cost(i) {
                 let j = Math.ceil(10*i**1.2)
@@ -177,6 +198,7 @@ function buyGlyphUpgrade(i) {
     let ua = upgs[i]||0
     let u = DARK_RUN.upg[i]
     let max = u.max||Infinity
+    if (u.canUpdateMax()) max = u.maxUpdated()||Infinity
     let cost = u.cost(ua)
 
     if (isAffordGlyphCost(cost) && ua < max) {
@@ -212,6 +234,7 @@ function updateDarkRunHTML() {
         let u = DARK_RUN.upg[gum]
         let ua = player.dark.run.upg[gum]||0
         let max = u.max||Infinity
+        if (u.canUpdateMax()==true) max = u.maxUpdated()||Infinity
 
         let desc = "<span class='sky'>"+(typeof u.desc == "function" ? u.desc() : u.desc)+"</span>"
 
@@ -242,6 +265,7 @@ function updateDarkRunHTML() {
 		let u = DARK_RUN.upg[x]
         let ua = player.dark.run.upg[x]||0
         let max = u.max||Infinity
+        if (u.canUpdateMax()) max = u.maxUpdated()||Infinity
 
 		tmp.el['glyph_upg'+x].setClasses({img_btn: true, locked: !isAffordGlyphCost(u.cost(ua)) && ua < max, bought: ua >= max})
 	}

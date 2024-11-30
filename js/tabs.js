@@ -35,7 +35,6 @@ const TABS = {
             { id: "Indescribable Matter", unl() { return quUnl() }, style: "qu" },
             { id: "The Parallel", unl() { return hasInfUpgrade(9) }, style: "inf" },
             { id: "Antimatter", unl() { return hasElement(268) }, style: "dark" },
-            { id: "Multiversal Mass", unl() { return tmp.mlt_unl }, style: "inf" },
         ],
         1: [
             { id: "Ranks Rewards" },
@@ -89,10 +88,8 @@ const TABS = {
         ],
         10: [
             { id: "Circle", style: "mlt" },
-            { id: "Circle Perks", unl() { return true }, style: "mlt" },
-            { id: "Travel", unl() { return true }, style: "mlt" },
-            { id: "Challenge Switcher", unl() { return true }, style: "mlt" },
-
+            { id: "Circle Perks", unl() { return hasElement(54,1) }, style: "mlt" },
+            { id: "Travel", unl() {return hasElement(54,1)}, style: "mlt" },
         ],
         11: [
             { id: "Options" },

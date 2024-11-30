@@ -74,6 +74,7 @@ const UNSTABLE_BH = {
         let x = tmp.unstable_bh.fvm_eff.eff||E(1)
 
         x = x.mul(exoticAEff(1,0))
+        if (tmp.inf_unl) x = x.pow(theoremEff("bh",7))
         return x
     },
     getProduction(x,gain) {
@@ -169,6 +170,7 @@ function setupC16HTML() {
 
 function corruptedShardGain() {
     let bh = player.bh.mass
+    
 
     if (hasElement(245) && (!CHALS.inChal(17))&& !(CHALS.inChal(18))) bh = player.dark.c16.bestBH.max('e100')
    else if (!tmp.c16active || player.bh.mass.lt('e100')) return E(0)
@@ -181,6 +183,7 @@ let x = Decimal.pow(10,overflow(bh.max(1).log10(),1e9,0.5).div(100).root(hasElem
     if (hasBeyondRank(6,27)) x=x.mul(beyondRankEffect(6,27))
     eff = tmp.mv.circleEff
  if(eff.cs) x = x.mul(eff.cs)
+    if (hasElement(331)) x = x.pow(elemEffect(331))
 
     return x.floor()
 }

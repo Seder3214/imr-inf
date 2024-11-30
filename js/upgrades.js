@@ -278,13 +278,15 @@ const UPGS = {
             let inc = upg.inc
             let start = upg.start
             let lvl = player.mvUpg[i]||E(0)
-            let cost, bulk = E(0), fp
+            let cost, bulk = E(0), fp, ffp
 
                 fp = tmp.massFP
+                ffp = E(1)
+                if (i==1 && hasElement(340)) ffp = ffp.mul(elemEffect(340))
                 
-                cost = inc.pow(lvl.div(fp).scaleEvery("mvUpg")).mul(start)
+                cost = inc.pow(lvl.div(fp).scaleEvery("mvUpg")).mul(start).mul(ffp)
                 bulk = E(0)
-                if (player.mv.points.gte(start)) bulk = player.mv.points.div(start).max(1).log(inc).scaleEvery("mvUpg",true).mul(fp).add(1).floor()
+                if (player.mv.points.gte(start)) bulk = player.mv.points.div(ffp).div(start).max(1).log(inc).scaleEvery("mvUpg",true).mul(fp).add(1).floor()
         
             return {cost: cost, bulk: bulk}
         },
@@ -297,6 +299,7 @@ player.mv.firstReset == true },
             effect(x) {
                 let step = E(2)
                 if (hasElement(45,1)) step = step.add(muElemEff(45))
+                if (tmp.inf_unl) step = step.pow(theoremEff('mv',0))
                 let ret = step.mul(x.add(tmp.upgs.mv[1].bonus)).add(1)
                 return {step: step, eff: ret}
             },
@@ -317,7 +320,8 @@ player.mv.firstReset == true },
             start: E(100),
             inc: E(4),
             effect(x) {
-                let step = E(1)
+                let step = E(1.25)
+                if (tmp.inf_unl) step = step.pow(theoremEff('mv',2))
                 let ret = step.mul(x.add(tmp.upgs.mv[2].bonus)).add(1)//.softcap("ee14",0.95,2)
                 return {step: step, eff: ret}
             },
@@ -614,7 +618,7 @@ player.mv.firstReset == true },
                     player.mainUpg.bh.push(x)
                 }
             },
-            lens: 21,
+            lens: 22,
             1: {
                 desc: "Mass Upgardes no longer spend mass.",
                 cost: E(1),
@@ -806,6 +810,11 @@ player.mv.firstReset == true },
                     return "/"+format(x)
                 },
             },
+            22: {
+                unl() { return elemEffect(321)>=2 && hasElement(321) && tmp.mlt_unl },
+                desc: `First Circle effect formula is much better.`,
+                cost: E('e1e102000'),
+            },
         },
         3: {
             title: "Atom Upgrades",
@@ -820,7 +829,7 @@ player.mv.firstReset == true },
                 }
             },
             auto_unl() { return hasTree("qol1") || tmp.inf_unl },
-            lens: 21,
+            lens: 22,
             1: {
                 desc: "Start with Mass upgrades unlocked.",
                 cost: E(1),
@@ -986,6 +995,11 @@ player.mv.firstReset == true },
                     return "x"+format(x)
                 },
             },
+            22: {
+                unl() { return elemEffect(321)>=2 && hasElement(321) && tmp.mlt_unl },
+                desc: `Remove the softcaps of Modificators self-boosts and boost their effect.`,
+                cost: E('e1e90000'),
+            },
         },
         4: {
             title: "Big Rip Upgrades",
@@ -1000,7 +1014,7 @@ player.mv.firstReset == true },
                 }
             },
             auto_unl() { return hasElement(132) || tmp.inf_unl },
-            lens: 21,
+            lens: 22,
             1: {
                 desc: `Start with Hydrogen-1 unlocked in Big Rip.`,
                 cost: E(5),
@@ -1145,6 +1159,11 @@ player.mv.firstReset == true },
                 effDesc(x=this.effect()) {
                     return "^"+format(x)
                 },
+            },
+            22: {
+                unl() { return elemEffect(321)>=2 && hasElement(321) && tmp.mlt_unl },
+                desc: `Remove the softcap from Dimensional Mass effect.`,
+                cost: E('e3085000'),
             },
         },
     },

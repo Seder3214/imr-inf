@@ -6,7 +6,7 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mrredshark77.github.io/imr-inf/" />
-    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.8 pt 1" />
+    <meta property="og:title" content="Incremental Mass Rewritten: New Path Reloaded v0.8.1" />
     <meta property="og:description" content="Incremental Mass Rewritten: New Path Reloaded made by Seder3214." />
     <meta property="og:image" content="https://seder3214.github.io/imr-inf//images/thumbnail.jpg" />
 
@@ -109,7 +109,7 @@
     <div id='app' style='display: none;'>
         <div id="star"></div>
         <div class="table_center" style="height: 100%; width: 100%;">
-            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.8 pt 1 | Player Name: <span id='playerName'></span></div>
+            <div style="position: absolute; bottom: 1; left: 0; user-select: all;">v0.8.1 | Player Name: <span id='playerName'></span></div>
             <div id="tabs">
             </div>
             <div id="main_app" style="width: calc(100% - 450px); height: 100%; overflow-y: auto; overflow-x: hidden; position: relative;">
@@ -118,7 +118,8 @@
                     <button id="nav_right_hider" onclick="hideNavigation(1)"><iconify-icon icon="ic:round-arrow-forward-ios" width="35"></iconify-icon></button>
                 </div>
                 <div style="min-height: 60px">
-                    <div id="chal_upper"></div>
+                    <div id="chal_upper"></div><br>
+                    <span id="time_boost"></span>
                 </div>
                 <div class="main-line"></div>
                 <div id="stabs_div" style="min-height: 55px;">
@@ -278,7 +279,8 @@
                                 <div id="massOverflow"></div>
                                 <div id="massOverflow2" style="color: rgb(255, 197, 215)"></div>
                                 <div id="massOverflow3" style="color: rgb(248, 156, 185)"></div>
-                                <div id="massOverflow4" style="color: rgb(243, 109, 151)"></div><br>
+                                <div id="massOverflow4" style="color: rgb(243, 109, 151)"></div>
+                                <div id="massOverflow5" style="color: rgb(247, 94, 142)"></div><br>
                                 <span id='br_broke' style="color: rgb(252, 16, 90)">X</span>
                                 <div id="strongerOverflow"></div>
                                 <div id="strongerOverflow2" style="color: rgb(255, 197, 215)"></div>
@@ -437,10 +439,14 @@
                                 <div style="width: calc(50%);">
                                     <div id="chals_table"></div>
                                 </div><div style="width: calc(50% - 30px); margin: 0 15px;">
-                                    <button class="btn" id="chal_exit" onclick="CHALS.exit()">Exit Challenge</button><br><br>
+                                    <button class="btn" id="chal_exit" onclick="CHALS.exit()">Exit Challenge</button><p></p>
+                                    <button class="btn" id="chal_change" onclick="CHALS.openChange()">Change the challenge</button><br><br>
+                                    <div id="chal_changeMenu"></div>
+                                    <div id="chal.changeBtnMenu"></div>
                                     <div id="chal_desc_div">
                                         <button class="btn" id="chal_enter" onclick="enterChal()">Enter Challenge</button>
                                         <p id="chal_ch_title"></p>
+                                        <span id="chal_changeCost"></span><br>
                                         <span class="red" id="chal_ch_desc"></span><br>
                                         <span class="red" id="chal_ch_reset"></span>
                                         <p id="chal_ch_goal"></p>
@@ -772,7 +778,7 @@
                         </div>
                     </div><div id="tab_frame10">
                         <div id="stab_frame10_0">
-                            <div class="table_center"><div style="width: 50%; min-width: 500px;">
+                            <div class="table_center"><div style="width: 40%; min-width: 400px;">
                                 You have compleled <h3  id="total"></h3> cycles in total. Completing <h3 id='addOrbit_req'></h3> cycles will add 1 orbit (Currently: <h3 id='currentCount'></h3> cycles completed).<br>
                                 <b class="circleText" style="font-size:20px">Current cycle time is <span id="cycleTime"></span>.</b><br>
                                 Completing the cycle will give you <b class='circleText' style="font-size:20px" id="cycleGain"></b> Multiversal Fragments.
@@ -783,11 +789,11 @@
                                 Your core power is <h3 class='circleText'id="corePower"></h3>.<br>
                                 Note: Every boosting cicrle part are making the cycle time higher!
                     </div>
-                    <div class='circleDebuff'style="width: 25%; min-width: 250px;">
+                    <div class='circleDebuff'style="width: 30%; min-width: 350px;">
                         <h3>Portal Spell's Circle Debuffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is weakened by <h3 id="orbitNerf"></h3></span>.<br>(Based on Orbits)<br><hr style='width: 75px;'><span class="sky">Your circle's parts are boosting cycle time by +<h3 id="timeScale"></h3></span><br>(Based on Everyting)</span><br>
             </div>
-            <div class='circleBuff'style="width: 25%; min-width: 250px;">
-                <h3>Portal Spell's Circle Buffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="ringEff"></h3></span><br>(Based on Ring Length.)<hr style='width: 75px;'>Note: If the ring durability reaches 0 - the effect will be useless<br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="coreEff"></h3></span><br>(Based on Core Level and Core Power)
+            <div class='circleBuff'style="width: 30%; min-width: 350px;">
+                <h3>Portal Spell's Circle Buffs:</h3><br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="ringEff"></h3></span><br>(Based on Ring Length.)<hr style='width: 75px;'>Note: If the ring durability reaches 0 - the effect will be much weaker<br><span class="sky">Your multiverse fragments gain per cycle is boosted by <h3 id="coreEff"></h3></span><br>(Based on Core Level and Core Power)
             </div>
             <div>
                 <h3>Circle effects:</h3><br><span id="circleEffects"></span><br> (Note: This effects are boosted by current gain/cycle.)
@@ -813,7 +819,7 @@
                             <h2>Confirmation Settings</h2><br>
                             <div id="confirm_table" class="table_center"></div>
                             <br><br>
-                            Incremental Mass Rewritten: New Path Reloaded - v0.8 part 1 - made by Seder3214<br>
+                            Incremental Mass Rewritten: New Path Reloaded - v0.8.1 - made by Seder3214<br>
                             Based on Incremental Mass Rewritten -  v0.7.0.1 - made by MrRedShark77<br>
                             The game is inspired by Distance Incremental & Synergism<br>
                             Contributors: <span style="cursor: pointer;" onclick='addNotify(`frfrfr<br><img src="https://5.imimg.com/data5/HO/DK/MY-8155364/lemon-500x500.jpg" style="width:100%">`)'>Lemon</span>, 16777216 & Aarex (Artists)<br><br><br>
@@ -826,9 +832,6 @@
                         </div><div id="stab_frame11_1">
                             <div id="res_hider_table" class="table_center"></div>
                          </div>
-<div style="position: absolute; bottom: 35px; right: 35px;"> 
-                             <img id="omega_badge" src="images/omega.png"> 
-                        </div>
                         <div style="position: absolute; bottom: 35px; right: 35px;">
                             <img id="omega_badge" src="images/omega.png">
                         </div>

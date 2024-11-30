@@ -47,6 +47,7 @@ renown: E(350),
 massUpg4: E(200),
 		inf_theorem: E(25),
 		galaxy: E(20),
+		grading: E(140),
 valor: E(290),
 fusionTier: E(50),
 	},
@@ -144,6 +145,7 @@ fusionTier: 2,
         renown: 40,
 		pe: 3,
 		inf_theorem: 3.15,
+		grading: 5,
 		galaxy: 20,
 valor: 5,
 fusionTier: 5,
@@ -354,6 +356,7 @@ function getScalingStart(type, name) {
 	if (type==0) {
 		if (name=="rank") {
 			if (CHALS.inChal(1) || CHALS.inChal(10)) return E(25)
+			if (CHALS.inChal(21)) return E(5)
 			start = start.add(tmp.chal?tmp.chal.eff[1].rank:0)
 		}
 		else if (name=="tier") {
@@ -374,6 +377,7 @@ function getScalingStart(type, name) {
 		}
 		else if (name=='tickspeed') {
 			if (CHALS.inChal(1) || CHALS.inChal(10)) return E(50)
+			if (CHALS.inChal(21)) return E(10)
 		}
 		else if (name=="prestige") {
 			if (player.md.break.upgs[9].gte(1)) start = start.add(10)
@@ -385,7 +389,6 @@ function getScalingStart(type, name) {
 			if (hasBeyondRank(5,2)) start = start.add(beyondRankEffect(5,2,0))
 			if (hasBeyondRank(8,2)) start = start.add(beyondRankEffect(8,2))
 		}
-
 		else if (!tmp.scaling_pinf.includes(name)) {
 			if (hasElement(252)) start = start.add(elemEffect(252))
 					}
@@ -402,8 +405,17 @@ function getScalingStart(type, name) {
 			if (hasElement(175)) start = start.add(30)
 			if (hasElement(194)) start = start.mul(2)
 		}
+		else if (name=="renown") {
+			if (hasElement(332)) start = start.mul(elemEffect(332).hr)
+		}
+		else if (name=="valor") {
+			if (hasElement(332)) start = start.mul(elemEffect(332).hv)
+		}
 		else if (name=="hex") {
 			if (hasPrestige(0,651)) start = start.mul(4/3)
+		}
+		else if (name=="galaxy") {
+			if (hasElement(343)) start = start.add(15)
 		}
 	}
 	else if (type==2) {
@@ -691,6 +703,9 @@ function noScalings(type,name) {
 	}
 	else if (name=="prestige") {
 		if (type < 3 && hasBeyondRank(5,7)) return true
+	}
+	else if (name=="valor") {
+		if (type < 2 && hasElement(334)) return true
 	}
 else if (name=='glory') {
 if (type == 0 && hasAscension(0,10)) return true}

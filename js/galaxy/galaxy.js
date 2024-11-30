@@ -8,6 +8,7 @@ const GALAXY = {
  if (hasUpgrade('rp',21)) x = x.mul(upgEffect(1,21))
  if (tmp.inf_unl) x = x.mul(theoremEff('bh',6))
  if (tmp.chal) x = x.mul(tmp.chal.eff[20])
+   if (hasAscension(1,10))x=x.mul(ascensionEff(1,10))
         return x
     },
     cost() {
@@ -26,10 +27,10 @@ const GALAXY = {
         if (hasTree("glx7")) bonus = bonus.add(treeEff('glx7'))
         if (player.galaxy.grade.type[2].gte(1)) pow = pow.add(gradeEffect(2,0))
         if (hasTree('glx1')) pow = pow.mul(treeEff('glx1'))
+         if (tmp.inf_unl) pow = pow.mul(theoremEff("mv",5))
         if (hasElement(302)) x = player.galaxy.generator.add(tmp.galaxy.bonus).add(1).pow(pow).mul(player.galaxy.stars.add(1).root(.25).max(1)).max(1)
        else if (hasElement(299)) x = player.galaxy.generator.add(tmp.galaxy.bonus).add(1).pow(pow).mul(player.galaxy.stars.add(1).root(2).max(1)).max(1)
        else x = player.galaxy.generator.add(tmp.galaxy.bonus).add(1).pow(pow).mul(player.galaxy.stars.add(1).log(1.15).max(1)).max(1)
-
        x = overflow(x,E(1e9).pow(hasTree('glx13')?treeEff('glx13'):1),hasElement(305)?0.5:0.25)
         return x = overflow(x,E(1e15).pow(hasTree('glx19')?treeEff('glx19'):1),0.285)
     },
@@ -72,6 +73,7 @@ player.inf.pm = E(0)
 player.inf.dm = E(0)
 player.inf.hm = E(0)
 player.inf.em = E(0)
+player.inf.pe = E(0)
 player.inf.nm_base = E(0)
 player.inf.pm_base = E(0)
 player.inf.dm_base = E(0)
@@ -82,6 +84,7 @@ player.inf.core[0].star = [true,true,true,true,true,true]
 player.inf.core[1].star = [true,true,true,true,true,true]
 player.inf.core[2].star = [true,true,true,true,true,true]
 player.inf.core[3].star = [true,true,true,true,true,true]
+player.inf.core[4].star = [true,true,true,true,true,true]
 player.inf.theorem = E(6)
 player.inf.theorem_max = E(5)
 

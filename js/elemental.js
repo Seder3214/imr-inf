@@ -1836,6 +1836,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
             cost: E('ee20250'),
             effect() {let x = E(1)
                 x = tmp.preInfGlobalSpeed.max(1).log10().add(1).log10()
+                if (hasElement(335)) x = tmp.preInfGlobalSpeed.max(1).log10().add(1).log2()
                 if (tmp.inf_unl) x = x.mul(theoremEff('mass',6))
             return x},
             effDesc(x) { return "rooted by "+format(x,3)+"" },
@@ -1852,6 +1853,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
             effect() {
                     let x = E(1)
                     x = player.galaxy.generator.root(5).add(1)
+                    if (hasElement(49,1)) x=player.galaxy.generator.root(1.375).add(1)
                     return x
             },
             effDesc: x=>"+"+format(x),
@@ -1866,7 +1868,9 @@ if (hasElement(317)) ret = ret.mul(1.15)
             desc: `Apply C18's reward to Galaxy Particles gain at reduced rate.`,
             cost: E('e8.4e9'),
             effect() {let x = E(1)
+                let c = tmp.chal ? tmp.chal.eff[16] : 1
                  x = (player.chal.comps[18].mul(25).pow(10).add(1)).log(1.1)
+                 if (hasElement(50,1)) x=x.pow(c)
                 return x},
             effDesc(x) { return "x"+format(x,3)+"" },
 },
@@ -1901,7 +1905,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 },
 {
         inf: true,
-        desc: `Unlock fifth row main upgrades per Silver Grading.`,
+        desc: `Unlock fifth row main upgrades per Silver Grading (max 2).`,
         effect() {
             let x = E(0)
            if (player.galaxy.grade.type[0].gte(20)) x = x.add(1)
@@ -1909,7 +1913,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
            if (player.galaxy.grade.type[2].gte(20)) x = x.add(1)
            if (player.galaxy.grade.type[3].gte(20)) x = x.add(1)
            if (player.galaxy.grade.type[4].gte(20)) x = x.add(1)
-            return x.floor()
+            return x.floor().min(2)
         },
         effDesc(x) { return "+"+format(x) },
         cost: E('1e78'),
@@ -1930,7 +1934,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
 },
 {
     inf: true,
-    desc: `Unlock Post-17th Fusion Tiers, that will muonize all of the effects.`,
+    desc: `Unlock Post-17th Fusion Tiers, that will muonize all of the effects per 6 Fusion Tiers (starts at 18th).`,
     cost: E(1e100),
 },
 {
@@ -1967,6 +1971,114 @@ if (hasElement(317)) ret = ret.mul(1.15)
     },
     effDesc(x) { return "^"+format(x) },
     cost: E('e2.83975e11'),
+},
+{
+    c16: true,
+    desc: `Corrupted Shards' gain is better based on Infinity Points.`,
+    effect() {
+        let x = E(0)
+        x = player.inf.points.add(1).log10().max(1).root(1.25).add(1)
+        return x
+    },
+    effDesc(x) { return "^"+format(x) },
+    cost: E('e1e1200'),
+},
+{
+    inf: true,
+    desc: `Hyper Renown and Hyper Valor starts later based on Beyond-Prestiges's max tier.`,
+    effect() {
+        let x1 = E(1)
+        let x2 = E(1)
+        x1 = E(1.95).pow(tmp.beyond_pres.max_tier)
+        x2 = E(1.35).pow(tmp.beyond_pres.max_tier)
+        return {hr:x1,hv:x2}
+    },
+    effDesc(x) { return "Hyper-Renown: "+ formatMult(this.effect().hr)+"<br>Hyper-Valor: "+ formatMult(this.effect().hv) },
+    cost: E(1e140),
+},
+{
+    inf: true,
+    desc: `Get 1/10 of Ring's Durability per Orbit addition.`,
+    cost: E('1e325'),
+},
+{
+    desc: 'Remove Hyper-Valor scaling.',
+    cost: E('ee130100'),
+},
+{
+    c16: true,
+    desc: 'Triunniliumm-310 is better.',
+    cost: E('ee2500'),
+},
+{
+    dark:true,
+    desc: `Anti-Matter Generator's power is much better.`,
+    cost: E('e2.70e12'),
+},
+{
+    inf: true,
+    desc: 'Six Slot theorem will be at the max theorem level.',
+    cost: E('1e370'),
+},
+{
+    c16: true,
+    desc: `Ascension 6's Reward base is better (1.25 => <b>1.35</b>).`,
+    cost: E('ee2800'),
+},
+{
+    desc: `String Theorem's 2nd dot effect's softcap is removed.`,
+    cost: E('ee136400'),
+},
+{
+    dark:true,
+    desc: `Multiversal Muscler cost is cheapened based on Cycle Gain.`,
+    effect() {
+        let x = E(1)
+        x = x.div(Decimal.pow(tmp.mv.cycleGain,1.75))
+        return x
+    },
+    effDesc(x){return formatMult(x)},
+    cost: E('e2.9e12'),
+},
+{
+    inf: true,
+    desc: 'Second Circle effect formula is slightly better.',
+    cost: E('5e406'),
+},
+{
+    dark:true,
+    desc: `Add more Orb of Creation Upgrades (are kept on any reset).`,
+    cost: E('e3.875e12'),
+},
+{
+    desc: `Ultra Galaxies starts +5 later.`,
+    cost: E('ee145750'),
+},
+{
+    inf: true,
+    desc: 'Unlock Eight Dot for theorems.',
+    cost: E('1e460'),
+},
+{
+    dark:true,
+    desc: `Add free Parallel Extruders based on Core Level and Core Power.`,
+    effect() {
+        let x = E(1)
+        x = x.mul(player.mv.coreLvl).pow(spellEff(2)).root(2).floor()
+        return x
+    },
+    effDesc(x){return "+"+format(x)},
+    cost: E('e7.3e12'),
+},
+{
+    desc: `Muonic-Fusion Tiers affects Ascension 6 reward base at reduced rate.`,
+    effect() {
+        let x = E(1)
+        x = x.mul(E(player.dark.exotic_atom.tier).add(1).log10().pow(0.86))
+        return x
+    },
+    effDesc(x){return "+"+format(x)},
+    cost: E('ee232500'),
 },
     ],
     /*
@@ -2021,6 +2133,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasTree('glx20')) u += 8
         if (hasElement(322)) u += 8
         if (tmp.mlt_unl) u = 332
+        if (hasElement(48,1)) u+= 14
         return u
     },
 }

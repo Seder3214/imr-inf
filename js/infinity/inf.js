@@ -25,12 +25,13 @@ if (hasElement(300)) e.push(300)
 
      player.atom.elements = e
 let me = []
-        if (hasElement(40,1)) for (let i = 0; i < player.atom.muonic_el.length; i++) me.push(player.atom.muonic_el[i])
+if (tmp.mlt_unl) for (let i = 0; i < player.atom.muonic_el.length; i++) {
+    let u = MUONIC_ELEM.upgs[player.atom.muonic_el[i]]
+    if (u.mlt==true) me.push(player.atom.muonic_el[i])
+        console.log(`${player.atom.muonic_el[i]}`)
+}
+        if (hasElement(40,1)) for (let i = 0; i > 43; i++) me.push(player.atom.muonic_el[i])
         if (hasElement(30,1)) me.push(30)
-        for (let i = 0; i < player.atom.muonic_el.length; i++) {
-            let u = MUONIC_ELEM.upgs[player.atom.muonic_el[i]]
-            if (u.mlt) me.push(player.atom.muonic_el[i])
-        }
        player.atom.muonic_el = me
        if (!hasTree('glx14')) for (let x = 1; x <= 16; x++) player.chal.comps[x] = E(0)
         let keep = ["qu_qol1", "qu_qol2", "qu_qol3", "qu_qol4", "qu_qol5", "qu_qol6", "qu_qol7", "qu_qol8", "qu_qol9", "qu_qol8a", "unl1", "unl2", "unl3", "unl4",
@@ -380,8 +381,9 @@ dark.matters.am = E(0)
         },
         effect() {
             let x = player.inf.dim_mass.add(1).log10().pow(2).div(10)
-
-            return x.softcap(15000,0.25,0)
+            if (tmp.inf_unl) x= x.pow(theoremEff('mv',1))
+                if (player.mainUpg.br.includes(22))  return x = overflow(x,3e15,0.1)
+           else return x.softcap(15000,0.25,0)
         },
     },
     nm_base: {
@@ -406,7 +408,8 @@ dark.matters.am = E(0)
         boost() {
             let x = E(1)
             if (hasOrbUpg(2)) x = player.inf.pm_base.max(1).root(2).pow(1.6).add(1)
-            return overflow(x,1e60,0.01)
+                if (player.mainUpg.bh.includes(22)) x = player.inf.pm_base.max(1).root(1.5).pow(2.165).add(1)
+            return overflow(x,player.mainUpg.bh.includes(22)?Infinity:1e60,0.01)
         },
     },
     pm_base: {
@@ -418,13 +421,14 @@ dark.matters.am = E(0)
         },
         effect() {
             let x = player.inf.pm_base.add(1).root(0.15).pow(hasElement(271)?2.25:2).add(1)
-
+            if (tmp.inf_unl) x = x.mul(theoremEff("proto",7))
             return x//.softcap(10,0.5,0)
         },
         boost() {
             let x = E(1)
             if (hasOrbUpg(2)) x = player.inf.dm_base.max(1).root(1.5).pow(1.45).add(1)
-            return x.softcap(1e45,0.1,0)
+                if (player.mainUpg.bh.includes(22)) x = player.inf.dm_base.max(1).root(1.15).pow(2.15).add(1)
+                return overflow(x,player.mainUpg.bh.includes(22)?Infinity:1e45,0.01)
         },
     },
     dm_base: {
@@ -432,6 +436,7 @@ dark.matters.am = E(0)
             if (!hasElement(261)) return E(0)
             let x = tmp.dmEffect.eff||E(1)
             if (hasOrbUpg(2)) x = x.mul(tmp.dm_base_boost)
+                if (tmp.inf_unl) x = x.mul(theoremEff("atom",7))
             return x
         },
         effect() {
@@ -448,7 +453,8 @@ dark.matters.am = E(0)
         boost() {
             let x = E(1)
             if (hasOrbUpg(2)) x = player.inf.em_base.max(1).root(1.5).pow(1.45).add(1)
-            return x.softcap(1e45,0.1,0)
+                if (player.mainUpg.bh.includes(22))x = player.inf.em_base.max(1).root(1.25).pow(2.165).add(1)
+                return overflow(x,player.mainUpg.bh.includes(22)?Infinity:1e45,0.01)
         },
     },
     em_base: {
@@ -461,7 +467,8 @@ dark.matters.am = E(0)
         boost() {
             let x = E(1)
             if (hasOrbUpg(2)) x = player.inf.hm_base.max(1).root(1.5).pow(1.45).add(1)
-            return x.softcap(1e45,0.1,0)
+                if (player.mainUpg.bh.includes(22))x = player.inf.hm_base.max(1).root(1.25).pow(2.225).add(1)
+                return overflow(x,player.mainUpg.bh.includes(22)?Infinity:1e45,0.01)
         },
     },
     hm_base: {
@@ -478,7 +485,8 @@ dark.matters.am = E(0)
         boost() {
             let x = E(1)
             if (hasOrbUpg(2)) x = player.inf.hm_base.max(1).root(7).pow(0.15).add(1)
-            return x.softcap(1e45,0.1,0)
+                if (player.mainUpg.bh.includes(22))x = player.inf.em_base.max(1).root(4).pow(0.1725).add(1)
+                return overflow(x,player.mainUpg.bh.includes(22)?Infinity:1e45,0.01)
         },
     },
     pe: {
@@ -501,6 +509,7 @@ dark.matters.am = E(0)
 
             let bonus = E(0)
             if (hasElement(41,1)) bonus = bonus.add(muElemEff(41))
+            if (hasElement(345)) bonus = bonus.add(elemEffect(345))
             let step = E(2).add(exoticAEff(1,4,0))
 
             if (hasElement(225)) step = step.add(elemEffect(225,0))
@@ -624,8 +633,9 @@ dark.matters.am = E(0)
             let bonus = E(0)
 
             let step = E(2)
-            
+            if (tmp.inf_unl) step = step.add(theoremEff("time",7))
             let eff = step.pow(t.add(bonus))
+            eff= overflow(eff,E(`1e3500`),0.05)
 
             return {step: step, eff: eff, bonus: bonus}
         },
@@ -845,7 +855,7 @@ function calcInf(dt) {
     }
     if (hasInfUpgrade(4)) for (let x = 0; x < TREE_TYPES.qu.length; x++) TREE_UPGS.buy(TREE_TYPES.qu[x], true)
     if (hasInfUpgrade(6)) for (let x = 119; x <= 218; x++) buyElement(x,0)
-player.inf.theorem_max = player.inf.theorem_max.max(tmp.core_lvl).floor()
+player.inf.theorem_max = player.inf.theorem_max.max(tmp.core_lvl)
 player.inf.total = player.inf.total.max(player.inf.points)
 if (FERMIONS.onActive('07')|| CHALS.inChal(19)||CHALS.inChal(20)) {
         player.inf.theorem_max = E(1)
@@ -856,21 +866,24 @@ if (FERMIONS.onActive('07')|| CHALS.inChal(19)||CHALS.inChal(20)) {
      player.inf.core[i].power=power
     }
 if (CHALS.inChal(17)|| CHALS.inChal(18)||CHALS.inChal(20)) {
-player.inf.core[0].level = E(player.inf.theorem_max).floor()
-player.inf.core[1].level = E(player.inf.theorem_max).floor()
- player.inf.core[2].level = E(player.inf.theorem_max).floor()
-player.inf.core[3].level = E(player.inf.theorem_max).floor()
-player.inf.core[4].level = E(player.inf.theorem_max).floor()
+player.inf.core[0].level = E(player.inf.theorem_max)
+player.inf.core[1].level = E(player.inf.theorem_max)
+ player.inf.core[2].level = E(player.inf.theorem_max)
+player.inf.core[3].level = E(player.inf.theorem_max)
+player.inf.core[4].level = E(player.inf.theorem_max)
     player.inf.theorem_max = E(tmp.core_lvl)
 }
 for (let i = 0; i < 1; i++) if (player.inf.core[i] && hasElement(229)) {
-    player.inf.core[i].level=lvl
+    player.inf.core[i].level=player.inf.core[i].type=="mv"?lvl/10:lvl
    }
    for (let i = 1; i < 3; i++) if (player.inf.core[i] && hasElement(249)) {
-    player.inf.core[i].level=lvl
+    player.inf.core[i].level=player.inf.core[i].type=="mv"?lvl/10:lvl
    }
    for (let i = 2; i < 5; i++) if (player.inf.core[i] && hasElement(260)) {
-    player.inf.core[i].level=lvl
+    player.inf.core[i].level=player.inf.core[i].type=="mv"?lvl/10:lvl
+   }
+   for (let i = 2; i < 6; i++) if (player.inf.core[i] && hasElement(337)) {
+    player.inf.core[i].level=player.inf.core[i].type=="mv"?lvl/10:lvl
    }
    if (!CHALS.inChal(19)&&(!CHALS.inChal(20))) { player.inf.dim_mass = player.inf.dim_mass.add(tmp.dim_mass_gain.mul(dt))
     player.inf.nm_base = player.inf.nm_base.add(tmp.nm_base_gain.mul(dt))
@@ -953,8 +966,8 @@ function updateInfHTML() {
     tmp.el.nm_step.setHTML(formatMult(nm_eff.step))
     tmp.el.nm_eff.setTxt(formatMult(nm_eff.eff))
     tmp.el.nm_base.setTxt(formatMass(player.inf.nm_base)+" "+player.inf.nm_base.formatGain(tmp.nm_base_gain,true))
-    tmp.el.nm_base_boost.setHTML(formatMult(tmp.nm_base_boost)+(tmp.nm_base_boost.gte(1e60)?` <span class='soft'>(softcapped)</span>`:``))
-    tmp.el.pm_base_boost.setHTML(formatMult(tmp.pm_base_boost)+(tmp.pm_base_boost.gte(1e45)?` <span class='soft'>(softcapped)</span>`:``))
+    tmp.el.nm_base_boost.setHTML(formatMult(tmp.nm_base_boost)+(tmp.nm_base_boost.gte(1e60)&&(!player.mainUpg.bh.includes(22))?` <span class='soft'>(softcapped)</span>`:``))
+    tmp.el.pm_base_boost.setHTML(formatMult(tmp.pm_base_boost)+(tmp.pm_base_boost.gte(1e45)&&(!player.mainUpg.bh.includes(22))?` <span class='soft'>(softcapped)</span>`:``))
     tmp.el.nm_base_eff.setHTML("+"+tmp.nm_base_eff.format()+(tmp.nm_base_eff.gte(tmp.nm_base_soft)?`<span class='soft'> (softcapped)`:'')+"</br><span class='infsoftcap_text'>Effect will be softcapped at "+format(tmp.nm_base_soft)+"</span>")
     tmp.el.nm_base_boost_div.setDisplay(unlboost);
     let unl = hasElement(256)
@@ -1007,9 +1020,9 @@ function updateInfHTML() {
     tmp.el.hm_eff.setTxt(formatMult(hm_eff.eff))
     tmp.el.hm_base.setTxt(formatMass(player.inf.hm_base)+" "+player.inf.hm_base.formatGain(tmp.hm_base_gain,true))
 
-    tmp.el.dm_base_boost.setHTML(formatMult(tmp.dm_base_boost)+(tmp.dm_base_boost.gte(1e45)?` <span class='soft'>(softcapped)</span>`:``))
-    tmp.el.em_base_boost.setHTML(formatMult(tmp.em_base_boost)+(tmp.em_base_boost.gte(1e45)?` <span class='soft'>(softcapped)</span>`:``))
-    tmp.el.hm_base_boost.setHTML(formatMult(tmp.hm_base_boost)+(tmp.hm_base_boost.gte(1e45)?` <span class='soft'>(softcapped)</span>`:``))
+    tmp.el.dm_base_boost.setHTML(formatMult(tmp.dm_base_boost)+(tmp.dm_base_boost.gte(1e45)&&(!player.mainUpg.bh.includes(22))?` <span class='soft'>(softcapped)</span>`:``))
+    tmp.el.em_base_boost.setHTML(formatMult(tmp.em_base_boost)+(tmp.em_base_boost.gte(1e45)&&(!player.mainUpg.bh.includes(22))?` <span class='soft'>(softcapped)</span>`:``))
+    tmp.el.hm_base_boost.setHTML(formatMult(tmp.hm_base_boost)+(tmp.hm_base_boost.gte(1e45)&&(!player.mainUpg.bh.includes(22))?` <span class='soft'>(softcapped)</span>`:``))
 }
 
 function setupInfUpgradesHTML() {

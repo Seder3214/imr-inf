@@ -1,3 +1,4 @@
+
 function setupChalHTML() {
     let chals_table = new Element("chals_table")
 	let table = ""
@@ -11,9 +12,19 @@ function setupChalHTML() {
 	}
 	chals_table.setHTML(table)
 }
-
+function setupChalChangeHTML() {
+    let menu= new Element("chal.changeBtnMenu")
+    let table=""
+    for (let x = 21;x<=26;x++) {
+        table+=`<button class='btn' id='chal_changeBtn_${x}'></button>`
+    }
+    menu.setHTML(table)
+}
 function updateChalHTML() {
     if (tmp.stab[3]==0){
+        for (let x = 21; x<=26;x++) {
+            tmp.el[`chal_changeBtn_`+x].setTxt(`Apply ${CHALS[x].title}`)
+        }
         for (let x = 1; x <= CHALS.cols; x++) {
             let chal = CHALS[x]
             let unl = chal.unl ? chal.unl() : true
@@ -23,10 +34,17 @@ function updateChalHTML() {
                 tmp.el["chal_comp_"+x].setTxt(format(player.chal.comps[x],0)+(tmp.chal.max[x].gte(EINF)?"":" / "+format(tmp.chal.max[x],0)))
             }
         }
+        tmp.el.chal_change.setVisible(player.chal.choosed != 0&&player.mv.points.gte(CHALS[player.chal.choosed].change)&&hasElement(54,1))
         tmp.el.chal_enter.setVisible(player.chal.active != player.chal.choosed)
         tmp.el.chal_exit.setVisible(player.chal.active != 0)
         tmp.el.chal_exit.setTxt(tmp.chal.canFinish && !hasTree("qol6") ? "Finish Challenge for +"+tmp.chal.gain+" Completions" : "Exit Challenge")
         tmp.el.chal_desc_div.setDisplay(player.chal.choosed != 0)
+        for (let x = 21; x<=26;x++) {
+            tmp.el[`chal_changeBtn_`+x].setVisible(player.chal.choosed!=0&&hasElement(54,1))
+            if (player.chal.choosed==1)tmp.el[`chal_changeBtn_`+x].setDisplay(tmp.chal.changeOpened[1]==true&&x<=23)
+            if (player.chal.choosed==2)tmp.el[`chal_changeBtn_`+x].setDisplay(tmp.chal.changeOpened[2]==true&&x<=26&&x>=24)
+            if (player.chal.choosed>=3)tmp.el[`chal_changeBtn_`+x].setDisplay(false)
+        }
         if (player.chal.choosed != 0) {
             let chal = CHALS[player.chal.choosed]
             tmp.el.chal_ch_title.setHTML(`[${player.chal.choosed}]${CHALS.getScaleName(player.chal.choosed)} ${chal.title} [${format(player.chal.comps[player.chal.choosed],0)+(tmp.chal.max[player.chal.choosed].gte(EINF)?"":"/"+format(tmp.chal.max[player.chal.choosed],0))} Completions]`)
@@ -35,7 +53,20 @@ function updateChalHTML() {
             tmp.el.chal_ch_goal.setTxt("Goal: "+CHALS.getFormat(player.chal.choosed)(tmp.chal.goal[player.chal.choosed])+CHALS.getResName(player.chal.choosed))
             tmp.el.chal_ch_reward.setHTML("Reward: "+(typeof chal.reward == 'function' ? chal.reward() : chal.reward))
             tmp.el.chal_ch_eff.setHTML("Currently: "+chal.effDesc(tmp.chal.eff[player.chal.choosed]))
+            tmp.el.chal_changeCost.setVisible(player.chal.choosed < 16&&player.chal.choosed!=0&&hasElement(54,1))
+            tmp.el.chal_changeCost.setHTML(`<span class="mltText">Cost to change a challenge: `+format(CHALS[player.chal.choosed].change)+` Multiversal Fragments</span><br>${tmp.chal.chal1Changed!=0?`<span style="color:green">Challenge ${CHALS[tmp.chal.chal1Changed].title} is applied</span>`:""}`)
         }
+        if (tmp.chal.changeOpened[player.chal.choosed]==true) {
+        let menu = tmp.el.chal_changeMenu
+        let table=`<div class="table_center">`
+        let table2=``
+        for (let x = 21+((player.chal.choosed-1)*3); x<=23+((player.chal.choosed-1)*3);x++) {
+        table+=`<div style="display:inline-grid; margin:5px;width:35%;background:#171717;border:2px solid white; justify-content:center; justify-items:center">${(typeof CHALS[x].changeDesc == 'function' ? CHALS[x].changeDesc() : CHALS[x].changeDesc)}`
+        }
+        menu.setHTML(table+`</div>`)
+        tmp.el.chal_changeMenu.setDisplay(tmp.chal.changeOpened[player.chal.choosed])
+    }
+    else tmp.el.chal_changeMenu.setHTML("")
     }
     if (tmp.stab[3]==1){
         updateQCHTML()
@@ -53,6 +84,10 @@ function updateChalTemp() {
         max: {},
         eff: {},
         bulk: {},
+        change: {},
+        changeCheck: {},
+        changeOpened: {},
+        chal1Changed: 0,
         canFinish: false,
         gain: E(0),
     }
@@ -67,7 +102,8 @@ function updateChalTemp() {
         tmp.chal.max[x] = CHALS.getMax(x)
         tmp.chal.goal[x] = data.goal
         tmp.chal.bulk[x] = data.bulk
-                let q = x<=8?s:hasElement(174)&&x<=12?s.root(5):hasTree('ct5')&&x<=v?w:1 
+        tmp.chal.change[x] = CHALS[x].change
+                let q = x<=8|x>=21?s:hasElement(174)&&x<=12?s.root(5):hasTree('ct5')&&x<=v?w:1 
          if (x == 9) q = E(q).min('e150') 
          tmp.chal.eff[x] = CHALS[x].effect(FERMIONS.onActive("05")?E(0):player.chal.comps[x].mul(q))
     }
@@ -77,6 +113,26 @@ function updateChalTemp() {
 }
 
 const CHALS = {
+    openChange(x=player.chal.choosed) {
+       tmp.chal.changeOpened[x]=!tmp.chal.changeOpened[x]
+    },
+    changeChallenge(x) {
+        tmp.chal.changeCheck[player.chal.choosed]=!tmp.chal.changeCheck[player.chal.choosed]
+    if (x>=21 && x<=24) {
+        tmp.chal.chal1Changed=x
+        tmp.chal.changeCheck[1]=!tmp.chal.changeCheck[1]}
+    else if (x>=25 && x<=28) tmp.chal.changeCheck[2]=!tmp.chal.changeCheck[2]
+    else if (x>=29 && x<=32) tmp.chal.changeCheck[3]=!tmp.chal.changeCheck[3]
+    else if (x>=33 && x<=36) tmp.chal.changeCheck[4]=!tmp.chal.changeCheck[4]
+    if (x>=34 && x<=37) tmp.chal.changeCheck[5]=!tmp.chal.changeCheck[5]
+    if (x>=38 && x<=41) tmp.chal.changeCheck[6]=!tmp.chal.changeCheck[6]
+    if (x>=42 && x<=45) tmp.chal.changeCheck[7]=!tmp.chal.changeCheck[7]
+    if (x>=46 && x<=49) tmp.chal.changeCheck[8]=!tmp.chal.changeCheck[8]
+    if (x>=52 && x<=55) tmp.chal.changeCheck[9]=!tmp.chal.changeCheck[9]
+    if (x>=56 && x<=59) tmp.chal.changeCheck[10]=!tmp.chal.changeCheck[10]
+    if (x>=60 && x<=63) tmp.chal.changeCheck[11]=!tmp.chal.changeCheck[11]
+    if (x>=64 && x<=67) tmp.chal.changeCheck[12]=!tmp.chal.changeCheck[12]
+    },
     choose(x) {
         if (player.chal.choosed == x) {
             this.exit()
@@ -132,15 +188,18 @@ const CHALS = {
         }
     },
     getResource(x) {
-        if (x < 5 || x > 8) return player.mass
+        if (x==23) return tmp.mv_time
+        else if (x < 5 || x > 8) return player.mass
         return player.bh.mass
     },
     getResName(x) {
-        if (x < 5 || x > 8) return ''
+        if (x==23) return " of Time in Cycle"
+        else if (x < 5 || x > 8) return ''
         return ' of Black Hole'
     },
     getFormat(x) {
-        return formatMass
+        if (x==23) return formatTime
+       else return formatMass
     },
     getReset(x) {
         if (x < 5) return "Entering this challenge will force dark matter reset."
@@ -153,7 +212,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         else return "Entering challenge will force an FSS reset."
     },
     getMax(i) {
-        if (i <= 12 && hasPrestige(2,25)) return EINF 
+        if (i <= 12 || i>=21 && hasPrestige(2,25)) return EINF 
         let x = this[i].max
         if (i <= 4 && !hasPrestige(2,25)) x = x.add(tmp.chal?tmp.chal.eff[7]:0)
         if (hasElement(13) && (i==5||i==6)) x = x.add(tmp.elements.effect[13])
@@ -185,6 +244,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         if (tmp.inf_unl && i==17) x = x.add(Math.min(theoremEff('mass',5)))
         if (hasElement(303) && i==18) x = x.add(10000)
         if (tmp.inf_unl && i==18 && hasElement(319)) x = x.add(Math.min(theoremEff('mass',5)))
+            if (hasOrbUpg(6) && i==20) x = x.add(990)
         return x.floor()
     },
     getScaleName(i) {
@@ -324,12 +384,13 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         return {goal, bulk}
     },
     1: {
-        title: "Instant Scale",
+        title: "Instant Scale I",
         desc: "Super rank and mass upgrade scaling starts at 25. Also, Super tickspeed starts at 50.",
         reward: ()=>hasBeyondRank(2,20)?`Supercritical Rank & All Fermions Tier scaling starts later, Super Overpower scales weaker based on completions.`:`Super Rank starts later, Super Tickspeed scales weaker based on completions.`,
         max: E(100),
         inc: E(5),
         pow: E(1.3),
+        change: E(100),
         start: E(1.5e58),
         effect(x) {
             let c = hasBeyondRank(2,20)
@@ -347,6 +408,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         desc: "You cannot buy Tickspeed.",
         reward: `Each completion adds +7.5% to Tickspeed Power.`,
         max: E(100),
+        change: E(10000),
         inc: E(10),
         pow: E(1.3),
         start: E(1.989e40),
@@ -366,6 +428,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         reward: `Mass gain is raised based on completions (doesn't apply in this challenge).`,
         max: E(100),
         inc: E(25),
+        change: E(1e8),
         pow: E(1.25),
         start: E(2.9835e49),
         effect(x) {
@@ -381,6 +444,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         desc: "Rage Power gain is rooted by 10. Additionally, mass gain softcap starts 100 OoMs eariler.",
         reward: `Rage Powers gain is raised by completions.`,
         max: E(100),
+        change: E(1e12),
         inc: E(30),
         pow: E(1.25),
         start: E(1.736881338559743e133),
@@ -399,6 +463,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         max: E(50),
         inc: E(50),
         pow: E(1.25),
+        change: E(1e15),
         start: E(1.5e136),
         effect(x) {
             let c = hasCharger(3)
@@ -416,6 +481,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         max: E(50),
         inc: E(64),
         pow: E(1.25),
+        change: E(1e35),
         start: E(1.989e38),
         effect(x) {
             let ret = x.mul(0.1).add(1).softcap(1.5,hasElement(39)?1:0.5,0).sub(1)
@@ -431,6 +497,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         max: E(50),
         inc: E(64),
         pow: E(1.25),
+        change: E(1e105),
         start: E(1.5e76),
         effect(x) {
             let c = hasPrestige(2,25)
@@ -447,6 +514,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         reward: `Dark Matter & Mass from Black Hole gains are raised by completions.<br><span class="yellow">On first completion, unlock 3 rows of Elements</span>`,
         max: E(50),
         inc: E(80),
+        change: E(1e220),
         pow: E(1.3),
         start: E(1.989e38),
         effect(x) {
@@ -462,6 +530,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         desc: "You cannot assign quarks. Additionally, mass gains exponent is raised to 0.9th power.",
         reward: `Improve Magnesium-12.`,
         max: E(100),
+        change: E(1e275),
         inc: E('e500'),
         pow: E(2),
         start: E('e9.9e4').mul(1.5e56),
@@ -480,6 +549,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         desc: "You are trapped in mass dilation and challenges 1-8.",
         reward: `The exponent of the RP formula is multiplied by completions. (this effect doesn't work while in this challenge)<br><span class="yellow">On first completion, unlock Fermions!</span>`,
         max: E(100),
+        change: E('1e375'),
         inc: E('e2000'),
         pow: E(2),
         start: E('e3e4').mul(1.5e56),
@@ -495,6 +565,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         desc: "You cannot gain dilated mass, and you are stuck in mass dilation.",
         reward: `Star boosters are stronger based on completions.`,
         max: E(100),
+        change: E('1e450'),
         inc: E("ee6"),
         pow: E(2),
         start: uni("e3.8e7"),
@@ -510,6 +581,7 @@ else if (x == 16) return "Entering challenge will force an FSS reset."
         desc: "You cannot gain Atoms or Quarks.",
         reward: `Completions add free Radiation Boosters.<br><span class="yellow">On first completion, unlock new prestige layer!</span>`,
         max: E(100),
+        change: E('1e620'),
         inc: E('e2e7'),
         pow: E(2),
         start: uni('e8.4e8'),
@@ -528,6 +600,7 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
         reward: `Increase dark ray earned based on completions.<br><span class="yellow">On first completion, unlock more features!</span>`,
         max: E(25),
         inc: E('e2e4'),
+        change: E('1e645'),
         pow: E(8),
         start: uni('e2e5'),
         effect(x) {
@@ -543,6 +616,7 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
         reward: `Gain more primordium theorems.<br><span class="yellow">On first completion, unlock more features!</span>`,
         max: E(100),
         inc: E('e2e19'),
+        change: E('1e765'),
         pow: E(3),
         start: uni('ee20'),
         effect(x) {
@@ -557,6 +631,7 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
         desc: "You are trapped in c1-12 and quantum challenge with modifiers [10,5,10,10,10,10,10,10].",
         reward: `Normal mass's overflow starts later based on completions.<br><span class="yellow">On first completion, unlock more features!</span>`,
         max: E(100),
+        change: E('1e865'),
         inc: E('e1e6'),
         pow: E(2),
         start: uni('e2e7'),
@@ -581,6 +656,7 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
         max: E(1),
         inc: E('e1.25e11'),
         pow: E(2),
+        change: EINF,
         start: E('e1.25e11'),
         effect(x) {
             let ret = x.mul(hasElement(232)?0.075:0.05).add(1)
@@ -602,11 +678,13 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
         reward: `Improve Muonic Calcium. <span class="yellow">Get more Prestige Base.</span><br><span class='orange'>At 50 completions, unlock C18</span>`,
         max: E(100),
         inc: E('e1.25e30'),
+        change: EINF,
         pow: E(4),
         start: E('e1.25e30'),
         effect(x) {
             let step = x.mul(2.15).pow(10.5).add(1).softcap(1e13,0.15,0)
             let ret = x.mul(1.5).pow(0.25).add(1)
+            if (hasBeyondRank(13,7)) ret = E(10).pow(x).log(1.005).pow(1.15).mul(x.add(1).pow(1.75)).add(1)
             if (hasTree('glx4')) step = x.mul(5.15).pow(10.5).add(1)
             return {ret: ret, step: step}
         },
@@ -623,11 +701,13 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
         `,
         reward: `Boost Dimensional Mass gain.<br><span class='orange'>At 100 completions, unlock C19</span>`,
         max: E(100),
+        change: EINF,
         inc: E('e11400000000'),
         pow: E(2),
         start: E('e11400000000'),
         effect(x) {
             let ret = x.mul(25).pow(10).add(1)
+            if (hasBeyondRank(13,7)) ret = E(10).pow(x).pow(0.35).add(1)
             return overflow(ret,1e15,0.1)
         },
         effDesc(x) { return "x"+format(x)},
@@ -646,6 +726,7 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
     reward: `Grading cost formula is weaker.<br><span class='orange'>At 100 completions, unlock C20</span>`,
     max: E(250),
     inc: E('e1e72'),
+    change: EINF,
     pow: E(12),
     start: E('e1e72'),
     effect(x) {
@@ -670,18 +751,167 @@ ret = overflow(ret,1e68,hasElement(323)?0.6:0.5)
     • Pre-Infinity Global Speed is much more weaker, but it applies to Pre-Quantum Global Speed exponentially<br>
     • You are trapped in Mass Dilation.
     `,
-    reward: `Boosts Galaxy Particles gain.<br><span class='orange'>At 3 completions, unlock Multiverse Fragments</span>`,
+    reward: `Boosts Galaxy Particles gain.<br><span class='orange'>At 10 completions, unlock Multiverse Fragments</span>`,
     max: E(10),
     inc: E('e7.5e347'),
     pow: E(200),
+    change: EINF,
     start: E('e7.5e347'),
     effect(x) {
-        let ret = x.mul(2).pow(2.5).add(1)
+        let ret = x.mul(100).pow(4.5).add(1)
         return ret
     },
     effDesc(x) { return formatMult(x)},
 },
-cols: 20,
+21: {
+    title: "Instant Scale II",
+    unl() {return tmp.chal.chal1Changed==21},
+    desc: "Super rank and mass upgrade scaling starts at 5. Also, Super tickspeed starts at 10.",
+    reward: ()=>`Super Rank starts later, Super Tickspeed scales weaker based on completions.`,
+    max: E(100),
+    chalType: `[Anti-Realm]`,
+changeDesc:(x=21)=>`<h3>${CHALS[x].chalType} ${CHALS[x].title}
+    </h3><img class="table_center" src="images/chal_${x}.png"></img><br><span style="color:red">${CHALS[x].desc}</span><br><span> <span style="color:red">-</span> Base Goal: ${format(CHALS[1].start)} -> <span style="color:red">${format(CHALS[x].start)}
+    </span></span><span><span style="color:red">-</span> Goal exponent increase per completion: ^${CHALS[1].pow} -> <span style="color: red">^${CHALS[x].pow}</span></span>
+    <span> <span style="color:green">+</span> First reward softcap: root by 4 -> <span style='color:green'>root by 2</span></span>
+    <span><span style='color:green'>+</span> Second reward formula is better</span><span><span style="color:green">+</span> First changed reward (by Beyond Ranks) is better.</span></span>
+    <span><span style="color:green">+</span> Second changed reward (by Beyond Ranks) is better.</span></span></div>`,
+    inc: E(6),
+    pow: E(1.35),
+    start: E(1.5e200),
+    change: EINF,
+    effect(x) {
+        let c = hasBeyondRank(2,20)
+        let rank = c?E(0):x.softcap(50,2,1).floor()
+        let tick = c?E(1):E(0.93).pow(x.root(1.5))
+        let scrank = x.add(1).log10().add(1)
+        let over = Decimal.pow(0.925,x.add(1).log10())
+        return {rank: rank, tick: tick, scrank, over}
+    },
+    effDesc(x) { return hasBeyondRank(2,20)?formatMult(x.scrank)+" later to Supercritical Rank & All Fermions starting, "+formatReduction(x.over)+" weaker to Super Overpower scaling":"+"+format(x.rank,0)+" later to Super Rank starting, "+format(E(1).sub(x.tick).mul(100))+"% weaker to Super Tickspeed scaling" },
+},
+22: {
+    title: "Superscaled",
+    unl() {return tmp.chal.chal1Changed==22},
+    desc: "Super rank, Super mass upgrades, Super tickspeed starts immediately.",
+    reward: ()=>`Super Rank starts later, Super Tickspeed scales weaker based on completions, Boost Multiversal Fragments gain by 5% per level.`,
+    max: E(100),
+    chalType: `[Anti-Realm]`,
+    changeDesc: (x=22)=>`<h3>${CHALS[x].chalType} ${CHALS[x].title}
+    </h3><img class="table_center" src="images/chal_${x}.png"></img><br><span style="color:red">${CHALS[x].desc}</span><br><span> <span style="color:red">-</span> Base Goal: ${format(CHALS[1].start)} -> <span style="color:red">${format(CHALS[x].start)}
+    </span></span><span><span style="color:red">-</span> Goal exponent increase per completion: ^${CHALS[1].pow} -> <span style="color: red">^${CHALS[x].pow}</span></span>
+    <span> <span style="color:green">+</span> First reward softcap: root by 4 -> <span style='color:green'>root by 2</span></span>
+    <span><span style='color:green'>+</span> Second reward formula is better.</span>
+    <span><span style="color:green">+</span> Add new effect, that boosts Multiversal Fragments gain.</span></div>`,
+    inc: E(6),
+    change: EINF,
+    pow: E(1.5),
+    start: E("1.75e650"),
+    effect(x) {
+        let c = hasBeyondRank(2,20)
+        let rank = c?E(0):x.softcap(150,2,1).floor()
+        let tick = c?E(1):E(0.92).pow(x.root(1.5))
+        let mvBoost=x.mul(0.1).add(1)
+        return {rank: rank, tick: tick, mvBoost: mvBoost}
+    },
+    effDesc(x) { return "+"+format(x.rank,0)+" later to Super Rank starting, "+format(E(1).sub(x.tick).mul(100))+"% weaker to Super Tickspeed scaling, "+format((x.mvBoost))+"x to Multiversal Fragments gain"},
+},
+23: {
+    title: "Stuck in Time",
+    chalType: `[Realm]`,
+    unl() {return tmp.chal1Changed==23},
+    desc: `Cycle time is massively boosted by current mass, but cycle speed is boosted based on mass of black hole.`,
+    reward: ()=>`Cycle time is reduced by 25% per completion.`,
+    max: E(100),
+    inc: E(3.5),
+    changeDesc: (x=23)=>`<h3>${CHALS[x].chalType} ${CHALS[x].title}
+    </h3><img class="table_center" src="images/chal_${x}.png"></img><br><span style="color:red">${CHALS[x].desc}</span><br><span> <span style="color:red">-</span> Base Goal: ${format(CHALS[1].start)} -> <span style="color:red">${format(CHALS[x].start)}
+    </span></span><span><span style="color:red">-</span> Goal exponent increase per completion: ^${CHALS[1].pow} -> <span style="color: red">^${CHALS[x].pow}</span></span><span><span style="color:grey">?</span> Different goal resource.</span>
+    <span><span style="color:green">+</span> New effect, that reduces Cycle Time by 25% per completion.</span></span></div>`,
+    pow: E(1.75),
+    change: EINF,
+    start: E(370),
+    effect(x) {
+        let time=x.mul(0.25).add(1)
+        return {time:time}
+    },
+    effDesc(x) { return "Cycle time is reduced by "+format((x.time))+"x"},
+},
+24: {
+    title: "Anti-Tickspeed II",
+    unl() {return tmp.chal.chal1Changed==21},
+    desc: "Super rank and mass upgrade scaling starts at 5. Also, Super tickspeed starts at 10.",
+    reward: ()=>`Super Rank starts later, Super Tickspeed scales weaker based on completions.`,
+    max: E(100),
+    chalType: `[Anti-Realm]`,
+changeDesc:(x=24)=>`<h3>${CHALS[x].chalType} ${CHALS[x].title}
+    </h3><img class="table_center" src="images/chal_${x}.png"></img><br><span style="color:red">${CHALS[x].desc}</span><br><span> <span style="color:red">-</span> Base Goal: ${format(CHALS[1].start)} -> <span style="color:red">${format(CHALS[x].start)}
+    </span></span><span><span style="color:red">-</span> Goal exponent increase per completion: ^${CHALS[1].pow} -> <span style="color: red">^${CHALS[x].pow}</span></span>
+    <span> <span style="color:green">+</span> First reward softcap: root by 4 -> <span style='color:green'>root by 2</span></span>
+    <span><span style='color:green'>+</span> Second reward formula is better</span><span><span style="color:green">+</span> First changed reward (by Beyond Ranks) is better.</span></span>
+    <span><span style="color:green">+</span> Second changed reward (by Beyond Ranks) is better.</span></span></div>`,
+    inc: E(6),
+    pow: E(1.35),
+    start: E(1.5e200),
+    change: EINF,
+    effect(x) {
+        let c = hasBeyondRank(2,20)
+        let rank = c?E(0):x.softcap(50,2,1).floor()
+        let tick = c?E(1):E(0.93).pow(x.root(1.5))
+        let scrank = x.add(1).log10().add(1)
+        let over = Decimal.pow(0.925,x.add(1).log10())
+        return {rank: rank, tick: tick, scrank, over}
+    },
+    effDesc(x) { return hasBeyondRank(2,20)?formatMult(x.scrank)+" later to Supercritical Rank & All Fermions starting, "+formatReduction(x.over)+" weaker to Super Overpower scaling":"+"+format(x.rank,0)+" later to Super Rank starting, "+format(E(1).sub(x.tick).mul(100))+"% weaker to Super Tickspeed scaling" },
+},
+25: {
+    title: "No Tickspeed",
+    unl() {return tmp.chal.chal1Changed==22},
+    desc: "Super rank, Super mass upgrades, Super tickspeed starts immediately.",
+    reward: ()=>`Super Rank starts later, Super Tickspeed scales weaker based on completions, Boost Multiversal Fragments gain by 5% per level.`,
+    max: E(100),
+    chalType: `[Anti-Realm]`,
+    changeDesc: (x=25)=>`<h3>${CHALS[x].chalType} ${CHALS[x].title}
+    </h3><img class="table_center" src="images/chal_${x}.png"></img><br><span style="color:red">${CHALS[x].desc}</span><br><span> <span style="color:red">-</span> Base Goal: ${format(CHALS[1].start)} -> <span style="color:red">${format(CHALS[x].start)}
+    </span></span><span><span style="color:red">-</span> Goal exponent increase per completion: ^${CHALS[1].pow} -> <span style="color: red">^${CHALS[x].pow}</span></span>
+    <span> <span style="color:green">+</span> First reward softcap: root by 4 -> <span style='color:green'>root by 2</span></span>
+    <span><span style='color:green'>+</span> Second reward formula is better.</span>
+    <span><span style="color:green">+</span> Add new effect, that boosts Multiversal Fragments gain.</span></div>`,
+    inc: E(6),
+    change: EINF,
+    pow: E(1.5),
+    start: E("1.75e650"),
+    effect(x) {
+        let c = hasBeyondRank(2,20)
+        let rank = c?E(0):x.softcap(150,2,1).floor()
+        let tick = c?E(1):E(0.92).pow(x.root(1.5))
+        let mvBoost=x.mul(0.1).add(1)
+        return {rank: rank, tick: tick, mvBoost: mvBoost}
+    },
+    effDesc(x) { return "+"+format(x.rank,0)+" later to Super Rank starting, "+format(E(1).sub(x.tick).mul(100))+"% weaker to Super Tickspeed scaling, "+format((x.mvBoost))+"x to Multiversal Fragments gain"},
+},
+26: {
+    title: "No Multiverse Mass",
+    chalType: `[Realm]`,
+    unl() {return tmp.chal1Changed==23},
+    desc: `Cycle time is massively boosted by current mass, but cycle speed is boosted based on mass of black hole.`,
+    reward: ()=>`Cycle time is reduced by 25% per completion.`,
+    max: E(100),
+    inc: E(3.5),
+    changeDesc: (x=26)=>`<h3>${CHALS[x].chalType} ${CHALS[x].title}
+    </h3><img class="table_center" src="images/chal_${x}.png"></img><br><span style="color:red">${CHALS[x].desc}</span><br><span> <span style="color:red">-</span> Base Goal: ${format(CHALS[1].start)} -> <span style="color:red">${format(CHALS[x].start)}
+    </span></span><span><span style="color:red">-</span> Goal exponent increase per completion: ^${CHALS[1].pow} -> <span style="color: red">^${CHALS[x].pow}</span></span><span><span style="color:grey">?</span> Different goal resource.</span>
+    <span><span style="color:green">+</span> New effect, that reduces Cycle Time by 25% per completion.</span></span></div>`,
+    pow: E(1.75),
+    change: EINF,
+    start: E(370),
+    effect(x) {
+        let time=x.mul(0.25).add(1)
+        return {time:time}
+    },
+    effDesc(x) { return "Cycle time is reduced by "+format((x.time))+"x"},
+},
+cols: 23,
 }
 
 /*

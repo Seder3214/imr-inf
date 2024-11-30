@@ -1,3 +1,9 @@
+function coreTypeLength() {
+    let a = 4
+    if (hasElement(1,47)) a++
+    return a
+}
+
 const CORE = {
     mass: {
         title: `Newton Theorem`,
@@ -10,7 +16,7 @@ const CORE = {
             `Make Prestige Ranks cheaper (Except: Prestige Level and Valor).`,
             `Add more C17 completions.`,
             `Triunnilium-310 is better.`,
-            `?.`,
+            `Boost normal mass overflow^5 starting.`,
         ],
         res: `Normal Mass`,
         boost() {return player.mass.add(1).log10().add(1).log10().add(1).log10().add(1).toNumber()},
@@ -50,9 +56,10 @@ if (x>=1e10) return x = 1e10
                 return x.max(1)
             },
             s => {
-                let x = E(1).pow(s)
+                let x = Decimal.pow(s+1,s**0.35*3)
 
-                return x
+                x = overflow(x,100,0.5)
+                return overflow(x,'e15000',0.25)
             },
         ],
         effDesc: [
@@ -63,7 +70,7 @@ if (x>=1e10) return x = 1e10
             x => formatMult(x),
             x => "+"+format(x),
             x => formatMult(x),
-            x => formatMult(x),
+            x => "^"+format(x),
         ],
     },
     bh: {
@@ -77,7 +84,7 @@ if (x>=1e10) return x = 1e10
             `Boost BH mass overflow^2-3 starting (weaker in C16).`,
             `Boost Parallel Extruder's power.`,
             `Boost Galaxy Particles Gain.`,
-            `?.`,
+            `Boost Unstable Black Hole gain.`,
         ],
         res: `Mass of Black Hole`,
         boost() {return player.bh.mass.add(1).log10().add(1).log10().add(1).log10().add(1).toNumber()},
@@ -130,9 +137,13 @@ if (x>=1e10) return x = 1e10
                 return x.max(1)
             },
             s => {
-                let x = E(1).pow(s)
+                let x = Decimal.pow(s+1,s**0.175*1.5)
 
-                return x
+                x = overflow(x,100,0.5)
+
+                if (tmp.c16active) x = x.log10().add(1)
+
+                return x = overflow(x,'e100000',0.1)
             },
         ],
         effDesc: [
@@ -143,7 +154,7 @@ if (x>=1e10) return x = 1e10
             x => "^"+format(x),
             x => formatMult(x),
             x => formatMult(x),
-            x => formatMult(x),
+            x => "x"+format(x),
         ],
     },
     atom: {
@@ -157,7 +168,7 @@ if (x>=1e10) return x = 1e10
             `Boost Kaons & Pions gain.`,
             `Increase Ascension base.`,
             `[glx8] is better.`,
-            `?.`,
+            `Boost Dalton Fragments effect.`,
         ],
         res: `Exotic Atom`,
         boost() {return tmp.exotic_atom.amount.add(1).log10().add(1).log10().add(1).mul(hasTree('glx8')?treeEff('glx8'):1).toNumber()},
@@ -207,9 +218,11 @@ if (x>=1e10) return x = 1e10
                 return x.max(1)
             },
             s => {
-                let x = E(1).pow(s)
-
-                return x
+                    let x = Decimal.pow(s-1,s**0.15)
+                    
+                    x = overflow(x,100,0.5)
+    
+                    return x = overflow(x, 'e50000', 0.25)
             },
         ],
         effDesc: [
@@ -234,7 +247,7 @@ if (x>=1e10) return x = 1e10
             `Antimatter Generator' power is better.`,
             `Add free Overpower levels.`,
             `C19 reward is better.`,
-            `?.`,
+            `Boost Protoversal Fragments effect.`,
         ],
         res: `Quantum Foam`,
         boost() {return player.qu.points.add(1).log10().add(1).log10().add(1).toNumber()},
@@ -274,10 +287,12 @@ if (x>=1e10) return x = 1e10
                 return x.max(1)
             },
             s => {
-                let x = E(1).pow(s)
+                let x = Decimal.pow(s-1,s**0.425)
+                
+                x = overflow(x,100,0.5)
 
-                return x
-            },
+                return x = overflow(x, 'e50000', 0.25)
+        },
         ],
         effDesc: [
             x => formatMult(x),
@@ -301,7 +316,7 @@ if (x>=1e10) return x = 1e10
             `Boost dark ray gains.`,
             `Meta-Prestige Level starts later.`,
             `Supercritical Supernovas starts later.`,
-            `?.`,
+            `Boost Einstein Modificator power.`,
         ],
         res: `Corrupted Shard`,
         boost() {let x = player.dark.c16.totalS.add(1).log10().add(1).log10().add(1).toNumber()
@@ -344,7 +359,7 @@ if (x>=1e10) return x = 1e10
                 return x
             },
             s => {
-                let x = E(1).pow(s)
+                let x = Decimal.pow(1.05,Math.log10(s+1)).pow(0.715)
 
                 return x
             },
@@ -357,6 +372,75 @@ if (x>=1e10) return x = 1e10
             x => formatMult(x),
             x => "^"+format(x),
             x => formatMult(x),
+            x => "+"+format(x),
+        ],
+    },
+    mv: {
+        title: `String Theorem`,
+        icon: `𖣔`,
+        preEff: [
+            `Boost Multiversal Muscler's power.`,
+            `Boost Parallel Extruder's effect.`,
+            `Boost Multiversal Stronger's power.`,
+            `Weaken Circle Parts's debuff.`,
+            `Increase Dark Run Upgrade 10 Cap and exponentially boost its effect.`,
+            `Multiply Galaxy Particle Generator's exponential base.`,
+            `Decrease Cycle Time.`,
+            `Boost Multiversal Fragments gain.`,
+        ],
+        res: `Multversal Fragments`,
+        boost() {let x = player.mv.points.add(1).log10().add(1).log10().add(1).toNumber()
+            if (hasElement(296)) x = player.mv.points.add(1).log(1.1).add(1).toNumber()
+            return x},
+        eff: [
+            s => {
+                let x = E(Math.pow(s+1,0.35)/(E(s).add(1).log10()))
+
+                return x = overflow(x,50,0.25)
+            },
+            s => {
+                let x = E(Math.log2(s+1)**1.58/1000+1)
+
+               if (hasElement(339))return x = E(Math.log2(s+1)**1.83/1000+1)
+               else return x = overflow(x,1.25,0.05)
+            },
+            s => {
+                let x = E(Math.pow(s+1,0.425)/(E(s).add(1).log2().max(1)))
+
+                return x = overflow(x,E(1.6735e5),0.05)
+            },
+            s => {
+                let x = Math.pow(1+Math.pow(s+1,0.15)/100,-1)
+                if (CHALS.inChal(18)) x = E(1)
+                return x
+            },
+            s => {
+                let x = Decimal.pow(1.35,Math.log2(s+1)).max(1)
+                x2=x/3.5
+                return x = overflow(x,15,0.05)
+            },
+            s => {
+                let x = E(10).pow(Math.pow(s+1,0.055)/(E(s).add(1).log10().add(1).log2()))
+                return x
+            },
+            s => {
+                let x = (Math.log2(s+1)**0.75/50)
+                if (CHALS.inChal(18)) x = E(1)
+                return x
+            },
+            s => {
+                let x = E(Math.pow(s+1,0.055)/(E(s).add(1).log10().add(1).log2())).max(1)
+                return x.max(1)
+            },
+        ],
+        effDesc: [
+            x => "^"+format(x),
+            x => "^"+format(x),
+            x => "^"+format(x),
+            x => formatMult(x),
+            x => "+"+format(x)+" to comps, ^"+format(x)+" to effect.",
+            x => "x"+format(x),
+            x => formatMult(x),
             x => formatMult(x),
         ],
     },
@@ -366,7 +450,7 @@ const CORE_CHANCE_MIN = 0.1
 const CORE_CHANCE_BASE = 1-CORE_CHANCE_MIN
 const CORE_TYPE = Object.keys(CORE)
 
-const MAX_CORE_LENGTH = 5
+const MAX_CORE_LENGTH = 6
 const MIN_CORE_LENGTH = 4
 const MAX_INV_LENGTH = 100
 const MAX_DOTS_LENGTH = 4
@@ -394,9 +478,11 @@ var t_choosed = "-"
 debug.generateTheorem = (chance=CORE_CHANCE_MIN) => {
     let c = []
     let a = MAX_DOTS_LENGTH
+
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
     if (hasElement(322)) a += 1
+    if (hasElement(344)) a += 1
     while (c.length == 0) {
         let m = [], n = false
         for (let i = 0; a; i++) {
@@ -405,7 +491,7 @@ debug.generateTheorem = (chance=CORE_CHANCE_MIN) => {
         }
         if (n) c = m
     }
-    let t = CORE_TYPE[Math.floor(Math.random() * CORE_TYPE.length)], s = ""
+    let t = CORE_TYPE[Math.floor(Math.random() * coreTypeLength())], s = ""
     let p = 1+Math.random()/5
 
     for (let i = 0; i < a; i++) s += `<iconify-icon icon="${c[i]<chance?'ic:baseline-star':'ic:baseline-star-border'}" width="18"></iconify-icon>`
@@ -422,12 +508,13 @@ debug.generateTheorem = (chance=CORE_CHANCE_MIN) => {
     `)
 }
 
-debug.addRandomTheorem = (level=1,power=1,max_chance=CORE_CHANCE_MIN) => {
+debug.addRandomTheorem = (level=0,power=1,max_chance=CORE_CHANCE_MIN) => {
     let c = []
     let a = MAX_DOTS_LENGTH
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
     if (hasElement(322)) a += 1
+    if (hasElement(344)) a += 1
     while (c.length == 0) {
         let m = [], n = false
         for (let i = 0; i < a; i++) {
@@ -450,11 +537,12 @@ function getTheoremHTML(data,sub=false) {
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
     if (hasElement(322)) a += 1
+    if (hasElement(344)) a += 1
     for (let i = 0; i < a; i++) s += `<div>${data.star[i]?"◉":""}</div>`
     let w = `
     <div class="c_type">${CORE[data.type].icon}</div>
     <div class="c_pow">${format(data.power*100,0)}%</div>
-    <div class="c_lvl">${format(data.level,0)}</div>
+    <div class="c_lvl">${format(data.level,2)}</div>
     <div>${s}</div>
     `
     return sub?w:`
@@ -470,6 +558,7 @@ function getTheoremPreEffects(t,s) {
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
     if (hasElement(322)) a += 1
+    if (hasElement(344)) a += 1
     for (let i = 0; i < a; i++) if (s[i]) e += CORE[t].preEff[i]+"<br>"
     return e+`(Based on <b>${CORE[t].res}</b>)`
 }
@@ -518,8 +607,8 @@ function updateCoreHTML() {
     tmp.el.preTReq.setDisplay(!reached)
     tmp.el.maxLevel.setTxt(format(player.inf.theorem_max,0))
 
-    let lvl = tmp.core_lvl, fl = Math.floor(lvl)
-    tmp.el.pt_lvl.setHTML(`<b>${format(fl,0)}</b> (${formatPercent(lvl-fl)})`)
+    let lvl = tmp.core_lvl, fl = lvl
+    tmp.el.pt_lvl.setHTML(`<b>${format(fl,2)}</b> (${formatPercent(lvl-fl)})`)
 
     let chance = getCoreChance(), pm = getPowerMult()
 
@@ -531,7 +620,7 @@ function updateCoreHTML() {
 
         let p = player.inf.pre_theorem[i], s = p.star_c.map(x => x < chance)
         pt.setClasses({theorem_div:true, tooltip:true, [p.type]:true, choosed: player.inf.pt_choosed == i})
-        pt.setHTML(getTheoremHTML({type: p.type, level: fl, power: Math.round(100+pm*p.power_m*100)/100, star: s},true))
+        pt.setHTML(getTheoremHTML({type: p.type, level: (p.type=="mv")?fl/10:fl, power: Math.round(100+pm*p.power_m*100)/100, star: s},true))
 
         pt.setTooltip(`
         <h3>${CORE[p.type].title}</h3>
@@ -564,6 +653,7 @@ function updateTheoremCore() {
             if (hasElement(275)) a += 1
             if (hasElement(283)) a += 1
             if (hasElement(322)) a += 1
+            if (hasElement(344)) a += 1
             let type = p.type, l = p.level, s = p.star, ct = core_tmp[type]
             ct.total_p *= p.power
             for (let i = 0; i < a; i++) ct.total_s[i] += l * s[i]
@@ -613,7 +703,7 @@ function removeTheorem() {
     updateTheoremInv()}
 }
 function resetTheorems() {
-    for (i=0;i<4;i++) {
+    for (i=0;i<5;i++) {
         delete player.inf.core[i]
     }
 }
@@ -624,6 +714,7 @@ function createPreTheorem() {
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
     if (hasElement(322)) a += 1
+    if (hasElement(344)) a += 1
     while (c.length == 0) {
         let m = [], n = false
         for (let i = 0; i < a; i++) {
@@ -675,7 +766,7 @@ function chooseTheorem(id,is_core=false) {
                 else if (checkSwitchingCore(t_choosed,id)) [inv[t_choosed], core[id]] = [core[id], inv[t_choosed]]
             } else [inv[id], inv[t_choosed]] = [inv[t_choosed], inv[id]]
         } else if (core[t_choosed.split('c')[0]]) {
-            if (is_core) [core[id], core[t_choosed.split('c')[0]]] = [core[t_choosed.split('c')[0]], core[id]]
+            if (is_core) [core[id], core[t_choosed.split('c')[0]]] =[core[id], core[t_choosed.split('c')[0]]]
             else if (checkSwitchingCore(id,t_choosed.split('c')[0])) {
                 if (isTheoremHigher(core[t_choosed.split('c')[0]],inv[id])) switchTheorems(id,t_choosed.split('c')[0])
                 else createConfirm(`Are you sure you want to pick theorem out of core?`,'pickout',()=>{
@@ -703,6 +794,7 @@ function isTheoremHigher(t,t_target) {
     if (hasElement(275)) a += 1
     if (hasElement(283)) a += 1
     if (hasElement(322)) a += 1
+    if (hasElement(344)) a += 1
     for (let i = 0; i < a; i++) if (t.star[i] > t_target.star[i]) return false
 
     return true
@@ -727,6 +819,7 @@ function updateCoreTemp() {
     tmp.min_core_len = MIN_CORE_LENGTH
 
     if (player.inf.theorem.gte(6)) tmp.min_core_len++
+    if (hasElement(47,1)) tmp.min_core_len++
 
     tmp.core_lvl = INF.level()
 
@@ -738,6 +831,7 @@ function updateCoreTemp() {
         if (hasElement(275)) a += 1
         if (hasElement(283)) a += 1
         if (hasElement(322)) a += 1
+        if (hasElement(344)) a += 1
         for (let j = 0; j < a; j++) {
             let sc = Decimal.pow(ct.total_s[j] * Math.pow(boost, Math.log10(ct.total_s[j]+1)+1),ct.total_p)
             sc = overflow(sc,1000,0.5)

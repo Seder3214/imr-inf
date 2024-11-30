@@ -112,9 +112,10 @@ const CONFIRMS_FUNCTION = {
         if (limit || player.inf.pt_choosed >= 0) {
             if (player.inf.theorem.eq(0)) addTheorem('mass',[0,1,1,1],1,1)
             else {
+                let lvl = tmp.core_lvl, fl = lvl
                 let td = player.inf.pre_theorem[player.inf.pt_choosed==-1?Math.floor(Math.random()*4):player.inf.pt_choosed]
 
-                addTheorem(td.type,td.star_c,Math.floor(tmp.core_lvl),td.power_m*getPowerMult()+1,getCoreChance())
+                addTheorem(td.type,td.star_c,(td.type=="mv")?fl/10:fl,td.power_m*getPowerMult()+1,getCoreChance())
             }
         }
 

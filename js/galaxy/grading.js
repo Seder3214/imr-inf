@@ -6,12 +6,12 @@ const GRADE = {
     unl() { return hasTree('glx5') },
     getGrade() {
         let b = tmp.grade.t_base
-        let x = player.galaxy.stars.max(1).log(b).mul(2.15).mul(tmp.chal?tmp.chal.eff[19]:1).scaleEvery('grading',true)
+        let x = player.galaxy.stars.max(1).log(b).mul(2.15).mul(tmp.chal?tmp.chal.eff[19]:1).scaleEvery('grading',true).add(1)
         return x.floor()
     },
     getNextGrade() {
         let b = tmp.grade.t_base
-        let x = E(b).pow(player.galaxy.grade.theorems.scaleEvery('grading').add(1).div(2.15).div(tmp.chal?tmp.chal.eff[19]:1))
+        let x = E(b).pow(player.galaxy.grade.theorems.scaleEvery('grading',false).div(tmp.chal?tmp.chal.eff[19]:1).div(2.15).add(1))
 
         return x
     },
@@ -191,7 +191,7 @@ function gradeEffect(x,y,def=1) { return tmp.grade.eff[x][y]||def }
 function updateGradeHTML() {
     tmp.el.grade_btns.setDisplay(true)
     tmp.el.grade_theorem.setTxt(format(tmp.grade.unspent,0)+" / "+format(player.galaxy.grade.theorems,0))
-    tmp.el.grade_next_theorem.setTxt(format(player.galaxy.stars,1)+" / "+format(tmp.grade.next_theorem,1))
+    tmp.el.grade_next_theorem.setTxt(format(player.galaxy.stars,2)+" / "+format(tmp.grade.next_theorem,2))
     for (let i = 0; i < player.galaxy.grade.type.length; i++) {
         let pp = player.galaxy.grade.type[i]
         let h = Math.floor(pp / 10) % 10

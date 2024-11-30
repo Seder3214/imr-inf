@@ -2,13 +2,14 @@ const ORB = {
     req() {
         let t = player.inf.c18.orb
         let r = this.requirement[t]||EINF
-
+        if (hasElement(342)) r=this.requirementAfter[t-6]||EINF
         return r
     },
     unl() {
         let x = E(0)
         if (player.inf.c18.orb.gte(1)) x += 2
         if (player.inf.c18.orb.gte(1)) x += 2
+        if (hasElement(342)) x += 2
         return x
     },
     gain() {
@@ -29,6 +30,7 @@ const ORB = {
         }
     },
 requirement: [E('e1.060e10'),E('e1.45e10'),E('e1.63e10'),mlt(159000),mlt(1100000),mlt(5.5e18)],
+requirementAfter: [E(`ee10500`),E(`ee17500`)],
 canBuy(x) {
     let u = this.upgs[x]
     let res = player.inf.c18.orb
@@ -66,6 +68,14 @@ upgs: [
     {
         desc: `Reduce C17's goal.`,
         cost: E(6),
+    },
+    {
+        desc: `Add +990 Max C20 Completions.`,
+        cost: E(7),
+    },
+    {
+        desc: `Unoverflow all of the elements in C18.`,
+        cost: E(8),
     },
 ],
 }

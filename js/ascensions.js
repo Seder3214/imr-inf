@@ -80,11 +80,13 @@ x += tmp.fermions.effs[1][7]
 10: `Remove Super-Renown Scaling`,
 14: `Unlock Transcension`,
 30: `Element Tier 3 autobuyer now buys elements up to 314th`,
+46: `Ascensions affects Exotic-Lepton effect at reduced rate.`,
         },
         {
             1: `Automate Ascensions`,
             2: `Change the Beyond-Prestiges effect in Ascension Base formula. (Based on Max Tier + its amount)`,
-            4: `Nebula Galaxy effect is better based on Ascension Base.`
+            4: `Nebula Galaxy effect is better based on Ascension Base.`,
+            10: `Ascension Base affects Galaxy Particles gain.`,
         },
     ],
     rewardEff: [
@@ -100,10 +102,19 @@ x += tmp.fermions.effs[1][7]
             ],
             6: [
                 ()=>{
-
-                    if (!CHALS.inChal(20)) x = E(1).add(player.ascensions[0].mul(1.25))
+                    let base=hasElement(338)?1.35:1.25
+                    if (hasElement(346)) base = E(base).add(elemEffect(346))
+                    if (!CHALS.inChal(20)) x = E(1).add(player.ascensions[0].mul(base))
                     else return E(1)
                     return x = overflow(x,24.5,0.1)
+                },
+                x=>"x"+format(x),
+            ],
+            46: [
+                ()=>{
+
+                    let x = player.ascensions[0].pow(0.215)
+                    return x;
                 },
                 x=>"x"+format(x),
             ],
@@ -112,6 +123,13 @@ x += tmp.fermions.effs[1][7]
             4:  [
                 ()=>{
                 let x = tmp.ascensions.base.log10().mul(1.5)
+                return x
+                },
+                x=>"x"+format(x),
+            ],
+            10:  [
+                ()=>{
+                let x = tmp.ascensions.base.add(1).root(5).pow(1.5)
                 return x
                 },
                 x=>"x"+format(x),

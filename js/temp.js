@@ -370,7 +370,8 @@ function updateBlackHoleTemp() {
     t.fvm_bulk = E(0)
     if (player.bh.dm.gte(10)) t.fvm_bulk = player.bh.dm.div(1e300).max(1).log(10).root(p).add(1).floor()
     t.fvm_eff = UNSTABLE_BH.fvm.effect()
-}
+    tmp.el.time_boost.setHTML(player.chal.active==23?`Cycle Time gain is boosted by ${format(player.bh.mass.add(1).log10().add(1).log10().pow(0.5),2)}`:"")
+}  
 
 function updateTemp() {
     updateSpellTemp()
@@ -393,7 +394,7 @@ function updateTemp() {
     tmp.brokenInf = hasInfUpgrade(16)
     tmp.ascensions_unl = hasElement(281)
     tmp.bpUnl = hasElement(294)
-    tmp.mlt_unl = player.chal.comps[20].gte(2) || player.mv.points.gt(0) || player.mv.firstReset == true
+    tmp.mlt_unl = player.chal.comps[20].gte(10) || player.mv.points.gt(0) || player.mv.firstReset == true
     updateGradeTemp()
     updateOrbTemp()
     updateInfTemp()

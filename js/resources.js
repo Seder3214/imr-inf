@@ -146,7 +146,7 @@ const RESOURCES_DIS = {
         icon: "mlt",
         class: "orange",
 
-        desc: (gs)=>format(tmp.mv_time)+'s / '+ format(tmp.mv.cycleTime)+"s | " + format(player.mv.points)+"<br>"+"(+"+(tmp.mv_time.gte(tmp.mv.cycleTime)?format(tmp.mv.cycleGain):'0')+")",
+        desc: (gs)=>formatTime(tmp.mv_time)+'/ '+ formatTime(tmp.mv.cycleTime)+" | " + format(player.mv.points)+"<br>"+"(+"+(tmp.mv_time.gte(tmp.mv.cycleTime)?format(tmp.mv.cycleGain):'0')+")",
 
         resetBtn() { CONFIRMS_FUNCTION.multiverse() },
     },

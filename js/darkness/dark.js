@@ -188,6 +188,7 @@ const DARK = {
             let step = E(1.5)
             if (tmp.inf_unl) step = step.mul(theoremEff('proto',4))
             if (hasUpgrade('atom',21)) step = step.mul(upgEffect(3,21))
+                if (hasElement(336)) step = step.pow(5.75)
             let eff = step.mul(t.add(bonus)).add(1)
 
             return {step: step, eff: eff, bonus: bonus}
@@ -236,7 +237,7 @@ if (hasElement(268)) player.dark.am_mass = player.dark.am_mass.add(tmp.am_mass_g
 
     if (tmp.eaUnl) {
         if (hasInfUpgrade(14)) {
-            for (let i = 1; i <= tmp.elements.unl_length[1]; i++) buyElement(i,1)
+            for (let i = 1; i <= 42; i++) buyElement(i,1)
 
             EXOTIC_ATOM.tier()
         }
