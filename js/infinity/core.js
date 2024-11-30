@@ -1,6 +1,6 @@
 function coreTypeLength() {
     let a = 4
-    if (hasElement(1,47)) a++
+    if (hasElement(47,1)) a++
     return a
 }
 
