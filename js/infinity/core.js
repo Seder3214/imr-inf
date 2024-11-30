@@ -394,7 +394,7 @@ if (x>=1e10) return x = 1e10
             return x},
         eff: [
             s => {
-                let x = E(Math.pow(s+1,0.35)/(E(s).add(1).log10()))
+                let x = E(Math.pow(s+1,0.35)/(E(s+1).add(1).log10()))
 
                 return x = overflow(x,50,0.25)
             },
