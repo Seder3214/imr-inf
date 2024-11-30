@@ -402,7 +402,7 @@ if (x==52) player.mv.orbits = player.mv.orbits.div(2).floor()
             desc: `Increase the amount of cycles needed to get Orbits based on Core Level (buying this element will remove half of orbits).`,
             cost: E(100000),
 eff() {let x = E(0)
-x = player.mv.coreLvl.mul(1.75).pow(1.25).round()
+x = player.mv.coreLvl.mul(0.25).pow(1.25).round()
 return x},
 effDesc: x=>"+"+format(x),
         },

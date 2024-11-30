@@ -233,7 +233,7 @@ const SPELL = {
     cyclesToOrbit() {
         let x = E(tmp.mv.cycleTime)
         x = x.pow(0.5).mul(1.5).floor()
-if (hasElement(50,1)) x = x.add(muElemEff(50))
+if (hasElement(52,1)) x = x.add(muElemEff(52))
         return x
     },
     coreLvlUp() {
