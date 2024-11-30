@@ -6,7 +6,7 @@ const ORB = {
         return r
     },
     unl() {
-        let x = E(0)
+        let x = 0
         if (player.inf.c18.orb.gte(1)) x += 2
         if (player.inf.c18.orb.gte(1)) x += 2
         if (hasElement(342)) x += 2
