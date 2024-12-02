@@ -275,11 +275,11 @@ if (x==52) player.mv.orbits = player.mv.orbits.div(2).floor()
         },
         {
             cs: true,
-            desc: `Add +5 to max Quantum Challenge Modificatots per Fusion Tier.`,
+            desc: `Add +5 to max Quantum Challenge Modificatots per Fusion Tier (max +110).`,
             eff() {
                 let x = E(1)
                 x = E(player.dark.exotic_atom.tier).max(1).mul(5).floor()
-                return x.max(1)
+                return x.max(1).min(110)
             },
             effDesc: x=>"+"+format(x),
             cost: E('e3125'),
