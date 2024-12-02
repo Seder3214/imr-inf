@@ -2078,7 +2078,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         return x
     },
     effDesc(x){return "+"+format(x)},
-    cost: E('ee181000'),
+    cost: E('ee171500'),
 },
     ],
     /*
