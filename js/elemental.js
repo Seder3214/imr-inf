@@ -2131,8 +2131,8 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(269)) u += 23
         if (hasElement(292)) u += 22
         if (hasTree('glx20')) u += 8
-        if (hasElement(322)) u += 8
-        if (tmp.mlt_unl) u = 334
+        if (hasElement(322)) u += 10
+        if (tmp.mlt_unl) u = 332
         if (hasElement(48,1)) u+= 14
         return u
     },
