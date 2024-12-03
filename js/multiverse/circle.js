@@ -318,7 +318,7 @@ if (hasElement(52,1)) x = x.add(muElemEff(52))
         let a = E(tmp.mv.cycleGain), eff = {}
         eff.cs = E(1e100).pow(a).add(1).log10().pow(1.85)
         if (player.mainUpg.bh.includes(22)) eff.cs = E(`e1e8`).pow(a).add(1).root(1000).pow(1.15)
-       if (hasElement(46,1)) eff.theoremLvl = a.add(1).root(2).floor()
+       if (hasElement(46,1)) eff.theoremLvl = a.add(1).root(2).floor().softcap(150,0.5,0)
         if (hasElement(341)) eff.theoremLvl = a.add(1).pow(0.75).floor().softcap(300,0.5,0)
         return eff
     }
