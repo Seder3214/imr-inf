@@ -1981,7 +1981,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         return x
     },
     effDesc(x) { return "^"+format(x) },
-    cost: E('e1e1200'),
+    cost: E('e1e1650'),
 },
 {
     inf: true,
@@ -1994,7 +1994,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         return {hr:x1,hv:x2}
     },
     effDesc(x) { return "Hyper-Renown: "+ formatMult(this.effect().hr)+"<br>Hyper-Valor: "+ formatMult(this.effect().hv) },
-    cost: E(1e140),
+    cost: E(1e162),
 },
 {
     inf: true,
@@ -2132,7 +2132,7 @@ if (hasElement(317)) ret = ret.mul(1.15)
         if (hasElement(292)) u += 22
         if (hasTree('glx20')) u += 8
         if (hasElement(322)) u += 8
-        if (tmp.mlt_unl) u = 332
+        if (tmp.mlt_unl) u = 334
         if (hasElement(48,1)) u+= 14
         return u
     },
