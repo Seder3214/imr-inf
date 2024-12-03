@@ -3,7 +3,7 @@ const SPELL = {
         if (tmp.mv_time.gte(tmp.mv.cycleTime)) {
             if (hasElement(51,1)) {
                 let chance = Math.random()
-                if (player.mv.durability==0 && chance > 0.75) player.mv.durability = player.mv.durability.add(tmp.mv.maxDurability.div(2).floor())
+                if (player.mv.durability==0 && chance > 0.75 && hasElement(51,1)) player.mv.durability = player.mv.durability.add(tmp.mv.maxDurability.div(2).floor())
             }
             player.mv.totalCycles = player.mv.totalCycles.add(1)
             player.mv.points = player.mv.points.add(tmp.mv.cycleGain)
