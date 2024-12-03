@@ -579,14 +579,14 @@ const EXOTIC_ATOM = {
                 return x.toNumber()
             },x=>`Increase matter exponent by <b>+${format(x)}</b>`],
             [a=>{
-                if (player.dark.exotic_atom.tier >= 15) x = Decimal.pow(0.95,overflow(a.add(1).log10(),2,0.5).root(4)).div(player.dark.am?tmp.am_mass_eff.max(1):1)
-                if (player.dark.exotic_atom.tier >= 24) x =  Decimal.pow(0.635,overflow(a.add(1).log2(),2,0.5).root(4)).div(player.dark.am?tmp.am_mass_eff.max(1):1)
+if (player.dark.exotic_atom.tier >= 24) x =  Decimal.pow(0.635,overflow(a.add(1).log2(),2,0.5).root(4)).div(player.dark.am?tmp.am_mass_eff.max(1):1)
+               else if (player.dark.exotic_atom.tier >= 15) x = Decimal.pow(0.95,overflow(a.add(1).log10(),2,0.5).root(4)).div(player.dark.am?tmp.am_mass_eff.max(1):1)
 else x = E(0)
                 return x.toNumber()
             },x=>`Reduce FSS requirement by <b>${formatReduction(x)}</b>. Req: 15th Tier. <span style='color: orange'>${player.dark.exotic_atom.tier >= E(24)?`[Muonized]</span>`:`</span>`}`],
             [a=>{
-                if (player.dark.exotic_atom.tier >= 17) x = a.add(1).log(1.01).pow(27).add(1)
-                if (player.dark.exotic_atom.tier >= 18) x = a.add(1).log(1.01).pow(500).add(1)
+if (player.dark.exotic_atom.tier >= 18) x = a.add(1).log(1.01).pow(500).add(1)
+               else if (player.dark.exotic_atom.tier >= 17) x = a.add(1).log(1.01).pow(27).add(1)
 else x = E(1)
                 return x
             },x=>`Mass overflow^1-3 starts <b>^${format(x)} later</b>. Req: 17th Tier. <span style='color: orange'>${player.dark.exotic_atom.tier >= E(18)?`[Muonized]</span>`:`</span>`}`],
