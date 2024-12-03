@@ -394,7 +394,7 @@ if (x>=1e10) return x = 1e10
             return x},
         eff: [
             s => {
-                let x = E(Math.pow(s,0.35)/(E(s).add(1).log10()))
+                let x = E(Math.pow(s,0.35)/(E(s).add(1).log10().max(1))).max(1)
 
                 return x = overflow(x,50,0.25)
             },
@@ -607,8 +607,8 @@ function updateCoreHTML() {
     tmp.el.preTReq.setDisplay(!reached)
     tmp.el.maxLevel.setTxt(format(player.inf.theorem_max,0))
 
-    let lvl = tmp.core_lvl, fl = lvl
-    tmp.el.pt_lvl.setHTML(`<b>${format(fl,2)}</b> (${formatPercent(lvl-fl)})`)
+    let lvl = E(tmp.core_lvl), fl = Decimal.floor(lvl)
+    tmp.el.pt_lvl.setHTML(`<b>${format(fl,2)}</b> (${formatPercent(lvl.sub(fl))})`)
 
     let chance = getCoreChance(), pm = getPowerMult()
 
